@@ -24,8 +24,105 @@
         Construct Riemann Sum: $$S_n=\sum_{k=1}^n f(x_k^*)\Delta x$$
       </li>
       <li>
-        Take the limit: $$\lim_{n\to\infty}S_n=\lim_{n\to\infty}\sum_{k=1}^n f(x_k^*)\Delta x=\int_a^b f(x) dx$$
+        Take the limit: $$S=\lim_{n\to\infty}S_n=\lim_{n\to\infty}\sum_{k=1}^n f(x_k^*)\Delta x=\int_a^b f(x) dx$$
       </li>
     </ol>
+    <br />
+    <h2>Properties of Integrals</h2>
+    <ol>
+      <li>$\int_a^b c dx=c(b-a)$</li>
+      <li>$\int_a^b [f(x)+g(x)] dx=\int_a^b f(x) dx+\int_a^b g(x) dx$</li>
+      <li>$\int_a^b cf(x) dx=c\int_a^b f(x) dx$</li>
+      <li>$\int_a^c f(x) dx+\int_c^b f(x) dx=\int_a^b f(x) dx$</li>
+    </ol>
+    <br />
+    <br />
+    <h2>Fundamental Theorem oF Calculus 1</h2>
+    Let $f(x)$ be continuous on $[a,b]$.
+    Given the function $$g(x)=\int_a^x f(t)dt,\quad a\leq x\leq b$$
+    Then $g(x)$ is continuous on $[a,b]$ and $$g'(x)=f(x),\quad a\leq x\leq b$$
+    <h2>Fundamental Theorem of Calculus 2</h2>
+    Let $F(x)$ be any antiderivative of $f(x)$, then $$\int_a^b f(x)dx = F(b) - F(a)$$
+    <br />
+    <br />
+    <br />
+    <h2>Integration by Substitution</h2>
+    e.g. $\int \sqrt{5x+4}dx$. <br /><br />
+    Let $u=5x+4$, $du=5dx$,
+    <br /><br />
+    $\begin{align*}
+      \int \sqrt{5x+4}dx&=\frac{1}{5}\int u^{\frac{1}{2}}du\\
+      &=\frac{2}{3}\frac{1}{5}u^{\frac{3}{2}} + C\\
+      &=\frac{2}{15}(5x+4)^{\frac{3}{2}} + C\\
+    \end{align*}$
+    <h2>Integration By Parts</h2>
+    $$\int udv=uv-\int vdu$$
+    <br />
+    e.g. $\int xe^xdx$ <br /><br />
+    Let $u=x$, $v=e^x$, $du=dx$, $dv=e^x$.
+    $$\int xe^xdx=xe^x-\int e^xdx=xe^x-e^x+C$$
+    <br />
+    <br />
+    <h2>Average of a Function</h2>
+    Given a function continuous over $[a,b]$,
+    <ol>
+      <li>
+        Partition $[a,b]$ into $n$ intervals of width $\Delta x=\frac{b-a}{n}$ and $x_n=a+k\Delta x$.
+      </li>
+      <li>
+        Pick a sample point $x_k^*\in [x_{k-1},x_k]$.
+      </li>
+      <li>
+        $$\begin{align*}
+          \overline{f(x)}&\approx \frac{1}{n}\sum_{k=1}^nf(x_k^*)\\
+          &=\frac{1}{n\Delta x}\sum_{k=1}^nf(x_k^*)\Delta x\\
+          &=\frac{1}{n(\frac{b-a}{n})}\sum_{k=1}^nf(x_k^*)\Delta x\\
+          &=\frac{1}{b-a}\sum_{k=1}^nf(x_k^*)\Delta x\\
+        \end{align*}$$
+      </li>
+      <li>
+        Taking the limit as $n\to\infty$,
+        $$\begin{align*}
+          \overline{f(x)}&=\frac{1}{b-a}\lim_{n\to\infty}\sum_{k=1}^nf(x_k^*)\Delta x\\
+          &=\frac{1}{b-a}\int_a^b f(x)dx\\
+        \end{align*}$$
+      </li>
+    </ol>
+    <br /><br />
+    <h2>Trigonometric Functions</h2>
+    <h3>Strategy for Evaluating $\int \sin^mx\ \cos^nx\ dx$</h3>
+    <ul>
+      <li>
+        If power of cosine is odd, $n=2k+1$, save one cosine and use $\cos^2x=1-\sin^2x$ to get
+        $$\int \sin^mx\ \cos^{2k+1}x\ dx=\int \sin^mx(1-\sin^2x)^k\cos x\ dx$$
+        Then, subsitute $u=\sin x$.
+      </li>
+      <li>
+        If power of sine is odd, similar process as above.
+      </li>
+      <li>
+        If both powers are even, use double angle identities:
+        $$\sin^2x=\frac{1}{2}(1-cos2x)\quad\quad\cos^2x=\frac{1}{2}(1+cos2x)\quad\quad\sin x\cos x=\frac{1}{2}\sin 2x$$
+      </li>
+    </ul>
+    <br />
+    <h3>Strategy for Evaluating $\int \tan^mx\ \sec^nx\ dx$</h3>
+    <ul>
+      <li>
+        If power of secant is even, $n=2k, k\geq 2$, save one $\sec^2x$ and use $\sec^2x=1+\tan^2x$ to get
+        $$\int \tan^mx\ \sec^{2k}x\ dx=\int \tan^mx(1+\tan^2x)^{k-1}\sec^2 x\ dx$$
+        Then, subsitute $u=\tan x$.
+      </li>
+      <li>
+        If power of tangent is odd, $m=2k+1$, save one $\sec x\tan x$ and use $\tan^2x=\sec^2x-1$ to get
+        $$\int \tan^{2k+1}x\ \sec^nx\ dx=\int (\sec^2x-1)^k\sec^{n-1}x\sec x\tan x\ dx$$
+        Then, subsitute $u=\sec x$.
+      </li>
+    </ul>
+    <br />
+    <br />
+    <h2>Trigonometric Substitution</h2>
+    This technique is used when you find:
+    $$\sqrt{A-x^2}\quad\quad\sqrt{A+x^2}\quad\quad\sqrt{x^2-A}$$
   </body>
 </html>
