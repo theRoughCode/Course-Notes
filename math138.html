@@ -128,9 +128,23 @@
     $$\sin^2x+\cos^2x=1\quad\quad\tan^2x+1=\sec^2x$$
     <h3>Integrals with $\sqrt{a^2-x^2}$</h3>
     e.g. $\int\sqrt{a^2-x^2}$<br /><br />
-    Let $x=a\sin u$, $dx=a\cos u\ du$.<br /> $\sqrt{a^2-x^2}=\sqrt{a^2-a^2\sin^2u}=a\sqrt{1-\sin^2u}=a\cos u$
-    <br />
+    Let $x=a\sin u$, $dx=a\cos u\ du$.<br /><br /> $\sqrt{a^2-x^2}=\sqrt{a^2-a^2\sin^2u}=a\sqrt{1-\sin^2u}=a\cos u$
+    <br /><br />
     $\begin{align*}
-    \end{align*}
+      \int\sqrt{a^2-x^2}dx&=\int a^2\cos^2u\ du\\
+      &=\frac{a^2}{2}\int (1+\cos 2u)du\\
+      &=\frac{a^2}{2}(u+\frac{\sin2u}{2})+C\\
+      &=\frac{a^2}{2}(u+\sin u\cos u)+C\\
+      &=\frac{a^2}{2}\big(\sin^{-1}(\frac{x}{a})+\frac{x}{a}\frac{\sqrt{a^2-x^2}}{a}\big)+C\\
+      &=\frac{a^2}{2}\sin^{-1}(\frac{x}{a})+\frac{x}{2}\sqrt{a^2-x^2}+C
+    \end{align*}$
+    <h3>Integrals with $\sqrt{a^2+x^2}$</h3>
+    Substitute $x=a\tan u$.  Similar method as above.
+    <h3>Integrals with $\sqrt{x^2-a^2}$</h3>
+    Substitute $x=a\sec u$.  Similar method as above.
+    <br /><br /><br /><br />
+    <h2>Partial Fractions</h2>
+    Used to integrate rational functions by expressing it as a sum of simple fractions.
+    Given a rational function, $\frac{P(x)}{Q(x)}$, if $\deg (P) < \deg (Q)$ then it can be expressed as a partial fraction.  If not, perform polynomial division to get $\frac{P(x)}{Q(x)}=S(x)+\frac{R(x)}{Q(x)}$ such that $\deg (R) < \deg (Q)$.
   </body>
 </html>
