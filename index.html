@@ -2,30 +2,20 @@
 <html>
   <head>
     <title>MATH 138 Final Review by Raphael Koh</title>
-    <script type="text/javascript" async
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-      });
-    </script>
+    <style>
+      html, body{
+        font-size:16px;
+        color: #dfdfdf;
+        background-color: #063647;
+      }
+      a {
+        color: #00d1b2;
+      }
+    </style>
   </head>
+  <h1>Courses:</h1>
+  <ul>
+    <li><a href="./math138.html">MATH 138 (Physics-based)</a></li>
+  </ul>
   <body>
-    <h1><b>1 </b>Review of Integration</h1>
-    <h2>Riemann Integral</h2>
-    Let $f(x)$ be a continuous (or piecewise continuous) function defined over $[a,b]$.
-    <ol>
-      <li>We partition $[a,b]$ into $n$ intervals such that each interval has has width $\Delta x=\frac{b-a}{n}$ with partition points $x_k=a+k\Delta x$, $0\leq k\leq n$.  Note that the endpoints are $x_0=a$ and $x_n=b$.</li>
-      <li>
-        For each interval $I_k=[x_{k-1}, x_k]$, $1\leq k\leq n$, pick a sample point $x_k^*\in I_k$.  This sample point can be the left endpoint ($x_{k-1}$), the right endpoint ($x_k$) or midpoint.
-      </li>
-      <li>
-        Construct Riemann Sum: $$S_n=\sum_{k=1}^n f(x_k^*)\Delta x$$
-      </li>
-      <li>
-        Take the limit: $$S=\lim_{n\to\infty}S_n=\lim_{n\to\infty}\sum_{k=1}^n f(x_k^*)\Delta x=\int_a^b f(x) dx$$
-      </li>
-    </ol>
-  </body>
 </html>
