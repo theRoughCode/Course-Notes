@@ -176,6 +176,35 @@
     $$M=\int_0^L\rho(x)dx$$
     $$\bar{x}\approx\frac{\sum_{i=1}^n\Delta m_ix_i^*}{\sum_{i=1}^n\Delta m_i}=\frac{\sum_{i=1}^n\rho(x_i^*)x_i^*\Delta x}{\sum_{i=1}^n\rho(x_i^*)\Delta x}$$
     $$\bar{x}=\lim_{n\to\infty}\bigg(\frac{\sum_{i=1}^n\rho(x_i^*)x_i^*\Delta x}{\sum_{i=1}^n\rho(x_i^*)\Delta x}\bigg)=\frac{\int_0^L\rho(x)x dx}{\int_0^L\rho(x)dx}=\frac{1}{M}\int_0^Lx\rho(x)dx$$
+    <h3>Centre of Mass of Centroids</h3>
+    Given $f(x)$ and $g(x)$ where $f(x)>g(x)$ and are continuous over $(a,b)$. Then
+    $$dA=[f(x)-g(x)]dx$$
+    First moment w.r.t $y$-axis: $dM_y=xdA$.  Net moment w.r.t $y$-axis: $M_y=\int_a^bxdA=\int_a^bx[f(x)-g(x)]dx$<br />
+    The $x$-coordinate of the Centre of Mass is determimed by
+    $$\int_a^b(x-\bar{x})dA=0$$
+    $$\int_a^bx\ dA=\bar{x}\int_a^bdA$$
+    $$\bar{x}=\frac{\int_a^bx\ dA}{\int_a^bdA}=\frac{M_y}{A}=\frac{\int_a^bx[f(x)-g(x)]dx}{\int_a^b[f(x)-g(x)]dx}$$
+    Similarly, the $y$-coordinate of the Centre of Mass can be found by:
+    $$\bar{y}=\frac{M_x}{A}=\frac{\int_a^by\ dA}{\int_a^bdA}$$
+    Note that $\bar{x}$ can be determined from $y$ and $\bar{y}$ from $x$ by using the midpoint.
+    $$M_x=\frac{1}{2}\int[f(x)+g(x)]dA$$
+    <br /><br /><br /><br />
+    <h3>Computation of Arclength</h3>
+    Given a function $f(x)$ continuous over $[a,b]$, we want to find its arclength.
+    <ol>
+      <li>
+        Partition into $n$ sub-intervals such that for each sub-interval $[x_{k-1},x_k]$ has an arclength of $C_k\approx||\overrightarrow{P_{k-1}P_k}||=\sqrt{\Delta x^2+\Delta y^2}=\sqrt{\Delta x^2+[f(x_k)-f(x_{k-1})]^2}=\Delta x\sqrt{1+\bigg[\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}\bigg]^2}$<br />
+        By the Mean Value Theorem, there exists a $x_k^*\in[x_{k-1},x_k]$ such that $f'(x_k^*)=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}$, so $C_k\approx\Delta x\sqrt{1+f'(x_k^*)^2}$
+      </li>
+      <li>
+        Sum over all intervals.
+        $$L\approx\sum_{k=1}^nC_k=\sum_{k=1}^n\sqrt{1+f'(x_k^*)^2}\Delta x$$
+      </li>
+      <li>
+        Take $n\to\infty$.
+        $$L=\lim_{n\to\infty}\sum_{k=1}^n\sqrt{1+f'(x_k^*)^2}\Delta x=\int\sqrt{1+f'(x)^2}dx$$
+      </li>
+    </ol>
     <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
