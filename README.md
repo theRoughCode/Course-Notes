@@ -3,8 +3,9 @@ Hey everyone!  This repo was created initially for me to study/increase the life
 
 ## How Do I Contribute?
 1. Fork this repo.
-2. a. If the course notes for the course you want is already available, just add in the changes to the specific file.
-   b. If it isn't created yet, create a new file "<subject in lower-case><course-number>.html"
+2. 
+   1. If the course notes for the course you want is already available, just add in the changes to the specific file.
+   2. If it isn't created yet, create a new file "<subject in lower-case><course-number>.html"
 3. Submit a pull request.
 
 ## What Should I Take Note Of?
