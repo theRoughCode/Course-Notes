@@ -214,7 +214,18 @@
         Take $n\to\infty$.
         $$L=\lim_{n\to\infty}\sum_{k=1}^n\sqrt{1+f'(x_k^*)^2}\Delta x=\int\sqrt{1+f'(x)^2}dx$$
       </li>
-    </ol>
+    </ol> <br />
+    Similarly, given a curve $C$, $$L=\int_Cds=\int_C\sqrt{dx^2+dy^2}=\int_Cdx\sqrt{1+\frac{dy}{dx}^2}=\int_a^b\sqrt{1+f'(x)^2}dx$$
+    <br /><br />
+    <h3>Computation of Centroids of Curves</h3>
+    Consider a function $f(x)$ continuous over $[a,b]$.  Let $C$ represent the curve with linear density $\rho_0=1$, so $dm=\rho_0ds=ds$.<br />
+    Moment w.r.t $y$-axis: $dM_y=xds\ \rightarrow\ M_y=\int_CdM_y=\int_Cxds$<br />
+    Moment w.r.t $x$-axis: $dM_x=yds\ \rightarrow\ M_x=\int_CdM_x=\int_Cyds$<br /><br />
+    Recall that for centroid($\bar{x},\bar{y}$):<br />
+    $$\int_C(x-\bar{x})ds=0\quad\text{Net moment w.r.t $\bar{x}$}$$
+    $$\int_C(y-\bar{y})ds=0\quad\text{Net moment w.r.t $\bar{y}$}$$
+    So, $$\int_Cxds=\bar{x}\int_Cds\ \rightarrow\ \bar{x}=\frac{\int_Cxds}{\int_Cds}=\frac{\int_Cxds}{L}$$
+    Similarly, $$\bar{y}=\frac{\int_Cyds}{L}$$
     <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
