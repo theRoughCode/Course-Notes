@@ -227,6 +227,40 @@
     So, $$\int_Cxds=\bar{x}\int_Cds\ \rightarrow\ \bar{x}=\frac{\int_Cxds}{\int_Cds}=\frac{\int_Cxds}{L}$$
     Similarly, $$\bar{y}=\frac{\int_Cyds}{L}$$
     <br /><br /><br /><br />
+    <h2>Improper Integrals</h2>
+    <h3>Type I - Integrals over infinite domains</h3>
+    $$\int_{-\infty}^\infty f(x)dx=\int_{-\infty}^af(x)dx+\int_{a}^\infty f(x)dx=\lim_{b\to\infty}I_1(b)+\lim_{b\to\infty}I_2(b)=\lim_{b\to\infty}\int_{-b}^af(x)dx+\lim_{b\to\infty}\int_{a}^{\infty}f(x)dx$$
+    <h3>Important Class of Improper Integrals</h3>
+    Consider $I_P=\int_1^\infty \frac{1}{x^P}dx,\ P\in\mathbb{R}$.  $I_P$ converges for $P>1$ and diverges for $p\leq 1$.  This class of integrals is useful for "comparison tests" to determine whether the improper integral converges/diverges.
+    <br /><br /><br /><br />
+    <h3>Comparison Test</h3>
+    Given functions $f(x), g(x)$ such that  $f(x)\geq g(x)\geq 0$ for all $x\geq a$, then $\int_a^bf(x)dx\geq\int_a^bg(x)dx$.
+    <ol>
+      <li>
+        If $\int_a^\infty f(x)dx$ converges, then $\int_a^\infty g(x)dx$ converges.
+      </li>
+      <li>
+        If $\int_a^\infty g(x)dx$ diverges, then $\int_a^\infty f(x)dx$ diverges.
+      </li>
+    </ol>
+    <h3>Type II - Discontinuous and (possibly) unbounded at a point $c\in[a,b]$</h3>
+    <ol>
+      <li>
+        $f(x)$ is continuous on $[a,b)$ and discontinuous at $b$, then $\int_a^b f(x)dx=\lim_{t\to b^-}\int_a^t f(x)dx$
+      </li>
+      <li>
+        $f(x)$ is continuous on $(a,b]$ and discontinuous at $a$, then $\int_a^b f(x)dx=\lim_{t\to a^+}\int_t^b f(x)dx$
+      </li>
+      <li>
+        $f(x)$ is continuous on $[a,b]$ except at $c\in(a,b)$, then $\int_a^b f(x)dx=\lim_{t\to c^-}\int_a^t f(x)dx+\lim_{t\to c^+}\int_t^b f(x)dx$
+      </li>
+    </ol>
+    <br /><br /><br /><br />
+    <h2>Differential Equations</h2>
+    A differential equation involves derivaties of a function and possibly the function itself.<br />
+    <u>Definition</u>: The <b>order of a DE</b> is the order of the highest derivative in the DE.<br />
+    <u>Definition</u>: A DE is <b>linear</b> if the dependent variable or derivative is not multiplied by itself or each other (i.e. $y + \frac{dy}{dx}$).
+    <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
 	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.
