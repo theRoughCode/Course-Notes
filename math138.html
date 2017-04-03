@@ -146,5 +146,26 @@
     <h2>Partial Fractions</h2>
     Used to integrate rational functions by expressing it as a sum of simple fractions.
     Given a rational function, $\frac{P(x)}{Q(x)}$, if $\deg (P) < \deg (Q)$ then it can be expressed as a partial fraction.  If not, perform polynomial division to get $\frac{P(x)}{Q(x)}=S(x)+\frac{R(x)}{Q(x)}$ such that $\deg (R) < \deg (Q)$.
+    Split the fractions into the form $\frac{A}{ax+b}+\frac{B}{cx+d}$.<br />
+    e.g. $$\begin{align*}
+      \int\frac{4x+1}{x^2-x-2}dx&=\int\frac{4x+1}{(x+1)(x-2)}dx\\
+      &=\int(\frac{3}{x-2}+\frac{1}{x+1}) dx\\
+      &=3\ln|x-2|+\ln|x+1|+C
+    \end{align*}$$
+    <h3>Repeated Roots</h3>
+    If a root is repeated $k$ times, we must repeat that term $k$ times such that
+    $\frac{P(x)}{(ax+b)^k}=\frac{A_1}{ax+b}+\frac{A_2}{(ax+b)^2}+\cdots+\frac{A_k}{(ax+b)^k}$.
+    <h3>Complex Roots</h3>
+    If a function has $Q(x)$ with irreducible quadratic factors, the partial fraction will be of the form $\frac{Ax+B}{ax^2+bx+c}$.  Complete the square and use
+    $$\int\frac{dx}{x^2-a^2}=\frac{1}{a}\tan^{-1}\big(\frac{x}{a}\big)+C$$
+    <h3>Repeated Complex Roots</h3>
+    $$\frac{P(x)}{Q(x)^k}=\frac{A_1x+B_1}{Q(x)}+\frac{A_2x+B_2}{Q(x)^2}+\cdots+\frac{A_kx+B_k}{Q(x)^k}$$
+    <br /><br /><br /><br />
+    <h2>Conservative Forces & Potential Energy</h2>
+    $\vec{F}=f(x)\hat{i}$ is conservative if there exists a function $U(x)$ such that $f(x)=-U'(x)$, where $U(x)$ is the potential energy function.  So, $U(x)=-\int f(x)dx$.<br />
+    <u>Consequence:</u>  If $\vec{F}$ acts on a mass $m$ to move it from $x=a$ to $x=b$, the work done is:
+    $$\int_a^bf(x)dx=-\int_a^bU'(x)dx=-[U(b)-U(a)]=-\Delta U$$
+    Alternatively, we can let $x=a$ be a reference point and define $U(x)=-\int_a^xf(s)ds$.  We define $U(a)=0$.  If $f(x)=-mg$, $U(x)=-\int_a^x-mg\ ds=mgx-mga=mgx$.<br />
+    <u>Physical Interpretation:</u>  $U(x)$ is the work done <u>against</u> the force when $m$ is moved from $a$ to $x$.  If $U(x)>0$, we have to work <u>against</u> the force to move $m$ from $a$ to $x$ (i.e. causes a "buildup" of PE).
   </body>
 </html>
