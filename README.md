@@ -20,3 +20,7 @@ If you are creating a new html file that requires MathJax, include the following
   });
 </script>
 ```
+
+#### Tips for MathJax
+ - To in-line LaTeX: use $<math>$
+ - To centre on page (equation-style): use $$<math>$$
