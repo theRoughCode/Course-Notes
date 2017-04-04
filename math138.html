@@ -586,7 +586,7 @@
     Since this is a geometric series, we know that it converges when $|r| < 1$ or $|-\frac{x}{2}|< 1 \rightarrow x < 2$. Thus the radius of convergence is $R=2$ and the interval of convergence is $(-2, 2)$.
     <h4>Differentiation and Integration of Power Series</h4>
     <u>Theorem</u>: If the power series $\sum c_n(x-a)^n$ has radius of convergence $R>0$ then the function defined by:
-    $$f(x)=c_0+c_1(x-a)+c_2(x-a)^2+cdots=\sum c_n(x-a)^n$$
+    $$f(x)=c_0+c_1(x-a)+c_2(x-a)^2+\cdots=\sum c_n(x-a)^n$$
     is differentiable and continuous on the interval $(a-R,a+R)$ and
     <ol type="i">
       <li>
@@ -598,5 +598,40 @@
         $$\int\bigg[\sum c_n(x-a)^n\bigg]dx=\sum \int[c_n(x-a)^n]dx$$
       </li>
     </ol>
+    <h3>Taylor and Maclaurin Series</h3>
+    <u>Theorem</u>: If $f$ has a power series representation at $a$ such that
+    $$f(x)=\sum c_n(x-a)^n\quad |x-a|< R$$
+    then its coefficients are given by
+    $$c_n=\frac{f^{(n)}(a)}{n!}$$
+    Thus,
+    $$f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\frac{f'''(a)}{3!}(x-a)^3+\cdots$$<br />
+    <b><u>Maclaurin Series</u></b>: Taylor Series centred at $a=0$.
+    $$f(x)=f(0)+f'(0)(x-a)+\frac{f''(0)}{2!}(x-a)^2+\frac{f'''(0)}{3!}(x-a)^3+\cdots$$
+    In general, $f(x)$ is the sum of a Taylor series if $f(x)=\lim_{n\to\infty}T_n(x)$.  We define $T_n(x)$ as the <b>$n$th-degree Taylor polynomial of $f$ at $a$</b> and $R_n(x)$ as the remainder of the Taylor series such that $R_n(x)=f(x)-T_n(x)$.<br /><br />
+    <u>Theorem</u>: If $\lim_{n\to\infty}R_n(x)=0$ for $|x-a| < R$, then $f$ is equal to the sum of the Taylor series on the interal $|x-a|< R$.<br />
+    <h4>Taylor's Inequality</h4>
+    If $|f^{(n+1)}(x)|\leq M$ for $|x-a|\leq d$, then the remainder $R_n(x)$ of the Taylor series satisfies
+    $$|R_n(x)|\leq \frac{M}{(n+1)!}|x-a|^{n+1}\quad\text{for }|x-a|\leq d$$
+    When using Taylor's Inequality, it is useful to note that
+    $$\lim_{n\to\infty}\frac{x^n}{n!}=0\quad x\in\mathbb{R}$$
+    <h4>Table of Important Maclaurin Series</h4>
+    <img src="./images/Maclaurin_Table.PNG" style="width:800px;height:580px;"/>
+    <h4>Multiplication and Division of Power Series</h4>
+    Power series can be added or subtracted, they can also be multiplied and divided using polynomial multiplication/division.
+    <h3>Applications of Taylor Polynomials</h3>
+    <h4>1. Obtaining non-elementary antiderivatives</h4>
+    e.g. Find $\int e^{-x^2}$<br />
+    We use the Maclaurin series expansion for $e^{t}=\sum_{n=0}^\infty \frac{t^n}{n!}$, where $t=-x^2$.
+    $$\begin{align*}
+      e^{-x^2}&=\sum_{n=0}^\infty \frac{(-x^2)^n}{n!}\\
+      &=\sum_{n=0}^\infty (-1)^n\frac{x^2n}{n!}\\
+      &=1-x^2+\frac{x^4}{2}-\frac{x^6}{6}+\cdots
+    \end{align*}$$
+    To get $\int e^{-x^2}$, we antidifferentiate term-wise.
+    $$\int e^{-x^2}=C+x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\cdots$$
+    We can use this series to obtain estimates of definite integrals of $e^{-x^2}$.
+    $$\int_0^1e^{-x^2}=\bigg[x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\cdots\bigg]_0^1=1-\frac{1}{3}+\frac{1}{10}-\frac{1}{42}+\cdots$$
+    Furthermore, we can estimate the error in the approximation for any given $n$.  For example, if we use $T_5(x)$, we can estimate the error by noting that this is an Alternating Series, so we use the Alternating Series Estimation Theorem,
+    $$R_5\leq b_{6}=\frac{1}{11\cdot 5!}=\frac{1}{1320}$$
   </body>
 </html>
