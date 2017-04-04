@@ -429,6 +429,34 @@
     <b><i>Completeness Axiom</i></b>: Let $S\subset\mathbb{R}$ be bounded above such that there exists an $M\in\mathbb{R}$, $x\leq M$ for all $x\in S$.  Then, $S$ has a <b>least upper bound</b> $b$ such that if $M$ is any other upper bound, then $b\leq M$.  **<i>This axiom is used to express that there is no hole or gap in the real number line.</i><br /><br />
     <b><i>Bounded Monotone Sequence Theorem</i></b>: A bounded monotone sequence is convergent (i.e. has a limit)<br />
     <br /><br /><br /><br />
+    <h2>Infinite Series</h2>
+    Given a sequence $\{a_n\}_{n=1}^\infty$, we consider the series $\sum_{n=1}^\infty a_n$<br />
+    <b>Partial Sum</b>: $S_n=a_1+a_2+\cdots+a_n=\sum_{k=1}^n a_k$<br /><br />
+    These partial sums for a sequence $\{S_n\}$.<br />
+    If $\{S_n\}$ converges and $\lim_{n\to\infty}S_n=S$ exists and is finite, then the series $\sum a_n$ is <b>convergent</b> such that $\sum_{n=1}^\infty a_n=S$, where $S$ is the <b>sum</b> of the series.  If $\{S_n\}$ is divergent, then the series is <b>divergent</b>.<br /><br />
+    e.g. Geometric Series<br />
+    Consider the geometric series $a+ar+ar^2+\cdots$ where $a_n=ar^{n-1}$, $n\geq 1$.<br />
+    Its partial sum is
+    $$\begin{align*}
+      S_n&=a+ar+\cdots+ar^{n-1}\\
+      rS_n&=ar+ar^2+\cdots+ar^n\\
+      S_n(1-r)=a-ar^n=a(1-r^n)\\
+      S_n=\frac{a(1-r^n)}{1-r}\quad r\neq 1
+    \end{align*}$$
+    <ol>
+      <li>
+        If $|r|< 1$, then $r^n\to 0$ as $n\to\infty\ \rightarrow\ \lim_{n\to\infty}S_n=\frac{a}{1-r}\quad$(sum of a geometric series)
+      </li>
+      <li>
+        If $|r|> 1$, then $|S_n|\to\infty$ so the series diverges.
+      </li>
+      <li>$r=1$, $a+a+a+\cdots$ is divergent.</li>
+      <li>$r=-1$, $a-a+a-a+\cdots$ oscillates and is divergent</li>
+    </ol>
+    Thus, geometric series converge to $\frac{a}{1-r}$ for $|r|< 1$ and diverge for $|r|\geq 1$.<br /><br />
+    <h3>Convergence and Divergence of Series</h3>
+    <b>Theorem</b>: If $\sum a_n$ is convergent, then $\lim_{n\to\infty}a_n=0$
+    <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
 	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.
