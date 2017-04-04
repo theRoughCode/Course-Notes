@@ -25,3 +25,8 @@ If you are creating a new html file that requires MathJax, include the following
 #### Tips for MathJax
  - To in-line LaTeX: use $\<math\>$
  - To centre on page (equation-style): use $$\<math\>$$
+ 
+## Errors or Requests for Additions
+ If you find a typo or an error, or if you have suggestions on something to add, you can:
+ 1. Create a new issue and I'll try to fix it ASAP!
+ 2. Fork the repo as above and submit a pull request with the change!
