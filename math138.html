@@ -455,7 +455,51 @@
     </ol>
     Thus, geometric series converge to $\frac{a}{1-r}$ for $|r|< 1$ and diverge for $|r|\geq 1$.<br /><br />
     <h3>Convergence and Divergence of Series</h3>
-    <b>Theorem</b>: If $\sum a_n$ is convergent, then $\lim_{n\to\infty}a_n=0$
+    <b>Theorem</b>: If $\sum a_n$ is convergent, then $\lim_{n\to\infty}a_n=0$<br />
+    <b>Corollary</b>: If $\lim_{n\to\infty}a_n\neq 0$, then $\sum a_n$ is divergent.<br />
+    <i>Note: $\lim_{n\to\infty}a_n=0$ does not imply that $\sum a_n$ is convergent. (i.e. Harmonic Series)</i><br /><br />
+    <b>Theorem</b>: If $\sum a_n$ and $\sum b_n$ are convergent, then $\sum (a_n+b_n)$ is convergent.
+    <h3>Divergence Tests</h3>
+    <h4>1. Integral Test</h4>
+    If $\sum a_n=f(n)$ where $f(x)$ is continuous, positive and decreasing on $[b,\infty)$, then $$\sum_{n=b}^\infty a_n\text{ is convergent }\Longleftrightarrow\ \int_a^\infty f(x)dx\ \text{ is convergent }$$
+    <b><u>Estimating Sums</u></b><br />
+    Given $\sum a_n$ converges and its sum is $S$,  its partial sums $S_n$ are approximations to $S$.  For $n\geq 1$, $S=S_n+R_n$ where $R_n$ is the remainder (or the error in approximation).  We can view $R_n$ as the "tail" of the series, $R_n=a_{n+1}+a_{n+2}+\cdots$
+    $$R_n\leq \int_n^\infty f(x)dx$$
+    <h4>2. Comparison Test</h4>
+    Given $\sum a_n$ and $\sum b_n$ where $a_n,b_n>0$ then
+    <ol type="i">
+      <li>
+        If $\sum b_n$ is convergent and $a_n\leq b_n$ for all $n\geq 1$, then $\sum a_n$ is convergent.
+      </li>
+      <li>
+        If $\sum b_n$ is divergent and $a_n\geq b_n$ for all $n\geq 1$, then $\sum a_n$ is divergent.
+      </li>
+    </ol>
+    <i>Tip: Determine what $a_n$ converges to as $n\to\infty$.  If $a_n\to 0$ then find $\sum b_n$ such that $b_n\geq a_n$ for all $n\geq 1$.</i><br /><br />
+    e.g. Determine whether $\sum_{n=1}^\infty \frac{5}{2n^2+4n+3}$ converges or diverges.<br />
+    We note that as $n\to\infty$, $a_n\to\frac{5}{2n^2}=0$.  Thus, we know it will converge, so we choose $b_n=\frac{5}{2n^2}$.  Since $\frac{5}{2n^2+4n+3}<\frac{5}{2n^2}$ and $b_n$ converges (p-series where $p>1$), thus $\sum_{n=1}^\infty \frac{5}{2n^2+4n+3}$ converges.<br /><br />
+    <b><u>Estimating Sums</u></b><br />
+    If we have used the Comparison Test to show that a series $\sum a_n$ converges by comparison with $\sum b_n$, then we can compare the remainders.<br />
+    Let $R_n$ be the remainder for $\sum a_n$ such that $R_n=s-s_n=a_{n+1}+a_{n+2}+cdots$<br />
+    Let $T_n$ be the remainder for $\sum b_n$ such that $T_n=t-t_n=b_{n+1}+b_{n+2}+cdots$<br />
+    Since $a_b\leq b_n$ for all $n\geq 1$, then  $R_n\leq T_n$.
+    <ul>
+      <li>
+        If $\sum b_n$ is a geometric series, $T_n=\frac{a}{1-r}$
+      </li>
+      <li>
+        If $\sum b_n$ is a p-series, we use the Remainder Estimate for the Integral Test shown above.
+      </li>
+    </ul>
+    <h4>3. Limit Comparison Test</h4>
+    Given $\sum a_n$ and $\sum b_n$ where $a_n,b_n>0$, if $\lim_{n\to\infty}\frac{a_n}{b_n}=c$, where $c$ is finite and $c>0$, then either both converge or both diverge.
+    <i>Tip: Determine the dominant term in both the numerator and denominator and use that as $b_n$.</i><br /><br />
+    e.g. Determine whether the series $\sum_{n=1}^\infty\frac{2n^3+3n}{\sqrt{5+n^5}}$ converges or diverges.<br />
+    Note that the dominant term in the numerator is $2n^2$ and the dominant term in the denominator is $\sqrt{n^5}$.  Thus, we take $b_n=\frac{2n^2}{n^{\frac{5}{2}}}=\frac{2}{n^{\frac{1}{2}}}$.
+    $$\begin{align*}
+      \lim_{n\to\infty}\frac{a_n}{b_n}=\lim_{n\to\infty}\frac{2n^3+3n}{\sqrt{5+n^5}}\cdot\frac{n^{\frac{1}{2}}}{2}=\lim_{n\to\infty}\frac{2n^{\frac{5}{2}}+3n^{\frac{3}{2}}}{2\sqrt{5+n^5}}=\lim_{n\to\infty}\frac{2+\frac{3}{n}}{2\sqrt{\frac{5}{n^5}+1}}=\frac{2}{2}=1
+    \end{align*}$$
+    Since $c$ is a positive, finite number, $b_n$ is divergent (p-series with $p< 1$), the given series is divergent by the Limit Comparison Test.
     <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
