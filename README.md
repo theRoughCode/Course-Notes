@@ -9,7 +9,7 @@ Hey everyone!  This repo was created initially for me to study/increase the life
 3. Submit a pull request.
 
 ## What Should I Take Note Of?
-For math-related courses, we will be making use of [MathJax}(https://www.mathjax.org/) to embed LaTeX into our html.  
+For math-related courses, we will be making use of [MathJax](https://www.mathjax.org/) to embed LaTeX into our html.  
 If you are creating a new html file that requires MathJax, include the following script tags into the \<head\> of your document.
 ```html
 <script type="text/javascript" async
