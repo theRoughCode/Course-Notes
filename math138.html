@@ -392,7 +392,24 @@
     <br /><br /><br /><br />
     <h2>Sequences</h2>
     <u>Definition</u>: An infinite set of real numbers ordered $a_1, a_2,\ldots\  $ Denoted as $\{a_n\}$ or $\{a_n\}_{n=1}^\infty$<br />
-    <u>Definition</u>: A sequence has the <b>limit</b>, <i>L</i>, which we write as $$\lim_{n=\infty}a_n=L\quad\text{or}\quad $a_n\to L\text{ as } n\to\infty$$
+    <u>Definition</u>: A sequence has the <b>limit</b>, <i>L</i>, which we write as $$\lim_{n=\infty}a_n=L\quad\text{or}\quad a_n\to L\text{ as } n\to\infty$$
+    if $\ \forall\epsilon > 0,\ \exists N > 0$ such that $|a_n-L|<\epsilon\quad\forall n>N$<br />
+    If the limit exists, then $\{a_n\}$ <b>converges</b>. Otherwise, it <b>diverges</b>.<br />
+    If $\{a_n\}$ and $\{b_n\}$ are convergent sequences and $c\in\mathbb{R}$, then
+    <ol>
+      <li>
+        $\lim_{n\to\infty}(a_n+b_n)=\lim_{n\to\infty}a_b+\lim_{n\to\infty}b_n$
+      </li>
+      <li>
+        $\lim_{n\to\infty}ca_n=c\lim_{n\to\infty}a_n$
+      </li>
+      <li>
+        $\lim_{n\to\infty}(a_nb_n)=\lim_{n\to\infty}a_n\cdot\lim_{n\to\infty}b_n$
+      </li>
+      <li>
+        $\lim_{n\to\infty}a_n^p=[\lim_{n\to\infty}a_n]^p\quad$if $p>0$ and $a_n>0$
+      </li>
+    </ol>
     <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
