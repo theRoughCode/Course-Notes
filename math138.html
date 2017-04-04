@@ -459,7 +459,7 @@
     <b>Corollary</b>: If $\lim_{n\to\infty}a_n\neq 0$, then $\sum a_n$ is divergent.<br />
     <i>Note: $\lim_{n\to\infty}a_n=0$ does not imply that $\sum a_n$ is convergent. (i.e. Harmonic Series)</i><br /><br />
     <b>Theorem</b>: If $\sum a_n$ and $\sum b_n$ are convergent, then $\sum (a_n+b_n)$ is convergent.
-    <h3>Divergence Tests</h3>
+    <h3>Convergence Tests</h3>
     <h4>1. Integral Test</h4>
     If $\sum a_n=f(n)$ where $f(x)$ is continuous, positive and decreasing on $[b,\infty)$, then $$\sum_{n=b}^\infty a_n\text{ is convergent }\Longleftrightarrow\ \int_a^\infty f(x)dx\ \text{ is convergent }$$
     <b><u>Estimating Sums</u></b><br />
@@ -499,7 +499,51 @@
     $$\begin{align*}
       \lim_{n\to\infty}\frac{a_n}{b_n}=\lim_{n\to\infty}\frac{2n^3+3n}{\sqrt{5+n^5}}\cdot\frac{n^{\frac{1}{2}}}{2}=\lim_{n\to\infty}\frac{2n^{\frac{5}{2}}+3n^{\frac{3}{2}}}{2\sqrt{5+n^5}}=\lim_{n\to\infty}\frac{2+\frac{3}{n}}{2\sqrt{\frac{5}{n^5}+1}}=\frac{2}{2}=1
     \end{align*}$$
-    Since $c$ is a positive, finite number, $b_n$ is divergent (p-series with $p< 1$), the given series is divergent by the Limit Comparison Test.
+    Since $c$ is a positive, finite number, $b_n$ is divergent (p-series with $p< 1$), the given series is divergent by the Limit Comparison Test.<br /><br />
+    <h3>Alternating Series</h3>
+    If an alternating series $\sum_{n=1}^\infty (-1)^{n-1}b_n$ satisfies
+    <ol type="i">
+      <li>
+        $b_{n+1}\leq b_n$ for all $n$
+      </li>
+      <li>
+        $\lim_{n\to\infty}b_n=0$
+      </li>
+    </ol>
+    then the series is convergent.<br /><br />
+    <b><u>Alternating Series Estimation Theorem</u></b><br />
+    If $\sum (-1)^{n-1}b_n$, $b_n>0$, satisfies the conditions for an alternating series, then $|R_n|=|s-s_n|\leq b_{n+1}$.<br /><br />
+    <h3>Absolute Convergence</h3>
+    <u>Definition</u>: A series $\sum a_n$ is called <b>absolutely convergent</b> if the series $\sum|a_n|$ is convergent.<br />
+    <u>Definition</u>: A series $\sum a_n$ is called <b>conditionally convergent</b> if it is convergent but not absolutely convergent. <br /><br />
+    <u>Theorem</u>: If a series $\sum a_n$ is absolutely convergent, then it is convergent.
+    <h4>4. Ratio Test</h4>
+    Given a series $\sum a_n$, let $\lim_{n\to\infty}\bigg|\frac{a_{n+1}}{a_n}\bigg| = L$
+    <ol type="i">
+      <li>
+        If $L< 1$, then $\sum a_n$ is absolutely convergent (and therefore convergent).
+      </li>
+      <li>
+        If $L>1$ or $L=\infty$, then $\sum a_n$ is divergent.
+      </li>
+      <li>
+        If $L=1$, test is inconclusive.
+      </li>
+    </ol>
+    <h4>5. Root Test</h4>
+    This is used when $n$th power occurs.<br />
+    Given a series $\sum a_n$, let $\lim_{n\to\infty}\sqrt{|a_n|} = L$
+    <ol type="i">
+      <li>
+        If $L< 1$, then $\sum a_n$ is absolutely convergent (and therefore convergent).
+      </li>
+      <li>
+        If $L>1$ or $L=\infty$, then $\sum a_n$ is divergent.
+      </li>
+      <li>
+        If $L=1$, test is inconclusive.
+      </li>
+    </ol>
     <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
