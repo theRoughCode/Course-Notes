@@ -359,6 +359,41 @@
     So, $C=v_0\sin\theta+\frac{mg}{k}$.
     $$\therefore v(t)=(v_0\sin\theta+\frac{mg}{k})e^{-\frac{kt}{m}}-\frac{mg}{k}$$
     <br /><br /><br /><br />
+    <h2>Parametric Representation of Curves</h2>
+    i.e. Projectile Motion.  These are the parametric representations of the trajectory of a projectile: $$x(t)=(v_0\cos\theta)t\quad y(t)=(v_0\sin\theta)t-\frac{1}{2}gt^2$$<br />
+    <h3>Calculus with Parametric Curves</h3>
+    <h4>Tangents</h4>
+    Given $x=f(t)$ and $y=g(t)$,
+    $$\frac{dy}{dt}=\frac{dy}{dx}\cdot \frac{dx}{dt}$$
+    So, $$\frac{dy}{dx}=\frac{\frac{dy}{dt}}{\frac{dx}{dt}}\quad\frac{dx}{dt}\neq 0$$
+    <h4>Areas</h4>
+    Given a curve defined by $x=f(t)$ and $y=g(t)$, the area under the curve as $x$ goes from $a$ to $b$ or as $t$ goes from $\alpha$ to $\beta$ can be found by:
+    $$A=\int_a^b ydx=\int_\alpha^\beta g(t)f'(t)dt$$<br />
+    <h3>Arclength Using Parametric Representation</h3>
+    Given a curve $C$ described by $x=f(t)$ and $y=g(t)$ and $f',\ g'$ are continuous over $[a,b]$, and $C$ is traversed exactly once as $t$ goes from $a$ to $b$, find the arclength of the curve in the interval $[a,b]$.
+    <ol>
+      <li>
+        Partition $[a,b]$ into $n$ sub-intervals of width $\Delta t=\frac{b-a}{n}$
+      </li>
+      <li>
+        $$\begin{align*}
+        L_k=||\overrightarrow{Q_kQ_{k+1}}||&\approx\sqrt{[f(t_{k+1}-f{t_k})]^2+[g(t_{k+1}-g{t_k})]^2}\\
+        &=\Delta t\sqrt{\bigg[\frac{f(t_{k+1}-f{t_k})}{\Delta t}\bigg]^2+\bigg[\frac{g(t_{k+1}-g{t_k})}{\Delta t}\bigg]^2}\\
+        &\approx\sqrt{f'(t_k^*)^2+g'(t_k^*)^2}\Delta t
+        \end{align*}$$
+      </li>
+      <li>
+        Take the Riemann Sum.
+        $$L=\lim_{n\to\infty}\sum_{k=1}^nL_k=\int_a^b\sqrt{f'(t)^2+g'(t)^2}dt$$
+      </li>
+    </ol>
+    Alternatively, we can derive this formula from the formula for arclength of a function $y=f(x)$.
+    $$L=\int_a^b\sqrt{1+\big(\frac{dy}{dx}\big)^2}dx=\int_a^b\sqrt{1+\bigg(\frac{\frac{dy}{dt}}{\frac{dx}{dt}}\bigg)^2}dx=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dx\cdot\frac{dt}{dx}=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dt$$
+    <br /><br /><br /><br />
+    <h2>Sequences</h2>
+    <u>Definition</u>: An infinite set of real numbers ordered $a_1, a_2,\ldots\  $ Denoted as $\{a_n\}$ or $\{a_n\}_{n=1}^\infty$<br />
+    <u>Definition</u>: A sequence has the <b>limit</b>, <i>L</i>, which we write as $$\lim_{n=\infty}a_n=L\quad\text{or}\quad $a_n\to L\text{ as } n\to\infty$$
+    <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
 	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.
