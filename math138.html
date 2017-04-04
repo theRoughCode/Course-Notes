@@ -259,7 +259,105 @@
     <h2>Differential Equations</h2>
     A differential equation involves derivaties of a function and possibly the function itself.<br />
     <u>Definition</u>: The <b>order of a DE</b> is the order of the highest derivative in the DE.<br />
-    <u>Definition</u>: A DE is <b>linear</b> if the dependent variable or derivative is not multiplied by itself or each other (i.e. $y + \frac{dy}{dx}$).
+    <u>Definition</u>: A DE is <b>linear</b> if the dependent variable or derivative is not multiplied by itself or each other (i.e. $y + \frac{dy}{dx}$).<br /><br />
+    <h3>Separable First-Order DEs</h3>
+    A DE is <u>separable</u> if it can be written in the form $\frac{dy}{dx}=g(x)f(y)$. <br />
+    e.g. <ol>
+      <li>
+        $\frac{dy}{dx}=xy\quad\checkmark$
+      </li>
+      <li>
+        $\frac{dy}{dx}=(x+1)(y^2+1)\quad\checkmark$
+      </li>
+      <li>
+        $\frac{dy}{dx}=x+y\quad\times$
+      </li>
+    </ol>
+    To solve a separable DE:
+    <ol>
+      <li>
+        Divide by $f(y)$.
+        $$\frac{1}{f(y)}\frac{dy}{dx}=g(x)\quad *f(y)\neq 0$$
+        If $f(y^*)=0$, then $y(x)=y^*$ is a constant solution to the DE.
+      </li>
+      <li>
+        Let $h(y)=\frac{1}{f(y)}$, so $h(y)\frac{dy}{dx}=g(x)$.
+      </li>
+      <li>
+        Integrate both sides and solve.
+        $$\int h(y)dy=\int g(x)dx$$
+      </li>
+    </ol>
+    e.g. $\frac{dy}{dx}=xy$
+    <ol>
+      <li>
+        Divide by $y$. $$\frac{1}{y}\frac{dy}{dx}=x\quad\textbf{*Check: } y=0\rightarrow\frac{dy}{dx}=x\cdot 0=0\ \rightarrow y(x)=0\text{ is a solution.}$$
+      </li>
+      <li>
+        Integrate. $$\int\frac{1}{y}dy=\int xdx$$
+      </li>
+      <li>
+        Solve.
+        $$\begin{align*}
+          \ln|y|&=\frac{1}{2}x^2+C\\
+          |y|&=e^{\frac{1}{2}x^2+C}\\
+          y&=\pm e^Ce^{\frac{1}{2}x^2}\\
+          y&=Ae^{\frac{x^2}{2}}\quad A\neq 0\\
+          \text{But, $y=0$ is a solution, }y&=Ce^{\frac{1}{2}x^2}\quad , C\in\mathbb{R}
+        \end{align*}$$
+      </li>
+    </ol><br /><br />
+    <h3>Linear First-Order DE</h3>
+    $$\text{General Form: }\frac{dy}{dx}+P(x)y=Q(x)$$
+    To solve,
+    <ol>
+      <li>
+        Multiply both sides by the integrating factor, $I(x)=e^{\int P(x)dx}$
+        $$e^{\int P(x)dx}\frac{dy}{dx}+e^{\int P(x)dx}P(x)y=Q(x)e^{\int P(x)dx}$$
+        $$\frac{d}{dx}[ye^{\int P(x)dx}]=Q(x)e^{\int P(x)dx}$$
+      </li>
+      <li>
+        Integrate both sides.
+        $$ye^{\int P(x)dx}+C=\int Q(x)ye^{\int P(x)dx}dx$$
+      </li>
+      <li>
+        Solve for y.
+        $$y(x)=e^{-\int P(x)dx}\int Q(x)ye^{\int P(x)dx}dx-Ce^{-\int P(x)dx}$$
+      </li>
+    </ol>
+    e.g. Solve $\frac{dy}{dx}+2y=x$.<br />
+    $P(x)=2,\ Q(x)=x,\ I(x)=e^{\int 2dx}=e^{2x}$
+    <ol>
+      <li>
+        Multiply by $I(x)$. $$e^{2x}\frac{dy}{dx}+2ye^{2x}=xe^{2x}$$
+        $$\frac{d}{dx}[ye^{2x}]=xe^{2x}$$
+      </li>
+      <li>
+        Integrate.
+        $$ye^{2x}+C_1=\int xe^{2x}dx$$
+        Let $u=x,\ du=dx,\ dv=e^{2x}dx,\ v=\frac{1}{2}e^{2x}$.
+        $$ye^{2x}=\frac{1}{2}xe^{2x}-\int \frac{1}{2}e^{2x}dx +C_2$$
+        $$ye^{2x}=\frac{1}{2}xe^{2x}-\frac{1}{4}e^{2x} +C$$
+      </li>
+      <li>
+        Solve for y.
+        $$y=\frac{1}{2}x-\frac{1}{4} +Ce^{-2x}\quad\square$$
+      </li>
+    </ol>
+    e.g. <b>[Physics]</b> Projectile Motion with Air Resistance<br />
+    $$m\frac{dv}{dt}=-mg-kv_y\ \rightarrow\ \frac{dv}{dt}=-g-\frac{k}{m}v_y$$
+    Let's rewrite this in terms of a first-order linear DE.
+    $$\frac{dv}{dt}+\frac{k}{m}v=-g\quad P(t)=\frac{k}{m},\ Q(t)=-g,\ I(t)=e^{\int \frac{k}{m}dt}=e^{\frac{kt}{m}}$$
+    We multiply by $I(t)$: $$e^{\frac{kt}{m}}\frac{dv}{dt}+\frac{k}{m}ve^{\frac{kt}{m}}=-ge^{\frac{kt}{m}}$$
+    $$\frac{d}{dt}[ve^{\frac{kt}{m}}]=-ge^{\frac{kt}{m}}$$
+    Integrate both sides:
+    $$ve^{\frac{kt}{m}}+C_1=-\int ge^{\frac{kt}{m}}$$
+    $$ve^{\frac{kt}{m}}=-\frac{mg}{k}e^{\frac{kt}{m}}+C$$
+    Solve for v. $$v=-\frac{mg}{k}+Ce^{-\frac{kt}{m}}$$
+    If we impose <i>initial condition</i> such that $v_y(0)=v_0\sin\theta$,
+    $v(0)=v_0\sin\theta=-\frac{mg}{k}+Ce^{-\frac{k(0))}{m}}=-\frac{mg}{k}+C$
+    So, $C=v_0\sin\theta+\frac{mg}{k}$.
+    $$\therefore v(t)=(v_0\sin\theta+\frac{mg}{k})e^{-\frac{kt}{m}}-\frac{mg}{k}$$
     <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
