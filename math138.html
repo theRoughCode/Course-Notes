@@ -10,9 +10,45 @@
         tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
       });
     </script>
+    <style>
+      #contents {
+        background: #ffe5e5;
+      }
+      #nav {
+        font-size: 20px;
+      }
+      #nav li {
+        padding: 5px;
+      }
+      #nav li a{
+        text-decoration: none;
+        color: hotpink;
+      }
+      #nav li a:hover{
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
-    <h1><b>1 </b>Review of Integration</h1>
+    <a name="top"></a>
+    <h1 style="text-align: center; font-size: 50px;">MATH 138P Notes by Raphael Koh</h1><br />
+    <div id="contents">
+      <h1>Table of Contents</h1>
+      <ol id="nav">
+        <li><a href="#1">Review of Integration</a></li>
+        <li><a href="#2">Integration Techniques</a></li>
+        <li><a href="#3">Applications of Integration</a></li>
+        <li><a href="#4">Improper Integral</a></li>
+        <li><a href="#5">Differential Equations</a></li>
+        <li><a href="#6">Parametric Representation of Curves</a></li>
+        <li><a href="#7">Sequences</a></li>
+        <li><a href="#8">Infinite Series</a></li>
+        <li><a href="#9">Power Series</a></li>
+        <li><a href="#10">Taylor & Maclaurin Series</a></li>
+      </ol>
+    </div>
+    <br /><br />
+    <h1><a name="1"></a><b>1 </b>Review of Integration</h1>
     <h2>Riemann Integral</h2>
     Let $f(x)$ be a continuous (or piecewise continuous) function defined over $[a,b]$.
     <ol>
@@ -37,7 +73,7 @@
     </ol>
     <br />
     <br />
-    <h2>Fundamental Theorem oF Calculus 1</h2>
+    <h2>Fundamental Theorem of Calculus 1</h2>
     Let $f(x)$ be continuous on $[a,b]$.
     Given the function $$g(x)=\int_a^x f(t)dt,\quad a\leq x\leq b$$
     Then $g(x)$ is continuous on $[a,b]$ and $$g'(x)=f(x),\quad a\leq x\leq b$$
@@ -46,6 +82,7 @@
     <br />
     <br />
     <br />
+    <h1><a name="2"></a><b>2 </b>Integration Techniques</h1>
     <h2>Integration by Substitution</h2>
     e.g. $\int \sqrt{5x+4}dx$. <br /><br />
     Let $u=5x+4$, $du=5dx$,
@@ -178,7 +215,7 @@
       &=0\quad\square
     \end{align*}$$
     <br /><br /><br /><br />
-    <h2>Applications of Integration</h2>
+    <h1><a name="3"></a><b>3 </b>Applications of Integration</h1>
     <h3>Centre of Mass</h3>
     $$\bar{x}=\frac{\sum_{i=0}^nm_ix_i}{\sum_{i=0}^nm_i}$$
     Consider an object of length $L$ with a continuous mass distribution, $\rho(x)$, lying on the $x$-axis with one end on the origin.
@@ -227,7 +264,7 @@
     So, $$\int_Cxds=\bar{x}\int_Cds\ \rightarrow\ \bar{x}=\frac{\int_Cxds}{\int_Cds}=\frac{\int_Cxds}{L}$$
     Similarly, $$\bar{y}=\frac{\int_Cyds}{L}$$
     <br /><br /><br /><br />
-    <h2>Improper Integrals</h2>
+    <h1><a name="4"></a><b>4 </b>Improper Integral</h1>
     <h3>Type I - Integrals over infinite domains</h3>
     $$\int_{-\infty}^\infty f(x)dx=\int_{-\infty}^af(x)dx+\int_{a}^\infty f(x)dx=\lim_{b\to\infty}I_1(b)+\lim_{b\to\infty}I_2(b)=\lim_{b\to\infty}\int_{-b}^af(x)dx+\lim_{b\to\infty}\int_{a}^{\infty}f(x)dx$$
     <h3>Important Class of Improper Integrals</h3>
@@ -256,7 +293,7 @@
       </li>
     </ol>
     <br /><br /><br /><br />
-    <h2>Differential Equations</h2>
+    <h1><a name="5"></a><b>5 </b>Differential Equations</h1>
     A differential equation involves derivaties of a function and possibly the function itself.<br />
     <u>Definition</u>: The <b>order of a DE</b> is the order of the highest derivative in the DE.<br />
     <u>Definition</u>: A DE is <b>linear</b> if the dependent variable or derivative is not multiplied by itself or each other (i.e. $y + \frac{dy}{dx}$).<br /><br />
@@ -359,7 +396,7 @@
     So, $C=v_0\sin\theta+\frac{mg}{k}$.
     $$\therefore v(t)=(v_0\sin\theta+\frac{mg}{k})e^{-\frac{kt}{m}}-\frac{mg}{k}$$
     <br /><br /><br /><br />
-    <h2>Parametric Representation of Curves</h2>
+    <h1><a name="6"></a><b>6 </b>Parametric Representations of Curves</h1>
     i.e. Projectile Motion.  These are the parametric representations of the trajectory of a projectile: $$x(t)=(v_0\cos\theta)t\quad y(t)=(v_0\sin\theta)t-\frac{1}{2}gt^2$$<br />
     <h3>Calculus with Parametric Curves</h3>
     <h4>Tangents</h4>
@@ -390,7 +427,7 @@
     Alternatively, we can derive this formula from the formula for arclength of a function $y=f(x)$.
     $$L=\int_a^b\sqrt{1+\big(\frac{dy}{dx}\big)^2}dx=\int_a^b\sqrt{1+\bigg(\frac{\frac{dy}{dt}}{\frac{dx}{dt}}\bigg)^2}dx=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dx\cdot\frac{dt}{dx}=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dt$$
     <br /><br /><br /><br />
-    <h2>Sequences</h2>
+    <h1><a name="7"></a><b>7 </b>Sequences</h1>
     <u>Definition</u>: An infinite set of real numbers ordered $a_1, a_2,\ldots\  $ Denoted as $\{a_n\}$ or $\{a_n\}_{n=1}^\infty$<br />
     <u>Definition</u>: A sequence has the <b>limit</b>, <i>L</i>, which we write as $$\lim_{n=\infty}a_n=L\quad\text{or}\quad a_n\to L\text{ as } n\to\infty$$
     if $\ \forall\epsilon > 0,\ \exists N > 0$ such that $|a_n-L|<\epsilon\quad\forall n>N$<br />
@@ -429,7 +466,7 @@
     <b><i>Completeness Axiom</i></b>: Let $S\subset\mathbb{R}$ be bounded above such that there exists an $M\in\mathbb{R}$, $x\leq M$ for all $x\in S$.  Then, $S$ has a <b>least upper bound</b> $b$ such that if $M$ is any other upper bound, then $b\leq M$.  **<i>This axiom is used to express that there is no hole or gap in the real number line.</i><br /><br />
     <b><i>Bounded Monotone Sequence Theorem</i></b>: A bounded monotone sequence is convergent (i.e. has a limit)<br />
     <br /><br /><br /><br />
-    <h2>Infinite Series</h2>
+    <h1><a name="8"></a><b>8 </b>Infinite Series</h1>
     Given a sequence $\{a_n\}_{n=1}^\infty$, we consider the series $\sum_{n=1}^\infty a_n$<br />
     <b>Partial Sum</b>: $S_n=a_1+a_2+\cdots+a_n=\sum_{k=1}^n a_k$<br /><br />
     These partial sums for a sequence $\{S_n\}$.<br />
@@ -456,6 +493,8 @@
     Thus, geometric series converge to $\frac{a}{1-r}$ for $|r|< 1$ and diverge for $|r|\geq 1$.<br /><br />
     <h3>Convergence and Divergence of Series</h3>
     <b>Theorem</b>: If $\sum a_n$ is convergent, then $\lim_{n\to\infty}a_n=0$<br />
+    <u>Proof</u>: <br />Consider the partial sum $S_n=a_1+\cdots+a_n=S_{n-1}+a_n$.  We can rewrite this as $a_n=S_n-S_{n-1}$.  We suppose that $\sum a_n$ is convergent, so we $\lim_{n\to\infty}S_n=s=\lim_{n\to\infty}S_{n-1}$.  Thus, $\lim_{n\to\infty}a_n=\lim_{n\to\infty}(S_n-S_{n-1})=\lim_{n\to\infty}S_n-\lim_{n\to\infty}S_{n-1}=s-s=0\quad\square$
+    <br /><br />
     <b>Corollary</b>: If $\lim_{n\to\infty}a_n\neq 0$, then $\sum a_n$ is divergent.<br />
     <i>Note: $\lim_{n\to\infty}a_n=0$ does not imply that $\sum a_n$ is convergent. (i.e. Harmonic Series)</i><br /><br />
     <b>Theorem</b>: If $\sum a_n$ and $\sum b_n$ are convergent, then $\sum (a_n+b_n)$ is convergent.
@@ -492,7 +531,15 @@
       </li>
     </ul>
     <h4>3. Limit Comparison Test</h4>
-    Given $\sum a_n$ and $\sum b_n$ where $a_n,b_n>0$, if $\lim_{n\to\infty}\frac{a_n}{b_n}=c$, where $c$ is finite and $c>0$, then either both converge or both diverge.
+    Given $\sum a_n$ and $\sum b_n$ where $a_n,b_n>0$, if $\lim_{n\to\infty}\frac{a_n}{b_n}=c$, where $c$ is finite and $c>0$, then either both converge or both diverge.<br />
+    <u>Proof</u>: For any $\epsilon > 0$, there exists an $N$ such that
+    $$\bigg|\frac{a_n}{b_n}-c\bigg|<\epsilon\quad\forall n > N$$
+    $$-\epsilon < \frac{a_n}{b_n}-c < \epsilon$$
+    $$c-\epsilon < \frac{a_n}{b_n} < c+\epsilon$$
+    Letting $m=c-\epsilon$ and $M=c+\epsilon$,
+    $$mb_n < a_n < Mb_n$$
+    Thus, we observe that if $\sum b_n$ converges, then by the comparison test, since $Mb_n > a_n$ and $Mb_n$ converges, $\sum a_n$ must converge.  If $\sum b_n$ diverges, then by the comparison test, since $Mb_n < a_n$ and $mb_n$ diverges, $\sum a_n$ must diverge.  Likewise, by the comparison test, if $\sum a_n$ converges, $b_n$ must converge and if  $\sum a_n$ diverges, $b_n$ must diverge.
+    <br /><br /><br />
     <i>Tip: Determine the dominant term in both the numerator and denominator and use that as $b_n$.</i><br /><br />
     e.g. Determine whether the series $\sum_{n=1}^\infty\frac{2n^3+3n}{\sqrt{5+n^5}}$ converges or diverges.<br />
     Note that the dominant term in the numerator is $2n^2$ and the dominant term in the denominator is $\sqrt{n^5}$.  Thus, we take $b_n=\frac{2n^2}{n^{\frac{5}{2}}}=\frac{2}{n^{\frac{1}{2}}}$.
@@ -516,7 +563,11 @@
     <h3>Absolute Convergence</h3>
     <u>Definition</u>: A series $\sum a_n$ is called <b>absolutely convergent</b> if the series $\sum|a_n|$ is convergent.<br />
     <u>Definition</u>: A series $\sum a_n$ is called <b>conditionally convergent</b> if it is convergent but not absolutely convergent. <br /><br />
-    <u>Theorem</u>: If a series $\sum a_n$ is absolutely convergent, then it is convergent.
+    <u>Theorem</u>: If a series $\sum a_n$ is absolutely convergent, then it is convergent.<br />
+    <u>Proof</u>:<br />
+    Observe the following inequality: $0\leq a_n + |a_n|\leq 2|a_n|$.<br />
+    Suppose $\sum a_n$ is absolutely convergent, then $\sum |a_n|$ is convergent.  By the Comparison Test, $\sum (a_n+|a_n|)$ is convergent.  Since $\sum a_n=\sum(a_n+|a_n|)-\sum |a_n|$ is a difference of two convergent series, then $\sum a_n$ is convergent. $\quad\square$
+    <br />
     <h4>4. Ratio Test</h4>
     Given a series $\sum a_n$, let $\lim_{n\to\infty}\bigg|\frac{a_{n+1}}{a_n}\bigg| = L$
     <ol type="i">
@@ -544,8 +595,9 @@
         If $L=1$, test is inconclusive.
       </li>
     </ol>
+    <img src="./images/Series_Convergence_Flowchart.PNG" />
     <br /><br /><br /><br />
-    <h2>Power Series</h2>
+    <h1><a name="9"></a><b>9 </b>Power Series</h1>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
 	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.<br />
     <u>Theorem</u>: For a given power series $\sum_{n=0}^\infty c_n(x-a)^n$, there are only three possibilities for convergence:
@@ -598,7 +650,7 @@
         $$\int\bigg[\sum c_n(x-a)^n\bigg]dx=\sum \int[c_n(x-a)^n]dx$$
       </li>
     </ol>
-    <h3>Taylor and Maclaurin Series</h3>
+    <h1><a name="10"></a><b>10 </b>Taylor & Maclaurin Series</h1>
     <u>Theorem</u>: If $f$ has a power series representation at $a$ such that
     $$f(x)=\sum c_n(x-a)^n\quad |x-a|< R$$
     then its coefficients are given by
@@ -633,5 +685,6 @@
     $$\int_0^1e^{-x^2}=\bigg[x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\cdots\bigg]_0^1=1-\frac{1}{3}+\frac{1}{10}-\frac{1}{42}+\cdots$$
     Furthermore, we can estimate the error in the approximation for any given $n$.  For example, if we use $T_5(x)$, we can estimate the error by noting that this is an Alternating Series, so we use the Alternating Series Estimation Theorem,
     $$R_5\leq b_{6}=\frac{1}{11\cdot 5!}=\frac{1}{1320}$$
+    <a href="#top">Back to Top</a>
   </body>
 </html>
