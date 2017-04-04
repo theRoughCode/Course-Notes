@@ -11,6 +11,7 @@
       });
     </script>
     <style>
+      /* CSS for navbar */
       #contents {
         background: #ffe5e5;
       }
@@ -27,9 +28,40 @@
       #nav li a:hover{
         text-decoration: underline;
       }
+
+      /* CSS for Definitions */
+      #def {
+        border: 5px solid green;
+      }
+      #def #title {
+        display: inline-block;
+        vertical-align: top;
+      }
+      #def #title label {
+        font-weight: bold;
+        text-decoration: underline;
+        padding-left: 20px;
+      }
+      #def #desc {
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
-
+    <h1><a name="1"></a>Vector Spaces & Dimensions</h1>
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A <b>field</b> is an algebraic system $\mathbb{F}$ having:
+        <ul>
+          <li>
+            elements $0$, $1$, (and possibly more)
+          </li>
+          <li>
+            operations $+, \times, -,$ and $^{-1}$
+          </li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>

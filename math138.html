@@ -11,6 +11,7 @@
       });
     </script>
     <style>
+      /* CSS for navbar */
       #contents {
         background: #ffe5e5;
       }
@@ -26,6 +27,28 @@
       }
       #nav li a:hover{
         text-decoration: underline;
+      }
+
+      /* CSS for Definitions */
+      #def {
+        border: 5px solid green;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+      }
+      #def #title {
+        display: inline-block;
+        vertical-align: top;
+      }
+      #def #title label {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      #def #desc {
+        padding-left: 10px;
+        display: inline-block;
       }
     </style>
   </head>
@@ -295,10 +318,25 @@
     <br /><br /><br /><br />
     <h1><a name="5"></a><b>5 </b>Differential Equations</h1>
     A differential equation involves derivaties of a function and possibly the function itself.<br />
-    <u>Definition</u>: The <b>order of a DE</b> is the order of the highest derivative in the DE.<br />
-    <u>Definition</u>: A DE is <b>linear</b> if the dependent variable or derivative is not multiplied by itself or each other (i.e. $y + \frac{dy}{dx}$).<br /><br />
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        The <b>order of a DE</b> is the order of the highest derivative in the DE.
+      </div>
+    </div>
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A DE is <b>linear</b> if the dependent variable or derivative is not multiplied by itself or each other (i.e. $y + \frac{dy}{dx}$).
+      </div>
+    </div>
     <h3>Separable First-Order DEs</h3>
-    A DE is <u>separable</u> if it can be written in the form $\frac{dy}{dx}=g(x)f(y)$. <br />
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A DE is <u>separable</u> if it can be written in the form $\frac{dy}{dx}=g(x)f(y)$.
+      </div>
+    </div>
     e.g. <ol>
       <li>
         $\frac{dy}{dx}=xy\quad\checkmark$
@@ -428,10 +466,20 @@
     $$L=\int_a^b\sqrt{1+\big(\frac{dy}{dx}\big)^2}dx=\int_a^b\sqrt{1+\bigg(\frac{\frac{dy}{dt}}{\frac{dx}{dt}}\bigg)^2}dx=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dx\cdot\frac{dt}{dx}=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dt$$
     <br /><br /><br /><br />
     <h1><a name="7"></a><b>7 </b>Sequences</h1>
-    <u>Definition</u>: An infinite set of real numbers ordered $a_1, a_2,\ldots\  $ Denoted as $\{a_n\}$ or $\{a_n\}_{n=1}^\infty$<br />
-    <u>Definition</u>: A sequence has the <b>limit</b>, <i>L</i>, which we write as $$\lim_{n=\infty}a_n=L\quad\text{or}\quad a_n\to L\text{ as } n\to\infty$$
-    if $\ \forall\epsilon > 0,\ \exists N > 0$ such that $|a_n-L|<\epsilon\quad\forall n>N$<br />
-    If the limit exists, then $\{a_n\}$ <b>converges</b>. Otherwise, it <b>diverges</b>.<br />
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        An infinite set of real numbers ordered $a_1, a_2,\ldots\  $ Denoted as $\{a_n\}$ or $\{a_n\}_{n=1}^\infty$
+      </div>
+    </div>
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A sequence has the <b>limit</b>, <i>L</i>, which we write as $$\lim_{n=\infty}a_n=L\quad\text{or}\quad a_n\to L\text{ as } n\to\infty$$
+        if $\ \forall\epsilon > 0,\ \exists N > 0$ such that $|a_n-L|<\epsilon\quad\forall n>N$<br />
+        If the limit exists, then $\{a_n\}$ <b>converges</b>. Otherwise, it <b>diverges</b>.
+      </div>
+    </div>
     If $\{a_n\}$ and $\{b_n\}$ are convergent sequences and $c\in\mathbb{R}$, then
     <ol>
       <li>
@@ -460,9 +508,24 @@
         <b>Monotone</b>: if either increasing or decreasing
       </li>
     </ol>
-    <u>Definition</u>: $\{a_n\}$ is <b>bounded above</b> if $\ \exists M$ such that $a_n\leq M\ \ \forall n\geq 1$<br />
-    <u>Definition</u>: $\{a_n\}$ is <b>bounded below</b> if $\ \exists m$ such that $a_n\geq m\ \ \forall n\geq 1$<br />
-    <u>Definition</u>: $\{a_n\}$ is <b>bounded</b> if $\ \exists m,\ M$ such that $m\leq a_n\leq M\ \ \forall n\geq 1$<br /><br />
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        $\{a_n\}$ is <b>bounded above</b> if $\ \exists M$ such that $a_n\leq M\ \ \forall n\geq 1$
+      </div>
+    </div>
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        $\{a_n\}$ is <b>bounded below</b> if $\ \exists m$ such that $a_n\geq m\ \ \forall n\geq 1$
+      </div>
+    </div>
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        $\{a_n\}$ is <b>bounded</b> if $\ \exists m,\ M$ such that $m\leq a_n\leq M\ \ \forall n\geq 1$
+      </div>
+    </div>
     <b><i>Completeness Axiom</i></b>: Let $S\subset\mathbb{R}$ be bounded above such that there exists an $M\in\mathbb{R}$, $x\leq M$ for all $x\in S$.  Then, $S$ has a <b>least upper bound</b> $b$ such that if $M$ is any other upper bound, then $b\leq M$.  **<i>This axiom is used to express that there is no hole or gap in the real number line.</i><br /><br />
     <b><i>Bounded Monotone Sequence Theorem</i></b>: A bounded monotone sequence is convergent (i.e. has a limit)<br />
     <br /><br /><br /><br />
@@ -561,8 +624,18 @@
     <b><u>Alternating Series Estimation Theorem</u></b><br />
     If $\sum (-1)^{n-1}b_n$, $b_n>0$, satisfies the conditions for an alternating series, then $|R_n|=|s-s_n|\leq b_{n+1}$.<br /><br />
     <h3>Absolute Convergence</h3>
-    <u>Definition</u>: A series $\sum a_n$ is called <b>absolutely convergent</b> if the series $\sum|a_n|$ is convergent.<br />
-    <u>Definition</u>: A series $\sum a_n$ is called <b>conditionally convergent</b> if it is convergent but not absolutely convergent. <br /><br />
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A series $\sum a_n$ is called <b>absolutely convergent</b> if the series $\sum|a_n|$ is convergent.
+      </div>
+    </div>
+    <div id="def">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A series $\sum a_n$ is called <b>conditionally convergent</b> if it is convergent but not absolutely convergent.
+      </div>
+    </div>
     <u>Theorem</u>: If a series $\sum a_n$ is absolutely convergent, then it is convergent.<br />
     <u>Proof</u>:<br />
     Observe the following inequality: $0\leq a_n + |a_n|\leq 2|a_n|$.<br />
