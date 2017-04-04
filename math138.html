@@ -547,6 +547,25 @@
     <br /><br /><br /><br />
     <h2>Power Series</h2>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
-	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.
+	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.<br />
+    <u>Theorem</u>: For a given power series $\sum_{n=0}^\infty c_n(x-a)^n$, there are only three possibilities for convergence:
+    <ol type="i">
+      <li>
+        Converges only at $x=a$.
+      </li>
+      <li>
+        Converges for all $x$.
+      </li>
+      <li>
+        Converges if $|x-a|< R$ and diverges if $|x-a| > R$ for $R>0$.  There are four possibilities:
+        $$(a-R, a+R)\quad\quad[a-R, a+R]\quad\quad(a-R, a+R]\quad\quad[a-R, a+R)$$
+      </li>
+    </ol>
+    To find the radius of convergence, apply the ratio test and test at endpoints.<br /><br />
+    e.g. Find the radius of convergence and interval of convergence of $\sum_{n=0}^\infty \frac{(-3)^nx^n}{\sqrt{n+1}}$.<br /><br />
+    Let $a_n=\frac{(-3)^nx^n}{\sqrt{n+1}}$.  Applying the ratio test, we get
+    $$\lim_{n\to\infty}\bigg|\frac{a_{n+1}}{a_n}\bigg|=\bigg|\frac{(-3)^{n+1}x^{n+1}}{\sqrt{n+2}}\cdot\frac{\sqrt{n+1}}{(-3)^nx^n}\bigg|=\bigg|-3x\sqrt{\frac{n+1}{n+2}}\bigg|=3|x|\sqrt{\frac{1+\frac{1}{n}}{1+\frac{2}{n}}}\rightarrow 3|x|\quad\text{as }n\to\infty$$
+    By the ratio test, the series converges if $3|x|< 1$ and diverges if $3|x| > 1$.  Thus, it converges if $x<|\frac{1}{3}|$ and diverges if $x>|\frac{1}{3}|$.  So, the <b>radius of convergence</b> is $R=\frac{1}{3}$.<br />
+    We now test for the endpoints.  When $x=-\frac{1}{3}$, the series becomes $\sum_{n=0}^\infty \frac{(-3)^n(-\frac{1}{3})^n}{\sqrt{n+1}}=\sum_{n=0}^\infty \frac{1}{\sqrt{n+1}}$, which diverges (p-series with $p = \frac{1}{2} < 1$).  When $x=\frac{1}{3}$, the series becomes \sum_{n=0}^\infty \frac{(-1)^n}{\sqrt{n+1}}$ which converges by the Alternating Series Test. Thus, the <b>interval of convergence</b> is $\big(-\frac{1}{3}, \frac{1}{3}\big]$.
   </body>
 </html>
