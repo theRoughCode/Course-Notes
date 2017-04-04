@@ -567,5 +567,36 @@
     $$\lim_{n\to\infty}\bigg|\frac{a_{n+1}}{a_n}\bigg|=\bigg|\frac{(-3)^{n+1}x^{n+1}}{\sqrt{n+2}}\cdot\frac{\sqrt{n+1}}{(-3)^nx^n}\bigg|=\bigg|-3x\sqrt{\frac{n+1}{n+2}}\bigg|=3|x|\sqrt{\frac{1+\frac{1}{n}}{1+\frac{2}{n}}}\rightarrow 3|x|\quad\text{as }n\to\infty$$
     By the ratio test, the series converges if $3|x|< 1$ and diverges if $3|x| > 1$.  Thus, it converges if $x<|\frac{1}{3}|$ and diverges if $x>|\frac{1}{3}|$.  So, the <b>radius of convergence</b> is $R=\frac{1}{3}$.<br />
     We now test for the endpoints.  When $x=-\frac{1}{3}$, the series becomes $\sum_{n=0}^\infty \frac{(-3)^n(-\frac{1}{3})^n}{\sqrt{n+1}}=\sum_{n=0}^\infty \frac{1}{\sqrt{n+1}}$, which diverges (p-series with $p = \frac{1}{2} < 1$).  When $x=\frac{1}{3}$, the series becomes \sum_{n=0}^\infty \frac{(-1)^n}{\sqrt{n+1}}$ which converges by the Alternating Series Test. Thus, the <b>interval of convergence</b> is $\big(-\frac{1}{3}, \frac{1}{3}\big]$.
+    <h3>Representations of Functions as Power Series</h3>
+    Functions can be modelled with a power series by manipulating the geometric series or by differentiating or integrating the series.  <br />
+    <u>Useful for</u>: Integrating functions without an elementary antiderivative,  solving differential equations, and approximating functions by polynomials.
+    <h4>Representation of Functions with the Geometric Series</h4>
+    $$\frac{1}{1-x}=1+x+x^2+\cdots=\sum_{n=0}^\infty x^n\quad |x|< 1$$
+    <h4>Manipulating Series</h4>
+    You can manipulate series by:
+    <ol>
+      <li>Substituting into $x$</li>
+      <li>Multiplying</li>
+      <li>Adding</li>
+    </ol>
+    e.g. Find a power series representation of $\frac{x^3}{x+2}$.<br />
+    We note that this is very similar to the function represented by a geometric series as shown above.
+    $$\frac{x^3}{x+2}=x^3\cdot\frac{1}{2+x}=\frac{x^3}{2}\cdot\frac{1}{1+\frac{x}{2}}\quad (a = 1,\ r = -\frac{x}{2})$$
+    $$\frac{x^3}{x+2}=\frac{x^3}{2}\sum_{n=0}^\infty (-\frac{x}{2})^n=\sum_{n=0}^\infty (-1)^n\frac{x^{n+3}}{2^{n+1}}$$
+    Since this is a geometric series, we know that it converges when $|r| < 1$ or $|-\frac{x}{2}|< 1 \rightarrow x < 2$. Thus the radius of convergence is $R=2$ and the interval of convergence is $(-2, 2)$.
+    <h4>Differentiation and Integration of Power Series</h4>
+    <u>Theorem</u>: If the power series $\sum c_n(x-a)^n$ has radius of convergence $R>0$ then the function defined by:
+    $$f(x)=c_0+c_1(x-a)+c_2(x-a)^2+cdots=\sum c_n(x-a)^n$$
+    is differentiable and continuous on the interval $(a-R,a+R)$ and
+    <ol type="i">
+      <li>
+        $$f'(x)=c_1+2c_2(x-a)+3c_3(x-a)^2+\cdots=\sum nc_n(x-a)^{n-1}\quad\text{or}$$
+        $$\frac{d}{dx}\bigg[\sum c_n(x-a)^n\bigg]=\sum \frac{d}{dx}[c_n(x-a)^n]$$
+      </li>
+      <li>
+        $$\int f(x)dx=C+c_0(x-a)+c_1\frac{(x-a)^2}{2}+c_2\frac{(x-a)^3}{3}+\cdots=C+\sum c_n\frac{(x-a)^{n+1}}{n+1}\quad\text{or}$$
+        $$\int\bigg[\sum c_n(x-a)^n\bigg]dx=\sum \int[c_n(x-a)^n]dx$$
+      </li>
+    </ol>
   </body>
 </html>
