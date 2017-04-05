@@ -16,7 +16,7 @@
   <body>
     <h1 id="title_text">MATH 146 Notes by Raphael Koh</h1><br />
     <h1><a name="1"></a><b>1 </b>Vector Spaces & Dimensions</h1>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A <b>field</b> is an algebraic system $\mathbb{F}$ having:
@@ -30,37 +30,37 @@
         </ul>
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A <b>vector space over $\mathbb{F}$</b> is a set $V$ which is closed under addition and scalar multiplication, and satisfies VS 1-8.
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem 8 (Cancellation Law)</label>:</div>
       <div id="desc">
         Suppose $V$ is a vector space and $x,y,z\in V$.  If $x+z=y+z$ then $x=y$.
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Corollary 1</label>:</div>
       <div id="desc">
         In any vector space, there is only one zero vector, denoted $0$.
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Let $V$ be a vector space over $\mathbb{F}$.  A subset $W$ of $V$ is a <b>subspace of $V$</b> if $W$, with the operations of $V$, form a vector space.
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Let $V$ be a vector space over $\mathbb{F}$. Let $x, u_1, \ldots, u_n\in V$.  $x$ is a <b>linear combination</b> of $u_1,\ldots,u_n$ if there exists $a_1,\ldots,a_n\in\mathbb{F}$ such that $x=a_1u_1+a_2u_2+\ldots+a_nu_n$
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Suppose $V$ is a vector space over $\mathbb{F}$, $W\subseteq V$.  Then, $W$ is a subspace of $V$ if and only if:
@@ -74,7 +74,7 @@
         </ol>
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $V$ is a vs/$\mathbb{F}$, $x\in V$, and $\phi\neq S\subseteq V$.
@@ -89,7 +89,7 @@
         </ol>
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Let $V$ be a vector space over $\mathbb{F}$, $S\subseteq V$.
@@ -103,33 +103,33 @@
         </ol>
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Let $V$ be a vs/$\mathbb{F}$, $x\in V$, and $S\subseteq V$.  $S$ is <b>linearly dependent</b> if there exist distinct vectors $u_1,\ldots,u_n\in S$ and $a_1,\ldots,a_n\in\mathbb{F}$ not all zero such that $a_1u_1+\ldots+a_nu_n=0$.
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A set $S$ is linearly independent if $\forall$ distinct $u_1,\ldots,u_n\in S$, $\forall a_1,\ldots,a_n\in\mathbb{F}$, if $a_1u_1+\ldots+a_nu_n=0$ then $a_1=a_2=\ldots=a_n=0$.
       </div>
     </div>
     <i>Note:</i> $S=\phi$ is linearly independent because a linearly dependent set must be non-empty.  $S=\{0\}$ is linearly dependent because $a\cdot 0=0$ for any scalar $a$.
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Suppose $S$ is a linearly independent set in a vector space $V$ and $v\in V-S$.  <br />Then $S\cup\{v\}$ is linearly independent $\leftrightarrow v\not\in span(S)$.
       </div>
     </div>
     <h2>Basis and Dimensions</h2>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A subset of a vector space $V$ is a <b>basis</b> for $V$ if it is linearly independent and spans $V$.
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A subset $S\subseteq V$ is a <b>minimal spanning set</b> if:
@@ -143,7 +143,7 @@
         </ol>
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A subset $S\subseteq V$ is a <b>maximal linearly independent</b> if:
@@ -157,13 +157,13 @@
         </ol>
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Basis $\longleftrightarrow$ Minimal spanning set $\longleftrightarrow$ Maximal linear independent set
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Replacement Lemma</label>:</div>
       <div id="desc">
         Suppose $V$ is a vector space and $S,T\subseteq V$, $v\in V$ and
@@ -181,20 +181,20 @@
         Then $\exists x\in T$ such that $span\bigg((S\cup\{v\})\cup(T-\{x\})\bigg)=V$
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Corollary</label>:</div>
       <div id="desc">
         If $V$ is finitely-generated, then all bases for $V$ are finite and have the same size.  This unique size of the basis of $V$ is known as the <b>dimension</b> of $V$, written as $\dim (V)$.
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         If $V$ is finitely-dimensional, then every linearly independent subset can be expanded to a basis for $V$.
       </div>
     </div>
     <h1><a name="2"></a><b>2 </b>Functions Between Vector Spaces</h1>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $V$ and $W$ are vector spaces over $\mathbb{F}$.  A function $T: V\rightarrow W$ is a <b>linear transformation</b> if $T$ satisfies:
@@ -223,7 +223,7 @@
         $T(a_1x_1+\ldots+a_nx_n)=a_1T(x_1)+\ldots+a_nT(x_n)$
       </li>
     </ol>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $T: V\rightarrow W$ is linear, then
@@ -237,13 +237,13 @@
         </ul>
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Suppose $T: V\rightarrow W$ is linear and $V= span(v_1,\ldots, v_n)$ then $R(T)=span(T(v_1),\ldots,T(v_n))$.
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Suppose $T: V\rightarrow W$ is linear.
@@ -257,7 +257,7 @@
         </ul>
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $T: V\rightarrow W$ is linear and $\dim (V)<\infty$.
@@ -271,26 +271,26 @@
         </ul>
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Rank-Nullity Theorem</label>:</div>
       <div id="desc">
         Suppose $T: V\rightarrow W$ is linear, then $rank(T)+nullity(T)=\dim(V)$.
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Corollary</label>:</div>
       <div id="desc">
         Suppose $T: V\rightarrow V$ and $\dim V<\infty$.  Then $T$ is injective $\leftrightarrow T$ is surjective.  In other words, $T$ is <i>bijective</i>.
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $V$ is a finite-dimensional vector space over $\mathbb{F}$ and $\beta=(v_1,\ldots, v_n)$ is an ordered basis for $V$, and $x\in V$.  The <b>coordinate vector of $x$ relative to $\beta$</b> is the $n$-tuple $(a_1,\ldots, a_n)\in\mathbb{F}^n$ unqiuely satisfying $x=a_1v_1+\ldots+a_nv_n$, and is denoted by
         $$[x]_\beta=\left(\begin{smallmatrix}a_1\\\vdots\\a_n\end{smallmatrix}\right)$$
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Suppose $V$ is a finite-dimensional vector space over $\mathbb{F}$ where $\dim(V)=n$ and $\beta=(v_1,\ldots,v_n)$ is an ordered basis. Then $[]_\beta:V\rightarrow\mathbb{F}^n$ is a <u>bijective linear transformation</u> or an <u>isomorphism</u>.
@@ -305,7 +305,7 @@
         If $T:V\rightarrow W$ and $U:W\rightarrow X$ are isomorphisms, then $U\circ T: V\rightarrow X$ is an isomorphism.
       </li>
     </ol>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $V,W$ are vs$/\mathbb{F}$.  $V$ is <u>isomorphic</u> to $W$ if $\exists$ isomorphism $T:V\rightarrow W$.
@@ -324,7 +324,7 @@
         Each $T(v_j)$ is characterized by its coordinate vector $[T(v_j)]_\gamma\in\mathbb{F}^n$.
       </li>
     </ul>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         In the above context, the <b>matrix representation of $T$</b> for $\beta$ and $\gamma$, denoted as $[T]_\beta^\gamma$, is the $mxn$ matrix in $M_{m\times n}(\mathbb{F})$ whose $j$th column is $[T(v_j)]_\gamma$.<br />
@@ -343,14 +343,14 @@
         Combine the column vectors to form the $m\times n$ matrix.
       </li>
     </ol>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Suppose $T:V\rightarrow W$ is linear and $V,W$ is a finite-dimensional vector space over $\mathbb{F}$ and $\beta=(v_1,\ldots,v_n)$, $\gamma=(w_1,\ldots,w_m)$ are ordered bases for $V,W$.  Then, for any $x\in V$,
         $$[T(x)]_\gamma=[T]_\beta^\gamma\cdot[x]_\beta$$
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         $$[U]_\beta^\gamma\cdot[T]_\alpha^\beta=[U\circ T]_\alpha^\gamma$$
@@ -365,7 +365,7 @@
         $\mathcal{L}(V,V)=\mathcal{L}(V)$
       </li>
     </ul>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $\mathbb{F}$ is a field and $A\in M_{m\times n}(\mathbb{F})$.  We define $L_A: \mathbb{F}^n\rightarrow\mathbb{F}^m$ given by $L_A(x)=Ax$.
@@ -374,20 +374,44 @@
     Let $\beta_n$ be the standard ordered basis for $\mathbb{F}^n$, and let $\beta_m$ be the standard ordered basis for $\mathbb{F}^m$.  Note that $\forall x\in\mathbb{F}^m$, $[x]_{\beta_m}=x$.  To find $[L_A]_{\beta_n}^{\beta_m}$, we must find $L_A(e_1), \ldots,L_A(e_n)$.
     $$L_A(e_1)=Ae_1=\left(\begin{smallmatrix}a_{11}\\a_{21}\\\vdots\\a_{m1}\end{smallmatrix}\right)=Col_1(A)$$
     For all $j=1,\ldots, n$, $L_A(e_j)=Col_j(A)$. Since $[x]_{\beta_m}=x$, the $j$th column of $[L_A]_{\beta_n}^{\beta_m}=L_A(e_j)=Col_j(A)$.
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Corollary</label>:</div>
       <div id="desc">
         $R(L_A)=span(Col_1(A),\ldots,Col_n(A))$ or "range of $L_A=$ column space of $A$"
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        The <b>rank</b> of a matrix $A\in M_{m\times n}(\mathbb{F})$ is $rank(L_A)$ where $L_A:\mathbb{F}^n\rightarrow\mathbb{F}^m$ and $rank(L_A)=\dim(R(L_A))$.<br />
+        Recall that $R(L_A))=$ subspace of $\mathbb{R}^m$ spanned by $Col(A)=$ column space of $A$.
+      </div>
+    </div>
+    <div class="thm" id="nocolour">
+      <div id="title"><label>Lemma</label>:</div>
+      <div id="desc">
+        Multiplication by invertible matrices does not change rank.
+      </div>
+    </div>
+    In general, $R(g\circ f)=g\cdot R(f)$.  If $Q$ is invertible, $R(L_{AQ})=R(L_A)$, and $A$ and $AQ$ have the same column space.  $rank(A)=rank(AQ)$<br />
+    However, left multiplication by an invertible matrix $P$ <u>can</u> change the column space (range of $L_A$) but <u>not</u> dimension.
+    <div class="thm" id="nocolour">
+      <div id="title"><label>Lemma</label>:</div>
+      <div id="desc">
+        Isomorphisms preserve dimensions of subspaces.<br />
+        Let $L_P$ be an isomorphism (invertible and bijective).  So,
+        $$\dim(R(L_A))=\dim(L_P(R(L_A)))=\dim(R(L_{PA}))$$
+        $$rank(A)=rank(PA)$$
+      </div>
+    </div>
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         Suppose $A\in M_{m\times n}(\mathbb{F})$. $A$ is <u>invertible</u> if $\exists B\in M_{m\times n}(\mathbb{F})$ satisfying $AB=I_n$ amd $BA=I_n$.<br />
         If $A,B$ are invertible, then $AB$ is invertible and $(AB)^{-1}=B^{-1}A^{-1}$
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Let $Q=[I_V]_\beta^\gamma$, then
@@ -401,13 +425,13 @@
         </ol>
       </div>
     </div>
-    <div id="def" class="nocolour">
+    <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         $Q=[I_V]_\beta^\gamma$ is called the <b>change of coordinate matrix from $\beta$ to $\gamma$</b>.
       </div>
     </div>
-    <div id="thm" class="nocolour">
+    <div class="thm" id="nocolour">
       <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         $$\begin{align*}
@@ -415,6 +439,134 @@
           &=[I_V]_\gamma^\beta[T]_\beta^\gamma\\
           &=[T]_\beta\quad\square
         \end{align*}$$
+      </div>
+    </div>
+    <h1><a name="3"></a><b>3 </b>Matrices and Systems of Equations</h1>
+    <h3>Facts about Columns</h3>
+    <ol>
+      <li>
+        $Col_j(AB)=A\cdot Col_j(B)$
+      </li>
+      <li>
+        $Col_j(B)=B\cdot e_j$
+      </li>
+      <li>
+        If $x=(x_1,\ldots,x_n)\in\mathbb{F}^n$, then $Bx=x_1Col_1(B)+x_2Col_2(B)+\ldots+x_nCol_n(B)$
+      </li>
+    </ol>
+    <h3>Facts about Rows</h3>
+    <ol>
+      <li>
+        $Row_i(AB)=Row_i(A)\cdot B$
+      </li>
+      <li>
+        $Row_i(A)=e_i^tA\quad (e_i^t$ is a $1\times m$ vector)
+      </li>
+      <li>
+        If $x=(x_1,\ldots,x_n)\in\mathbb{F}^n$, then $x^tA=x_1Row_1(A)+x_2Row_2(A)+\ldots+x_mRow_m(A)$
+      </li>
+    </ol>
+    <div class="def" id="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Fix $m,n$.  An <b>elementary row operation</b> is one of the following actions. Given $A\in M_{m\times n}(\mathbb{F})$:
+        <ol>
+          <li>
+            Switch row $i$ with row $j$.  $\quad[R_i\leftrightarrow R_j]$
+          </li>
+          <li>
+            Mutltiply row $i$ with row $j$. $\quad[R_i\leftarrow aR_i\ (a\neq 0)]$
+          </li>
+          <li>
+            Add to row $i$ a scalar multiple of row $j$. $\quad[R_i\leftarrow R_i + aR_j]$
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="def" id="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Fix $m,n$.  An <b>elementary column operation</b> is defined in the same way as rows, but with columns.
+      </div>
+    </div>
+    <div class="def" id="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        An <b>elementary matrix</b> is an $m\times n$ matrix obtained from $I_n$ by <u>one</u> elementary operation.
+        <ul style="list-style: none;">
+          <li>
+            Elementary column ops are simulated by elem matrices multiplying on the <u>right</u>.
+          </li>
+          <li>
+            Elementary row ops are simulated by elem matrices multiplying on the <u>left</u>.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <h3>Facts about Elementary Matrices</h3>
+    <ol>
+      <li>
+        Elementary Matrices are invertible.
+      </li>
+      <li>
+        Elementary column ops ($A\rightarrow AE$) do not change the column space.
+      </li>
+      <li>
+        Elementary row ops ($A\rightarrow EA$) can change the column space but not rank.
+      </li>
+    </ol>
+    <div class="thm" id="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Every $A\in M_{m\times n}(\mathbb{F})$, there exists invertible matrices $P\in M_{n\times n}(\mathbb{F}), Q\in M_{m\times m}(\mathbb{F})$ such that $D=PAQ$ where
+        $$D=\left(\begin{matrix}I_r & O\\O & O\end{matrix}\right)$$
+        and $rank(A)=r$.
+      </div>
+    </div>
+    <b><u>Transposes</u></b>: If $A$ is $m\times n$ and $B$ is $n\times p$, then $(AB)^t=B^tA^t$.
+    <div class="thm" id="nocolour">
+      <div id="title"><label>Corollary</label>:</div>
+      <div id="desc">
+        If $A$ is $n\times n$ and is invertible, then $A^t$ is invertible.
+      </div>
+    </div>
+    <div class="thm" id="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        For any $A\in M_{m\times n}(\mathbb{F}), rank(A)=rank(A^t)$.
+      </div>
+    </div>
+    <div class="thm" id="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        The row space of $A$ is the subspace of $\mathbb{F}^n$ spanned by the rows of $A=$ column space of $A^t=R(L_{A^t})$.<br />
+        But $\dim(L_{A^t})\overset{def}{=}rank(A^t)=rank(A)$, so $\dim(\text{row space of $A$})=\dim(\text{column space of $A$})$.
+      </div>
+    </div>
+    <div class="thm" id="impt">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        For any $A\in M_{n\times n}(\mathbb{F}), then the following are equivalent:
+        <ol>
+          <li>
+            $A$ is invertible.
+          </li>
+          <li>
+            $rank(A)=n$
+          </li>
+          <li>
+            $A$ is a product of elementary matrices.
+          </li>
+          <li>
+            $A$ can be transformed to $I_n$ using elem row ops only.
+          </li>
+        </ol>
+      </div>
+      <div id="Proof">
+        <div id="title"><label>Proof</label>:</div>
+        <div id="pf">
+
+        </div>
       </div>
     </div>
   </body>

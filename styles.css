@@ -103,7 +103,7 @@ h1 {
 }
 
 /* CSS for Definitions */
-#def {
+.def {
   border: 3px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -111,25 +111,25 @@ h1 {
   align-items: center;
   padding: 10px;
 }
-#def #title {
+
+#impt {
+  border: 5px solid blue;
+}
+.def #title {
   display: inline-block;
   vertical-align: top;
 }
-#def #title label {
+.def #title label {
   font-weight: bold;
   text-decoration: underline;
 }
-#def #desc {
+.def #desc {
   padding-left: 10px;
   display: inline-block;
 }
 
-#def + .nocolour {
-  border: none;
-}
-
 /* CSS for Theorems */
-#thm {
+.thm {
   border: 3px solid red;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -137,31 +137,30 @@ h1 {
   flex-direction: column;
   padding: 10px;
   overflow: auto;
-
 }
 
-#thm #Theorem {
+.thm #Theorem {
   padding: 10px;
 }
-#thm #Proof {
+.thm #Proof {
   padding: 10px;
 }
-#thm #title {
+.thm #title {
   display: inline-block;
   vertical-align: top;
 }
-#thm #title label {
+.thm #title label {
   font-weight: bold;
   text-decoration: underline;
 }
-#thm #desc {
+.thm #desc {
   padding-left: 10px;
   display: inline-block;
 }
-#thm #pf {
+.thm #pf {
   padding-left: 10px;
 }
 
-#thm + .nocolour {
+#nocolour {
   border: none;
 }

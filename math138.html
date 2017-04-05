@@ -218,7 +218,7 @@
       $$\int_a^bf(x)dx=-\int_a^bU'(x)dx=-[U(b)-U(a)]=-\Delta U$$
       Alternatively, we can let $x=a$ be a reference point and define $U(x)=-\int_a^xf(s)ds$.  We define $U(a)=0$.  If $f(x)=-mg$, $U(x)=-\int_a^x-mg\ ds=mgx-mga=mgx$.<br /><br />
       <u>Physical Interpretation:</u>  $U(x)$ is the work done <u>against</u> the force when $m$ is moved from $a$ to $x$.  If $U(x)>0$, we have to work <u>against</u> the force to move $m$ from $a$ to $x$ (i.e. causes a "buildup" of PE). <br /><br />
-      <div id="thm">
+      <div class="thm">
         <div id="Theorem">
           <div id="title"><label>Theorem</label>:</div>
           <div id="desc">
@@ -320,20 +320,20 @@
 
     <h1><a name="5"></a><b>5 </b>Differential Equations</h1>
     A differential equation involves derivaties of a function and possibly the function itself.<br />
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         The <b>order of a DE</b> is the order of the highest derivative in the DE.
       </div>
     </div>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A DE is <b>linear</b> if the dependent variable or derivative is not multiplied by itself or each other (i.e. $y + \frac{dy}{dx}$).
       </div>
     </div>
     <h3>Separable First-Order DEs</h3>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A DE is <u>separable</u> if it can be written in the form $\frac{dy}{dx}=g(x)f(y)$.
@@ -470,13 +470,13 @@
     $$L=\int_a^b\sqrt{1+\big(\frac{dy}{dx}\big)^2}dx=\int_a^b\sqrt{1+\bigg(\frac{\frac{dy}{dt}}{\frac{dx}{dt}}\bigg)^2}dx=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dx\cdot\frac{dt}{dx}=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dt$$
 
     <h1><a name="7"></a><b>7 </b>Sequences</h1>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         An infinite set of real numbers ordered $a_1, a_2,\ldots\  $ Denoted as $\{a_n\}$ or $\{a_n\}_{n=1}^\infty$
       </div>
     </div>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A sequence has the <b>limit</b>, <i>L</i>, which we write as $$\lim_{n=\infty}a_n=L\quad\text{or}\quad a_n\to L\text{ as } n\to\infty$$
@@ -512,26 +512,26 @@
         <b>Monotone</b>: if either increasing or decreasing
       </li>
     </ol>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         $\{a_n\}$ is <b>bounded above</b> if $\ \exists M$ such that $a_n\leq M\ \ \forall n\geq 1$
       </div>
     </div>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         $\{a_n\}$ is <b>bounded below</b> if $\ \exists m$ such that $a_n\geq m\ \ \forall n\geq 1$
       </div>
     </div>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         $\{a_n\}$ is <b>bounded</b> if $\ \exists m,\ M$ such that $m\leq a_n\leq M\ \ \forall n\geq 1$
       </div>
     </div>
     <b><i>Completeness Axiom</i></b>: Let $S\subset\mathbb{R}$ be bounded above such that there exists an $M\in\mathbb{R}$, $x\leq M$ for all $x\in S$.  Then, $S$ has a <b>least upper bound</b> $b$ such that if $M$ is any other upper bound, then $b\leq M$.  **<i>This axiom is used to express that there is no hole or gap in the real number line.</i><br /><br />
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Bounded Monotone Sequence Theorem</label>:</div>
         <div id="desc">
@@ -565,7 +565,7 @@
     </ol>
     Thus, geometric series converge to $\frac{a}{1-r}$ for $|r|< 1$ and diverge for $|r|\geq 1$.<br /><br />
     <h3>Convergence and Divergence of Series</h3>
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Theorem</label>:</div>
         <div id="desc">
@@ -580,7 +580,7 @@
       </div>
     </div>
     <i>Note: $\lim_{n\to\infty}a_n=0$ does not imply that $\sum a_n$ is convergent. (i.e. Harmonic Series)</i>
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Corollary</label>:</div>
         <div id="desc">
@@ -588,7 +588,7 @@
         </div>
       </div>
     </div>
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Theorem</label>:</div>
         <div id="desc">
@@ -661,7 +661,7 @@
     We now compute the odd partial sums.
     $$\lim_{n\to\infty}S_{2n+1}=\lim_{n\to\infty}(S_{2n}+b_{2n+1})=\lim_{n\to\infty}S_{2n}+\lim_{n\to\infty}b_{2n+1}=s+0=s$$
     Since both even and odd partial sums converge to $s$, we have that $\lim_{n\to\infty}S_n=s$ and thus the series is convergent.
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Alternating Series Estimation Theorem</label>:</div>
         <div id="desc">
@@ -670,19 +670,19 @@
       </div>
     </div>
     <h3>Absolute Convergence</h3>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A series $\sum a_n$ is called <b>absolutely convergent</b> if the series $\sum|a_n|$ is convergent.
       </div>
     </div>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A series $\sum a_n$ is called <b>conditionally convergent</b> if it is convergent but not absolutely convergent.
       </div>
     </div>
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Theorem</label>:</div>
         <div id="desc">
@@ -745,7 +745,7 @@
     <h1><a name="9"></a><b>9 </b>Power Series</h1>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
 	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Theorem</label>:</div>
         <div id="desc">
@@ -789,7 +789,7 @@
     $$\frac{x^3}{x+2}=\frac{x^3}{2}\sum_{n=0}^\infty (-\frac{x}{2})^n=\sum_{n=0}^\infty (-1)^n\frac{x^{n+3}}{2^{n+1}}$$
     Since this is a geometric series, we know that it converges when $|r| < 1$ or $|-\frac{x}{2}|< 1 \rightarrow x < 2$. Thus the radius of convergence is $R=2$ and the interval of convergence is $(-2, 2)$.
     <h4>Differentiation and Integration of Power Series</h4>
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Theorem</label>:</div>
         <div id="desc">
@@ -810,7 +810,7 @@
       </div>
     </div>
     <h1><a name="10"></a><b>10 </b>Taylor & Maclaurin Series</h1>
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Theorem</label>:</div>
         <div id="desc">
@@ -823,7 +823,7 @@
         </div>
       </div>
     </div>
-    <div id="def">
+    <div class="def">
       <div id="title"><label>Maclaurin Series</label>:</div>
       <div id="desc">
         Taylor Series centred at $a=0$.
@@ -831,7 +831,7 @@
       </div>
     </div>
     In general, $f(x)$ is the sum of a Taylor series if $f(x)=\lim_{n\to\infty}T_n(x)$.  We define $T_n(x)$ as the <b>$n$th-degree Taylor polynomial of $f$ at $a$</b> and $R_n(x)$ as the remainder of the Taylor series such that $R_n(x)=f(x)-T_n(x)$.<br /><br />
-    <div id="thm">
+    <div class="thm">
       <div id="Theorem">
         <div id="title"><label>Theorem</label>:</div>
         <div id="desc">
