@@ -10,87 +10,37 @@
         tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
       });
     </script>
-    <style>
-      /* CSS for navbar */
-      #contents {
-        background: #ffe5e5;
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      function togglePhys() {
+        const phys = document.querySelectorAll('#phys');
+        phys.forEach(elem => {
+          console.log(elem.style.display);
+          if(!elem.style.display || elem.style.display === 'none') elem.style.display = 'block';
+          else elem.style.display = 'none';
+        });
+        const h1 = document.querySelectorAll('h1');
       }
-      #nav {
-        font-size: 20px;
-      }
-      #nav li {
-        padding: 5px;
-      }
-      #nav li a{
-        text-decoration: none;
-        color: hotpink;
-      }
-      #nav li a:hover{
-        text-decoration: underline;
-      }
-
-      /* CSS for Definitions */
-      #def {
-        border: 5px solid green;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        padding: 10px;
-      }
-      #def #title {
-        display: inline-block;
-        vertical-align: top;
-      }
-      #def #title label {
-        font-weight: bold;
-        text-decoration: underline;
-      }
-      #def #desc {
-        padding-left: 10px;
-        display: inline-block;
-      }
-
-      /* CSS for Theorems */
-      #thm {
-        border: 5px solid red;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        display: inline-block;
-        align-items: center;
-      }
-      #thm #Theorem {
-        padding: 10px;
-      }
-      #thm #Proof {
-        padding: 10px;
-      }
-      #thm #title {
-        display: inline-block;
-        vertical-align: top;
-      }
-      #thm #title label {
-        font-weight: bold;
-        text-decoration: underline;
-      }
-      #thm #desc {
-        padding-left: 10px;
-        display: inline-block;
-      }
-      #thm #pf {
-        padding-left: 10px;
-      }
-    </style>
+    </script>
   </head>
   <body>
     <a name="top"></a>
     <h1 style="text-align: center; font-size: 50px;">MATH 138P Notes by Raphael Koh</h1><br />
+    <div class="toggle">
+      <div class="text">
+        Toggle Physics Mode:
+      </div>
+      <label class="switch">
+        <input type="checkbox" onclick="togglePhys()">
+        <div class="slider round"></div>
+      </label>
+    </div>
     <div id="contents">
       <h1>Table of Contents</h1>
       <ol id="nav">
         <li><a href="#1">Review of Integration</a></li>
         <li><a href="#2">Integration Techniques</a></li>
-        <li><a href="#3">Applications of Integration</a></li>
+        <li><a href="#3">Applications of Integration (Physics-based)</a></li>
         <li><a href="#4">Improper Integral</a></li>
         <li><a href="#5">Differential Equations</a></li>
         <li><a href="#6">Parametric Representation of Curves</a></li>
@@ -100,7 +50,6 @@
         <li><a href="#10">Taylor & Maclaurin Series</a></li>
       </ol>
     </div>
-    <br /><br />
     <h1><a name="1"></a><b>1 </b>Review of Integration</h1>
     <h2>Riemann Integral</h2>
     Let $f(x)$ be a continuous (or piecewise continuous) function defined over $[a,b]$.
@@ -132,9 +81,6 @@
     Then $g(x)$ is continuous on $[a,b]$ and $$g'(x)=f(x),\quad a\leq x\leq b$$
     <h2>Fundamental Theorem of Calculus 2</h2>
     Let $F(x)$ be any antiderivative of $f(x)$, then $$\int_a^b f(x)dx = F(b) - F(a)$$
-    <br />
-    <br />
-    <br />
     <h1><a name="2"></a><b>2 </b>Integration Techniques</h1>
     <h2>Integration by Substitution</h2>
     e.g. $\int \sqrt{5x+4}dx$. <br /><br />
@@ -251,84 +197,84 @@
     <h3>Repeated Complex Roots</h3>
     $$\frac{P(x)}{Q(x)^k}=\frac{A_1x+B_1}{Q(x)}+\frac{A_2x+B_2}{Q(x)^2}+\cdots+\frac{A_kx+B_k}{Q(x)^k}$$
     <br /><br /><br /><br />
-    <h2>Conservative Forces & Potential Energy</h2>
-    $\vec{F}=f(x)\hat{i}$ is conservative if there exists a function $U(x)$ such that $f(x)=-U'(x)$, where $U(x)$ is the potential energy function.  So, $U(x)=-\int f(x)dx$.<br />
-    <u>Consequence:</u>  If $\vec{F}$ acts on a mass $m$ to move it from $x=a$ to $x=b$, the work done is:
-    $$\int_a^bf(x)dx=-\int_a^bU'(x)dx=-[U(b)-U(a)]=-\Delta U$$
-    Alternatively, we can let $x=a$ be a reference point and define $U(x)=-\int_a^xf(s)ds$.  We define $U(a)=0$.  If $f(x)=-mg$, $U(x)=-\int_a^x-mg\ ds=mgx-mga=mgx$.<br /><br />
-    <u>Physical Interpretation:</u>  $U(x)$ is the work done <u>against</u> the force when $m$ is moved from $a$ to $x$.  If $U(x)>0$, we have to work <u>against</u> the force to move $m$ from $a$ to $x$ (i.e. causes a "buildup" of PE). <br /><br />
-    <div id="thm">
-      <div id="Theorem">
-        <div id="title"><label>Theorem</label>:</div>
-        <div id="desc">
-          Suppose that a mass $m$ is moving on the $x$-axis under the influence of a conservative force $\vec{F}(x)=f(x)\hat{i}$ according to Newton's Second Law of Motion, $\vec{F}=m\vec{a}$.  Then, the total mechanical energy of the mass is constant in time.
+    <div id="phys">
+      <h2>Conservative Forces & Potential Energy</h2>
+      $\vec{F}=f(x)\hat{i}$ is conservative if there exists a function $U(x)$ such that $f(x)=-U'(x)$, where $U(x)$ is the potential energy function.  So, $U(x)=-\int f(x)dx$.<br />
+      <u>Consequence:</u>  If $\vec{F}$ acts on a mass $m$ to move it from $x=a$ to $x=b$, the work done is:
+      $$\int_a^bf(x)dx=-\int_a^bU'(x)dx=-[U(b)-U(a)]=-\Delta U$$
+      Alternatively, we can let $x=a$ be a reference point and define $U(x)=-\int_a^xf(s)ds$.  We define $U(a)=0$.  If $f(x)=-mg$, $U(x)=-\int_a^x-mg\ ds=mgx-mga=mgx$.<br /><br />
+      <u>Physical Interpretation:</u>  $U(x)$ is the work done <u>against</u> the force when $m$ is moved from $a$ to $x$.  If $U(x)>0$, we have to work <u>against</u> the force to move $m$ from $a$ to $x$ (i.e. causes a "buildup" of PE). <br /><br />
+      <div id="thm">
+        <div id="Theorem">
+          <div id="title"><label>Theorem</label>:</div>
+          <div id="desc">
+            Suppose that a mass $m$ is moving on the $x$-axis under the influence of a conservative force $\vec{F}(x)=f(x)\hat{i}$ according to Newton's Second Law of Motion, $\vec{F}=m\vec{a}$.  Then, the total mechanical energy of the mass is constant in time.
+          </div>
+        </div>
+        <div id="Proof">
+          <div id="title"><label>Proof</label>:</div>
+          <div id="pf">
+            Total energy $E=KE+PE$.  Let $x(t)$ be the trajectory of the mass.  Then, $E(t)=\frac{1}{2}mv(t)^2+U(x(t))$ where $U'(x)=-f(x)$.
+            $$\begin{align*}
+              E'(t)=\frac{dE}{dt}&=\frac{1}{2}m\frac{d}{dt}v(t)^2+\frac{d}{dt}U(x(t))\\
+              &=mv(t)v'(t)+U'(x(t))x'(t)\\
+              &=mv(t)a(t)-f(x(t))v(t)\\
+              &=v(t)[ma(t)-f(x(t))]\\
+              &=v(t)[ma(t)-ma(t)]\\
+              &=0\quad\square
+            \end{align*}$$
+          </div>
         </div>
       </div>
-      <div id="Proof">
-        <div id="title"><label>Proof</label>:</div>
-        <div id="pf">
-          Total energy $E=KE+PE$.  Let $x(t)$ be the trajectory of the mass.  Then, $E(t)=\frac{1}{2}mv(t)^2+U(x(t))$ where $U'(x)=-f(x)$.
-          $$\begin{align*}
-            E'(t)=\frac{dE}{dt}&=\frac{1}{2}m\frac{d}{dt}v(t)^2+\frac{d}{dt}U(x(t))\\
-            &=mv(t)v'(t)+U'(x(t))x'(t)\\
-            &=mv(t)a(t)-f(x(t))v(t)\\
-            &=v(t)[ma(t)-f(x(t))]\\
-            &=v(t)[ma(t)-ma(t)]\\
-            &=0\quad\square
-          \end{align*}$$
-        </div>
-      </div>
+      <h1><a name="3"></a><b>3 </b>Applications of Integration</h1>
+      <h3>Centre of Mass</h3>
+      $$\bar{x}=\frac{\sum_{i=0}^nm_ix_i}{\sum_{i=0}^nm_i}$$
+      Consider an object of length $L$ with a continuous mass distribution, $\rho(x)$, lying on the $x$-axis with one end on the origin.
+      $$\Delta m\approx\rho(x_k^*)\Delta x$$
+      $$M=\int_0^L\rho(x)dx$$
+      $$\bar{x}\approx\frac{\sum_{i=1}^n\Delta m_ix_i^*}{\sum_{i=1}^n\Delta m_i}=\frac{\sum_{i=1}^n\rho(x_i^*)x_i^*\Delta x}{\sum_{i=1}^n\rho(x_i^*)\Delta x}$$
+      $$\bar{x}=\lim_{n\to\infty}\bigg(\frac{\sum_{i=1}^n\rho(x_i^*)x_i^*\Delta x}{\sum_{i=1}^n\rho(x_i^*)\Delta x}\bigg)=\frac{\int_0^L\rho(x)x dx}{\int_0^L\rho(x)dx}=\frac{1}{M}\int_0^Lx\rho(x)dx$$
+      <h3>Centre of Mass of Centroids</h3>
+      Given $f(x)$ and $g(x)$ where $f(x)>g(x)$ and are continuous over $(a,b)$. Then
+      $$dA=[f(x)-g(x)]dx$$
+      First moment w.r.t $y$-axis: $dM_y=xdA$.  Net moment w.r.t $y$-axis: $M_y=\int_a^bxdA=\int_a^bx[f(x)-g(x)]dx$<br />
+      The $x$-coordinate of the Centre of Mass is determimed by
+      $$\int_a^b(x-\bar{x})dA=0$$
+      $$\int_a^bx\ dA=\bar{x}\int_a^bdA$$
+      $$\bar{x}=\frac{\int_a^bx\ dA}{\int_a^bdA}=\frac{M_y}{A}=\frac{\int_a^bx[f(x)-g(x)]dx}{\int_a^b[f(x)-g(x)]dx}$$
+      Similarly, the $y$-coordinate of the Centre of Mass can be found by:
+      $$\bar{y}=\frac{M_x}{A}=\frac{\int_a^by\ dA}{\int_a^bdA}$$
+      Note that $\bar{x}$ can be determined from $y$ and $\bar{y}$ from $x$ by using the midpoint.
+      $$M_x=\frac{1}{2}\int[f(x)+g(x)]dA$$
+      <br /><br /><br /><br />
+      <h3>Computation of Arclength</h3>
+      Given a function $f(x)$ continuous over $[a,b]$, we want to find its arclength.
+      <ol>
+        <li>
+          Partition into $n$ sub-intervals such that for each sub-interval $[x_{k-1},x_k]$ has an arclength of $C_k\approx||\overrightarrow{P_{k-1}P_k}||=\sqrt{\Delta x^2+\Delta y^2}=\sqrt{\Delta x^2+[f(x_k)-f(x_{k-1})]^2}=\Delta x\sqrt{1+\bigg[\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}\bigg]^2}$<br />
+          By the Mean Value Theorem, there exists a $x_k^*\in[x_{k-1},x_k]$ such that $f'(x_k^*)=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}$, so $C_k\approx\Delta x\sqrt{1+f'(x_k^*)^2}$
+        </li>
+        <li>
+          Sum over all intervals.
+          $$L\approx\sum_{k=1}^nC_k=\sum_{k=1}^n\sqrt{1+f'(x_k^*)^2}\Delta x$$
+        </li>
+        <li>
+          Take $n\to\infty$.
+          $$L=\lim_{n\to\infty}\sum_{k=1}^n\sqrt{1+f'(x_k^*)^2}\Delta x=\int\sqrt{1+f'(x)^2}dx$$
+        </li>
+      </ol> <br />
+      Similarly, given a curve $C$, $$L=\int_Cds=\int_C\sqrt{dx^2+dy^2}=\int_Cdx\sqrt{1+\frac{dy}{dx}^2}=\int_a^b\sqrt{1+f'(x)^2}dx$$
+      <br /><br />
+      <h3>Computation of Centroids of Curves</h3>
+      Consider a function $f(x)$ continuous over $[a,b]$.  Let $C$ represent the curve with linear density $\rho_0=1$, so $dm=\rho_0ds=ds$.<br />
+      Moment w.r.t $y$-axis: $dM_y=xds\ \rightarrow\ M_y=\int_CdM_y=\int_Cxds$<br />
+      Moment w.r.t $x$-axis: $dM_x=yds\ \rightarrow\ M_x=\int_CdM_x=\int_Cyds$<br /><br />
+      Recall that for centroid($\bar{x},\bar{y}$):<br />
+      $$\int_C(x-\bar{x})ds=0\quad\text{Net moment w.r.t $\bar{x}$}$$
+      $$\int_C(y-\bar{y})ds=0\quad\text{Net moment w.r.t $\bar{y}$}$$
+      So, $$\int_Cxds=\bar{x}\int_Cds\ \rightarrow\ \bar{x}=\frac{\int_Cxds}{\int_Cds}=\frac{\int_Cxds}{L}$$
+      Similarly, $$\bar{y}=\frac{\int_Cyds}{L}$$
     </div>
-    <br /><br /><br /><br />
-    <h1><a name="3"></a><b>3 </b>Applications of Integration</h1>
-    <h3>Centre of Mass</h3>
-    $$\bar{x}=\frac{\sum_{i=0}^nm_ix_i}{\sum_{i=0}^nm_i}$$
-    Consider an object of length $L$ with a continuous mass distribution, $\rho(x)$, lying on the $x$-axis with one end on the origin.
-    $$\Delta m\approx\rho(x_k^*)\Delta x$$
-    $$M=\int_0^L\rho(x)dx$$
-    $$\bar{x}\approx\frac{\sum_{i=1}^n\Delta m_ix_i^*}{\sum_{i=1}^n\Delta m_i}=\frac{\sum_{i=1}^n\rho(x_i^*)x_i^*\Delta x}{\sum_{i=1}^n\rho(x_i^*)\Delta x}$$
-    $$\bar{x}=\lim_{n\to\infty}\bigg(\frac{\sum_{i=1}^n\rho(x_i^*)x_i^*\Delta x}{\sum_{i=1}^n\rho(x_i^*)\Delta x}\bigg)=\frac{\int_0^L\rho(x)x dx}{\int_0^L\rho(x)dx}=\frac{1}{M}\int_0^Lx\rho(x)dx$$
-    <h3>Centre of Mass of Centroids</h3>
-    Given $f(x)$ and $g(x)$ where $f(x)>g(x)$ and are continuous over $(a,b)$. Then
-    $$dA=[f(x)-g(x)]dx$$
-    First moment w.r.t $y$-axis: $dM_y=xdA$.  Net moment w.r.t $y$-axis: $M_y=\int_a^bxdA=\int_a^bx[f(x)-g(x)]dx$<br />
-    The $x$-coordinate of the Centre of Mass is determimed by
-    $$\int_a^b(x-\bar{x})dA=0$$
-    $$\int_a^bx\ dA=\bar{x}\int_a^bdA$$
-    $$\bar{x}=\frac{\int_a^bx\ dA}{\int_a^bdA}=\frac{M_y}{A}=\frac{\int_a^bx[f(x)-g(x)]dx}{\int_a^b[f(x)-g(x)]dx}$$
-    Similarly, the $y$-coordinate of the Centre of Mass can be found by:
-    $$\bar{y}=\frac{M_x}{A}=\frac{\int_a^by\ dA}{\int_a^bdA}$$
-    Note that $\bar{x}$ can be determined from $y$ and $\bar{y}$ from $x$ by using the midpoint.
-    $$M_x=\frac{1}{2}\int[f(x)+g(x)]dA$$
-    <br /><br /><br /><br />
-    <h3>Computation of Arclength</h3>
-    Given a function $f(x)$ continuous over $[a,b]$, we want to find its arclength.
-    <ol>
-      <li>
-        Partition into $n$ sub-intervals such that for each sub-interval $[x_{k-1},x_k]$ has an arclength of $C_k\approx||\overrightarrow{P_{k-1}P_k}||=\sqrt{\Delta x^2+\Delta y^2}=\sqrt{\Delta x^2+[f(x_k)-f(x_{k-1})]^2}=\Delta x\sqrt{1+\bigg[\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}\bigg]^2}$<br />
-        By the Mean Value Theorem, there exists a $x_k^*\in[x_{k-1},x_k]$ such that $f'(x_k^*)=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}$, so $C_k\approx\Delta x\sqrt{1+f'(x_k^*)^2}$
-      </li>
-      <li>
-        Sum over all intervals.
-        $$L\approx\sum_{k=1}^nC_k=\sum_{k=1}^n\sqrt{1+f'(x_k^*)^2}\Delta x$$
-      </li>
-      <li>
-        Take $n\to\infty$.
-        $$L=\lim_{n\to\infty}\sum_{k=1}^n\sqrt{1+f'(x_k^*)^2}\Delta x=\int\sqrt{1+f'(x)^2}dx$$
-      </li>
-    </ol> <br />
-    Similarly, given a curve $C$, $$L=\int_Cds=\int_C\sqrt{dx^2+dy^2}=\int_Cdx\sqrt{1+\frac{dy}{dx}^2}=\int_a^b\sqrt{1+f'(x)^2}dx$$
-    <br /><br />
-    <h3>Computation of Centroids of Curves</h3>
-    Consider a function $f(x)$ continuous over $[a,b]$.  Let $C$ represent the curve with linear density $\rho_0=1$, so $dm=\rho_0ds=ds$.<br />
-    Moment w.r.t $y$-axis: $dM_y=xds\ \rightarrow\ M_y=\int_CdM_y=\int_Cxds$<br />
-    Moment w.r.t $x$-axis: $dM_x=yds\ \rightarrow\ M_x=\int_CdM_x=\int_Cyds$<br /><br />
-    Recall that for centroid($\bar{x},\bar{y}$):<br />
-    $$\int_C(x-\bar{x})ds=0\quad\text{Net moment w.r.t $\bar{x}$}$$
-    $$\int_C(y-\bar{y})ds=0\quad\text{Net moment w.r.t $\bar{y}$}$$
-    So, $$\int_Cxds=\bar{x}\int_Cds\ \rightarrow\ \bar{x}=\frac{\int_Cxds}{\int_Cds}=\frac{\int_Cxds}{L}$$
-    Similarly, $$\bar{y}=\frac{\int_Cyds}{L}$$
-    <br /><br /><br /><br />
     <h1><a name="4"></a><b>4 </b>Improper Integral</h1>
     <h3>Type I - Integrals over infinite domains</h3>
     $$\int_{-\infty}^\infty f(x)dx=\int_{-\infty}^af(x)dx+\int_{a}^\infty f(x)dx=\lim_{b\to\infty}I_1(b)+\lim_{b\to\infty}I_2(b)=\lim_{b\to\infty}\int_{-b}^af(x)dx+\lim_{b\to\infty}\int_{a}^{\infty}f(x)dx$$
@@ -357,7 +303,7 @@
         $f(x)$ is continuous on $[a,b]$ except at $c\in(a,b)$, then $\int_a^b f(x)dx=\lim_{t\to c^-}\int_a^t f(x)dx+\lim_{t\to c^+}\int_t^b f(x)dx$
       </li>
     </ol>
-    <br /><br /><br /><br />
+
     <h1><a name="5"></a><b>5 </b>Differential Equations</h1>
     A differential equation involves derivaties of a function and possibly the function itself.<br />
     <div id="def">
@@ -461,21 +407,23 @@
         $$y=\frac{1}{2}x-\frac{1}{4} +Ce^{-2x}\quad\square$$
       </li>
     </ol>
-    e.g. <b>[Physics]</b> Projectile Motion with Air Resistance<br />
-    $$m\frac{dv}{dt}=-mg-kv_y\ \rightarrow\ \frac{dv}{dt}=-g-\frac{k}{m}v_y$$
-    Let's rewrite this in terms of a first-order linear DE.
-    $$\frac{dv}{dt}+\frac{k}{m}v=-g\quad P(t)=\frac{k}{m},\ Q(t)=-g,\ I(t)=e^{\int \frac{k}{m}dt}=e^{\frac{kt}{m}}$$
-    We multiply by $I(t)$: $$e^{\frac{kt}{m}}\frac{dv}{dt}+\frac{k}{m}ve^{\frac{kt}{m}}=-ge^{\frac{kt}{m}}$$
-    $$\frac{d}{dt}[ve^{\frac{kt}{m}}]=-ge^{\frac{kt}{m}}$$
-    Integrate both sides:
-    $$ve^{\frac{kt}{m}}+C_1=-\int ge^{\frac{kt}{m}}$$
-    $$ve^{\frac{kt}{m}}=-\frac{mg}{k}e^{\frac{kt}{m}}+C$$
-    Solve for v. $$v=-\frac{mg}{k}+Ce^{-\frac{kt}{m}}$$
-    If we impose <i>initial condition</i> such that $v_y(0)=v_0\sin\theta$,
-    $v(0)=v_0\sin\theta=-\frac{mg}{k}+Ce^{-\frac{k(0))}{m}}=-\frac{mg}{k}+C$
-    So, $C=v_0\sin\theta+\frac{mg}{k}$.
-    $$\therefore v(t)=(v_0\sin\theta+\frac{mg}{k})e^{-\frac{kt}{m}}-\frac{mg}{k}$$
-    <br /><br /><br /><br />
+    <div id="phys">
+      e.g. Projectile Motion with Air Resistance<br />
+      $$m\frac{dv}{dt}=-mg-kv_y\ \rightarrow\ \frac{dv}{dt}=-g-\frac{k}{m}v_y$$
+      Let's rewrite this in terms of a first-order linear DE.
+      $$\frac{dv}{dt}+\frac{k}{m}v=-g\quad P(t)=\frac{k}{m},\ Q(t)=-g,\ I(t)=e^{\int \frac{k}{m}dt}=e^{\frac{kt}{m}}$$
+      We multiply by $I(t)$: $$e^{\frac{kt}{m}}\frac{dv}{dt}+\frac{k}{m}ve^{\frac{kt}{m}}=-ge^{\frac{kt}{m}}$$
+      $$\frac{d}{dt}[ve^{\frac{kt}{m}}]=-ge^{\frac{kt}{m}}$$
+      Integrate both sides:
+      $$ve^{\frac{kt}{m}}+C_1=-\int ge^{\frac{kt}{m}}$$
+      $$ve^{\frac{kt}{m}}=-\frac{mg}{k}e^{\frac{kt}{m}}+C$$
+      Solve for v. $$v=-\frac{mg}{k}+Ce^{-\frac{kt}{m}}$$
+      If we impose <i>initial condition</i> such that $v_y(0)=v_0\sin\theta$,
+      $v(0)=v_0\sin\theta=-\frac{mg}{k}+Ce^{-\frac{k(0))}{m}}=-\frac{mg}{k}+C$
+      So, $C=v_0\sin\theta+\frac{mg}{k}$.
+      $$\therefore v(t)=(v_0\sin\theta+\frac{mg}{k})e^{-\frac{kt}{m}}-\frac{mg}{k}$$
+    </div>
+
     <h1><a name="6"></a><b>6 </b>Parametric Representations of Curves</h1>
     i.e. Projectile Motion.  These are the parametric representations of the trajectory of a projectile: $$x(t)=(v_0\cos\theta)t\quad y(t)=(v_0\sin\theta)t-\frac{1}{2}gt^2$$<br />
     <h3>Calculus with Parametric Curves</h3>
@@ -506,7 +454,7 @@
     </ol>
     Alternatively, we can derive this formula from the formula for arclength of a function $y=f(x)$.
     $$L=\int_a^b\sqrt{1+\big(\frac{dy}{dx}\big)^2}dx=\int_a^b\sqrt{1+\bigg(\frac{\frac{dy}{dt}}{\frac{dx}{dt}}\bigg)^2}dx=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dx\cdot\frac{dt}{dx}=\int_a^b\sqrt{\bigg(\frac{dx}{dt}\bigg)^2+\bigg(\frac{dy}{dt}\bigg)^2}dt$$
-    <br /><br /><br /><br />
+
     <h1><a name="7"></a><b>7 </b>Sequences</h1>
     <div id="def">
       <div id="title"><label>Definition</label>:</div>
@@ -758,7 +706,7 @@
       </li>
     </ol>
     <img src="./images/Series_Convergence_Flowchart.PNG" />
-    <br /><br /><br /><br />
+
     <h1><a name="9"></a><b>9 </b>Power Series</h1>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
 	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.
