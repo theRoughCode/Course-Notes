@@ -325,7 +325,8 @@
     <div id="def" class="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
-        In the above context, the <b>matrix representation of $T$</b> for $\beta$ and $\gamma$, denoted as $[T]_\beta^\gamma$, is the $mxn$ matrix in $M_{m\times n}(\mathbb{F})$ whose $j$th column is $[T(v_j)]_\gamma$.
+        In the above context, the <b>matrix representation of $T$</b> for $\beta$ and $\gamma$, denoted as $[T]_\beta^\gamma$, is the $mxn$ matrix in $M_{m\times n}(\mathbb{F})$ whose $j$th column is $[T(v_j)]_\gamma$.<br />
+        So, $Col_j([T]_\beta^\gamma)=[T(v_j)]_\gamma$.
       </div>
     </div>
     Steps to form the matrix representation of $T$ for $\beta$ and $\gamma$:
@@ -340,5 +341,79 @@
         Combine the column vectors to form the $m\times n$ matrix.
       </li>
     </ol>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Suppose $T:V\rightarrow W$ is linear and $V,W$ is a finite-dimensional vector space over $\mathbb{F}$ and $\beta=(v_1,\ldots,v_n)$, $\gamma=(w_1,\ldots,w_m)$ are ordered bases for $V,W$.  Then, for any $x\in V$,
+        $$[T(x)]_\gamma=[T]_\beta^\gamma\cdot[x]_\beta$$
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        $$[U]_\beta^\gamma\cdot[T]_\alpha^\beta=[U\circ T]_\alpha^\gamma$$
+      </div>
+    </div>
+    Notation:
+    <ul style="list-style:none;">
+      <li>
+         $\mathcal{L}(V,W)=\{$ all linear transformations $V\rightarrow W\ \}$
+      </li>
+      <li>
+        $\mathcal{L}(V,V)=\mathcal{L}(V)$
+      </li>
+    </ul>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $\mathbb{F}$ is a field and $A\in M_{m\times n}(\mathbb{F})$.  We define $L_A: \mathbb{F}^n\rightarrow\mathbb{F}^m$ given by $L_A(x)=Ax$.
+      </div>
+    </div>
+    Let $\beta_n$ be the standard ordered basis for $\mathbb{F}^n$, and let $\beta_m$ be the standard ordered basis for $\mathbb{F}^m$.  Note that $\forall x\in\mathbb{F}^m$, $[x]_{\beta_m}=x$.  To find $[L_A]_{\beta_n}^{\beta_m}$, we must find $L_A(e_1), \ldots,L_A(e_n)$.
+    $$L_A(e_1)=Ae_1=\left(\begin{smallmatrix}a_{11}\\a_{21}\\\vdots\\a_{m1}\end{smallmatrix}\right)=Col_1(A)$$
+    For all $j=1,\ldots, n$, $L_A(e_j)=Col_j(A)$. Since $[x]_{\beta_m}=x$, the $j$th column of $[L_A]_{\beta_n}^{\beta_m}=L_A(e_j)=Col_j(A)$.
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Corollary</label>:</div>
+      <div id="desc">
+        $R(L_A)=span(Col_1(A),\ldots,Col_n(A))$ or "range of $L_A=$ column space of $A$"
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $A\in M_{m\times n}(\mathbb{F})$. $A$ is <u>invertible</u> if $\exists B\in M_{m\times n}(\mathbb{F})$ satisfying $AB=I_n$ amd $BA=I_n$.<br />
+        If $A,B$ are invertible, then $AB$ is invertible and $(AB)^{-1}=B^{-1}A^{-1}$
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Let $Q=[I_V]_\beta^\gamma$, then
+        <ol>
+          <li>
+            $Q$ is invertible.
+          </li>
+          <li>
+            For any $x\in V$, $Q\cdot [x]_\beta=[I_V]_\beta^\gamma\cdot [x]_\gamma=[I_V(x)]_\gamma=[x]_\gamma$
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        $Q=[I_V]_\beta^\gamma$ is called the <b>change of coordinate matrix from $\beta$ to $\gamma$</b>.
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        $$\begin{align*}
+          [T]_\beta=Q^{-1}[T]_\gamma Q&=Q^{-1}[T]_\gamma [I_V]_\beta^\gamma\\
+          &=[I_V]_\gamma^\beta[T]_\beta^\gamma\\
+          &=[T]_\beta\quad\square
+        \end{align*}$$
+      </div>
+    </div>
   </body>
 </html>
