@@ -509,10 +509,10 @@
         Elementary Matrices are invertible.
       </li>
       <li>
-        Elementary column ops ($A\rightarrow AE$) do not change the column space.
+        Elementary column ops ($A\mapsto AE$) do not change the column space.
       </li>
       <li>
-        Elementary row ops ($A\rightarrow EA$) can change the column space but not rank.
+        Elementary row ops ($A\mapsto EA$) can change the column space but not rank.
       </li>
     </ol>
     <div class="thm" id="nocolour">
@@ -520,7 +520,7 @@
       <div id="desc">
         Every $A\in M_{m\times n}(\mathbb{F})$, there exists invertible matrices $P\in M_{n\times n}(\mathbb{F}), Q\in M_{m\times m}(\mathbb{F})$ such that $D=PAQ$ where
         $$D=\left(\begin{matrix}I_r & O\\O & O\end{matrix}\right)$$
-        and $rank(A)=r$.
+        $rank(D)=\dim($column space of $D)=r=rank(A)$, so $rank(A)=r$.
       </div>
     </div>
     <b><u>Transposes</u></b>: If $A$ is $m\times n$ and $B$ is $n\times p$, then $(AB)^t=B^tA^t$.
@@ -565,9 +565,74 @@
       <div id="Proof">
         <div id="title"><label>Proof</label>:</div>
         <div id="pf">
-
+          <ul style="list-style: none;">
+            <li style="display: flex;">
+              <div style="padding-right: 5px;">
+                $(1)\Leftrightarrow(2):$
+              </div>
+              <div>
+                $A$ is invertible $\Longleftrightarrow L_A$ is a bijection $\Longleftrightarrow L_A$ is surjective $\Longleftrightarrow R(L_A)=\mathbb{F}^n\Longleftrightarrow \dim(R(L_A))=n\Longleftrightarrow rank(A)=n$
+              </div>
+            </li>
+            <li style="display: flex;">
+              <div style="padding-right: 5px;">
+                $(2)\Rightarrow(3):$
+              </div>
+              <div>
+                If $rank(A)=n$, then $A$ can be transformed by elementary matrices to $I_n$ where $I_n=E_k\cdots E_2E_1AE'_1E'_2\cdots E'_l=PAQ$.  Since $P,Q$ are invertible, we get
+                $$\begin{align*}
+                A&=P^{-1}(PAQ)Q^{-1}\\
+                &=P^{-1}I_nQ^{-1}\\
+                &=P^{-1}Q^{-1}\\
+                &=(E_1)^{-1}(E_2)^{-1}\cdots(E_k)^{-1}(E'_l)^{-1}\cdots(E'_2)^{-1}(E'_1)^{-1}
+                \end{align*}$$
+                Since the inverse of an elementary matrix is also an elementary matrix, this proves (3).
+              </div>
+            </li>
+            <li style="display: flex;">
+              <div style="padding-right: 5px;">
+                $(3)\Rightarrow(4):$
+              </div>
+              <div>
+                Let $A=E_1E_2\cdots E_k$.  Then $A$ is invertible (product of elementary matrices which are invertible) and $A^{-1}=E^{-1}_1E^{-1}_2\cdots E^{-1}_k$. Thus, $I_n=A^{-1}A=E^{-1}_1E^{-1}_2\cdots E^{-1}_kA$.  Multiplying on the left by elementary matrices is the same as applying elem row operations.  Thus, this shows that $A$ can be transformed by elementary row operations to $I_n$.
+              </div>
+            </li>
+            <li>
+              $(4)\Rightarrow(2): rank(I_n)=n$ and elementary operations preserve rank, so $rank(A)=n$.
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+    <div class="thm" id="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        If $A$ can be transformed to $I_n$ by elem row ops, then the same sequence transforms $I_n$ to $A^{-1}$.  This is useful for calculating $A^{-1}$.
+      </div>
+    </div>
+    e.g. Let $A=\left(\begin{matrix} 1 & -3 &1\\1 & 0 &2\\ 0 &1 &0\end{matrix}\right)$.  Find $A^{-1}$.<br />
+    Form the augmented matrix $(A|I_3)$.
+    $$\left(\begin{array}{ccc} 1&-3&1\\1&0&2\\0&1&0 \end{array}\middle\vert\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right)\xrightarrow{R_2\leftarrow R_2 - R_1}
+      \left(\begin{array}{ccc} 1&-3&1\\0&3&1\\0&1&0 \end{array}\middle\vert\begin{array}{ccc} 1&0&0\\-1&1&0\\0&0&1\end{array}\right)\xrightarrow{R_1\leftarrow R_1 + R_2}
+      \left(\begin{array}{ccc} 1&0&2\\0&3&1\\0&1&0 \end{array}\middle\vert\begin{array}{ccc} 0&1&0\\-1&1&0\\0&0&1\end{array}\right)$$
+      $$\xrightarrow{R_2\leftrightarrow R_3}
+      \left(\begin{array}{ccc} 1&0&2\\0&1&0\\0&3&1 \end{array}\middle\vert\begin{array}{ccc} 0&1&0\\0&0&1\\-1&1&0\end{array}\right)
+      \xrightarrow{R_3\leftrightarrow R_3 - 3R_2}
+      \left(\begin{array}{ccc} 1&0&2\\0&1&0\\0&0&1 \end{array}\middle\vert\begin{array}{ccc} 0&1&0\\0&0&1\\-1&1&-3\end{array}\right)
+      \xrightarrow{R_1\leftrightarrow R_1 - 2R_3}
+      \left(\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1 \end{array}\middle\vert\begin{array}{ccc} 2&-1&6\\0&0&1\\-1&1&-3\end{array}\right)$$
+      $\therefore A^{-1}=\left(\begin{array}{ccc} 2&-1&6\\0&0&1\\-1&1&-3\end{array}\right)$<br />
+      This algorithm also determines if $A$ is invertible.  If $A$ is not invertible, you will get $(I_r|B), r< n$ so $rank(A)\neq n\Leftrightarrow A$ is not invertible.
+      <h2>Systems of Equations</h2>
+      Consider a system, $S$, and $a_{ij},b_i\in\mathbb{F}$.
+      $$\begin{align*}
+        a_{11}x_1+a_{12}x_2+\ldots+a_{1n}x_n&=b_1\\
+        a_{21}x_1+a_{22}x_2+\ldots+a_{2n}x_n&=b_2\\
+        &\vdots\\
+        a_{m1}x_1+a_{m2}x_2+\ldots+a_{mn}x_n&=b_m
+      \end{align*}$$
+      We can write $S$ as $\left(\begin{array}{cccc} a_{11}&a_{12}&\ldots&a_{1n}\\a_{21}&a_{22}&\ldots&a_{2n}\\&\vdots\\a_{m1}&a_{21}&\ldots&a_{mn}\end{array}\right)\left(\begin{matrix} x_1\\x_2\\\vdots\\x_n\end{matrix}\right)=\left(\begin{matrix} b_1\\b_2\\\vdots\\b_n\end{matrix}\right)$ which we write as $Ax=b$, where $A\in M_{m\times n}(\mathbb{F})$, $x$ is an unknown vector in $\mathbb{F}^n$, $b\in\mathbb{F}^m$.  <br /><br />
+      A <u>solution</u> to $S$ is an $n$-tuple $s=(s_1,s_2,\ldots,s_n)\in\mathbb{F}^n$ satisfying $S$.<br />
+      The <u>solution set</u> to $S$ is $\{s\in\mathbb{F}^n: As=b\}\subseteq\mathbb{F}^n$.
   </body>
 </html>
