@@ -182,8 +182,163 @@
     <div id="thm" class="nocolour">
       <div id="title"><label>Corollary</label>:</div>
       <div id="desc">
-        SIf $V$ is finitely-generated, then all bases for $V$ are finite and have the same size.  This unique size of the basis of $V$ is known as the <b>dimension</b> of $V$, written as $\dim (V)$.
+        If $V$ is finitely-generated, then all bases for $V$ are finite and have the same size.  This unique size of the basis of $V$ is known as the <b>dimension</b> of $V$, written as $\dim (V)$.
       </div>
     </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        If $V$ is finitely-dimensional, then every linearly independent subset can be expanded to a basis for $V$.
+      </div>
+    </div>
+    <h1><a name="2"></a><b>2 </b>Functions Between Vector Spaces</h1>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $V$ and $W$ are vector spaces over $\mathbb{F}$.  A function $T: V\rightarrow W$ is a <b>linear transformation</b> if $T$ satisfies:
+        <ol>
+          <li>
+            $T(x+y)=T(x)+T(y)$
+          </li>
+          <li>
+            $T(ax)=aT(x)$
+          </li>
+        </ol>
+      </div>
+    </div>
+    Properties of all linear transformations:
+    <ol>
+      <li>
+        $T(0)=0$
+      </li>
+      <li>
+        $T(-x)=-T(x)$
+      </li>
+      <li>
+        $T(x-y)=T(x)-T(y)$
+      </li>
+      <li>
+        $T(a_1x_1+\ldots+a_nx_n)=a_1T(x_1)+\ldots+a_nT(x_n)$
+      </li>
+    </ol>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $T: V\rightarrow W$ is linear, then
+        <ul style="list-style: none;">
+          <li>
+            $R(T)$ is the <b>range</b> of $T$ such that $R(T)=\{T(x):x\in V\}$ and $R(T)$ is a subspace of $W$.
+          </li>
+          <li>
+            $N(T)$ is the <b>nullspace</b> of $T$ such that $\{x\in V:T(x)=0\}$ and $N(T)$ is a subspace of $V$.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Suppose $T: V\rightarrow W$ is linear and $V= span(v_1,\ldots, v_n)$ then $R(T)=span(T(v_1),\ldots,T(v_n))$.
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Suppose $T: V\rightarrow W$ is linear.
+        <ul style="list-style:none;">
+          <li>
+            $T$ is <i>surjective</i> $\leftrightarrow R(T)=W$
+          </li>
+          <li>
+            $T$ is <i>injective</i> $\leftrightarrow N(T)=\{0\}$
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $T: V\rightarrow W$ is linear and $\dim (V)<\infty$.
+        <ul style="list-style:none;">
+          <li>
+            $rank(T)=\dim(R(T))$
+          </li>
+          <li>
+            $nullity(T)=\dim(N(T))$
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Rank-Nullity Theorem</label>:</div>
+      <div id="desc">
+        Suppose $T: V\rightarrow W$ is linear, then $rank(T)+nullity(T)=\dim(V)$.
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Corollary</label>:</div>
+      <div id="desc">
+        Suppose $T: V\rightarrow V$ and $\dim V<\infty$.  Then $T$ is injective $\leftrightarrow T$ is surjective.  In other words, $T$ is <i>bijective</i>.
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $V$ is a finite-dimensional vector space over $\mathbb{F}$ and $\beta=(v_1,\ldots, v_n)$ is an ordered basis for $V$, and $x\in V$.  The <b>coordinate vector of $x$ relative to $\beta$</b> is the $n$-tuple $(a_1,\ldots, a_n)\in\mathbb{F}^n$ unqiuely satisfying $x=a_1v_1+\ldots+a_nv_n$, and is denoted by
+        $$[x]_\beta=\left(\begin{smallmatrix}a_1\\\vdots\\a_n\end{smallmatrix}\right)$$
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Suppose $V$ is a finite-dimensional vector space over $\mathbb{F}$ where $\dim(V)=n$ and $\beta=(v_1,\ldots,v_n)$ is an ordered basis. Then $[]_\beta:V\rightarrow\mathbb{F}^n$ is a <u>bijective linear transformation</u> or an <u>isomorphism</u>.
+      </div>
+    </div>
+    Facts:
+    <ol>
+      <li>
+        If $T:V\rightarrow W$ is an isomorphism, then $T^{-1}:W\rightarrow V$ is an isomorphism.
+      </li>
+      <li>
+        If $T:V\rightarrow W$ and $U:W\rightarrow X$ are isomorphisms, then $U\circ T: V\rightarrow X$ is an isomorphism.
+      </li>
+    </ol>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $V,W$ are vs$/\mathbb{F}$.  $V$ is <u>isomorphic</u> to $W$ if $\exists$ isomorphism $T:V\rightarrow W$.
+      </div>
+    </div>
+    <h3>Coordinating Linear Transformations</h3>
+    Suppose $T:V\rightarrow W$ where $V,W$ are finite-dimensional.  Let $\beta=(v_1,\ldots,v_n),\gamma=(w_1,\ldots,w_m)$.  We observe that
+    <ul>
+      <li>
+        $T$ is completely determined by $T(v_1),T(v_2),\ldots,T(v_n)$.
+      </li>
+      <li>
+        Each $T(v_j)$ is a vector in $W$.
+      </li>
+      <li>
+        Each $T(v_j)$ is characterized by its coordinate vector $[T(v_j)]_\gamma\in\mathbb{F}^n$.
+      </li>
+    </ul>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        In the above context, the <b>matrix representation of $T$</b> for $\beta$ and $\gamma$, denoted as $[T]_\beta^\gamma$, is the $mxn$ matrix in $M_{m\times n}(\mathbb{F})$ whose $j$th column is $[T(v_j)]_\gamma$.
+      </div>
+    </div>
+    Steps to form the matrix representation of $T$ for $\beta$ and $\gamma$:
+    <ol>
+      <li>
+        Apply $T$ to each vector in $\beta$.
+      </li>
+      <li>
+        Find coordinate vector of $T(v_j)$ relative to $\gamma$.
+      </li>
+      <li>
+        Combine the column vectors to form the $m\times n$ matrix.
+      </li>
+    </ol>
   </body>
 </html>
