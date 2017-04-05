@@ -550,8 +550,8 @@
     $$\begin{align*}
       S_n&=a+ar+\cdots+ar^{n-1}\\
       rS_n&=ar+ar^2+\cdots+ar^n\\
-      S_n(1-r)=a-ar^n=a(1-r^n)\\
-      S_n=\frac{a(1-r^n)}{1-r}\quad r\neq 1
+      S_n(1-r)&=a-ar^n=a(1-r^n)\\
+      S_n&=\frac{a(1-r^n)}{1-r}\quad r\neq 1
     \end{align*}$$
     <ol>
       <li>
@@ -646,6 +646,7 @@
     \end{align*}$$
     Since $c$ is a positive, finite number, $b_n$ is divergent (p-series with $p< 1$), the given series is divergent by the Limit Comparison Test.<br /><br />
     <h3>Alternating Series</h3>
+    <h4>4. Alternating Series Test</h4>
     If an alternating series $\sum_{n=1}^\infty (-1)^{n-1}b_n$ satisfies
     <ol type="i">
       <li>
@@ -655,7 +656,11 @@
         $\lim_{n\to\infty}b_n=0$
       </li>
     </ol>
-    then the series is convergent.
+    then the series is convergent.<br /><br />
+    <u>Proof</u>: Consider the even partial sums $\{S_{2n}\}$.  We want to show that it is convergent, i.e. that it is increasing and bounded above. $S_{2n}=S_{2n-2}+(b_{2n-1}-b_{2n})\geq S_{2n-2}$.  Since $b_{2n}\leq b_{2n-1}$.  Thus, the sequence of even partial sums $\{S_{2n}\}$ is increasing. We can also rewrite the sum as $S_{2n}=b_1-(b_2-b_3)-\ldots-(b_{2n-2}-b_{2n-1})-b_{2n}$.  Each term in parantheses is positive, so $S_{2n}\leq b_1$ for all $n$.  Therefore, the sequence $\{S_{2n}\}$ is increasing and bounded above and is convergent by the Bounded Monotone Sequence Theorem.  We let $\lim_{n\to\infty}S_{2n}=s$.<br />
+    We now compute the odd partial sums.
+    $$\lim_{n\to\infty}S_{2n+1}=\lim_{n\to\infty}(S_{2n}+b_{2n+1})=\lim_{n\to\infty}S_{2n}+\lim_{n\to\infty}b_{2n+1}=s+0=s$$
+    Since both even and odd partial sums converge to $s$, we have that $\lim_{n\to\infty}S_n=s$ and thus the series is convergent.
     <div id="thm">
       <div id="Theorem">
         <div id="title"><label>Alternating Series Estimation Theorem</label>:</div>
@@ -692,7 +697,7 @@
         </div>
       </div>
     </div>
-    <h4>4. Ratio Test</h4>
+    <h4>5. Ratio Test</h4>
     Given a series $\sum a_n$, let $\lim_{n\to\infty}\bigg|\frac{a_{n+1}}{a_n}\bigg| = L$
     <ol type="i">
       <li>
@@ -705,7 +710,23 @@
         If $L=1$, test is inconclusive.
       </li>
     </ol>
-    <h4>5. Root Test</h4>
+    <u>Proof</u>:
+    <ol type="i">
+      <li>
+        If $L< 1$, we can choose an $r$ such that $0 < L < r < 1$, so $\bigg|\frac{a_{n+1}}{a_n}\bigg|< r$ for a large enough $n\geq N$.  This give
+        $$\begin{align*}
+          |a_{N+1}| &< r|a_N|\\
+          |a_{N+2}| &< r|a_{N+1}| < r^2|a_N|\\
+          &\vdots\\
+          r|a_{N+k}| &< r^kr|a_N|
+        \end{align*}$$
+        The series $\sum |a_N|r^k$ converges (geometric series with $r< 1$), so by the Comparison Test, $\sum|a_{N+k}|$ converges. Thus $\sum|a_k|$ converges absolutely.
+      </li>
+      <li>
+        If $L > 1$, there exists an integer $N$ such that $\bigg|\frac{a_{n+1}}{a_n}\bigg| > 1$ for $n\geq N$ so $|a_{n+1}| > |a_n|$.   Thus, $\lim_{n\to\infty}a_n\neq 0$ so $\sum a_n$ diverges by the Divergence Test.
+      </li>
+    </ol>
+    <h4>6. Root Test</h4>
     This is used when $n$th power occurs.<br />
     Given a series $\sum a_n$, let $\lim_{n\to\infty}\sqrt[n]{|a_n|} = L$
     <ol type="i">
