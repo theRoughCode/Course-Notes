@@ -10,46 +10,11 @@
         tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
       });
     </script>
-    <style>
-      /* CSS for navbar */
-      #contents {
-        background: #ffe5e5;
-      }
-      #nav {
-        font-size: 20px;
-      }
-      #nav li {
-        padding: 5px;
-      }
-      #nav li a{
-        text-decoration: none;
-        color: hotpink;
-      }
-      #nav li a:hover{
-        text-decoration: underline;
-      }
-
-      /* CSS for Definitions */
-      #def {
-        border: 5px solid green;
-      }
-      #def #title {
-        display: inline-block;
-        vertical-align: top;
-      }
-      #def #title label {
-        font-weight: bold;
-        text-decoration: underline;
-        padding-left: 20px;
-      }
-      #def #desc {
-        display: inline-block;
-      }
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1><a name="1"></a>Vector Spaces & Dimensions</h1>
-    <div id="def">
+    <h1><a name="1"></a><b>1 </b>Vector Spaces & Dimensions</h1>
+    <div id="def" class="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
         A <b>field</b> is an algebraic system $\mathbb{F}$ having:
@@ -61,6 +26,61 @@
             operations $+, \times, -,$ and $^{-1}$
           </li>
         </ul>
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A <b>vector space over $\mathbb{F}$</b> is a set $V$ which is closed under addition and scalar multiplication, and satisfies VS 1-8.
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem 8 (Cancellation Law)</label>:</div>
+      <div id="desc">
+        Suppose $V$ is a vector space and $x,y,z\in V$.  If $x+z=y+z$ then $x=y$.
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Corollary 1</label>:</div>
+      <div id="desc">
+        In any vector space, there is only one zero vector, denoted $0$.
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Let $V$ be a vector space over $\mathbb{F}$.  A subset $W$ of $V$ is a <b>subspace of $V$</b> if $W$, with the operations of $V$, form a vector space.
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Let $V$ be a vector space over $\mathbb{F}$. Let $x, u_1, \ldots, u_n\in V$.  $x$ is a <b>linear combination</b> of $u_1,\ldots,u_n$ if there exists $a_1,\ldots,a_n\in\mathbb{F}$ such that $x=a_1u_1+a_2u_2+\ldots+a_nu_n$
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Suppose $V$ is a vector space over $\mathbb{F}$, $W\subseteq V$.  Then, $W$ is a subspace of $V$ if and only if:
+        <ol>
+          <li>
+            $W$ is closed under the operations (addition + scalar multiplication) of $V$.
+          </li>
+          <li>
+            $W$ contains the zero vector of $V$.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Suppose $V$ is a vs/$\mathbb{F}$, $x\in V$, and $\phi\neq S\subseteq V$.
+        <ol>
+          <li>
+            $x$ is a <b>linear combination of $S$</b> if $x$ is a linear combination
+          </li>
+        </ol>
       </div>
     </div>
   </body>

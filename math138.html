@@ -12,11 +12,22 @@
     </script>
     <link rel="stylesheet" href="./styles.css" />
     <script>
+      var is_Phys = false;
       function togglePhys() {
         const phys = document.querySelectorAll('#phys');
+        const main_title = document.querySelector('title');
+        const title = document.querySelector('#title');
+        is_Phys = !is_Phys;
+        if (is_Phys) {
+          main_title.innerHTML = "MATH 138P Notes by Raphael Koh";
+          title.innerHTML = "MATH 138P Notes by Raphael Koh";
+        }
+        else {
+          main_title.innerHTML = "MATH 138 Notes by Raphael Koh";
+          title.innerHTML = "MATH 138 Notes by Raphael Koh";
+        }
         phys.forEach(elem => {
-          console.log(elem.style.display);
-          if(!elem.style.display || elem.style.display === 'none') elem.style.display = 'block';
+          if(phys) elem.style.display = 'block';
           else elem.style.display = 'none';
         });
         const h1 = document.querySelectorAll('h1');
@@ -25,7 +36,7 @@
   </head>
   <body>
     <a name="top"></a>
-    <h1 style="text-align: center; font-size: 50px;">MATH 138P Notes by Raphael Koh</h1><br />
+    <h1 id="title">MATH 138 Notes by Raphael Koh</h1><br />
     <div class="toggle">
       <div class="text">
         Toggle Physics Mode:
