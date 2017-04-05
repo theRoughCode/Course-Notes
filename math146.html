@@ -634,5 +634,67 @@
       We can write $S$ as $\left(\begin{array}{cccc} a_{11}&a_{12}&\ldots&a_{1n}\\a_{21}&a_{22}&\ldots&a_{2n}\\&\vdots\\a_{m1}&a_{21}&\ldots&a_{mn}\end{array}\right)\left(\begin{matrix} x_1\\x_2\\\vdots\\x_n\end{matrix}\right)=\left(\begin{matrix} b_1\\b_2\\\vdots\\b_n\end{matrix}\right)$ which we write as $Ax=b$, where $A\in M_{m\times n}(\mathbb{F})$, $x$ is an unknown vector in $\mathbb{F}^n$, $b\in\mathbb{F}^m$.  <br /><br />
       A <u>solution</u> to $S$ is an $n$-tuple $s=(s_1,s_2,\ldots,s_n)\in\mathbb{F}^n$ satisfying $S$.<br />
       The <u>solution set</u> to $S$ is $\{s\in\mathbb{F}^n: As=b\}\subseteq\mathbb{F}^n$.
+      <div class="def" id="nocolour">
+        <div id="title"><label>Definition</label>:</div>
+        <div id="desc">
+          The system $Ax=0$ is called <b>homogenous</b>.<br />
+          A system $Ax=b, b\neq 0$ is called <b>non-homogenous</b>.
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Let $Ax=0$ be a homogenous system of $m$ linear equations in $n$ unknowns.
+          <ol>
+            <li>
+              The solution set is $N(A)$.
+            </li>
+            <li>
+              The solution set is a subspace of $\mathbb(F)^n$ of dimension: $n-rank(A)$.
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="title"><label>Corollary</label>:</div>
+        <div id="desc">
+          If we have more unknowns than equations such that $n>m$ then $nullity(A)>0$ and the solution set has dimension $\geq 1$ so it has <u>non-zero</u> solutions.
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="title"><label>Definition</label>:</div>
+        <div id="desc">
+          A system $Ax=0$ is <b>consistent</b> if it has at least one solution.<br />
+          <u>Note</u>: Every homogenous system $Ax=0$ is consistent (has the zero solution).
+          <br /><br />
+          $Ax=b$ is consistent $\Leftrightarrow rank(A)=rank(A|b)$.
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $Ax=b$ is consistent.  Pick one solution $s\in\mathbb{F}^n$.  Then the solution set is $$s+N(A)\quad\text{(translation of $N(A)$ by $s$)}$$
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $Ax=b$ where $A$ is $m\times n$.  Then, $Ax=b\Leftrightarrow A$ is invertible.  Specifically, $s=A^{-1}b$.
+        </div>
+      </div>
+      <h2>Solving Systems of Linear Equations</h2>
+      <u>3 core goals to solve $Ax=b$</u>:
+      <ol>
+        <li>
+          Determine if $Ax=b$ is consistent.
+        </li>
+        <li>
+          If yes, find one particular solution, $s_0$.
+        </li>
+        <li>
+          Find a basis $\{u_1,\ldots,u_k\}$ for $N(A)$.
+        </li>
+      </ol>
+      Then the solution to $Ax=b$ is $S=s_0+(a_1u_1+a_2u_2+\ldots+a_ku_k),$ where $a_1,\ldots,a_k\in\mathbb{F}$.
   </body>
 </html>
