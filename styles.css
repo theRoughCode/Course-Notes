@@ -133,7 +133,7 @@ h1 {
   border: 5px solid red;
   margin-top: 10px;
   margin-bottom: 10px;
-  display: inline-block;
+  display: flex;
   align-items: center;
   padding: 10px;
 }
