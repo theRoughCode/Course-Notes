@@ -59,7 +59,7 @@
       </div>
     </div>
     <div id="thm" class="nocolour">
-      <div id="title_text"><label>Theorem</label>:</div>
+      <div id="title"><label>Theorem</label>:</div>
       <div id="desc">
         Suppose $V$ is a vector space over $\mathbb{F}$, $W\subseteq V$.  Then, $W$ is a subspace of $V$ if and only if:
         <ol>
@@ -81,9 +81,108 @@
             $x$ is a <b>linear combination of $S$</b> if $x$ is a linear combination of some vectors $u_1,\ldots,u_n\in S$.
           </li>
           <li>
-            $\span (S)\overset{ad}{=}$
+            $span (S)\overset{def}{=}\{\text{all linear combos of $S$}\}$<br />
+            *$span(\phi)\overset{def}{=}\{0\}$
           </li>
         </ol>
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Let $V$ be a vector space over $\mathbb{F}$, $S\subseteq V$.
+        <ol>
+          <li>
+            $span(S)$ is a subspace of $V$
+          </li>
+          <li>
+            $span(S)$ is the smallest subspace of $V$ containing $S$.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        Let $V$ be a vs/$\mathbb{F}$, $x\in V$, and $S\subseteq V$.  $S$ is <b>linearly dependent</b> if there exist distinct vectors $u_1,\ldots,u_n\in S$ and $a_1,\ldots,a_n\in\mathbb{F}$ not all zero such that $a_1u_1+\ldots+a_nu_n=0$.
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A set $S$ is linearly independent if $\forall$ distinct $u_1,\ldots,u_n\in S$, $\forall a_1,\ldots,a_n\in\mathbb{F}$, if $a_1u_1+\ldots+a_nu_n=0$ then $a_1=a_2=\ldots=a_n=0$.
+      </div>
+    </div>
+    <i>Note:</i> $S=\phi$ is linearly independent because a linearly dependent set must be non-empty.  $S=\{0\}$ is linearly dependent because $a\cdot 0=0$ for any scalar $a$.
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Suppose $S$ is a linearly independent set in a vector space $V$ and $v\in V-S$.  <br />Then $S\cup\{v\}$ is linearly independent $\leftrightarrow v\not\in span(S)$.
+      </div>
+    </div>
+    <h2>Basis and Dimensions</h2>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A subset of a vector space $V$ is a <b>basis</b> for $V$ if it is linearly independent and spans $V$.
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A subset $S\subseteq V$ is a <b>minimal spanning set</b> if:
+        <ol type="i">
+          <li>
+            $span(S)=V$ <u>and</u>
+          </li>
+          <li>
+            no proper subset of $S$ is a spanning set of $V$.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div id="def" class="nocolour">
+      <div id="title"><label>Definition</label>:</div>
+      <div id="desc">
+        A subset $S\subseteq V$ is a <b>maximal linearly independent</b> if:
+        <ol type="i">
+          <li>
+            $S$ is linearly independent <u>and</u>
+          </li>
+          <li>
+            No set $W\subseteq V$ that has $S$ as a proper subset is linearly independent.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Theorem</label>:</div>
+      <div id="desc">
+        Basis $\longleftrightarrow$ Minimal spanning set $\longleftrightarrow$ Maximal linear independent set
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Replacement Lemma</label>:</div>
+      <div id="desc">
+        Suppose $V$ is a vector space and $S,T\subseteq V$, $v\in V$ and
+        <ul>
+          <li>
+            $S$ us linearly independent.
+          </li>
+          <li>
+            $v\not\in span(S)\rightarrow S\cup\{v\}$ is linearly independent
+          </li>
+          <li>
+            $span(S\cup T)=V$
+          </li>
+        </ul>
+        Then $\exists x\in T$ such that $span\bigg((S\cup\{v\})\cup(T-\{x\})\bigg)=V$
+      </div>
+    </div>
+    <div id="thm" class="nocolour">
+      <div id="title"><label>Corollary</label>:</div>
+      <div id="desc">
+        SIf $V$ is finitely-generated, then all bases for $V$ are finite and have the same size.  This unique size of the basis of $V$ is known as the <b>dimension</b> of $V$, written as $\dim (V)$.
       </div>
     </div>
   </body>
