@@ -104,7 +104,7 @@ h1 {
 
 /* CSS for Definitions */
 #def {
-  border: 5px solid green;
+  border: 3px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -130,7 +130,7 @@ h1 {
 
 /* CSS for Theorems */
 #thm {
-  border: 5px solid red;
+  border: 3px solid red;
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
