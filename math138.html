@@ -50,6 +50,36 @@
         padding-left: 10px;
         display: inline-block;
       }
+
+      /* CSS for Theorems */
+      #thm {
+        border: 5px solid red;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+        align-items: center;
+      }
+      #thm #Theorem {
+        padding: 10px;
+      }
+      #thm #Proof {
+        padding: 10px;
+      }
+      #thm #title {
+        display: inline-block;
+        vertical-align: top;
+      }
+      #thm #title label {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      #thm #desc {
+        padding-left: 10px;
+        display: inline-block;
+      }
+      #thm #pf {
+        padding-left: 10px;
+      }
     </style>
   </head>
   <body>
@@ -227,16 +257,28 @@
     $$\int_a^bf(x)dx=-\int_a^bU'(x)dx=-[U(b)-U(a)]=-\Delta U$$
     Alternatively, we can let $x=a$ be a reference point and define $U(x)=-\int_a^xf(s)ds$.  We define $U(a)=0$.  If $f(x)=-mg$, $U(x)=-\int_a^x-mg\ ds=mgx-mga=mgx$.<br /><br />
     <u>Physical Interpretation:</u>  $U(x)$ is the work done <u>against</u> the force when $m$ is moved from $a$ to $x$.  If $U(x)>0$, we have to work <u>against</u> the force to move $m$ from $a$ to $x$ (i.e. causes a "buildup" of PE). <br /><br />
-    <u>Theorem: </u> Suppose that a mass $m$ is moving on the $x$-axis under the influence of a conservative force $\vec{F}(x)=f(x)\hat{i}$ according to Newton's Second Law of Motion, $\vec{F}=m\vec{a}$.  Then, the total mechanical energy of the mass is constant in time. <br />
-    <u>Proof: </u>Total energy $E=KE+PE$.  Let $x(t)$ be the trajectory of the mass.  Then, $E(t)=\frac{1}{2}mv(t)^2+U(x(t))$ where $U'(x)=-f(x)$.
-    $$\begin{align*}
-      E'(t)=\frac{dE}{dt}&=\frac{1}{2}m\frac{d}{dt}v(t)^2+\frac{d}{dt}U(x(t))\\
-      &=mv(t)v'(t)+U'(x(t))x'(t)\\
-      &=mv(t)a(t)-f(x(t))v(t)\\
-      &=v(t)[ma(t)-f(x(t))]\\
-      &=v(t)[ma(t)-ma(t)]\\
-      &=0\quad\square
-    \end{align*}$$
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose that a mass $m$ is moving on the $x$-axis under the influence of a conservative force $\vec{F}(x)=f(x)\hat{i}$ according to Newton's Second Law of Motion, $\vec{F}=m\vec{a}$.  Then, the total mechanical energy of the mass is constant in time.
+        </div>
+      </div>
+      <div id="Proof">
+        <div id="title"><label>Proof</label>:</div>
+        <div id="pf">
+          Total energy $E=KE+PE$.  Let $x(t)$ be the trajectory of the mass.  Then, $E(t)=\frac{1}{2}mv(t)^2+U(x(t))$ where $U'(x)=-f(x)$.
+          $$\begin{align*}
+            E'(t)=\frac{dE}{dt}&=\frac{1}{2}m\frac{d}{dt}v(t)^2+\frac{d}{dt}U(x(t))\\
+            &=mv(t)v'(t)+U'(x(t))x'(t)\\
+            &=mv(t)a(t)-f(x(t))v(t)\\
+            &=v(t)[ma(t)-f(x(t))]\\
+            &=v(t)[ma(t)-ma(t)]\\
+            &=0\quad\square
+          \end{align*}$$
+        </div>
+      </div>
+    </div>
     <br /><br /><br /><br />
     <h1><a name="3"></a><b>3 </b>Applications of Integration</h1>
     <h3>Centre of Mass</h3>
@@ -527,8 +569,14 @@
       </div>
     </div>
     <b><i>Completeness Axiom</i></b>: Let $S\subset\mathbb{R}$ be bounded above such that there exists an $M\in\mathbb{R}$, $x\leq M$ for all $x\in S$.  Then, $S$ has a <b>least upper bound</b> $b$ such that if $M$ is any other upper bound, then $b\leq M$.  **<i>This axiom is used to express that there is no hole or gap in the real number line.</i><br /><br />
-    <b><i>Bounded Monotone Sequence Theorem</i></b>: A bounded monotone sequence is convergent (i.e. has a limit)<br />
-    <br /><br /><br /><br />
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Bounded Monotone Sequence Theorem</label>:</div>
+        <div id="desc">
+          A bounded monotone sequence is convergent (i.e. has a limit)
+        </div>
+      </div>
+    </div>
     <h1><a name="8"></a><b>8 </b>Infinite Series</h1>
     Given a sequence $\{a_n\}_{n=1}^\infty$, we consider the series $\sum_{n=1}^\infty a_n$<br />
     <b>Partial Sum</b>: $S_n=a_1+a_2+\cdots+a_n=\sum_{k=1}^n a_k$<br /><br />
@@ -555,12 +603,37 @@
     </ol>
     Thus, geometric series converge to $\frac{a}{1-r}$ for $|r|< 1$ and diverge for $|r|\geq 1$.<br /><br />
     <h3>Convergence and Divergence of Series</h3>
-    <b>Theorem</b>: If $\sum a_n$ is convergent, then $\lim_{n\to\infty}a_n=0$<br />
-    <u>Proof</u>: <br />Consider the partial sum $S_n=a_1+\cdots+a_n=S_{n-1}+a_n$.  We can rewrite this as $a_n=S_n-S_{n-1}$.  We suppose that $\sum a_n$ is convergent, so we $\lim_{n\to\infty}S_n=s=\lim_{n\to\infty}S_{n-1}$.  Thus, $\lim_{n\to\infty}a_n=\lim_{n\to\infty}(S_n-S_{n-1})=\lim_{n\to\infty}S_n-\lim_{n\to\infty}S_{n-1}=s-s=0\quad\square$
-    <br /><br />
-    <b>Corollary</b>: If $\lim_{n\to\infty}a_n\neq 0$, then $\sum a_n$ is divergent.<br />
-    <i>Note: $\lim_{n\to\infty}a_n=0$ does not imply that $\sum a_n$ is convergent. (i.e. Harmonic Series)</i><br /><br />
-    <b>Theorem</b>: If $\sum a_n$ and $\sum b_n$ are convergent, then $\sum (a_n+b_n)$ is convergent.
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If $\sum a_n$ is convergent, then $\lim_{n\to\infty}a_n=0$
+        </div>
+      </div>
+      <div id="Proof">
+        <div id="title"><label>Proof</label>:</div>
+        <div id="pf">
+          Consider the partial sum $S_n=a_1+\cdots+a_n=S_{n-1}+a_n$.  We can rewrite this as $a_n=S_n-S_{n-1}$.  We suppose that $\sum a_n$ is convergent, so we $\lim_{n\to\infty}S_n=s=\lim_{n\to\infty}S_{n-1}$.  Thus, $\lim_{n\to\infty}a_n=\lim_{n\to\infty}(S_n-S_{n-1})=\lim_{n\to\infty}S_n-\lim_{n\to\infty}S_{n-1}=s-s=0\quad\square$
+        </div>
+      </div>
+    </div>
+    <i>Note: $\lim_{n\to\infty}a_n=0$ does not imply that $\sum a_n$ is convergent. (i.e. Harmonic Series)</i>
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Corollary</label>:</div>
+        <div id="desc">
+          If $\lim_{n\to\infty}a_n\neq 0$, then $\sum a_n$ is divergent.
+        </div>
+      </div>
+    </div>
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If $\sum a_n$ and $\sum b_n$ are convergent, then $\sum (a_n+b_n)$ is convergent.
+        </div>
+      </div>
+    </div>
     <h3>Convergence Tests</h3>
     <h4>1. Integral Test</h4>
     If $\sum a_n=f(n)$ where $f(x)$ is continuous, positive and decreasing on $[b,\infty)$, then $$\sum_{n=b}^\infty a_n\text{ is convergent }\Longleftrightarrow\ \int_a^\infty f(x)dx\ \text{ is convergent }$$
@@ -620,9 +693,15 @@
         $\lim_{n\to\infty}b_n=0$
       </li>
     </ol>
-    then the series is convergent.<br /><br />
-    <b><u>Alternating Series Estimation Theorem</u></b><br />
-    If $\sum (-1)^{n-1}b_n$, $b_n>0$, satisfies the conditions for an alternating series, then $|R_n|=|s-s_n|\leq b_{n+1}$.<br /><br />
+    then the series is convergent.
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Alternating Series Estimation Theorem</label>:</div>
+        <div id="desc">
+          If $\sum (-1)^{n-1}b_n$, $b_n>0$, satisfies the conditions for an alternating series, then $|R_n|=|s-s_n|\leq b_{n+1}$.
+        </div>
+      </div>
+    </div>
     <h3>Absolute Convergence</h3>
     <div id="def">
       <div id="title"><label>Definition</label>:</div>
@@ -636,11 +715,21 @@
         A series $\sum a_n$ is called <b>conditionally convergent</b> if it is convergent but not absolutely convergent.
       </div>
     </div>
-    <u>Theorem</u>: If a series $\sum a_n$ is absolutely convergent, then it is convergent.<br />
-    <u>Proof</u>:<br />
-    Observe the following inequality: $0\leq a_n + |a_n|\leq 2|a_n|$.<br />
-    Suppose $\sum a_n$ is absolutely convergent, then $\sum |a_n|$ is convergent.  By the Comparison Test, $\sum (a_n+|a_n|)$ is convergent.  Since $\sum a_n=\sum(a_n+|a_n|)-\sum |a_n|$ is a difference of two convergent series, then $\sum a_n$ is convergent. $\quad\square$
-    <br />
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If a series $\sum a_n$ is absolutely convergent, then it is convergent.
+        </div>
+      </div>
+      <div id="Proof">
+        <div id="title"><label>Proof</label>:</div>
+        <div id="pf">
+          Observe the following inequality: $0\leq a_n + |a_n|\leq 2|a_n|$.<br />
+          Suppose $\sum a_n$ is absolutely convergent, then $\sum |a_n|$ is convergent.  By the Comparison Test, $\sum (a_n+|a_n|)$ is convergent.  Since $\sum a_n=\sum(a_n+|a_n|)-\sum |a_n|$ is a difference of two convergent series, then $\sum a_n$ is convergent. $\quad\square$
+        </div>
+      </div>
+    </div>
     <h4>4. Ratio Test</h4>
     Given a series $\sum a_n$, let $\lim_{n\to\infty}\bigg|\frac{a_{n+1}}{a_n}\bigg| = L$
     <ol type="i">
@@ -672,21 +761,28 @@
     <br /><br /><br /><br />
     <h1><a name="9"></a><b>9 </b>Power Series</h1>
 	  A <em>power series about a</em> is a series that can be written in the form of $$\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$$
-	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.<br />
-    <u>Theorem</u>: For a given power series $\sum_{n=0}^\infty c_n(x-a)^n$, there are only three possibilities for convergence:
-    <ol type="i">
-      <li>
-        Converges only at $x=a$.
-      </li>
-      <li>
-        Converges for all $x$.
-      </li>
-      <li>
-        Converges if $|x-a|< R$ and diverges if $|x-a| > R$ for $R>0$.  There are four possibilities:
-        $$(a-R, a+R)\quad\quad[a-R, a+R]\quad\quad(a-R, a+R]\quad\quad[a-R, a+R)$$
-      </li>
-    </ol>
-    To find the radius of convergence, apply the ratio test and test at endpoints.<br /><br />
+	  Where $a, c_{n} \in \mathbb{R}$. Some things to note are the $c_{n}$'s are often called the <strong>coefficients</strong> of the series, and that the series is a function of $x$.
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          For a given power series $\sum_{n=0}^\infty c_n(x-a)^n$, there are only three possibilities for convergence:
+          <ol type="i">
+            <li>
+              Converges only at $x=a$.
+            </li>
+            <li>
+              Converges for all $x$.
+            </li>
+            <li>
+              Converges if $|x-a|< R$ and diverges if $|x-a| > R$ for $R>0$.  There are four possibilities:
+              $$(a-R, a+R)\quad\quad[a-R, a+R]\quad\quad(a-R, a+R]\quad\quad[a-R, a+R)$$
+            </li>
+          </ol>
+          To find the radius of convergence, apply the ratio test and test at endpoints.
+        </div>
+      </div>
+    </div>
     e.g. Find the radius of convergence and interval of convergence of $\sum_{n=0}^\infty \frac{(-3)^nx^n}{\sqrt{n+1}}$.<br /><br />
     Let $a_n=\frac{(-3)^nx^n}{\sqrt{n+1}}$.  Applying the ratio test, we get
     $$\lim_{n\to\infty}\bigg|\frac{a_{n+1}}{a_n}\bigg|=\bigg|\frac{(-3)^{n+1}x^{n+1}}{\sqrt{n+2}}\cdot\frac{\sqrt{n+1}}{(-3)^nx^n}\bigg|=\bigg|-3x\sqrt{\frac{n+1}{n+2}}\bigg|=3|x|\sqrt{\frac{1+\frac{1}{n}}{1+\frac{2}{n}}}\rightarrow 3|x|\quad\text{as }n\to\infty$$
@@ -710,30 +806,56 @@
     $$\frac{x^3}{x+2}=\frac{x^3}{2}\sum_{n=0}^\infty (-\frac{x}{2})^n=\sum_{n=0}^\infty (-1)^n\frac{x^{n+3}}{2^{n+1}}$$
     Since this is a geometric series, we know that it converges when $|r| < 1$ or $|-\frac{x}{2}|< 1 \rightarrow x < 2$. Thus the radius of convergence is $R=2$ and the interval of convergence is $(-2, 2)$.
     <h4>Differentiation and Integration of Power Series</h4>
-    <u>Theorem</u>: If the power series $\sum c_n(x-a)^n$ has radius of convergence $R>0$ then the function defined by:
-    $$f(x)=c_0+c_1(x-a)+c_2(x-a)^2+\cdots=\sum c_n(x-a)^n$$
-    is differentiable and continuous on the interval $(a-R,a+R)$ and
-    <ol type="i">
-      <li>
-        $$f'(x)=c_1+2c_2(x-a)+3c_3(x-a)^2+\cdots=\sum nc_n(x-a)^{n-1}\quad\text{or}$$
-        $$\frac{d}{dx}\bigg[\sum c_n(x-a)^n\bigg]=\sum \frac{d}{dx}[c_n(x-a)^n]$$
-      </li>
-      <li>
-        $$\int f(x)dx=C+c_0(x-a)+c_1\frac{(x-a)^2}{2}+c_2\frac{(x-a)^3}{3}+\cdots=C+\sum c_n\frac{(x-a)^{n+1}}{n+1}\quad\text{or}$$
-        $$\int\bigg[\sum c_n(x-a)^n\bigg]dx=\sum \int[c_n(x-a)^n]dx$$
-      </li>
-    </ol>
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If the power series $\sum c_n(x-a)^n$ has radius of convergence $R>0$ then the function defined by:
+          $$f(x)=c_0+c_1(x-a)+c_2(x-a)^2+\cdots=\sum c_n(x-a)^n$$
+          is differentiable and continuous on the interval $(a-R,a+R)$ and
+          <ol type="i">
+            <li>
+              $$f'(x)=c_1+2c_2(x-a)+3c_3(x-a)^2+\cdots=\sum nc_n(x-a)^{n-1}\quad\text{or}$$
+              $$\frac{d}{dx}\bigg[\sum c_n(x-a)^n\bigg]=\sum \frac{d}{dx}[c_n(x-a)^n]$$
+            </li>
+            <li>
+              $$\int f(x)dx=C+c_0(x-a)+c_1\frac{(x-a)^2}{2}+c_2\frac{(x-a)^3}{3}+\cdots=C+\sum c_n\frac{(x-a)^{n+1}}{n+1}\quad\text{or}$$
+              $$\int\bigg[\sum c_n(x-a)^n\bigg]dx=\sum \int[c_n(x-a)^n]dx$$
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
     <h1><a name="10"></a><b>10 </b>Taylor & Maclaurin Series</h1>
-    <u>Theorem</u>: If $f$ has a power series representation at $a$ such that
-    $$f(x)=\sum c_n(x-a)^n\quad |x-a|< R$$
-    then its coefficients are given by
-    $$c_n=\frac{f^{(n)}(a)}{n!}$$
-    Thus,
-    $$f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\frac{f'''(a)}{3!}(x-a)^3+\cdots$$<br />
-    <b><u>Maclaurin Series</u></b>: Taylor Series centred at $a=0$.
-    $$f(x)=f(0)+f'(0)(x-a)+\frac{f''(0)}{2!}(x-a)^2+\frac{f'''(0)}{3!}(x-a)^3+\cdots$$
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If $f$ has a power series representation at $a$ such that
+          $$f(x)=\sum c_n(x-a)^n\quad |x-a|< R$$
+          then its coefficients are given by
+          $$c_n=\frac{f^{(n)}(a)}{n!}$$
+          Thus,
+          $$f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\frac{f'''(a)}{3!}(x-a)^3+\cdots$$
+        </div>
+      </div>
+    </div>
+    <div id="def">
+      <div id="title"><label>Maclaurin Series</label>:</div>
+      <div id="desc">
+        Taylor Series centred at $a=0$.
+        $$f(x)=f(0)+f'(0)(x-a)+\frac{f''(0)}{2!}(x-a)^2+\frac{f'''(0)}{3!}(x-a)^3+\cdots$$
+      </div>
+    </div>
     In general, $f(x)$ is the sum of a Taylor series if $f(x)=\lim_{n\to\infty}T_n(x)$.  We define $T_n(x)$ as the <b>$n$th-degree Taylor polynomial of $f$ at $a$</b> and $R_n(x)$ as the remainder of the Taylor series such that $R_n(x)=f(x)-T_n(x)$.<br /><br />
-    <u>Theorem</u>: If $\lim_{n\to\infty}R_n(x)=0$ for $|x-a| < R$, then $f$ is equal to the sum of the Taylor series on the interal $|x-a|< R$.<br />
+    <div id="thm">
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If $\lim_{n\to\infty}R_n(x)=0$ for $|x-a| < R$, then $f$ is equal to the sum of the Taylor series on the interal $|x-a|< R$.
+        </div>
+      </div>
+    </div>
     <h4>Taylor's Inequality</h4>
     If $|f^{(n+1)}(x)|\leq M$ for $|x-a|\leq d$, then the remainder $R_n(x)$ of the Taylor series satisfies
     $$|R_n(x)|\leq \frac{M}{(n+1)!}|x-a|^{n+1}\quad\text{for }|x-a|\leq d$$
