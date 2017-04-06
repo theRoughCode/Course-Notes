@@ -695,6 +695,85 @@
           Find a basis $\{u_1,\ldots,u_k\}$ for $N(A)$.
         </li>
       </ol>
-      Then the solution to $Ax=b$ is $S=s_0+(a_1u_1+a_2u_2+\ldots+a_ku_k),$ where $a_1,\ldots,a_k\in\mathbb{F}$.
+      Then the solution to $Ax=b$ is $S=s_0+(a_1u_1+a_2u_2+\ldots+a_ku_k),$ where $a_1,\ldots,a_k\in\mathbb{F}$.<br /><br />
+      e.g. Solve the following system of equations.
+      $$\begin{align*}
+        2x_1+3x_2+x_3+4x_4-9x_5&=17\\
+        x_1+x_2+x_3+x_4-3x_5&=6\\
+        x_1+x_2+x_3+2x_4-5x_5&=8\\
+        2x_1+2x_2+2x_3+3x_4-8x_5&=14\\
+      \end{align*}$$
+      <ol>
+        <li>
+          Form the augmented matrix $(A|b)$.
+          $$\left(\begin{array}{ccccc} 2&3&1&4&-9\\1&1&1&1&-3\\ 1&1&1&2&-5\\ 2&2&2&3&-8 \end{array}\middle\vert\begin{array}{c} 17\\6\\8\\14\end{array}\right)$$
+        </li>
+        <li>
+          Reduce to <b>reduced row echelon form</b>.
+          <div class="def" id="nocolour">
+            <div id="title"><label>Definition</label>:</div>
+            <div id="desc">
+              For $(A*|b*)$ to be in <b>reduced row echelon form (RREF)</b>:
+              <ol>
+                <li>
+                  Zero row(s) must be at the bottom.
+                </li>
+                <li>
+                  First (leftmost) non-zero entry in each row
+                  <ol type="i">
+                    <li>must equal $1$.</li>
+                    <li>must be the only non-zero entry in its column</li>
+                    <li>must be to the right of the first non-zero entry of the row above</li>
+                  </ol>
+                </li>
+              </ol>
+              <u>Fact</u>: Every matrix can be transformed by elem row ops to a RREF matrix.
+            </div>
+          </div>
+          $$\left(\begin{array}{ccccc} 2&3&1&4&-9\\1&1&1&1&-3\\ 1&1&1&2&-5\\ 2&2&2&3&-8 \end{array}\middle\vert\begin{array}{c} 17\\6\\8\\14\end{array}\right)\xrightarrow{R_3\leftarrow R_3-R_2}
+          \left(\begin{array}{ccccc} 2&3&1&4&-9\\1&1&1&1&-3\\ 0&0&0&1&-2\\ 2&2&2&3&-8 \end{array}\middle\vert\begin{array}{c} 17\\6\\2\\14\end{array}\right)\xrightarrow{R_1\leftarrow R_1-R_4}
+          \left(\begin{array}{ccccc} 0&1&-1&1&-1\\1&1&1&1&-3\\ 0&0&0&1&-2\\ 2&2&2&3&-8 \end{array}\middle\vert\begin{array}{c} 3\\6\\2\\14\end{array}\right)$$
+          $$\xrightarrow{R_4\leftarrow R_4-2R_2}
+          \left(\begin{array}{ccccc} 0&1&-1&1&-1\\1&1&1&1&-3\\ 0&0&0&1&-2\\ 0&0&0&1&-2 \end{array}\middle\vert\begin{array}{c} 3\\6\\2\\2\end{array}\right)\xrightarrow{R_4\leftarrow R_4-R_3}
+          \left(\begin{array}{ccccc} 0&1&-1&1&-1\\1&1&1&1&-3\\ 0&0&0&1&-2\\ 0&0&0&0&0 \end{array}\middle\vert\begin{array}{c} 3\\6\\2\\0\end{array}\right)\xrightarrow{R_2\leftarrow R_2-R_1}$$
+          $$
+          \left(\begin{array}{ccccc} 0&1&-1&1&-1\\1&0&2&0&-2\\ 0&0&0&1&-2\\ 0&0&0&0&0 \end{array}\middle\vert\begin{array}{c} 3\\3\\2\\0\end{array}\right)\xrightarrow{R_1\leftarrow R_1-R_3}
+          \left(\begin{array}{ccccc} 0&1&-1&0&1\\1&0&2&0&-2\\ 0&0&0&1&-2\\ 0&0&0&0&0 \end{array}\middle\vert\begin{array}{c} 1\\3\\2\\0\end{array}\right)\xrightarrow{R_1\leftrightarrow R_2}
+          \left(\begin{array}{ccccc} 1&0&2&0&-2\\0&1&-1&0&1\\ 0&0&0&1&-2\\ 0&0&0&0&0 \end{array}\middle\vert\begin{array}{c} 3\\1\\2\\0\end{array}\right)=(A^*|b^*)$$
+        </li>
+        <li>
+          $rank(A)=rank(A^*)=rank(A^*|b^*)=rank(A|b)=3$, so $Ax=b$ is consistent.
+        </li>
+        <li>
+          Solve $A^*x=b^*$ to find one particular solution.
+          $$\begin{align*}
+            x_1+2x_3-2x_5&=3\\
+            x_2-x_3+x_5&=1\\
+            x_4-2x_5&=2\\
+          \end{align*}$$
+          For a particular solution, let $x_3=x_5=0$.  Then $x_1=3,x_2=1,x_4=2$. So, $s_0=(3,1,0,2,0)$.
+        </li>
+        <li>
+          Find a basis for $N(A)$.<br />
+          $A$ is an $4\times 5$ matrix, so $L_A:\mathbb{F}^5\rightarrow\mathbb{F}^4$ so $\dim(\mathbb{F}^5)=5$.
+          Since $rank(A)=3$, $nullity(A)=5-3=2$.<br />
+          Recall that $N(A)$ is the solution to $Ax=0$, so
+          $$\begin{align*}
+            x_1&=-2x_3+2x_5\\
+            x_2&=x_3-x_5\\
+            x_3&=x_3\\
+            x_4&=2x_5\\
+            x_5&=x_5
+          \end{align*}$$
+          $$\left(\begin{matrix}x_1\\x_2\\x_3\\x_4\\x_5\end{matrix}\right)=x_3\left(\begin{matrix}-2\\1\\1\\0\\0\end{matrix}\right)+x_5\left(\begin{matrix}2\\-1\\0\\2\\1\end{matrix}\right)$$
+          where $\{(-2,1,1,0,0),(2,-1,0,2,1)\}$ are basis vectors for $N(A)$.
+        </li>
+        <li>
+          Form the general solution.
+          $$s=s_0+a_1u_1+a_2u_2=(3,1,0,2,0)+a_1(-2,1,1,0,0)+a_2(2,-1,0,2,1)\quad a_1,a_2\in\mathbb{F}$$ <br />
+          <i>This can be viewed as a translation of a plane in $\mathbb{F}^5$.</i>
+        </li>
+      </ol>
+      Note that if $b=\left(\begin{smallmatrix}17\\6\\8\\15\end{smallmatrix}\right)$ instead, we would get $b^*=\left(\begin{smallmatrix}0\\0\\0\\1\end{smallmatrix}\right)$, so $rank(A^*|b^*)=4\neq rank(A)$, thus the system is inconsistent.
   </body>
 </html>
