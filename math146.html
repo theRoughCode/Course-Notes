@@ -37,15 +37,19 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem 8 (Cancellation Law)</label>:</div>
-      <div id="desc">
-        Suppose $V$ is a vector space and $x,y,z\in V$.  If $x+z=y+z$ then $x=y$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem 8 (Cancellation Law)</label>:</div>
+        <div id="desc">
+          Suppose $V$ is a vector space and $x,y,z\in V$.  If $x+z=y+z$ then $x=y$.
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Corollary 1</label>:</div>
-      <div id="desc">
-        In any vector space, there is only one zero vector, denoted $0$.
+      <div id="Theorem">
+        <div id="title"><label>Corollary 1</label>:</div>
+        <div id="desc">
+          In any vector space, there is only one zero vector, denoted $0$.
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -61,17 +65,19 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Suppose $V$ is a vector space over $\mathbb{F}$, $W\subseteq V$.  Then, $W$ is a subspace of $V$ if and only if:
-        <ol>
-          <li>
-            $W$ is closed under the operations (addition + scalar multiplication) of $V$.
-          </li>
-          <li>
-            $W$ contains the zero vector of $V$.
-          </li>
-        </ol>
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $V$ is a vector space over $\mathbb{F}$, $W\subseteq V$.  Then, $W$ is a subspace of $V$ if and only if:
+          <ol>
+            <li>
+              $W$ is closed under the operations (addition + scalar multiplication) of $V$.
+            </li>
+            <li>
+              $W$ contains the zero vector of $V$.
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -90,17 +96,19 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Let $V$ be a vector space over $\mathbb{F}$, $S\subseteq V$.
-        <ol>
-          <li>
-            $span(S)$ is a subspace of $V$
-          </li>
-          <li>
-            $span(S)$ is the smallest subspace of $V$ containing $S$.
-          </li>
-        </ol>
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Let $V$ be a vector space over $\mathbb{F}$, $S\subseteq V$.
+          <ol>
+            <li>
+              $span(S)$ is a subspace of $V$
+            </li>
+            <li>
+              $span(S)$ is the smallest subspace of $V$ containing $S$.
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -112,14 +120,16 @@
     <div class="def" id="nocolour">
       <div id="title"><label>Definition</label>:</div>
       <div id="desc">
-        A set $S$ is linearly independent if $\forall$ distinct $u_1,\ldots,u_n\in S$, $\forall a_1,\ldots,a_n\in\mathbb{F}$, if $a_1u_1+\ldots+a_nu_n=0$ then $a_1=a_2=\ldots=a_n=0$.
+        A set $S$ is linearly independent if $\forall$ distinct $u_1,\ldots,u_n\in S$, $\forall a_1,\ldots,a_n\in\mathbb{F}$, if $a_1u_1+\ldots+a_nu_n=0$ then $a_1=a_2=\ldots=a_n=0$.<br /><br />
+        <i>Note:</i> $S=\phi$ is linearly independent because a linearly dependent set must be non-empty.  $S=\{0\}$ is linearly dependent because $a\cdot 0=0$ for any scalar $a$.
       </div>
     </div>
-    <i>Note:</i> $S=\phi$ is linearly independent because a linearly dependent set must be non-empty.  $S=\{0\}$ is linearly dependent because $a\cdot 0=0$ for any scalar $a$.
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Suppose $S$ is a linearly independent set in a vector space $V$ and $v\in V-S$.  <br />Then $S\cup\{v\}$ is linearly independent $\leftrightarrow v\not\in span(S)$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $S$ is a linearly independent set in a vector space $V$ and $v\in V-S$.  <br />Then $S\cup\{v\}$ is linearly independent $\leftrightarrow v\not\in span(S)$.
+        </div>
       </div>
     </div>
     <h2>Basis and Dimensions</h2>
@@ -158,39 +168,47 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Basis $\longleftrightarrow$ Minimal spanning set $\longleftrightarrow$ Maximal linear independent set
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Basis $\longleftrightarrow$ Minimal spanning set $\longleftrightarrow$ Maximal linear independent set
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Replacement Lemma</label>:</div>
-      <div id="desc">
-        Suppose $V$ is a vector space and $S,T\subseteq V$, $v\in V$ and
-        <ul>
-          <li>
-            $S$ us linearly independent.
-          </li>
-          <li>
-            $v\not\in span(S)\rightarrow S\cup\{v\}$ is linearly independent
-          </li>
-          <li>
-            $span(S\cup T)=V$
-          </li>
-        </ul>
-        Then $\exists x\in T$ such that $span\bigg((S\cup\{v\})\cup(T-\{x\})\bigg)=V$
+      <div id="Theorem">
+        <div id="title"><label>Replacement Lemma</label>:</div>
+        <div id="desc">
+          Suppose $V$ is a vector space and $S,T\subseteq V$, $v\in V$ and
+          <ul>
+            <li>
+              $S$ us linearly independent.
+            </li>
+            <li>
+              $v\not\in span(S)\rightarrow S\cup\{v\}$ is linearly independent
+            </li>
+            <li>
+              $span(S\cup T)=V$
+            </li>
+          </ul>
+          Then $\exists x\in T$ such that $span\bigg((S\cup\{v\})\cup(T-\{x\})\bigg)=V$
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Corollary</label>:</div>
-      <div id="desc">
-        If $V$ is finitely-generated, then all bases for $V$ are finite and have the same size.  This unique size of the basis of $V$ is known as the <b>dimension</b> of $V$, written as $\dim (V)$.
+      <div id="Theorem">
+        <div id="title"><label>Corollary</label>:</div>
+        <div id="desc">
+          If $V$ is finitely-generated, then all bases for $V$ are finite and have the same size.  This unique size of the basis of $V$ is known as the <b>dimension</b> of $V$, written as $\dim (V)$.
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        If $V$ is finitely-dimensional, then every linearly independent subset can be expanded to a basis for $V$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If $V$ is finitely-dimensional, then every linearly independent subset can be expanded to a basis for $V$.
+        </div>
       </div>
     </div>
     <h1><a name="2"></a><b>2 </b>Functions Between Vector Spaces</h1>
@@ -238,23 +256,27 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Suppose $T: V\rightarrow W$ is linear and $V= span(v_1,\ldots, v_n)$ then $R(T)=span(T(v_1),\ldots,T(v_n))$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $T: V\rightarrow W$ is linear and $V= span(v_1,\ldots, v_n)$ then $R(T)=span(T(v_1),\ldots,T(v_n))$.
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Suppose $T: V\rightarrow W$ is linear.
-        <ul style="list-style:none;">
-          <li>
-            $T$ is <i>surjective</i> $\leftrightarrow R(T)=W$
-          </li>
-          <li>
-            $T$ is <i>injective</i> $\leftrightarrow N(T)=\{0\}$
-          </li>
-        </ul>
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $T: V\rightarrow W$ is linear.
+          <ul style="list-style:none;">
+            <li>
+              $T$ is <i>surjective</i> $\leftrightarrow R(T)=W$
+            </li>
+            <li>
+              $T$ is <i>injective</i> $\leftrightarrow N(T)=\{0\}$
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -272,15 +294,19 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Rank-Nullity Theorem</label>:</div>
-      <div id="desc">
-        Suppose $T: V\rightarrow W$ is linear, then $rank(T)+nullity(T)=\dim(V)$.
+      <div id="Theorem">
+        <div id="title"><label>Rank-Nullity Theorem</label>:</div>
+        <div id="desc">
+          Suppose $T: V\rightarrow W$ is linear, then $rank(T)+nullity(T)=\dim(V)$.
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Corollary</label>:</div>
-      <div id="desc">
-        Suppose $T: V\rightarrow V$ and $\dim V<\infty$.  Then $T$ is injective $\leftrightarrow T$ is surjective.  In other words, $T$ is <i>bijective</i>.
+      <div id="Theorem">
+        <div id="title"><label>Corollary</label>:</div>
+        <div id="desc">
+          Suppose $T: V\rightarrow V$ and $\dim V<\infty$.  Then $T$ is injective $\leftrightarrow T$ is surjective.  In other words, $T$ is <i>bijective</i>.
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -291,9 +317,11 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Suppose $V$ is a finite-dimensional vector space over $\mathbb{F}$ where $\dim(V)=n$ and $\beta=(v_1,\ldots,v_n)$ is an ordered basis. Then $[]_\beta:V\rightarrow\mathbb{F}^n$ is a <u>bijective linear transformation</u> or an <u>isomorphism</u>.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $V$ is a finite-dimensional vector space over $\mathbb{F}$ where $\dim(V)=n$ and $\beta=(v_1,\ldots,v_n)$ is an ordered basis. Then $[\ ]_\beta:V\rightarrow\mathbb{F}^n$ is a <u>bijective linear transformation</u> or an <u>isomorphism</u>.
+        </div>
       </div>
     </div>
     Facts:
@@ -344,16 +372,20 @@
       </li>
     </ol>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Suppose $T:V\rightarrow W$ is linear and $V,W$ is a finite-dimensional vector space over $\mathbb{F}$ and $\beta=(v_1,\ldots,v_n)$, $\gamma=(w_1,\ldots,w_m)$ are ordered bases for $V,W$.  Then, for any $x\in V$,
-        $$[T(x)]_\gamma=[T]_\beta^\gamma\cdot[x]_\beta$$
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Suppose $T:V\rightarrow W$ is linear and $V,W$ is a finite-dimensional vector space over $\mathbb{F}$ and $\beta=(v_1,\ldots,v_n)$, $\gamma=(w_1,\ldots,w_m)$ are ordered bases for $V,W$.  Then, for any $x\in V$,
+          $$[T(x)]_\gamma=[T]_\beta^\gamma\cdot[x]_\beta$$
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        $$[U]_\beta^\gamma\cdot[T]_\alpha^\beta=[U\circ T]_\alpha^\gamma$$
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          $$[U]_\beta^\gamma\cdot[T]_\alpha^\beta=[U\circ T]_\alpha^\gamma$$
+        </div>
       </div>
     </div>
     Notation:
@@ -375,9 +407,11 @@
     $$L_A(e_1)=Ae_1=\left(\begin{smallmatrix}a_{11}\\a_{21}\\\vdots\\a_{m1}\end{smallmatrix}\right)=Col_1(A)$$
     For all $j=1,\ldots, n$, $L_A(e_j)=Col_j(A)$. Since $[x]_{\beta_m}=x$, the $j$th column of $[L_A]_{\beta_n}^{\beta_m}=L_A(e_j)=Col_j(A)$.
     <div class="thm" id="nocolour">
-      <div id="title"><label>Corollary</label>:</div>
-      <div id="desc">
-        $R(L_A)=span(Col_1(A),\ldots,Col_n(A))$ or "range of $L_A=$ column space of $A$"
+      <div id="Theorem">
+        <div id="title"><label>Corollary</label>:</div>
+        <div id="desc">
+          $R(L_A)=span(Col_1(A),\ldots,Col_n(A))$ or "range of $L_A=$ column space of $A$"
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -388,20 +422,24 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Lemma</label>:</div>
-      <div id="desc">
-        Multiplication by invertible matrices does not change rank.
+      <div id="Theorem">
+        <div id="title"><label>Lemma</label>:</div>
+        <div id="desc">
+          Multiplication by invertible matrices does not change rank.
+        </div>
       </div>
     </div>
     In general, $R(g\circ f)=g\cdot R(f)$.  If $Q$ is invertible, $R(L_{AQ})=R(L_A)$, and $A$ and $AQ$ have the same column space.  $rank(A)=rank(AQ)$<br />
     However, left multiplication by an invertible matrix $P$ <u>can</u> change the column space (range of $L_A$) but <u>not</u> dimension.
     <div class="thm" id="nocolour">
-      <div id="title"><label>Lemma</label>:</div>
-      <div id="desc">
-        Isomorphisms preserve dimensions of subspaces.<br />
-        Let $L_P$ be an isomorphism (invertible and bijective).  So,
-        $$\dim(R(L_A))=\dim(L_P(R(L_A)))=\dim(R(L_{PA}))$$
-        $$rank(A)=rank(PA)$$
+      <div id="Theorem">
+        <div id="title"><label>Lemma</label>:</div>
+        <div id="desc">
+          Isomorphisms preserve dimensions of subspaces.<br />
+          Let $L_P$ be an isomorphism (invertible and bijective).  So,
+          $$\dim(R(L_A))=\dim(L_P(R(L_A)))=\dim(R(L_{PA}))$$
+          $$rank(A)=rank(PA)$$
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -412,17 +450,19 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Let $Q=[I_V]_\beta^\gamma$, then
-        <ol>
-          <li>
-            $Q$ is invertible.
-          </li>
-          <li>
-            For any $x\in V$, $Q\cdot [x]_\beta=[I_V]_\beta^\gamma\cdot [x]_\gamma=[I_V(x)]_\gamma=[x]_\gamma$
-          </li>
-        </ol>
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Let $Q=[I_V]_\beta^\gamma$, then
+          <ol>
+            <li>
+              $Q$ is invertible.
+            </li>
+            <li>
+              For any $x\in V$, $Q\cdot [x]_\beta=[I_V]_\beta^\gamma\cdot [x]_\gamma=[I_V(x)]_\gamma=[x]_\gamma$
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
     <div class="def" id="nocolour">
@@ -432,13 +472,15 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        $$\begin{align*}
-          [T]_\beta=Q^{-1}[T]_\gamma Q&=Q^{-1}[T]_\gamma [I_V]_\beta^\gamma\\
-          &=[I_V]_\gamma^\beta[T]_\beta^\gamma\\
-          &=[T]_\beta\quad\square
-        \end{align*}$$
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          $$\begin{align*}
+            [T]_\beta=Q^{-1}[T]_\gamma Q&=Q^{-1}[T]_\gamma [I_V]_\beta^\gamma\\
+            &=[I_V]_\gamma^\beta[T]_\beta^\gamma\\
+            &=[T]_\beta\quad\square
+          \end{align*}$$
+        </div>
       </div>
     </div>
     <h1><a name="3"></a><b>3 </b>Matrices and Systems of Equations</h1>
@@ -516,51 +558,61 @@
       </li>
     </ol>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        Every $A\in M_{m\times n}(\mathbb{F})$, there exists invertible matrices $P\in M_{n\times n}(\mathbb{F}), Q\in M_{m\times m}(\mathbb{F})$ such that $D=PAQ$ where
-        $$D=\left(\begin{matrix}I_r & O\\O & O\end{matrix}\right)$$
-        $rank(D)=\dim($column space of $D)=r=rank(A)$, so $rank(A)=r$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          Every $A\in M_{m\times n}(\mathbb{F})$, there exists invertible matrices $P\in M_{n\times n}(\mathbb{F}), Q\in M_{m\times m}(\mathbb{F})$ such that $D=PAQ$ where
+          $$D=\left(\begin{matrix}I_r & O\\O & O\end{matrix}\right)$$
+          $rank(D)=\dim($column space of $D)=r=rank(A)$, so $rank(A)=r$.
+        </div>
       </div>
     </div>
     <b><u>Transposes</u></b>: If $A$ is $m\times n$ and $B$ is $n\times p$, then $(AB)^t=B^tA^t$.
     <div class="thm" id="nocolour">
-      <div id="title"><label>Corollary</label>:</div>
-      <div id="desc">
-        If $A$ is $n\times n$ and is invertible, then $A^t$ is invertible.
+      <div id="Theorem">
+        <div id="title"><label>Corollary</label>:</div>
+        <div id="desc">
+          If $A$ is $n\times n$ and is invertible, then $A^t$ is invertible.
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        For any $A\in M_{m\times n}(\mathbb{F}), rank(A)=rank(A^t)$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          For any $A\in M_{m\times n}(\mathbb{F}), rank(A)=rank(A^t)$.
+        </div>
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        The row space of $A$ is the subspace of $\mathbb{F}^n$ spanned by the rows of $A=$ column space of $A^t=R(L_{A^t})$.<br />
-        But $\dim(L_{A^t})\overset{def}{=}rank(A^t)=rank(A)$, so $\dim(\text{row space of $A$})=\dim(\text{column space of $A$})$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          The row space of $A$ is the subspace of $\mathbb{F}^n$ spanned by the rows of $A=$ column space of $A^t=R(L_{A^t})$.<br />
+          But $\dim(L_{A^t})\overset{def}{=}rank(A^t)=rank(A)$, so $\dim(\text{row space of $A$})=\dim(\text{column space of $A$})$.
+        </div>
       </div>
     </div>
     <div class="thm" id="impt">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        For any $A\in M_{n\times n}(\mathbb{F})$, then the following are equivalent:
-        <ol>
-          <li>
-            $A$ is invertible.
-          </li>
-          <li>
-            $rank(A)=n$
-          </li>
-          <li>
-            $A$ is a product of elementary matrices.
-          </li>
-          <li>
-            $A$ can be transformed to $I_n$ using elem row ops only.
-          </li>
-        </ol>
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          For any $A\in M_{n\times n}(\mathbb{F})$, then the following are equivalent:
+          <ol>
+            <li>
+              $A$ is invertible.
+            </li>
+            <li>
+              $rank(A)=n$
+            </li>
+            <li>
+              $A$ is a product of elementary matrices.
+            </li>
+            <li>
+              $A$ can be transformed to $I_n$ using elem row ops only.
+            </li>
+          </ol>
+        </div>
       </div>
       <div id="Proof">
         <div id="title"><label>Proof</label>:</div>
@@ -605,9 +657,11 @@
       </div>
     </div>
     <div class="thm" id="nocolour">
-      <div id="title"><label>Theorem</label>:</div>
-      <div id="desc">
-        If $A$ can be transformed to $I_n$ by elem row ops, then the same sequence transforms $I_n$ to $A^{-1}$.  This is useful for calculating $A^{-1}$.
+      <div id="Theorem">
+        <div id="title"><label>Theorem</label>:</div>
+        <div id="desc">
+          If $A$ can be transformed to $I_n$ by elem row ops, then the same sequence transforms $I_n$ to $A^{-1}$.  This is useful for calculating $A^{-1}$.
+        </div>
       </div>
     </div>
     e.g. Let $A=\left(\begin{matrix} 1 & -3 &1\\1 & 0 &2\\ 0 &1 &0\end{matrix}\right)$.  Find $A^{-1}$.<br />
@@ -642,23 +696,27 @@
         </div>
       </div>
       <div class="thm" id="nocolour">
-        <div id="title"><label>Theorem</label>:</div>
-        <div id="desc">
-          Let $Ax=0$ be a homogenous system of $m$ linear equations in $n$ unknowns.
-          <ol>
-            <li>
-              The solution set is $N(A)$.
-            </li>
-            <li>
-              The solution set is a subspace of $\mathbb(F)^n$ of dimension: $n-rank(A)$.
-            </li>
-          </ol>
+        <div id="Theorem">
+          <div id="title"><label>Theorem</label>:</div>
+          <div id="desc">
+            Let $Ax=0$ be a homogenous system of $m$ linear equations in $n$ unknowns.
+            <ol>
+              <li>
+                The solution set is $N(A)$.
+              </li>
+              <li>
+                The solution set is a subspace of $\mathbb(F)^n$ of dimension: $n-rank(A)$.
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
       <div class="thm" id="nocolour">
-        <div id="title"><label>Corollary</label>:</div>
-        <div id="desc">
-          If we have more unknowns than equations such that $n>m$ then $nullity(A)>0$ and the solution set has dimension $\geq 1$ so it has <u>non-zero</u> solutions.
+        <div id="Theorem">
+          <div id="title"><label>Corollary</label>:</div>
+          <div id="desc">
+            If we have more unknowns than equations such that $n>m$ then $nullity(A)>0$ and the solution set has dimension $\geq 1$ so it has <u>non-zero</u> solutions.
+          </div>
         </div>
       </div>
       <div class="def" id="nocolour">
@@ -671,15 +729,19 @@
         </div>
       </div>
       <div class="thm" id="nocolour">
-        <div id="title"><label>Theorem</label>:</div>
-        <div id="desc">
-          Suppose $Ax=b$ is consistent.  Pick one solution $s\in\mathbb{F}^n$.  Then the solution set is $$s+N(A)\quad\text{(translation of $N(A)$ by $s$)}$$
+        <div id="Theorem">
+          <div id="title"><label>Theorem</label>:</div>
+          <div id="desc">
+            Suppose $Ax=b$ is consistent.  Pick one solution $s\in\mathbb{F}^n$.  Then the solution set is $$s+N(A)\quad\text{(translation of $N(A)$ by $s$)}$$
+          </div>
         </div>
       </div>
       <div class="thm" id="nocolour">
-        <div id="title"><label>Theorem</label>:</div>
-        <div id="desc">
-          Suppose $Ax=b$ where $A$ is $m\times n$.  Then, $Ax=b\Leftrightarrow A$ is invertible.  Specifically, $s=A^{-1}b$.
+        <div id="Theorem">
+          <div id="title"><label>Theorem</label>:</div>
+          <div id="desc">
+            Suppose $Ax=b$ where $A$ is $m\times n$.  Then, $Ax=b\Leftrightarrow A$ is invertible.  Specifically, $s=A^{-1}b$.
+          </div>
         </div>
       </div>
       <h2>Solving Systems of Linear Equations</h2>
@@ -827,7 +889,8 @@
           If $A$ has a column of zeros, then $\det(A)=0$
         </li>
         <li>
-          If $A$ has two equal adjacent rows, then $\det(A)=0$
+          If $A$ has two equal adjacent rows, then $\det(A)=0$<br />
+          <u>Corollary 9</u>: If $A$ has two equal rows, then $\det(A)=0$.
         </li>
         <li>
           $\det$ is <i>linear in each row</i>.  If we fix $n,i$, and $u_1,\ldots,u_{i-1},u_{i+1},\ldots,u_n\in\mathbb{F}^n$ then for all $r,s\in\mathbb{F}^n$ and all $a\in\mathbb{F}$,
@@ -837,10 +900,64 @@
         </li>
         <li>
           If $A\xrightarrow{R_i\leftarrow R_i+cR_j}B$ ($A$ is transformed by an elem row op of type 3) and $j=i\pm 1$, then $\det(A)=\det(B)$.  <br />
-          i.e. Type 3 elem row ops preserve determinant when $j=i\pm 1$.
+          i.e. Type 3 elem row ops preserve determinant when $j=i\pm 1$.<br />
+          <u>Corollary 10</u>: <b>[Type 3]</b>  If $A\xrightarrow{R_i\leftarrow R_i+cR_j}B$, for $1\leq i,j\leq n$, then $\det(A)=\det(B)$.
         </li>
         <li>
-          If $A\xrightarrow{R_i\leftrightarrow R_{i+1}}B$, then $\det(B)=-\det(A)$.
+          If $A\xrightarrow{R_i\leftrightarrow R_{i+1}}B$, then $\det(B)=-\det(A)$.<br />
+          <u>Corollary 11</u>: <b>[Type 1]</b> If $A\xrightarrow{R_i\leftrightarrow R_j}B$, then $\det(B)=-\det(A)$.
+        </li>
+        <li>
+          <u>Corollary 12</u>: <b>[Type 2]</b>  If $A\xrightarrow{R_i\leftrightarrow cR_i}B$, then $\det(B)=c\cdot\det(A)$.
+        </li>
+      </ol>
+      We observe that given an elem matrix $E$, if $E$ is of Type:
+      <ol>
+        <li>$\det(E)=-\det(I_n)=-1$</li>
+        <li>$\det(E)=c\cdot\det(I_n)=c,\quad c\neq 0$</li>
+        <li>$\det(E)=\det(I_n)=1$</li>
+      </ol>
+      Note that $\det(E)\neq 0$ and that $\det(E^t)=\det(E)$.<br />
+      <h3>How to Compute Determinants</h3>
+      <ol>
+        <li>
+          We can use elem row ops to reduce $A$ to an upper triangular matrix.<br />
+          e.g. Compute the determinant of $A=\left(\begin{array}{ccc} 0&1&3\\-2&-3&-5\\3&-1&1\end{array}\right)$
+          $$\left(\begin{array}{ccc} 0&1&3\\-2&-3&-5\\3&-1&1\end{array}\right)\xrightarrow{R_1\leftrightarrow R_2}\left(\begin{array}{ccc} -2&-3&-5\\0&1&3\\3&-1&1\end{array}\right)\xrightarrow{R_3\leftrightarrow R_3+\frac{3}{2}R_1}\left(\begin{array}{ccc} -2&-3&-5\\0&1&3\\0&-\frac{11}{2}&-\frac{13}{2}\end{array}\right)\xrightarrow{R_3\leftrightarrow R_3+\frac{11}{2}R_1}\left(\begin{array}{ccc} -2&-3&-5\\0&1&3\\0&0&10\end{array}\right)$$
+          $\det(B)=(-2)\cdot 1\cdot 10=-20$<br />
+          $\det(A)=(-1)\cdot 1\cdot 1\cdot (-20) = 20$
+        </li><br />
+        <li>
+          Transform $A$ by elem matrices to $I_n$.<br /><br />
+          <b><u>Theorem 14</u></b>: If $A,E\in M_{n\times n}(\mathbb{F}), E$ is an elem matrix, then $\det(EA)=\det(E)\det(A)$.<br /><br />
+          <b><u>Theorem 15</u></b>: $A$ is invertible $\Leftrightarrow \det(A)\neq 0$.
+          <div class="thm" id="impt">
+            <div id="Theorem">
+              <div id="title"><label>Theorem 16</label>:</div>
+              <div id="desc">
+                $\det(AB)=\det(A)\det(B)$
+              </div>
+            </div>
+            <div id="Proof">
+              <div id="title"><label>Proof</label>:</div>
+              <div id="pf">
+                <ul style="list-style: none;">
+                  <li>
+                    <u>Case 1</u>: $rank(A)< n$. Then, $rank(AB)\leq(A)< n$ (by A6Q2b). Thus, $\det(A)=\det(AB)=0$
+                  </li>
+                  <li>
+                    <u>Case 2</u>: $rank(A)=n$.  Then $A$ is invertible and can be transformed into a product of elem matrices such that $A=E_k\cdots E_2E_1$.  Then,
+                    $$\begin{align*}
+                      \det(AB)&=\det(E_k\cdots E_2E_1B)\\
+                      &=\det(E_k)\cdots \det(E_2)\det(E_1)\det(B)\\
+                      &=\det(E_k\cdots E_2E_1)\det(B)\quad\text{(special case of Thm 14 where $A=I_n$)}\\
+                      &=\det(A)\det(B)\quad\square
+                    \end{align*}$$
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </li>
       </ol>
   </body>
