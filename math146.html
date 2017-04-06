@@ -775,5 +775,73 @@
         </li>
       </ol>
       Note that if $b=\left(\begin{smallmatrix}17\\6\\8\\15\end{smallmatrix}\right)$ instead, we would get $b^*=\left(\begin{smallmatrix}0\\0\\0\\1\end{smallmatrix}\right)$, so $rank(A^*|b^*)=4\neq rank(A)$, thus the system is inconsistent.
+      <h1><a name="4"></a><b>4 </b>Determinants</h1>
+      <div class="def" id="nocolour">
+        <div id="title"><label>Definition</label>:</div>
+        <div id="desc">
+          $$\det\left(\begin{smallmatrix}a &b\\c &d\end{smallmatrix}\right)=ad-bc$$
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="title"><label>Definition</label>:</div>
+        <div id="desc">
+          Suppose $A$ is an $m\times n$ matrix and $1\leq i\leq m, 1\leq j\leq n$, then $\widetilde{A}_{ij}$ is the $(m-1)(n-1)$ matrix obtained from $A$ by deleting row $i$ and column $j$ from $A$.
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="title"><label>Definition</label>:</div>
+        <div id="desc">
+          The <b>determinant</b> of a matrix is a mathematical object that is useful in the analysis and solution of systems of linear equations, and computing and establishing the properties of eigenvalues.  <br />
+          Determinants are only defined for square matrices.
+          <br /><br />
+          Given $A\in M_{n\times n}(\mathbb{F}))$,
+          <ol type="i">
+            <li>
+              If $n=1$, given $A=(a)$, then $\det(A)=a$.
+            </li>
+            <li>
+              If $n > 1$, $$\det(A)=a_{11}\cdot\det(\widetilde{A}_{11})-a_{21}\cdot\det(\widetilde{A}_{21})+a_{31}\cdot\det(\widetilde{A}_{31})-\ldots+(-1)^{n+1}a_{n1}\cdot\det(\widetilde{A}_{n1})$$
+              This is known as an <b>expansion of minors/cofactors on the first column</b>.<br /><br />
+              $\det(\widetilde{A}_{i1})$ is the $(i,1)$-<b>minor</b> of $A$.<br />
+              $(-1)^{i+1}\det(\widetilde{A}_{i1})$ is the $(i,1)$-<b>cofactor</b> of $A$.<br /><br />
+              <u>General Form</u>:
+              $$\det(A)=\sum_{i=1}^k(-1)^{i+j}a_{ij}\det(\widetilde{A}_{ij})$$
+              which is the expansion on the $j$-th column.
+            </li>
+          </ol>
+        </div>
+      </div>
+      <u>Properties</u>:
+      Let $A\in M_{n\times n}$
+      <ol>
+        <li>
+          If $A$ is upper-triangular, then $\det(A)=a_{11}a_{22}a_{33}\cdots a_{nn}$
+        </li>
+        <li>
+          <u>Corollary</u>: $\det(I_n)=1$
+        </li>
+        <li>
+          If $A$ has a row of zeros, then $\det(A)=0$
+        </li>
+        <li>
+          If $A$ has a column of zeros, then $\det(A)=0$
+        </li>
+        <li>
+          If $A$ has two equal adjacent rows, then $\det(A)=0$
+        </li>
+        <li>
+          $\det$ is <i>linear in each row</i>.  If we fix $n,i$, and $u_1,\ldots,u_{i-1},u_{i+1},\ldots,u_n\in\mathbb{F}^n$ then for all $r,s\in\mathbb{F}^n$ and all $a\in\mathbb{F}$,
+          $$\det\left(\begin{array}{c}-u_1-\\\vdots\\-r+s-\\\vdots\\-u_n-\end{array}\right)=\det\left(\begin{array}{c}-u_1-\\\vdots\\-r-\\\vdots\\-u_n-\end{array}\right)+\det\left(\begin{array}{c}-u_1-\\\vdots\\-s-\\\vdots\\-u_n-\end{array}\right)$$
+          $$\det\left(\begin{array}{c}-u_1-\\\vdots\\-ar-\\\vdots\\-u_n-\end{array}\right)=a\cdot\det\left(\begin{array}{c}-u_1-\\\vdots\\-r-\\\vdots\\-u_n-\end{array}\right)$$
+          <i>Note that this does <b>not</b> mean that $\det(A+B)=\det(A)+\det(B)$ or $\det(aA)=a\det(A)$.</i>
+        </li>
+        <li>
+          If $A\xrightarrow{R_i\leftarrow R_i+cR_j}B$ ($A$ is transformed by an elem row op of type 3) and $j=i\pm 1$, then $\det(A)=\det(B)$.  <br />
+          i.e. Type 3 elem row ops preserve determinant when $j=i\pm 1$.
+        </li>
+        <li>
+          If $A\xrightarrow{R_i\leftrightarrow R_{i+1}}B$, then $\det(B)=-\det(A)$.
+        </li>
+      </ol>
   </body>
 </html>
