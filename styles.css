@@ -4,7 +4,8 @@
 }
 
 body {
-  background-color: #fcf1d6;
+  background-color: #ffffff;
+  padding:5%; /* added padding to make it look nicer */
 }
 
 img {
@@ -19,7 +20,7 @@ h1 {
 
 /* CSS for navbar */
 #contents {
-  background: #ffe5e5;
+  background: #00bfff;
 }
 #nav {
   font-size: 20px;
@@ -82,7 +83,7 @@ h1 {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #fcf1d6;
 }
 
 input:focus + .slider {
