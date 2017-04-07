@@ -7,6 +7,15 @@ body {
   background-color: #fcf1d6;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
+h1 {
+  margin-top: 50px;
+}
+
 /* CSS for navbar */
 #contents {
   background: #ffe5e5;
@@ -92,10 +101,6 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-}
-
-h1 {
-  margin-top: 50px;
 }
 
 #phys {
