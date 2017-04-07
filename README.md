@@ -30,3 +30,6 @@ If you are creating a new html file that requires MathJax, include the following
  If you find a typo or an error, or if you have suggestions on something to add, you can:
  1. Create a new issue and I'll try to fix it ASAP!
  2. Fork the repo as above and submit a pull request with the change!
+
+## Contributors
+@clayton-halim, @anamayagarodia
