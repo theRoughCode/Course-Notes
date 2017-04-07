@@ -32,4 +32,4 @@ If you are creating a new html file that requires MathJax, include the following
  2. Fork the repo as above and submit a pull request with the change!
 
 ## Contributors
-@clayton-halim, @anamayagarodia
+@clayton-halim, @anamayagarodia, @tate1010
