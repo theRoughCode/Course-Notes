@@ -1081,5 +1081,26 @@
           $$\det(A)=\sum_\sigma\text{sign}(\sigma)a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}$$
         </div>
       </div>
+      <h1><a name="5"></a><b>5 </b>Eigenvalues</h1>
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: Given a finite-dimensional vector space over $\mathbb{F}, V,$ a <b>linear operator</b> on $V$ is a linear transformation $T: V\rightarrow V$ denoted
+          $$\mathcal{L}(V)=\{\text{all linear operators on }V\}$$
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: Let $A\in M_{n\times n}(\mathbb{F})$.
+          <ul style="list-style: none;">
+            <li>An <b>eigenvector</b> of $A$ is any nonzero vector $v\in\mathbb{F}^n$ satisfying $Av\in span(v)$.</li>
+            <li>The <b>eigenvalue</b> corresponding to $v$ is the unique scalar $\lambda\in\mathbb{F}$ such that $Av=\lambda v$.</li>
+            <li>
+              Given an eigenvalue $\lambda$ of $T\in\mathcal{L}(v)$, the <b>eigenspace</b> is defined as
+              $$E_\lambda=\{v\in V: T(v)=\lambda b\}=\{\text{all eigenvectors of $T$ corresponding to $\lambda$}\}\cup\{0\}$$
+            </li>
+            <li>The <b>spectrum</b> of $T$ is the set of eigenvalues of $T$.</li>
+          </ul>
+        </div>
+      </div>
   </body>
 </html>
