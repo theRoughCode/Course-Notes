@@ -1019,7 +1019,7 @@
         </div>
       </div>
       <h2>Permutations</h2>
-      A <b>permuation</b> on $\{1,2,3,4\}$ is an <u>ordering</u>.  (e.g. $\{2,4,3,1\}$)<br />
+      A <b>permutation</b> on $\{1,2,3,4\}$ is an <u>ordering</u>.  (e.g. $\{2,4,3,1\}$)<br />
       <u>Alternate View</u>: A bijection $\sigma : \{1,2,3,4\}\rightarrow\{2,4,3,1\}$, with $\sigma(1)=2,\sigma(2)=4,\sigma(3)=3,\sigma(4)=1$.<br />
       Also, $\sigma^{-1}(1)=4,\sigma^{-1}(2)=1,\sigma^{-1}(3)=3,\sigma^{-1}(4)=2$ <br />
       Representing permutations as such has two main advantages:
@@ -1039,13 +1039,46 @@
       </ol>
       <div class="def" id="nocolour">
         <div id="desc">
+          <b><u>Definition</u></b>: A <b>transposition</b> is a permutation switching exactly two values.  Any permutation can be simulated by a sequence of row switches.
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="desc">
           <b><u>Definition</u></b>: Let $\sigma$ be a permutation on $\{1,\ldots,n\}$, $A,B\in M_{n\times n}(\mathbb{F})$, we write $A\xrightarrow{R:\sigma}B$ to denote $B$ obtained from $A$ by moving Row$_i(A)$ to row $\sigma(i)$.  So, Row$_i(B)=$Row$_{\sigma^{-1}(i)}(A)$.
         </div>
       </div>
       <div class="def" id="nocolour">
         <div id="desc">
           <b><u>Definition</u></b>: Let $\sigma$ be a permutation on $\{1,\ldots,n\}$, the <b>permutation matrix</b> associated to $\sigma$ is the matrix $P_\sigma$ obtained from $I_n$ by $\xrightarrow{R:\sigma}$, or, $I_n\xrightarrow{R:\sigma} P_\sigma$.
-          $$\left(\begin{array}{c}-u_1-\\\vdots\\-r+s-\\\vdots\\-u_n-\end{array}\right)$$
+          $$P_\sigma=\left(\begin{array}{c}-e_{\sigma^{-1}(1)}-\\-e_{\sigma^{-1}(2)}-\\-e_{\sigma^{-1}(3)}-\\-e_{\sigma^{-1}(4)}-\end{array}\right)=
+          \left(\begin{array}{c}-e_4-\\-e_1-\\-e_3-\\-e_2-\end{array}\right)=\left(\begin{array}{cccc}0&0&0&1\\1&0&0&0\\0&0&1&0\\0&1&0&0\end{array}\right)
+          =\left(\begin{array}{cccc}|&|&|&|\\e_2&e_4&e_3&e_1\\|&|&|&|\end{array}\right)$$
+          $$P_\sigma=\left(\begin{array}{cccc}|&|&|&|\\e_{\sigma(1)}&e_{\sigma(2)}&e_{\sigma(3)}&e_{\sigma(4)}\\|&|&|&|\end{array}\right)$$
+        </div>
+      </div>
+      In general:
+      <ul>
+        <li>Row$_i(P_\sigma)=e_{\sigma^{-1}(i)}$</li>
+        <li>Col$_i(P_\sigma)=e_{\sigma(i)}$</li>
+        <li>$A\xrightarrow{R:\sigma} P_\sigma A$</li>
+        <li>$P_\sigma e_i=e_{\sigma(i)}$</li>
+        <li>$(P_\sigma P_\tau) e_i=P_\sigma (P_\tau e_i)=P_\sigma e_{\tau(i)}=e_{\sigma(\tau(i))}=e_{(\sigma\tau(i))}=(P_{\sigma\tau}e_i)\Rightarrow P_\sigma P_\tau=P_{\sigma\tau}$</li>
+        <li>$P_{\sigma^{-1}}=P_\sigma^t$</li>
+        <li>$\det(P_\tau)=-1$</li>
+        <li>$\det(P_\sigma)=\det(P_{\tau_k}\cdots P_{\tau_2}P_{\tau_1})=\prod_{i=1}^k\det(P_{\tau_i})=(-1)^k=\pm 1$<br />
+        <ul style="list-style:none;">
+          <li>Even number of transpositions: sign$(\sigma)= \det(P_\sigma)=1 \Longrightarrow \sigma$ is <b>even</b></li>
+          <li>Odd number of transpositions: sign$(\sigma)= \det(P_\sigma)=-1 \Longrightarrow \sigma$ is <b>odd</b></li>
+        </ul>
+        </li>
+        <li>
+          If $\sigma$ is composed of $k$ cycles of lengths $l_1,l_2,\ldots,l_k$, then sign$(\sigma)=(-1)^{(l_1-1)+(l_2-1)+\cdots+(l_k-1)}$
+        </li>
+      </ul>
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: We can define the <b>complete expansion</b> of the determinant using permutations.  Given $A$ is an $n\times n$ matrix,
+          $$\det(A)=\sum_\sigma\text{sign}(\sigma)a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}$$
         </div>
       </div>
   </body>
