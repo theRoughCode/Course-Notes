@@ -114,24 +114,19 @@ input:checked + .slider:before {
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
-  align-items: center;
   padding: 10px;
 }
 
 #impt {
   border: 3px solid blue;
 }
-.def #title {
-  display: inline-block;
-  vertical-align: top;
-}
-.def #title label {
-  font-weight: bold;
-  text-decoration: underline;
-}
 .def #desc {
-  padding-left: 10px;
+  padding-left: 4.8em;
   display: inline-block;
+  text-indent: -4.8em;
+}
+.def #desc li {
+  text-indent: 0em;
 }
 
 /* CSS for Theorems */
