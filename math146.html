@@ -728,7 +728,7 @@
         <div id="Theorem">
           <div id="title"><label>Theorem</label>:</div>
           <div id="desc">
-            Suppose $Ax=b$ where $A$ is $m\times n$.  Then, $Ax=b\Leftrightarrow A$ is invertible.  Specifically, $s=A^{-1}b$.
+            Suppose $Ax=b$ where $A$ is $m\times n$.  Then, $Ax=b$ is a <i>unique</i> solution $\Leftrightarrow A$ is invertible.  Specifically, $s=A^{-1}b$.
           </div>
         </div>
       </div>
@@ -1030,6 +1030,15 @@
           </div>
         </div>
       </div>
+      <h3>Other Properties of Determinants</h3>
+      <ol>
+        <li>
+          If $M=\left(\begin{matrix} A &B\\ O &D \end{matrix}\right)$ where $A$ and $D$ are square, then $\det(M)=\det(A)\det(D)$.
+        </li>
+        <li>
+          If $A$ is invertible and has integer entries, then $A^{-1}$ has integer entries iff $\det(A)=\pm 1$.
+        </li>
+      </ol>
       <h2>Permutations</h2>
       A <b>permutation</b> on $\{1,2,3,4\}$ is an <u>ordering</u>.  (e.g. $\{2,4,3,1\}$)<br />
       <u>Alternate View</u>: A bijection $\sigma : \{1,2,3,4\}\rightarrow\{2,4,3,1\}$, with $\sigma(1)=2,\sigma(2)=4,\sigma(3)=3,\sigma(4)=1$.<br />
@@ -1160,6 +1169,7 @@
                 The coefficient of $t^{n-1}$ in $p_A(t)$ is $(-1)^{n-1}tr(A)$.
               </li>
             </ol>
+            <u>Note</u>: The constant coefficient of $p_A(t)$ is $p_A(0)=\det(A-0I_n)=\det(A)$
           </div>
         </div>
       </div>
@@ -1278,6 +1288,19 @@
           If $\lambda < 0$, then $T$ reverses the direction of $w$ and multiplies it by a factor of $\lambda$.
         </li>
       </ul>
+      <h3>Other facts about determinants</h3>
+      Given $A\in M_{n\times n}, \lambda_1,\ldots,\lambda_k$ are its distinct eigenvalues and $m_1,\ldots,m_k$ are their multiplicities,
+      <ol>
+        <li>
+          $\det(A) = \lambda_1^{m_1}\lambda_2^{m_2}\cdots\lambda_k^{m_k}$
+        </li>
+        <li>
+          $tr(A)=m_1\lambda_1+m_2\lambda_2+\ldots+m_k\lambda_k$
+        </li>
+        <li>
+          If $A$ is invertible and $\lambda$ is an eigenvalue of $A$, then $\frac{1}{\lambda}$ is an eigenvalue of $A^{-1}$.
+        </li>
+      </ol>
       <h2>Diagonalizability</h2>
       <div class="def" id="nocolour">
         <div id="desc">
@@ -1327,7 +1350,11 @@
       <ol>
         <li>Find the characteristic polynomial of $p_A(t)$.</li>
         <li>Solve for its eigenvalues.</li>
-        <li>Determine if it is diagonalizable ($p_A(t)$ splits and $\dim(E_i)=m_i$)</li>
+        <li>Determine if it is diagonalizable.
+          <ul>
+            <li>$p_A(t)$ splits.</li>
+            <li>$\dim(E_i)=nullity(A-\lambda_iI_n)=m_i$</li>
+          </ul>
         <li>If diagonalizable, find the basis vectors for each $E_i$.</li>
         <li>Form the basis $\beta$ for $M_{n\times n}$ with the above basis vectors.</li>
         <li>Compute $D=[L_A]_\beta$.</li>
