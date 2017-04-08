@@ -1322,6 +1322,25 @@
       \left(\begin{matrix}1&0&0\\0&1&0\\0&0&1\end{matrix}\middle\vert\begin{array}{ccc} -1&1&-1\\-\frac{1}{2}&0&\frac{1}{2}\\\frac{1}{2}&0&\frac{1}{2}\end{array}\right)=(I_3|Q^{-1})$$
       Thus,
       $$A^k=QD^kQ^{-1}=\left(\begin{matrix}0&-1&1\\1&0&2\\0&1&1\end{matrix}\right)\left(\begin{matrix}3^k&0&0\\0&3^k&0\\0&0&5^k\end{matrix}\right)\left(\begin{matrix} -1&1&-1\\-\frac{1}{2}&0&\frac{1}{2}\\\frac{1}{2}&0&\frac{1}{2}\end{matrix}\right)=\left(\begin{matrix} \frac{1}{2}(3^k+5^k)&0&\frac{1}{2}(5^k-3^k)\\5^k-3^k&3^k&5^k-3^k\\\frac{1}{2}(5^k-3^k)&0&\frac{1}{2}(3^k+5^k)\end{matrix}\right)$$
-      <a href="#top">Back to Top</a>
+      <h3>Steps to Diagonalizing a Matrix</h3>
+      Given a matrix $A\in M_{n\times n}(\mathbb{F})$,
+      <ol>
+        <li>Find the characteristic polynomial of $p_A(t)$.</li>
+        <li>Solve for its eigenvalues.</li>
+        <li>Determine if it is diagonalizable ($p_A(t)$ splits and $\dim(E_i)=m_i$)</li>
+        <li>If diagonalizable, find the basis vectors for each $E_i$.</li>
+        <li>Form the basis $\beta$ for $M_{n\times n}$ with the above basis vectors.</li>
+        <li>Compute $D=[L_A]_\beta$.</li>
+        <li><b>Additionally</b>, if you wish to find $A^k$, compute $Q=\left(\begin{matrix}|&|& &|\\v_1&v_2&\cdots&v_n\\|&|& &|\end{matrix}\right)$.</li>
+        <li>Compute $Q^{-1}$ by forming the augmented matrix $(Q|I_n)$ and transforming via row ops to $(I_n|Q^{-1})$.</li>
+        <li>$A^k=QD^kQ^{-1}$</li>
+      </ol>
+      <div style="display: flex;">
+        <a href="#top">Back to Top</a>
+        <div style="position: absolute; right: 0px;">
+          <a target="_blank"
+       href="./resources/A Little Beyond - Linear Algebra.pdf">Extra Problems</a> (Credits to Akshay Tiwary for sharing this!)
+        </div>
+      </div>
   </body>
 </html>
