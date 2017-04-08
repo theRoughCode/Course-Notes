@@ -388,7 +388,8 @@
     </div>
     Let $\beta_n$ be the standard ordered basis for $\mathbb{F}^n$, and let $\beta_m$ be the standard ordered basis for $\mathbb{F}^m$.  Note that $\forall x\in\mathbb{F}^m$, $[x]_{\beta_m}=x$.  To find $[L_A]_{\beta_n}^{\beta_m}$, we must find $L_A(e_1), \ldots,L_A(e_n)$.
     $$L_A(e_1)=Ae_1=\left(\begin{smallmatrix}a_{11}\\a_{21}\\\vdots\\a_{m1}\end{smallmatrix}\right)=Col_1(A)$$
-    For all $j=1,\ldots, n$, $L_A(e_j)=Col_j(A)$. Since $[x]_{\beta_m}=x$, the $j$th column of $[L_A]_{\beta_n}^{\beta_m}=L_A(e_j)=Col_j(A)$.
+    For all $j=1,\ldots, n$, $L_A(e_j)=Col_j(A)$. Since $[x]_{\beta_m}=x$, the $j$th column of $[L_A]_{\beta_n}^{\beta_m}=L_A(e_j)=Col_j(A)$.<br />
+    <i>Note that $[L_A]_\sigma^\sigma=L_A$, where $\sigma$ is the standard ordered basis.</i>
     <div class="thm" id="nocolour">
       <div id="Theorem">
         <div id="title"><label>Corollary</label>:</div>
@@ -1102,5 +1103,213 @@
           </ul>
         </div>
       </div>
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Theorem 2</label>:</div>
+          <div id="desc">
+            Let $A\in M_{n\times n}(\mathbb{F})$ and $\lambda\in\mathbb{F}$, then $\lambda$ is an eigenvalue of $A\Leftrightarrow\det(A-\lambda I_n)=0$.
+          </div>
+        </div>
+        <div id="Proof">
+          <div id="title"><label>Proof</label>:</div>
+          <div id="pf">
+            Suppose $A\in M_{n\times n}(\mathbb{F})$ and $\lambda\in\mathbb{F}$, then
+            $$\begin{align*}
+              \lambda\text{ is an eigenvalue of } A&\Longleftrightarrow\exists v\in\mathbb{F}^n, v\neq 0\text{, such that }Av=\lambda v\\
+              &=Av-\lambda v=0\\
+              &=(A-\lambda I_n)v=0\\
+              &=N(A-\lambda I_n)\neq\{0\}\\
+              &=nullity(A-\lambda I_n)>0\\
+              &=rank(A-\lambda I_n)< n\\
+              &=\det(A-\lambda I_n)=0
+            \end{align*}$$
+          </div>
+        </div>
+      </div>
+      If $\lambda$ is an eigenvalue of $A$, then $E_\lambda=N(A-\lambda I_n)$, and $\dim(E_\lambda)=nullity(A-\lambda I_n)>0$.
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: [Definition using matrices] The <b>characteristic polynomial</b> of $A$ is the expression $p_A(t)=\det(A-tI_n))$.<br />
+          The eigenvalues of $A$ are the roots of $p_A(t)=0$.
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Theorem 3</label>:</div>
+          <div id="desc">
+            Let $A\in M_{n\times n}(\mathbb{F})$.
+            <ol>
+              <li>
+                $p_A(t)$ is a polynomial in $\mathbb{F}[n]$ of degree $n$.
+              </li>
+              <li>
+                The leading coefficient of $p_A(t)$ is $(-1)^n$.
+              </li>
+              <li>
+                The coefficient of $t^{n-1}$ in $p_A(t)$ is $(-1)^{n-1}tr(A)$.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Corollary</label>:</div>
+          <div id="desc">
+            If $A\in M_{n\times n}(\mathbb{F})$, then $A$ has at most $n$ eigenvalues.
+          </div>
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: Let $A,B\in M_{n\times n}*\mathbb{F}).  $B$ is <b>similar to</b> $A$ (over $\mathbb{F}$) if there exists an invertible $Q\in M_{n\times n}(\mathbb{F})$ such that $B=Q^{-1}AQ.$ &nbsp&nbsp Moreover, $p_B(t)=p_A(t)$.
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Lemma</label>:</div>
+          <div id="desc">
+            Suppose $\dim(V)=n$ and $T\in\mathcal{L}(V)$.  Let $\beta$ and $\gamma$ be two ordered bases for $V$ and let $A=[T]_\beta$ and $B=[T]_\gamma$.  Then $p_A(t)=p_B(t)$.
+          </div>
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: [Definition using linear operators] Let $T\in\mathcal{L}(V)$ where $V$ is finite-dimensional.  The <b>characteristic polynomial</b> of $T$ is the characteristic polynomial of $[T]_\beta$ (definition for matrix) for any ordered basis $\beta$ for $V$, and is denoted by $p_T(t)$.
+        </div>
+      </div>
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: A polynomial $f(t)\in\mathbb{F}[t]$ <b>splits over</b> $\mathbb{F}$ if $\exists\  e,a_1,\ldots,a_n\in\mathbb{F}$ such that $f(t)=c(t-a_1)(t-a_2)\cdots(t-a_n)$.<br />
+          If $\lambda$ is an eigenvalue of $T$, the <b>multiplicity</b> of $\lambda$ is the maximum value $k$ such that $(t-\lambda)^k$ is a factor of $p_T(t)$.
+        </div>
+      </div>
+      <div class="thm" id="impt">
+        <div id="Theorem">
+          <div id="title"><label>Theorem 7</label>:</div>
+          <div id="desc">
+            Suppose $V$ is finite-dimensional, $T\in\mathcal{L}(V)$, $\lambda$ is an eigenvalue of $T$ with multiplicity $m$, then $\dim(E_\lambda)\leq m$.
+          </div>
+        </div>
+        <div id="Proof">
+          <div id="title"><label>Proof</label>:</div>
+          <div id="pf">
+            Let $d=\dim(E_\lambda)$ and let $n=\dim(V)$.  We pick an ordered basis $\alpha=(v_1,\ldots,v_d)$ for $E_\lambda$.  We then extend $\alpha$ to an ordered basis $\beta=(v_1,\ldots,v_d,v_{d+1},\ldots,v_n)$ for $V$.  We let $A=[T]_\beta$ so $p_T(t)=p_A(t)$.  Then, to get $[T]_\beta$, we apply $T$ to each $v_i\in\beta$.  Note that when $i=1,\ldots,d$, since $v_i\in E_\lambda$,
+            $$T(v_i)=\lambda v_i=0v_1+\ldots+0v_{i-1}+\lambda v_i+0v_{i+1}+\ldots+0v_d+\ldots 0v_n$$
+            For $i>d$, we cannot apply the same logic since $v_i\not\in E_\lambda$, so Col$_i(A)$ for $i>d$ has arbitrary values.
+            Thus, we have
+            $$A=[T]_\beta=\left(\begin{matrix} \lambda I_d &B\\ O &C\end{matrix}\right)$$
+            $$\begin{align*}
+              p_T(t)=\det(A-tI_n)&=\det\left(\begin{matrix} (\lambda-t) I_d &B\\ O &(C-tI_{n-d})\end{matrix}\right)\\
+              &=\det((\lambda-t) I_d)\det(C-tI_{n-d})\quad\quad *\det\left(\begin{smallmatrix} A &B\\ O &D\end{smallmatrix}\right)=\det(A)\det(D)\\
+              &=(\lambda-t)^d\det(I_n)\det(C-tI_{n-d})\quad\quad *\det(cA)=c^n\det(A), A\in M_{n\times n}\\
+              &=(\lambda-t)^d\cdot p_C(t)
+            \end{align*}$$
+            This proves that $(t-\lambda)^d$ divides $p_T(t)$.  Since $m$ is by definition the largest value such that $(t-\lambda)^m$ divides $p_T(t)$, we have proved that $d\leq m$ or $\dim(E_\lambda)\leq m$.
+          </div>
+        </div>
+      </div>
+      e.g. $A=\left(\begin{matrix}4&0&1\\2&3&2\\1&0&4\end{matrix}\right)\in M_{3\times 3}(\mathbb{R})$
+      $$\begin{align*}
+        p_A(t)=\det(A-tI_3)&=\det\left(\begin{matrix}4-t&0&1\\2&3-t&2\\1&0&4-t\end{matrix}\right)\\
+        &=(-1)^{2+2}(3-t)\det\left(\begin{matrix}4-t&1\\1&4-t\end{matrix}\right)\quad\text{*Expanding by minors on the second column}\\
+        &=(3-t)((4-t)^2-1)=(3-t)^2(5-t)
+      \end{align*}$$
+      Thus, $p_A(t)$ splits over $\mathbb{R}$ and the eigenvalues of $A$ are $3$ and $5$ with multiplicities $2$ and $1$, respectively.  We can see that $\dim(E_5)=1$ and $1\leq\dim(E_3)\leq 2$.
+      $$A-3I_3=\left(\begin{matrix}1&0&1\\2&0&2\\1&0&1\end{matrix}\right)$$
+      So $rank(A-3I_3)=1$ and $nullity(A-3I_3)=2=\dim(E_3)$.  To find a basis for $E_3$, we solve the system $(A-3I_3)x=0$.  We begin by forming the augmented matrix.
+      $$\left(\begin{array}{ccc} 1&0&1\\2&0&2\\ 1&0&1 \end{array}\middle\vert\begin{array}{c} 0\\0\\0\end{array}\right)\rightarrow
+      \left(\begin{array}{ccc} 1&0&1\\0&0&0\\ 0&0&0 \end{array}\middle\vert\begin{array}{c} 0\\0\\0\end{array}\right)$$
+      $$x_1+x_3=0\Rightarrow x_1=-x_3\quad\quad x_2=x_2\quad\quad x_3=x_3$$
+      $$\left(\begin{smallmatrix}x_1\\x_2\\x_3\end{smallmatrix}\right)=x_2\left(\begin{smallmatrix}0\\1\\0\end{smallmatrix}\right)+x_3\left(\begin{smallmatrix}-1\\0\\1\end{smallmatrix}\right)$$
+      Thus, $\{(0,1,0), (-1,0,1)\}$ is a basis for $N(A-3I_3)=E_3$.<br />
+      Similarly, to find a basis for $E_5$, we solve for $(A-5I_3)x=0$.
+      $$\left(\begin{array}{ccc} -1&0&1\\2&-2&2\\ 1&0&-1 \end{array}\middle\vert\begin{array}{c} 0\\0\\0\end{array}\right)\rightarrow
+      \left(\begin{array}{ccc} 1&0&-1\\0&1&-2\\ 0&0&0 \end{array}\middle\vert\begin{array}{c} 0\\0\\0\end{array}\right)
+      $$
+      $$x_1-x_3=0\Rightarrow x_1=x_3\quad\quad x_2-2x_3=0\Rightarrow x_2=2x_3\quad\quad x_3=x_3$$
+      $$\left(\begin{smallmatrix}x_1\\x_2\\x_3\end{smallmatrix}\right)=x_3\left(\begin{smallmatrix}1\\2\\1\end{smallmatrix}\right)$$
+      So, $\{(1,2,1)\}$ is a basis for $E_5$.
+      Observe that since $(1,2,1)\not\in\{(0,1,0), (-1,0,1)\}$, $\{(0,1,0), (-1,0,1), (1,2,1)\}$ is a basis for $\mathbb{R}^3$.
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Theorem 5</label>:</div>
+          <div id="desc">
+            Suppose $V$ is finite-dimensional and $T\in\mathcal{L}(V)$ and $\lambda_1,\ldots,\lambda_k$ are distinct eigenvectors of $T$. If $x_1,\ldots,x_k$ are eigenvectors corresponding to $\lambda_1,\ldots,\lambda_k$, then $\{x_1,\ldots,x_k\}$ is linearly independent.
+          </div>
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Theorem 8</label>:</div>
+          <div id="desc">
+            Suppose $V$ is finite-dimensional and $T\in\mathcal{L}(V)$ and $\lambda_1,\ldots,\lambda_k$ are distinct eigenvectors of $T$. If for each $i=1,\ldots,k$ and $\beta_i$ is an ordered basis for $E_\lambda$, then $\beta=\beta_1\cup\beta_2\cup\cdots\cup\beta_k$ is linearly independent.
+          </div>
+        </div>
+      </div>
+      <h3>Geometric Interpretation</h3>
+      Let's describe the geometric interpretation  of how a linear operator $T$ acts on an eigenvector in a vector space $V$ over $\mathbb{R}$.  Let $v$ be an eigenvector of $T$ and $\lambda$ be the corresponding eigenvalue.  Let $W=span(\{v\})$ be the line in $V$ that passes through $0$ and $v$.  For any $w\in W$, $w=cv$ and so, $T(w)=T(cv)=cT(v)=c\lambda v=\lambda w$.<br />
+      $T$ acts on the vectors in $W$ by multiplying them by $\lambda$.
+      <ul>
+        <li>
+          If $\lambda > 1$, then $T$ moves $w$ further from $0$ by a factor of $\lambda$.
+        </li>
+        <li>
+          If $\lambda = 1$, then $T$ acts as the identity operator.
+        </li>
+        <li>
+          If $0 < \lambda < 1$, then $T$ moves $w$ closer to $0$ by a factor of $\lambda$.
+        </li>
+        <li>
+          If $\lambda = 0$, then $T$ acts as the zero transformation.
+        </li>
+        <li>
+          If $\lambda < 0$, then $T$ reverses the direction of $w$ and multiplies it by a factor of $\lambda$.
+        </li>
+      </ul>
+      <h2>Diagonalizability</h2>
+      <div class="def" id="nocolour">
+        <div id="desc">
+          <b><u>Definition</u></b>: Suppose $V$ is finite-dimensional and $T\in\mathcal{L}(V)$. $T$ is <b>diagonalizable</b> if there is an ordered basis $\beta$ in $V$ such that $[T]_\beta$ is a diagonal matrix. A square matrix $A$ is diagonalizable if $L_A$ is diagonalizable.
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Theorem 1</label>:</div>
+          <div id="desc">
+            If $T\in\mathcal{L}(V)$, $T$ is diagonalizable $\Longleftrightarrow\ \exists\ $ basis for $V$ consisting of eigenctors for $T$.
+          </div>
+        </div>
+      </div>
+      <div class="thm" id="nocolour">
+        <div id="Theorem">
+          <div id="title"><label>Theorem 9</label>:</div>
+          <div id="desc">
+            Let $V$ be finite-dimensional with $\dim(V)=n$ and $T\in\mathcal{L}(V)$.  Let $\lambda_1,\ldots,\lambda_k$ be the distinct eigenvalues of $T$ and let $m_1,\ldots,m_k$ be their multiplicities. Then, $T$ is diagonalizable iff
+            <ol type="a">
+              <li>$p_T(t)$ splits over $\mathbb{F}$.</li>
+              <li>For each $i=1,\ldots,k$, $\dim(E_{\lambda_i})=m_i$</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      e.g. Determine if $A=\left(\begin{matrix}4&0&1\\2&3&2\\1&0&4\end{matrix}\right)$ is diagonalizable.<br /><br />
+      From above, we know that $p_A(t)=-(t-3)^2(t-5)$ splits, and $\lambda_1=3,\lambda_2=5$ are eigenvalues with $m_1=2, m_2=1$.  We have shown above that $\dim(E_3)=2$ and $\dim(E_5)=1$ which equal their multiplicities.  Thus, by Theorem 9, $A$ is diagonalizable.  <br />
+      Moreover, if we let $\beta=\{(0,1,0), (-1,0,1), (1,2,1)\}$ the eigenvectors of $A$, then $[L_A]_\beta=D=\left(\begin{matrix}3&0&0\\0&3&0\\0&0&5\end{matrix}\right)$.<br />
+      <u>Alternatively</u>, we can use an invertible $Q$ such that $Q^{-1}AQ=D=\left(\begin{matrix}3&0&0\\0&3&0\\0&0&5\end{matrix}\right)$, where $$Q=\left(\begin{matrix}|&|&|\\v_1&v_2&v_3\\|&|&|\end{matrix}\right)=\left(\begin{matrix}0&-1&1\\1&0&2\\0&1&1\end{matrix}\right)$$
+      Let $\sigma=(e_1,e_2,e_3)$, the standard ordered basis for $\mathbb{R}^3$.  We observe that $Q=[I_{\mathbb{R}^3}]_\beta^\sigma$ and $Q^{-1}=[I_{\mathbb{R}^3}]_\sigma^\beta$. So,
+      $$Q^{-1}AQ=[I_{\mathbb{R}^3}]_\sigma^\beta[L_A]_\sigma^\sigma[I_{\mathbb{R}^3}]_\beta^\sigma=[I_{\mathbb{R}^3}\circ  L_A\circ I_{\mathbb{R}^3}]_\beta^\beta=[L_A]_\beta=D$$
+      <h3>Computational Powers of Diagonal Matrices</h3>
+      If $A$ is diagonalizable, it is easy to compute $A^k$.<br /><br />
+      Suppose $D$ is a diagonal matrix with diagonal entries of $\lambda_i$, then $D^k$ is a diagonal matrix with diagonal entries of $\lambda_i^k$.<br />
+      Then, there exists an invertible $Q$ such that $Q^{-1}AQ=D$.
+      $$A=QDQ^{-1}\Rightarrow A^k=(QDQ^{-1})^k=QDQ^{-1}QDQ^{-1}\cdot QDQ^{-1}=QD\cdot DQ^{-1}=QD^kQ^{-1}$$
+      e.g. Given  $A=\left(\begin{matrix}4&0&1\\2&3&2\\1&0&4\end{matrix}\right)$, find $A^k$.<br /><br />
+      We know that $A$ is diagonalizable from before and if $Q=\left(\begin{matrix}0&-1&1\\1&0&2\\0&1&1\end{matrix}\right)$, then $D=Q^{-1}AQ=\left(\begin{matrix}3&0&0\\0&3&0\\0&0&5\end{matrix}\right)$.
+      To compute $A^k$, we need to know $Q^{-1}$.  We form the augmented matrix $(Q|I_3)$.
+      $$(Q|I_3)=\left(\begin{matrix}0&-1&1\\1&0&2\\0&1&1\end{matrix}\middle\vert\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right)\rightarrow
+      \left(\begin{matrix}1&0&0\\0&1&0\\0&0&1\end{matrix}\middle\vert\begin{array}{ccc} -1&1&-1\\-\frac{1}{2}&0&\frac{1}{2}\\\frac{1}{2}&0&\frac{1}{2}\end{array}\right)=(I_3|Q^{-1})$$
+      Thus,
+      $$A^k=QD^kQ^{-1}=\left(\begin{matrix}0&-1&1\\1&0&2\\0&1&1\end{matrix}\right)\left(\begin{matrix}3^k&0&0\\0&3^k&0\\0&0&5^k\end{matrix}\right)\left(\begin{matrix} -1&1&-1\\-\frac{1}{2}&0&\frac{1}{2}\\\frac{1}{2}&0&\frac{1}{2}\end{matrix}\right)=\left(\begin{matrix} \frac{1}{2}(3^k+5^k)&0&\frac{1}{2}(5^k-3^k)\\5^k-3^k&3^k&5^k-3^k\\\frac{1}{2}(5^k-3^k)&0&\frac{1}{2}(3^k+5^k)\end{matrix}\right)$$
   </body>
 </html>

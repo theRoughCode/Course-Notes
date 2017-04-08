@@ -160,6 +160,7 @@ input:checked + .slider:before {
 }
 .thm #pf {
   padding-left: 10px;
+  display: inline-block;
 }
 
 #nocolour {
