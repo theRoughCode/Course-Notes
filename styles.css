@@ -166,3 +166,17 @@ input:checked + .slider:before {
 #nocolour {
   border: none;
 }
+
+.formula {
+  padding: 1em;
+  display: inline-block;
+}
+
+.formula table {
+  border: 2px solid black;
+  width: auto;
+}
+
+.formula td {
+  padding: 1em;
+}
