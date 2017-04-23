@@ -180,3 +180,11 @@ input:checked + .slider:before {
 .formula td {
   padding: 1em;
 }
+
+.concept {
+  border: 3px solid blue;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  padding: 10px;
+}

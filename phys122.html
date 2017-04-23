@@ -34,11 +34,73 @@
           <td>$\omega=\frac{\Delta\theta}{\Delta t}=\frac{2\pi}{T}=2\pi f$</td>
         </tr>
       </table>
+      $x=x_0\cos(\omega t)$ describes the object that is at $x=x_0$ at $t=0$.
       <div class="def">
         <div id="desc">
-          $x=x_0\cos(\omega t)$ describes the object that is at $x=x_0$ at $t=0$.
+          <b><u>General Equation</u></b>: $x=x_0\cos(\omega t + \phi)$
         </div>
       </div>
+      $$\begin{align*}
+        \frac{dx}{dt}&=\frac{d}{dt} x_0\cos(\omega t + \phi)\\
+        v&= -\omega x_0\sin(\omega t + \phi)\\
+        a&= -\omega^2 x_0\cos(\omega t + \phi)=-\omega^2 x
+      \end{align*}$$
+      <div class="concept">
+        <div id="desc">
+          A <b><u>simple harmonic oscillator</u></b> is:
+          <ul>
+            <li>
+              A projection of an object moving in a circle.
+            </li>
+            <li>
+              An object whose acceleration is proportional to its position.
+            </li>
+          </ul>
+        </div>
+      </div>
+      e.g. For an object on a spring undergoing simple harmonic motion,
+      $$\begin{align*}
+        F&=-kx\\
+        ma&= -kx\\
+        a&= -\frac{k}{m}x\\
+        \therefore \frac{k}{m}&=\omega^2\\
+        \omega &= \sqrt{\frac{k}{m}}
+      \end{align*}$$
+
+      <h2>Electric Potentials</h2>
+      <div class="def">
+        <div id="desc">
+          $$\Delta V=\frac{\Delta U}{q}=-\int_a^b\vec{E}\cdot d\vec{r}$$
+          $$V_{ab}=V_a-V_b=-\int_b^a\vec{E}\cdot d\vec{r}=\int_a^b\vec{E}\cdot d\vec{r}$$
+        </div>
+      </div>
+      <ul>
+        <li>
+          $\Delta V_{\text{point}}=\frac{Q}{4\pi\epsilon_0 r}$
+        </li>
+        <li>
+          $\Delta V_{\text{line}}=\frac{\lambda}{2\pi\epsilon_0}\ln(\frac{r_0}{r})$, where $r_0$ is the reference point where $V=0$ (normally radius of outer shell)
+        </li>
+        <li>
+          $\Delta V_{\text{place}}=-\frac{\sigma}{2\epsilon_0}\Delta r$
+        </li>
+      </ul>
+      <div class="def">
+        <div id="desc">
+          To find the electric field given Electric Potential at a certain radial distance,
+          $$E_r=-\frac{\delta V}{\delta r}$$
+        </div>
+      </div>
+
+      <h2>Calculating Capacitance of Spheres/Cylinders</h2>
+      <ol>
+        <li>
+          Find Potential Difference between outer and inner shell.  Treat cylinders as lines of charge and spheres as a point charge.
+        </li>
+        <li>
+          Use $C=\frac{Q}{\Delta V}$ ($Q$ should cancel out)
+        </li>
+      </ol>
     </div>
   </body>
 </html>
