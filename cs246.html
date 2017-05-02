@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 Notes</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a name="top"></a>
+    <a href="./index.html">Back to Courses</a>
+    <h1 id="title_text">CS 246 Notes</h1><br />
+    <div id="contents">
+      <h1>Table of Contents</h1>
+      <ol id="nav">
+        <li><a href="#1">The Shell</a></li>
+        <li><a href="#2">C++s</a></li>
+        <li><a href="#3">Unix tools</a></li>
+        <li><a href="#4">Software Engineering</a></li>
+      </ol>
+    </div>
+    <h1><a name="1"></a><b>1 </b>The Shell</h1>
+    <ul>
+      <li>The <b>shell</b> is a program that reads commands and interprets them.</li>
+      <li>Shell commands interact with the file system.</li>
+    </ul>
+    <h2>Shell Commands</h2>
+    <b>cat</b>: Prints out the content of a file or combine multiple files to standard output
+    <ul>
+      <li><code>cat file1.txt</code> prints out file1.txt</li>
+      <li><code>cat file1.txt file2.txt</code> combines both files</li>
+      <li><code>cat</code>/<code>cat -</code> takes in keyboard input and outputs it (<samp>ctrl-D</samp> ends)</li>
+      <li><code>cat file1.txt - file2.txt</code> takes in <samp>file1.txt</samp>, then keyboard input (end with <samp>ctrl-D</samp>), then <samp>file2.txt</samp></li>
+      <li><code>man cat</code> provides info about cat command</li>
+    </ul>
+    <i style="margin-left: 20px;">Ctrl-C vs. Ctrl-D</i>
+    <ul style="list-style:none; margin-top: 0;">
+      <li><samp>Ctrl-C</samp>: kills a process and stops what it is doing by sending an interrupt signal</li>
+      <li><samp>Ctrl-D</samp>: EOF signal</li>
+    </ul>
+
+    <b>head</b>: Displays first few (10) lines of a file<br />
+    <b>tail</b>: Displays last few (10) lines of a file<br />
+    <code>-n[# of lines]</code>/<code>-[# of lines]</code>: specify number of lines
+    <br /><br />
+    <b>ls</b>: lists the contents of the current directory<br />
+    <b>ls a</b>: lists all contents including hidden files (files that start with '.')<br /><br />
+
+    <b>pwd</b>: shows the current working directory<br /><br />
+    <b>cd</b>: change directory
+    <ul>
+      <li><code>cd</code>/<code>cd ~</code> home directory</li>
+      <li><code>cd [directory]</code> specified directory</li>
+      <li><code>cd ..</code> parent directory</li>
+      <li><code>cd /</code> root directory</li>
+      <li><code>cd -</code> previous directory</li>
+      <li>Absolute directories begin with <code>/</code></li>
+      <li>Relative directories begin with
+        <ul>
+          <li><code>./</code> (current)</li>
+          <li><code>../</code> (parent)</li>
+          <li><code>~/</code> (home)</li>
+        </ul>
+    </ul>
+
+    <h2>Standard File Streams</h2>
+    There are 3 standard file streams:
+    <ol>
+      <li><code>stdin</code> with descriptor value of 0 (e.g. keyboard)</li>
+      <li><code>stdout</code> with descriptor value of 1 (e.g. terminal)</li>
+      <li><code>stderr</code> with descriptor value of 2 (e.g. log file)</li>
+    </ol>
+    <b>Input Redirection</b>: <code>stdin</code> is often supplied by directing an input to come from a file or previous output command using Pipe.
+    <ul>
+      <li><code>doCommand < input_file</code></li>
+      <li>e.g. <code>cat < file1.txt</code> redirects keyboard input from file1.txt.  <i>Note</i> that this is different from <code>cat file1.txt</code> which opens the file and prints out content</li>
+    </ul>
+    <b>Output Redirection</b>: <code>stdout</code> is often redirected to a file, <code>stderr</code> is usually printed to terminal but sometimes redirected to a log file
+    <ul>
+      <li><code>doCommand > output_file</code> for stdout</li>
+      <li><code>doCommand 2> error_file</code> for stderr</li>
+      <li>e.g. <code>cat > output_file.txt</code> saves content of keyboard input to file</li>
+      <li>e.g. <code>cat file1.txt file2.txt</code> combines file1 and file2 to new file</li>
+    </ul>
+    <h3>Wildcards</h3>
+    <ul>
+      <li>used for pattern matching and searching for files names with specific characters</li>
+      <li><code>?</code> replaces a single character or digit</li>
+      <li><code>*</code> replaces a string of characters of digits</li>
+      <li>e.g. <code>cat file?.txt</code> shows the content of all files that start with the word 'file' then a single character or digit of type <samp>.txt</samp></li>
+      <li>e.g. <code>ls *file*.txt</code> list all files that has the word 'file' anywhere in its name</li>
+    </ul>
+    <h3>Pipes</h3>
+    <ul>
+      <li>can pipe the output of certain commands into the input of another command (i.e. chains commands)</li>
+      <li><code>commandA | commandB | commandC</code></li>
+      <li><code>head -n11 file3.txt | tail -n2</code> displays lines 10 and 11 of <samp>file3.txt</samp></li>
+    </ul>
+
+
+
+    <div style="display: flex; padding-top: 20px;">
+      <a href="#top">Back to Top</a>
+    </div>
+  </body>
+</html>

@@ -17,6 +17,10 @@ h1 {
   margin-top: 50px;
 }
 
+code {
+    background: hsl(260, 0%, 90%);
+}
+
 /* CSS for navbar */
 #contents {
   background: #ffe5e5;
