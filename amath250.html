@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AMATH 250 Notes</title>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a name="top"></a>
+    <a href="./index.html">Back to Courses</a>
+    <h1 id="title_text">AMATH 250 Notes</h1><br />
+    <div id="contents">
+      <h1>Table of Contents</h1>
+      <ol id="nav">
+        <li><a href="#1">First-order Differential Equations</a></li>
+        <li><a href="#2">Dimensional Analysis</a></li>
+        <li><a href="#3">Second-order Linear Differential Equations</a></li>
+        <li><a href="#4">Laplace Transforms</a></li>
+        <li><a href="#5">Systems of Linear Differential Equations</a></li>
+      </ol>
+    </div>
+    <h1><a name="1"></a><b>1 </b>First-order Differential Equations</h1>
+    <div class="def" id="nocolour">
+      <div id="desc">
+        <b><u>Definition</u></b>: A <b>differential equation (DE)</b>, is an equation involving unknown functions and their derivative(s).<br />
+        e.g. $\frac{dy}{dx}=y(x)$<br />
+        Solutions: $y(x)=e^x, y(x)=0$<br />
+        General Solution: $y(x)=Ce^x$
+      </div>
+    </div>
+    <h3>Falling Object with Air Resistance</h3>
+    $$m\frac{dv}{dt}=mg-F_d$$
+    At low speeds, $F_d\propto v$: $F_d=\alpha v\quad\alpha > 0$ is a constant.<br />
+    At high speeds, $F_d\propto v^2$: $F_d=\beta v|v|\quad\beta > 0$ is a constant.<br /><br />
+    We will focus on the linear drag law, so $\frac{dv}{dt}=g-\frac{\alpha}{m}v$.<br />
+    Note that all velocities converge to $\frac{mg}{\alpha}$, which is known as the <b>terminal velocity</b>.
+    <h2>Dimensions of Quantities</h2>
+    <b>Dimensional Analysis</b> is a useful method for finding relationships between variables in an equations and ensuring the equation makes sense.
+    <b>Main Dimensions</b>:
+    <ul>
+      <li>M - Mass</li>
+      <li>L - Length</li>
+      <li>T - Time</li>
+      <li>$\theta$ - Temperature</li>
+    </ul>
+    e.g. $[v]=$"dimension of velocity"$=\frac{L}{T}=LT^{-1}$, $\ [F]=MLT^{-2}$, $\ [\frac{v}{c}]=1=$"dimensionless"
+    <b>Principle of Dimensional Homogeneity</b>: Addition/subtraction/equation of terms must have the same units/dimensions.<br />
+    e.g. Find the dimensions of $\alpha$.
+    $$[mg]=[\alpha v]\rightarrow MLT^{-2}=[\alpha]LT^{-1}\rightarrow [\alpha]=MT^{-1}$$
+
+    <div style="display: flex; padding-top: 20px;">
+      <a href="#top">Back to Top</a>
+    </div>
+  </body>
+</html>
