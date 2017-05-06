@@ -32,12 +32,6 @@
       </ol>
     </div>
     <h1><a name="1"></a><b>1 </b>Introduction to Probability</h1>
-    <div class="def">
-      <div id="desc">
-        <b><u>Definition</u></b>: A <b>sample space</b>, denoted by $S$, refers to the set of all possible outcomes of an experiment. <br />
-        e.g. $S=\{\text{"heads, "tails"}\}$.
-      </div>
-    </div>
     <h3>Definitions of Probability:</h3>
     <ol>
       <li><u>Classical Definition</u>: $$P(A)=\frac{\text{# of ways event $A$ can occur}}{\text{# of outcomes in $S$}}$$</li>
@@ -47,6 +41,52 @@
       <li><u>Subjective Probability Definition</u>: The probability of an event is a measure of how sure the person making the statement is that the event would occur.</li>
       Limitation: No rational basis for agreement on a right answer.
     </ol>
+    <h1><a name="2"></a><b>2 </b>Mathematical Probability Model</h1>
+    <div class="def">
+      <div id="desc">
+        <b><u>Definition</u></b>: A <b>sample space</b>, denoted by $S$, refers to the set of all possible outcomes of an experiment. <br />
+        e.g. $S=\{\text{"heads, "tails"}\}$.
+      </div>
+    </div>
+    A sample space can be classified as:
+    <ul>
+      <li>Discrete</li>
+      <ul>
+        <li>Takes only integer values</li>
+        <li>Things we count</li>
+        <li>Can be further classified as:</li>
+        <ul>
+          <li>Finite: e.g. rolling a die twice</li>
+          <li>Countably Infinite: e.g. tossing a coin till a head appears</li>
+        </ul>
+      </ul>
+      <li>Continuous</li>
+      <ul>
+        <li>Takes any real values</li>
+        <li>Things we measure</li>
+      </ul>
+    </ul>
+    <div class="def">
+      <div id="desc">
+        <b><u>Definition</u></b>: An <b>event</b> is a subset of the sample space.  Probabilities are defined on events.
+      </div>
+    </div>
+    Events can be classified as:
+    <ul>
+      <li>Simple Event: An event that consists of 1 element</li>
+      <li>Compound Event: An event that has more than one element</li>
+    </ul>
+    <div class="def">
+      <div id="desc">
+        <b><u>Definition</u></b>: An <b>probability function</b>, P, is a function that satisfies the following 2 axioms:
+        <ol>
+          <li>P(S)=1; P($\phi$)=0</li>
+          <li>$P(\cup_{i=1}^\infty A_i)=\sum_{i=1}^\infty P(A_i)$, $A_i\cap A_j=\phi$ ($A_i$ and $A_j$ are "mutually exclusive" or "disjoint")<br />
+          If 2 events are disjoint, then $P(A_i\cup A_j)=P(A_i)+P(A_j)$</li>
+        </ol>
+      </div>
+    </div>
+
     <div style="display: flex;">
       <a href="#top">Back to Top</a>
     </div>

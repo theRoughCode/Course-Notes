@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AMATH 250 Notes</title>
+    <title>MATH 237 Notes</title>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
@@ -15,7 +15,7 @@
   <body>
     <a name="top"></a>
     <a href="./index.html">Back to Courses</a>
-    <h1 id="title_text">AMATH 250 Notes</h1><br />
+    <h1 id="title_text">MATH 237 Notes</h1><br />
     <div id="contents">
       <h1>Table of Contents</h1>
       <ol id="nav">
@@ -33,6 +33,7 @@
       </ol>
     </div>
     <h1><a name="1"></a><b>1 </b>Scalar Functions & Limits</h1>
+    <h2>Scalar Functions</h2>
     <div class="def">
       <div id="desc">
         <b><u>Definition</u></b>: A <b>function</b> consists of 3 things:
@@ -49,6 +50,28 @@
         e.g. $f(x,y)=16-x^2-4y^2$: Domain$=\mathbb{R}^2$, Co-domain$=\{p\in\mathbb{R} | p\leq 16\}$.
       </div>
     </div>
+    <div class="def">
+      <div id="desc">
+        <b><u>Definition</u></b>: The <b>level curves</b> of $f(x,y)$ are the curves in $\mathbb{R}^2$ of the form $f(x,y)=k$ where $k\in\mathbb{R}$. e.g. $16-x^2-4y^2=k\rightarrow x^2+4y^2=16-k$, which is an ellipse.
+      </div>
+    </div>
+    <div class="def">
+      <div id="desc">
+        <b><u>Definition</u></b>: The <b>cross sections</b> of $f(x,y)$ are the curves in $\mathbb{R}^2$ given by $z=f(c,y)$ or $z=f(x,d)$ where $c,d\in\mathbb{R}$.
+      </div>
+    </div>
+    <b>Tip</b>: If $f(x,y)=g(x)+h(y)$, use cross-sections.
+    <h2>Limits</h2>
+    <div class="def">
+      <div id="desc">
+        <b><u>Definition</u></b>: The <b>limit</b>, L, of $f(x)$ as $x$ approaches $a$ is defined as:<br />
+        $$\forall\epsilon >0\text{, }\exists\delta > 0\text{ such that if }0<|x-a|<\delta\text{, then }|f(x)-L|<\epsilon$$
+      </div>
+    </div>
+    When $f$ is univariate, there are only 2 ways to approach the limit, i.e. from the left and right.<br />
+    Given $f:\mathbb{R}^2\rightarrow\mathbb{R}$ and $\vec{a}\in\mathbb{R}^2$, let $\vec{x}=(x,y)$ and $\vec{a}=(a,b)$, then the <b>norm</b> of $\vec{x}$ and $\vec{a}$ is
+    $$||\vec{x}-\vec{a}||=\sqrt{(x-a)^2+(y-b)^2}$$
+    This is the distance between $\vec{x}$ and $\vec{a}$.
 
     <div style="display: flex; padding-top: 20px;">
       <a href="#top">Back to Top</a>
