@@ -42,7 +42,8 @@
     <code>-n[# of lines]</code>/<code>-[# of lines]</code>: specify number of lines
     <br /><br />
     <b>ls</b>: lists the contents of the current directory<br />
-    <b>ls a</b>: lists all contents including hidden files (files that start with '.')<br /><br />
+    <b style="margin-left: 20px;">ls -a</b>: lists all contents including hidden files (files that start with '.')<br />
+    <b style="margin-left: 20px;">ls -l</b>: lists the contents of a directory in a long listing format (<code>ls -l [filename]</code> displays info for a file in long listing format)<br /><br />
 
     <b>pwd</b>: shows the current working directory<br /><br />
     <b>cd</b>: change directory
@@ -63,7 +64,18 @@
     <b>exit</b>: terminates the shell session<br />
     <b>echo</b>: write arguments, separated by spaces and terminated with a newline<br />
     <b>rm</b>: remove<br />
-    <b style="margin-left: 20px;">rm -f</b>: force remove
+    <b style="margin-left: 20px;">rm -f</b>: force remove<br />
+    <b>less</b>: loads a text file one page at a time rather than all at once<br />
+    <b>wc</b>: displays the number of words, bytes, and lines in a file<br />
+    <b style="margin-left: 20px;">wc -w</b>: word count<br />
+    <b style="margin-left: 20px;">wc -l</b>: line count<br />
+    <b>sort</b>: sort lines of text file (alphabetical)<br />
+    <ul style="margin-top: 0;">
+      <li>Lines starting with a number will appear before lines starting with a letter.</li>
+      <li>Sorted in increasing alphabetical order based on first character</li>
+      <li>Lines starting with a lowercase letter will appear before lines starting with the same letter in uppercase.</li>
+      <li><code>sort -r</code>: sorts in reverse order</li>
+    </ul>
 
     <h2>Standard File Streams</h2>
     There are 3 standard file streams:
@@ -81,10 +93,12 @@
     <ul>
       <li><code>doCommand > output_file</code> for stdout</li>
       <li><code>doCommand 2> error_file</code> for stderr</li>
+      <li><code>doCommand > output_file 2>&1</code> redirects the error messages to the same location where output is (or in bash: <code>doCommand >% output_file</code>)</li>
+      <li><code>doCommand >> output_file</code> appends to start of file</li>
       <li>e.g. <code>cat > output_file.txt</code> saves content of keyboard input to file</li>
       <li>e.g. <code>cat file1.txt file2.txt</code> combines file1 and file2 to new file</li>
     </ul>
-    <h3>Wildcards</h3>
+    <h2>Wildcards</h2>
     <ul>
       <li>used for pattern matching and searching for files names with specific characters</li>
       <li><code>?</code> replaces a single character or digit</li>
@@ -92,13 +106,139 @@
       <li>e.g. <code>cat file?.txt</code> shows the content of all files that start with the word 'file' then a single character or digit of type <samp>.txt</samp></li>
       <li>e.g. <code>ls *file*.txt</code> list all files that has the word 'file' anywhere in its name</li>
     </ul>
-    <h3>Pipes</h3>
+    <h2>Pipes</h2>
     <ul>
       <li>can pipe the output of certain commands into the input of another command (i.e. chains commands)</li>
       <li><code>commandA | commandB | commandC</code></li>
       <li><code>head -n11 file3.txt | tail -n2</code> displays lines 10 and 11 of <samp>file3.txt</samp></li>
     </ul>
 
+    <h2>Users and Groups</h2>
+    Each user is assigned a userid<br />
+    <b>who</b>: lists the currently logged-in users to the system<br />
+    <b>whoami</b>: lists current user<br />
+    <h3>File Permissions</h3>
+    Files have three types of permissions:
+    <ol style="margin-top: 0;">
+      <li>read (r)</li>
+      <li>write (w)</li>
+      <li>execute (x)</li>
+    </ol>
+    There are 4 main types of users:
+    <ol style="margin-top: 0;">
+      <li>user (u)</li>
+      <li>group (g)</li>
+      <li>others (o)</li>
+      <li>all (a)</li>
+    </ol>
+    File permissions are ordered by user, group, others. For example,<br />
+    <code>drwxr-xr-x</code> means:
+    <ul style="margin-top: 0;">
+      <li><code>d</code>: directory</li>
+      <li><code>rwx</code>: user has rwx access</li>
+      <li><code>r-x</code>: group has r and x access</li>
+      <li><code>r-x</code>: others have r and x access</li>
+    </ul>
+    <b>chmod</b>: change permissions of a file
+    <ul style="margin-top: 0;">
+      <li><code>+</code> adds permission</li>
+      <li><code>-</code> removes permission</li>
+      <li><code>=</code> sets permission</li>
+      <li>e.g. <code>chmod u-r file</code> removes read permission from user for file</li>
+      <li>e.g. <code>chmod o+x file</code> adds execute permission to others</li>
+      <li>e.g. <code>chmod a=rwx file</code> gives everybody full control</li>
+    </ul>
+    <b>which</b>: search where an application resides (e.g. <code>which ls</code> searches where the ls command resides)
+    <b>whereis</b>: search broader range of directories and locate the source and man packages of the application
+    <b>tree</b>: displays tree view of file system (e.g. <code>tree cs246</code> displays tree view of cs246 folder)
+    <b>tac</b>: start from last line of a file and displays its contents backwards (e.g. <code>tac file1.txt file2.txt file3.txt</code> displays the contents of each file backwards, in order)
+    <b>touch</b>: update the file timestamp to match the current time
+    <ul style="margin-top: 0;">
+      <li>can be used to update the access, change and modify time</li>
+      <li>if file doesnt exist, it creates an empty file</li>
+      <li><code>touch -t</code> sets the time</li>
+      <li>e.g.
+        <pre><code>touch tomato
+touch -t 0606060606 tomato
+touch tomato</code>
+
+This creates a file called tomato, sets the time stamp of tomato to June 6, 2006, 6:07
+      </pre></li>
+    </ul>
+    <b>stat</b>: displays the detailed status of a particular file or file system<br />
+    <b>mkdir</b>: creates new directory<br />
+    <b>rmdir</b>: removes empty directory<br />
+    <b>mv</b>: move or/and rename a file (e.g. <code>mv alice.txt cs246/alicewonderland.txt</code> moves alice.txt into cs246 and rename to alicewonderland.txt)<br />
+    <b>sudo</b>: runs a program by the use of security privilege of another user often the root or super user<br />
+    <b>locate</b>: search through a previously created database of files and directory to find a match of your entry
+      <pre style="margin-top:0; margin-left:20px;">e.g.
+        <code>mv alice.txt cs246/alicewonderland.txt
+        updatedb
+        locate alicewonderland</code>
+
+This moves alice.txt into cs246 and rename to alicewonderland.txt, updates the directory to reflect changes and locates the new location of alicewonderland
+    </pre><br />
+    <b>find</b>: searches for file<br />
+      <ul style="margin-top:0;">
+        <li><code>find [dir] -name file_name</code></li>
+        <li>e.g. <code>find / -name ubunto > ubuntofiles.txt 2> logfile.txt less ubuntofiles.txt less logfile.txt</code> finds file named ubunto in the root dir and save results into a file, save errors into log file and display the first page of the two new files</li>
+        <li><code>-delete</code> removes all files named <samp>file_name</samp> that are in the specified directory</li>
+        <li><code>-exec [command]</code> executes command on specified files.  All following arguments are args to command until a <samp>;</samp>.  <samp>{}</samp> is the variable for each file</li>
+        <li>e.g. <code>find / -name "*.txt" -exec rm {} \;</code> searches all <samp>txt</samp> files and deletes them.</li>
+        <li><code>-size [size]</code> searches for all files of a specific size.</li>
+        <ul>
+          <li><code>b</code>: 512-byte blocks (default if no suffix is used)</li>
+          <li><code>c</code>: bytes</li>
+          <li><code>w</code>: two-byte words</li>
+          <li><code>k</code>: Kilobytes (units of 1024 bytes)</li>
+          <li><code>M</code>: Megabytes (units of 1048576 bytes)</li>
+          <li><code>G</code>: Gigabytes (units of 1073741824 bytes)</li>
+          <li><code>+</code>: bigger than specified size</li>
+          <li><code>-</code>: smaller than specified size</li>
+          <li>e.g. <code>find / -size +100M</code>: searches for all files bigger than 100MB</li>
+        </ul>
+      </ul>
+      Difference between find and locate:
+      <ol>
+        <li><samp>locate</samp> is faster than <samp>find</samp></li>
+        <li><samp>find</samp> has more functionality (can select files more than just name)</li>
+        <li><samp>find</samp> doesn't necessarily search the entire filesystem, points to a subdirectory</li>
+        <li><samp>find</samp> can perform operations to files it finds (<samp>exec</samp>, <samp>delete</samp>, <samp>size</samp>)</li>
+        <li><samp>locate</samp>'s output can be outdated (needs to be updated by <samp>updatedb</samp>)</li>
+      </ol>
+      <b>uniq</b>: removes repeated, adjacent lines in a fil<br />
+      e.g.
+      <ul style="margin-top: 0;">
+        <li><code>sort file3.txt file4.txt | uniq</code> sorts file3 and file4 and removes duplicates</li>
+        <li><code>sort file3.txt file4.txt | uniq | wc -l</code> counts number of lines in unique combination of file3 and file4</li>
+      </ul>
+      <b>grep</b>: searches for a pattern in a file name and prints all matching lines
+      <ul style="margin-top: 0;">
+        <li><code>grep [pattern] directory</li>
+        <li><code>-v</code> print line NOT matched by the pattern</li>
+        <li><code>-egrep</code>/<code>grep -E</code> uses regular expressions</li>
+        <li>e.g. <code>egrep "(T|t)he" 1001nights.txt | wc -l</code> counts the number of lines where the word 'the' or 'The' appeared in 1001night.txt</li>
+      </ul>
+      <b>shutdown</b>: halts the machine
+      <ul style="margin-top: 0;">
+        <li><code>-h</code> schedules shutdown at current time</li>
+        <li>e.g. <code>shutdown -h 10:00</code> schedules shut down at 10am</li>
+        <li><code>-r</code> restarts machine</li>
+      </ul>
+
+      <h2>Regular Expressions (RegEx)</h2>
+      <ul style="margin-top: 0;">
+        <li><code>.</code> matches any single character</li>
+        <li><code>|</code> matches either</li>
+        <li><code>$</code> matches end of string</li>
+        <li><code>^</code> matches beginning of string</li>
+        <li><code>*</code> matches preceding item 0 or more times</li>
+        <li><code>?</code> matches preceding item 0 or 1 times</li>
+        <li><code>{n}</code> matches preceding item exactly n occurences</li>
+        <li><code>[...]</code> matches any character in set</li>
+        <li>e.g. <code>(W|w)onderland</code> matches Wonderland or wonderland</li>
+        <li><code>[C|c][S|s][0-9]{3}/code> matches any CS course</li>
+      </ul>
 
 
     <div style="display: flex; padding-top: 20px;">
