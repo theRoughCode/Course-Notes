@@ -214,7 +214,7 @@ This moves alice.txt into cs246 and rename to alicewonderland.txt, updates the d
       </ul>
       <b>grep</b>: searches for a pattern in a file name and prints all matching lines
       <ul style="margin-top: 0;">
-        <li><code>grep [pattern] directory</li>
+        <li><code>grep [pattern] directory</code></li>
         <li><code>-v</code> print line NOT matched by the pattern</li>
         <li><code>-i</code> case-insensitive</li>
         <li><code>-egrep</code>/<code>grep -E</code> uses extended regular expressions, such as <samp>+, ?, |, (, )</samp></li>
@@ -241,6 +241,39 @@ This moves alice.txt into cs246 and rename to alicewonderland.txt, updates the d
         <li>e.g. <code>(W|w)onderland</code> matches Wonderland or wonderland</li>
         <li><code>[C|c][S|s][0-9]{3}</code> matches any CS course</li>
       </ul>
+
+      <h2>Bash Scripts</h2>
+      Benefits:
+      <ul>
+        <li>Automate tasks</li>
+        <li>Simple commands</li>
+        <li>Users are given a controlled interface</li>
+        <li>Combination of utilities to form new commands</li>
+        <li>Quick protoyping of functionalities wthout compiling codes</li>
+      </ul>
+
+      <h2>First line</h2>
+      <code>#!/bin/bash</code> specifies the path of the interpreter.  Bash scripts are saved with a ".sh" (shell) extension
+      <br />
+      <code>chmod u+x [fileName].sh</code> makes files executable
+
+      <h2>Interactive script</h2>
+      e.g. Write a script that will read your name and student id and display to output
+      <pre style="margin-top:0;"><code>
+#!/bin/bash
+echo "What is your name?"
+read name
+echo "Enter your student ID"
+read id
+echo your name is $name and your id is $id</code>
+      </pre>
+
+      <samp>Exit</samp>: set return value<br />
+      <samp>$?</samp>: view return value of most recent command<br />
+      <samp>\</samp>: indicates continuation in the next line/split line into multiple lines<br />
+      <samp>;</samp>: separates commands<br />
+      <samp>&&</samp>: aborts subsequent commands if one fails<br />
+      <samp>||</samp>: proceeds until success
 
 
     <div style="display: flex; padding-top: 20px;">
