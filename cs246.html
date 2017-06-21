@@ -148,10 +148,10 @@
       <li>e.g. <code>chmod o+x file</code> adds execute permission to others</li>
       <li>e.g. <code>chmod a=rwx file</code> gives everybody full control</li>
     </ul>
-    <b>which</b>: search where an application resides (e.g. <code>which ls</code> searches where the ls command resides)
-    <b>whereis</b>: search broader range of directories and locate the source and man packages of the application
-    <b>tree</b>: displays tree view of file system (e.g. <code>tree cs246</code> displays tree view of cs246 folder)
-    <b>tac</b>: start from last line of a file and displays its contents backwards (e.g. <code>tac file1.txt file2.txt file3.txt</code> displays the contents of each file backwards, in order)
+    <b>which</b>: search where an application resides (e.g. <code>which ls</code> searches where the ls command resides)<br />
+    <b>whereis</b>: search broader range of directories and locate the source and man packages of the application<br />
+    <b>tree</b>: displays tree view of file system (e.g. <code>tree cs246</code> displays tree view of cs246 folder)<br />
+    <b>tac</b>: start from last line of a file and displays its contents backwards (e.g. <code>tac file1.txt file2.txt file3.txt</code> displays the contents of each file backwards, in order)<br />
     <b>touch</b>: update the file timestamp to match the current time
     <ul style="margin-top: 0;">
       <li>can be used to update the access, change and modify time</li>
@@ -160,10 +160,10 @@
       <li>e.g.
         <pre><code>touch tomato
 touch -t 0606060606 tomato
-touch tomato</code>
+touch tomato</code></pre>
 
 This creates a file called tomato, sets the time stamp of tomato to June 6, 2006, 6:07
-      </pre></li>
+      </li>
     </ul>
     <b>stat</b>: displays the detailed status of a particular file or file system<br />
     <b>mkdir</b>: creates new directory<br />
@@ -274,8 +274,32 @@ echo your name is $name and your id is $id</code>
       <samp>;</samp>: separates commands<br />
       <samp>&&</samp>: aborts subsequent commands if one fails<br />
       <samp>||</samp>: proceeds until success
+      <br />
+      <samp>$0</samp>: script name<br />
+      <samp>$1, $2</samp> ...: First, Second, ... Parameters<br />
+      <samp>$*</samp>: all parameters<br />
+      <samp>$#</samp>: number of parameters<br />
 
-
+      <h2>Command Substitution</h2>
+      - store result of a command<br />
+      - Enclose inner command with backticks <samp>``</samp> or enclose with <samp>$()</samp><br />
+      - innermost command is executed first and its standard output is inserted where substitution is done<br />
+      - <samp>$()</samp> allows nesting
+      - <samp>expr</samp>: evaluate an expression
+      <ul>
+        <li>arithmetics</li>
+        <li>comparison</li>
+        <li>logical</li>
+        <li><samp>$(())</samp> or <samp>$(expr ...)</samp></li>
+        <li>
+          e.g. Add two inputs and print both summation
+          <pre style="margin-top:0;"><code>
+#!/bin/bash
+result=$(expr $1 + $2)
+echo $1 + $2 = $result</code>
+          </pre>
+        </li>
+      </ul>
     <div style="display: flex; padding-top: 20px;">
       <a href="#top">Back to Top</a>
     </div>
