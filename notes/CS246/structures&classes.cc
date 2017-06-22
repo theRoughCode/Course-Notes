@@ -80,7 +80,7 @@ Overloading Constructors
 Explicit Constructor Calls
 - constructors can be called even after object has been declared
 - holiday = DayofYear(5, 5);
-- *For a constructor with no arguments, we DO have to include paranthesis
+- *For a constructor with no arguments, we DO have to include parenthesis
 - TIP: always include a default constructor to allow for "accidental" declarations of classes without parameters
 
 Member Initializers
