@@ -4,7 +4,7 @@ Call-by-value
 
 Call-by-reference
 - arg is a variable
-- variable itself is plugged in, so var's value can be changed by function
+- variable itself is plugged in, so vars value can be changed by function
 - 'datatype& var'
 -e.g.
 void getNumbers(int& num1, int& num2) {

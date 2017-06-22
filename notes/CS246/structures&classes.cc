@@ -152,6 +152,7 @@ Class &Class::operator=(const Class &Object) {
   ptr = new int;
   *ptr = Object->ptr; // copies value
 }
+Class c2 = c1;  <-- calls copy constructor
 
 
 
@@ -224,16 +225,45 @@ MemoryPage& MemoryPage::operator=(MemoryPage&& other)
   return *this;
 }
 
-classType c = {a1, a2, ...}
+
 Uniform Initialization
-1. Searches for Initializer constructor
-2. Regular constructor
-  - private member vars
-  - public constructor
-3. Aggregate Initialization
-  - public member vars
+- similar to array: int arr[4] = {0,1,2,3};
+- public vars:
+class Student {
+public:
+  String name;
+  int id;
+}
+Student s1 = {"Sarah", 1222};  // agggregate initialization
+- private vars:
+class Student {
+private:
+  String name;
+  int id;
+public:
+  Student(String name, int id) : name {name}, id {id} {}
+}
+Student s2 = {"John", 3344};  // calls constructor
+
+- Uniform Initialization searches for:
+  1. initializer_list constructor
+    myclass (std::initializer_list<int> v);
+  2. Regular constructor
+    - private member vars
+    - public constructor
+  3. Aggregate Initialization
+    - public member vars
 
 MIL = Member Initialization List
 -className (a1, a2, ...) : member_var1(a1), member_var2(a2)...
 - fields are initialized in the order of declaration in the class, not in the order of MIL
 - more efficient than initializing in the body as it calls the constructor once rather than calling the default constructor and then initializing the member vars
+
+
+Every class comes with:
+1. default constructor
+2. copy constructor
+3. copy assignment constructor
+4. destructor
+5. move constructor
+6. move assignment constructor
