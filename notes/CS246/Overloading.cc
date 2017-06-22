@@ -100,7 +100,7 @@ Rules on Overloading Operators
 - The following operators can only be overloaded as (nonstatic) members of the class: =, [], ->, and ()
 - Cannot create a new operator, can only overload existing operators
 - Cannot change the number of arguments that an operator takes
-- Cannot changeprecedence of an operator.  An overloaded operator has the same precedence as the ordinary version of the operator
+- Cannot change precedence of an operator.  An overloaded operator has the same precedence as the ordinary version of the operator
   -> e.g. x*y + z => (x*y) + z
 - The following operators cannot be overloaded: ., ::, sizeof, ?:, .*
 - overloaded operators cannot have default arguments
@@ -140,7 +140,7 @@ ostream& operator <<(ostream& outputStream, const Money& amount) {
     outputStream << '.' << '0' << absCents;
   return outputStream;
 }
-  -> Note that the operator returns a reference
+  -> Note that the operator returns a reference to allow for chaining
 - >> is overloaded in a similar way, but the second argument receives the input valiue, so it cannot be a const
 istream& operator >>(istream& inputStream, Money& amount)
 {
@@ -194,7 +194,7 @@ IntPair IntPair:: operator++(int ignoreMe) //Postfix version
 
 
 Overloading Array Operator []
-- overload for a class so that it can be used with objects of hte class
+- overload for a class so that it can be used with objects of the class
 - To use it on the left-hand side of an assignment operator, the operator must be defined to return a reference
 - MUST be a member function
 char& CharPair:: operator[](int index)
@@ -213,3 +213,6 @@ l-value: int& f();
 r-value: const int& f() const;
 
 Overloading the Assignment Operator
+- returns reference to allow chaining
+- a = b = c sets a and b equal to c, right associative
+- must return same type as left hand side to allow chaining to work, use this pointers

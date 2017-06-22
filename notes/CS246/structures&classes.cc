@@ -133,12 +133,24 @@ Copy Constructor
 - used when a copy of an object is made
 - used when:
   1. A class object is declared and initialized by another object of the same type in parameters
+    - Class c1(c2);
+    - Class c1 = c2;
   2. When a function returns a value of the class type
-  3. When an arguemtn of the class type is plugged in for a call-by-calue parameter
+  3. When an argument of the class type is plugged in for a call-by-calue parameter
 - has one call-by-reference parameter of same class type (normally const)
 - Any class that uses pointers/new operator should have a copy constructor
 Class::Class(const Class& Object) {
+  ptr = new int;
+  *ptr = Object->ptr; // copies value
+}
 
+Copy Assignment Operator
+- used when an already initialized object is assigned a new value from another existing object
+- fallback for move assignment when move is unavailable (rvalues can bind to const references)
+Class &Class::operator=(const Class &Object) {
+  delete ptr;
+  ptr = new int;
+  *ptr = Object->ptr; // copies value
 }
 
 
@@ -169,11 +181,23 @@ std::string&& rrstr; // C++11 rvalue reference varaiable
 - contrasting to lvalues that look like
 std::string& ref;  // C++11 lvalue reference varaiable
 
+Move Semantics
+- copying transfers the state of an object to another
+- moving is faster as they move existing resources to the new destination, while copying requires the creation of a new resource from scratch
+
 Move Constructor
 - moves sub-objects and data members
 C::C(C&& other);  //C++11 move constructor
 - doesnt allocate new resources, gets others resources
 - std::move() is a cast that produces an rvalue reference to an object to enable moving from it
+MemoryPage (MemoryPage &&other) : size(0), buf(nullptr) {
+  // pilers other's resources
+  size = other.size;
+  buf = other.buf;
+  // reset other
+  other.size = 0;
+  other.bug = nullptr;
+}
 
 Move Assignment Operator
 C& C::operator=(C&& other); //C++ move assignment operator
