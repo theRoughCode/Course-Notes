@@ -46,7 +46,7 @@ Normal Way:
 2. Free up memory
 3. Allocate new memory
 4. Deep copy similar to copy constructor
-- doesn't leak memory
+- doesnt leak memory
 - DOES NOT maintain the state of object when exception is thrown
   - new throws exception
   - delete next;
@@ -71,6 +71,7 @@ struct Node {
     return *this;
   }
 }
+
 
 Move Constructor
 - used with R-values (&&)
@@ -150,7 +151,11 @@ struct Student {
 }
 
 Invariants
-- set of asserts tha must hold true from the creation to the destruction of objects
+- set of asserts that must hold true from the creation to the destruction of objects
+- i.e. exactly one of two member vars must be 0.  Can use a member function to check if invariant holds and raise an assert if invariant is broken
+
+Encapsulation
+- enforces invariants
 struct Node {
   int data;
   Node *next;

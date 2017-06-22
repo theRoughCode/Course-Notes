@@ -2,7 +2,7 @@ struct CDAccount {
   double balance;
   double interestRate;
   int term;
-};  <-- Don't forget semi-colon
+};  <-- Dont forget semi-colon
 
 CDAccount cd1;  // cd1 is a strcture variable
 // cd1's value is a collection of 3 member values
@@ -154,6 +154,39 @@ Class &Class::operator=(const Class &Object) {
 }
 Class c2 = c1;  <-- calls copy constructor
 
+Copy and Swap Idiom
+- strong exception guarantee for resource managing class
+Normal Way:
+1. Check for first assignment
+2. Free up memory
+3. Allocate new memory
+4. Deep copy similar to copy constructor
+- doesnt leak memory
+- DOES NOT maintain the state of object when exception is thrown
+  - new throws exception
+  - delete next;
+    next = other.next ? new Node (*other.next) : nullptr;
+  - if new throws error, next has lost its data
+- one solution is to perform deep operation before changing the state of the object
+- or use copy and swap Idiom
+- make use of copy constructor to copy to temp value then swap this object with the temp
+
+Copy and Swap LinkedList Example
+#include <utility>
+struct Node {
+  ...
+  void swap(Node &other){
+    using std::swap;
+    swap(data, other.data); // data now contains other.data, other.data contains your data
+    swap(next, other.next);
+  }
+  Node &operator =(const Node &other) {
+    Node temp = other;  // copy constructor
+    swap(temp);  // swap temp with this
+    return *this;
+  }
+}
+
 
 
 RULE OF THREE
@@ -187,6 +220,7 @@ Move Semantics
 - moving is faster as they move existing resources to the new destination, while copying requires the creation of a new resource from scratch
 
 Move Constructor
+- removes need for deep copy or delete
 - moves sub-objects and data members
 C::C(C&& other);  //C++11 move constructor
 - doesnt allocate new resources, gets others resources
@@ -225,6 +259,13 @@ MemoryPage& MemoryPage::operator=(MemoryPage&& other)
   return *this;
 }
 
+Move and Swap Example
+MemoryPage& MemoryPage::operator=(MemoryPage&& other){
+  using std::swap;
+  swap(size, other.size); // swap values of this with other (R-value to be destroyed)
+  swap(buf, other.buf);
+  return *this
+}
 
 Uniform Initialization
 - similar to array: int arr[4] = {0,1,2,3};
@@ -267,3 +308,31 @@ Every class comes with:
 4. destructor
 5. move constructor
 6. move assignment constructor
+
+
+UML for classes
+- shows dependencies between classes
+- class name on top
+- '+' to represent a public member
+- '-' to represent a private member
+- arrows represents inclusion of another class
+  - weak association: includes parameter of another class
+  - strong association: hold reference to an instance of another class
+  - numbers on either side of arrow to represent the multiplicity relationship
+  - Order: class name, member vars, member functions
+  =================            ===============
+  |    ClassA     | 1       1  |    ClassB   |
+  ----------------- ---------> ---------------
+  |- fun(): ClassB|            |             |
+  =================            ===============
+- Aggregation: shared association
+  - class B can be a part of other classes (class A is not an exclusive container of class B)
+  - use an open diamond
+  =================            ===============
+  |    ClassA     |            |    ClassB   |
+  ----------------- <>-------- ---------------
+  |               |            |             |
+  =================            ===============
+- Composition: not shared association
+  - class A has exclusive ownership over class B
+  - use a solid diamond

@@ -13,11 +13,23 @@ Virtual Functions: used before it is defined
   - defined at compiletime
 
 override keyword
-- to make clear if a fucntion is overriden or redefined
+- to make clear if a function is overridden or redefined
+class Sale {
+  virtual double bill() const;
+};
+class DiscountSale : public Sale {
+  double bill() const override;
+};
 
 final keyword
 - prevents virtual function from being overriden
 - useful for inherited classes that inherit virtual functions
+class Sale {
+  virtual double bill() const final;
+};
+class DiscountSale : public Sale {
+  double bill() const;  <-- compiler error
+};
 
 Disadvantage of Virtual Functions
 - Overhead
@@ -63,5 +75,66 @@ pdog = new Dog;
 pdog->name = "Tiny";
 pdog->breed = "Great Dane";
 ppet = pdog;
-- can still access the breed field of node pointed to by ppet
+- ppet->breed will generate an error, but ppet->print() will access the breed field from Dog
 - by using pointers and dynamic vars, we can treat objects of the derived class as a base class without throwing away additional vars
+
+
+class Book {
+  string title, author;
+protected:
+  int numPages;
+public:
+  Book();
+  virtual bool isHeavy() const {
+    return numPages > 200;
+  }
+};
+class Comic : public Book {
+  bool isHeavy() const override {
+    return numPages > 30;
+  }
+}
+
+Comic c{40};
+Book &pB{&c};
+Book &rB{c};
+Comic *pc{&c};
+
+cout  << pc->isHeavy() // true
+      << pB->isHeavy() // true
+      << rb.isHeavy(); // true
+
+Book *myBook[20];
+for (int i = 0; i < 20; i++) {
+  cout << myBooks[i]->isHeavy() << endl;
+}
+// accomodates multiple types under one abstraction (polymorphism)
+
+------------ Danger: ------------
+class One {
+  int x, y;
+public:
+  One(int x = 0, int y = 0) : x{x}, y{y}{}
+};
+class Two : public One {
+  int x;
+public:
+  Two(int x = 0, int y = 0, int z = 0) : One{x, y}, z{z}{}
+};
+
+void f(One *a) {
+  a[0] = One {6,7};
+  a[1] = One {8,9};
+}
+
+Two myArray[2] {{1,2,3}, {4,5,6}};
+f(myArray);
+myArray: | 1 2 3 | 4 5 6 |
+a[0] = {6,7};
+a[1] = {8,9};
+myArray: | 6 7 8 | 9 5 6 |  // Data misaligned
+
+- Never use array of objects polymorphism if you want to have a polymorphic array of pointers
+
+UML
+- Abstract class and pure virtual functions are italic
