@@ -138,3 +138,28 @@ myArray: | 6 7 8 | 9 5 6 |  // Data misaligned
 
 UML
 - Abstract class and pure virtual functions are italic
+
+
+Virtual Destructors
+Base *pBase = new Derived;
+delete pBase;
+- if destructor in Base was virtual, the destructor in Derived is called.  If it was not virtual, the Base destructor is called
+- makes sense to make all destructors virtual
+
+Upcasting: castng from a descendent type to anscestor type
+  - safe as youre only disregarding some info
+Downcasting: casting from ancestor type to descendent
+  - dangerous
+  - use dynamic_cast, only works for pointer types
+  Pet *ppet;
+  ppet = new Dog;
+  Dog *pdog = dynamic_cast<Dog*>(ppet);
+  - dynamic_cast informs you if it fails and returns NULL
+  - Keep the following points in mind when Downcasting:
+    1. Keep track of things so you know the info to be added is present
+    2. Member functions must be virtual since dynamic_cast uses the virtual functions info to perform cast
+
+virtual function table: created for a class that has one or more member functions that are virtual
+  - has a pointer for each virtual member function
+  - if inherited virtual function is not changed, table points to definition in ancestor class
+  - if virtual function has a new definition, pointer points to that definition

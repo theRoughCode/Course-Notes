@@ -25,7 +25,15 @@ Raw String Literals
 
 Type Casting
 - '(data type to cast)'
-
+- static_cast<Type> (Expression)
+  - function that takes in a type and returns an "equivalent" value of type Type
+  - does not change the value of variable in expression
+- const_cast<Type> (Expression)
+  - cast away constantness
+- dynamic_cast<Type> (Expression)
+  - downcasting from a type to a descendent type
+- reinterpret_cast<Type> (Expression)
+  - implementation-dependent cast
 
 Enums
  - Variable that cna only take on specific values
