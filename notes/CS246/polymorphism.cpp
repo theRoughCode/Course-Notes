@@ -1,9 +1,9 @@
 Polymorphism: the ability to associate multiple meanings to one function name with virtual functions or late binding
 
 Virtual Functions: used before it is defined
-- compiler waits till it is used in the program and gets the object's implementation
+- compiler waits till it is used in the program and gets the objects implementation
 - this technique is known as late binding or dynamic binding
-- used when we have a function which we don't know exactly how it is implemented
+- used when we have a function which we dont know exactly how it is implemented
 - Note that in Java, all functions are virtual, unlike in C++
 - virtual type varName();
 - inherited classes will keep the virtual properties of virtual functions in the base class (even without stating the virtual keyword)
