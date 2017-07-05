@@ -59,3 +59,195 @@ Friend Functions
 
 Templates and Inheritance
 - to define a derived template class, start with a template class and derive another template class from it
+
+
+Factory Method Pattern
+- uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object being created
+- Factory method allows classes to defer instantiation it uses to subclasses
+class Level {
+public:
+  virtual Enemy *createEnemy() = 0;  // factory method
+};
+
+class NormalLevel: public Level {
+public:
+  Enemy *createEnemy() override {
+    // create mostly turtles
+  }
+};
+
+class Castle : public Level {
+public:
+  Enemy *createEnemy() override {
+    // create mostly bullets
+  }
+}
+
+int main(int argc, char const *argv[]) {
+  Level *l = new NormalLevel;
+  Enemy *e = l->createEnemy();
+  return 0;
+}
+
+
+Template Method Pattern
+- defines the skeleton of an algorithm in a method deferring some steps to subclasses to override some aspects of superclass behaviour but, in other aspects, must stay the same
+
+class Turtle {
+public:
+  void draw() {
+    drawHead();
+    drawShell();
+    drawFeet();
+  }
+private:
+  void drawHead() {}
+  void drawFeet() {}
+  virtual void drawShell = 0;
+}
+
+class RedTurtle : public Turtle {
+  void drawShell override {
+    // draw red shell
+  }
+}
+
+class GreenTurtle : public Turtle {
+  void drawShell override {
+    // draw green shell
+  }
+}
+
+Extension: non-virtual interface (NVL) Idiom
+A public virtual method:
+1. Interface to client
+  - indicate provided behaviour pre/post condition invariants
+2. Interface to subclasses
+  - "hooks" for subclassses to insert specialized behaviour
+If these ideas are wrapped in function declaration, it would be difficult to separate
+* separate customizable behaviour into two methods with non-customizable steps in between without changing public interface
+* How could you make sure overriding function confers to pre/post conditions and invariant
+
+NVL Idiom
+1. All public methods should be non-virtual
+2. All virtual methods should be private (or at least protected)
+3. Except destructors
+
+e.g. Translate the following class to conform with the NVL Idiom
+class DigitalMedia {
+public:
+  virtual void play() = 0;
+  virtual ~DigitalMedia;
+}
+class DigitalMedia {
+public:
+  void play() {
+    doPlay();
+  }
+  virtual ~DigitalMedia();
+private:
+  virtual void doPlay() = 0;
+}
+- extra control over Play
+  - add before/after code around doPlay that cant change
+  - add more "hooks" by calling additional virtual methods from play
+  - without changing the public interface
+
+
+Maps
+- creates dictionaries
+- a vector of pairs (key + value)
+- templated class
+
+#include <map>
+using namespace std;
+// main
+map <string, int> m;
+m["abc"] = 1;
+m["def"] = 4;
+cout << m["abc"] << endl; // 1
+cout << m["ghi"] << endl; // if key is not defined, it will call the default constructor of value type and insert it in that key  (prints 0)
+m.erase("abc");
+if(m.count("def")) {} // 0 if not found, 1 if found
+for (auto &p : m)
+  cout << p.first << p.second << endl;
+  // p.first gets key
+  // p.second gets value
+
+Visitor Pattern
+- double dispatch
+- performs an extensible set of operations on an object structure without requiring any change to the structure
+- adds capability to composite of objects when encapsulation is not important
+e.g. Striking enemies with weapons
+virtual void strike(Enemy &e, Weapon &w);
+// Enemy
+virtual void strike(Weapon &w);
+// Weapon
+virtual void strike(Enemy &e);
+
+class Enemy {
+public:
+  virtual void beStruckBy(Weapon &w) = 0;
+};
+
+class Turtle : public Enemy {
+public:
+  void beStruckBy(Weapon &w) override {
+    w.strike(*this);
+  }
+};
+
+class Bullet : public Enemy {
+public:
+  void beStruckBy(Weapon &w) override {
+    w.strike(*this);
+  }
+}
+
+class Weapon {
+public:
+  virtual void strike(Turtle &t) = 0;
+  virtual void strike(Bullet &b) = 0;
+};
+
+class Stick : public Weapon {
+public:
+  void strike(Turtle &t) {
+    // strike turtle with stick
+  }
+  void strike(Bullet &b) {
+    // strike bullet with stick
+  }
+}
+
+class Rock : public Weapon {
+public:
+  void strike(Turtle &t) {
+    // strike turtle with rock
+  }
+  void strike(Bullet &b) {
+    // strike bullet with rock
+  }
+}
+
+int main() {
+  Enemy *e = new Bullet(...);
+  Weapon *w = new Rock(...);
+  e->beStruckBy(*w);
+}
+
+1. Bullet::beStruckBy runs virtual method
+2. It calls Weapon::strike
+  - *this is bullet
+  - Bullet version happens at compile time
+3. virtual method strike (Bullet &b)
+  - resolves to Rock::strike(Bullet &b)
+
+
+Observer Design Pattern
+- define a one-to-many dependency between objects so that when one object changes state, all dependents are notified/updated
+Subject
+  - keeps track of all observers and provides the facility to add or remove observers
+  - updates oberservers when any change occurs
+Observer
+  - defines method that should be called whenever there is a change
