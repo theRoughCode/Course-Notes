@@ -336,3 +336,10 @@ UML for classes
 - Composition: not shared association
   - class A has exclusive ownership over class B
   - use a solid diamond
+
+
+Forward Declaration
+- declaration of an identifier which has not been defined
+- forward declare classes instead of including headers
+- Do not use #include as it will introduce a dependency that willl cause your code to be recompiled whenever the header file is changed
+- significicantly reduces the number of header files needed

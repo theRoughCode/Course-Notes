@@ -108,6 +108,12 @@ Exception Specification
   - default action of unexpected() is to end the program
   - can be changed with 'set_unexpected';
 
+C++11
+- throw is deprecated
+- use noexcept
+- if a function might throw, omit any throw statement or use noexcept(false)
+- if a function does not throw, use noexcept(true)
+
 Inheritance and Exceptions
 - If we have a derived class D of class B, and B is in the exception specification, then a thrown D will be treated normally with no automatic type conversion done
 - if double is in the exception specification and an int value is thrown, the int value exception is not accounted for

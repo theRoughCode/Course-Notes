@@ -173,6 +173,11 @@ for (auto &p : m)
   cout << p.first << p.second << endl;
   // p.first gets key
   // p.second gets value
+Using User-defined classes as key
+- class must be:
+  - copyable
+  - assignable
+  - comparable ( implement operator <)
 
 Visitor Pattern
 - double dispatch
@@ -243,6 +248,42 @@ int main() {
 3. virtual method strike (Bullet &b)
   - resolves to Rock::strike(Bullet &b)
 
+- visitor can be used to add functionality to existing classes without changing or recompiling classes
+e.g. Add a visitor to book hierarchy
+class Book {
+public:
+  virtual void accept(BookVisitor &v) {
+    v.visit(*this);
+  }
+};
+class Text : public Book {
+public:
+  void accept(BookVisitor &v) override {
+    v.visit(*this);
+  }
+};
+class Comic : public Book {
+public:
+  void accept(BookVisitor &v) {
+    v.visit(*this);
+  }
+};
+class BookVisitor {
+public:
+  virtual void visit(Book &b) = 0;
+  virtual void visit(Text &t) = 0;
+  virtual void visit(Comic &c) = 0;
+};
+// Track how many of each type of book we have.  Group books by author, texts by topic, comics by hero
+class Catalog : public BookVisitor {
+  map<string, int> theCatalog;
+public:
+  map<string, int> getCatalog() { return theCatalog; }
+  void visit(Book &b) { ++theCatalog[b.getAuthor()]; }
+  void visit(Text &t) { ++theCatalog[t.getTopic()]; }
+  void visit(Comic &c) { ++theCatalog[t.getHero()]; }
+};
+
 
 Observer Design Pattern
 - define a one-to-many dependency between objects so that when one object changes state, all dependents are notified/updated
@@ -251,3 +292,59 @@ Subject
   - updates oberservers when any change occurs
 Observer
   - defines method that should be called whenever there is a change
+
+Decorator Design Pattern
+- Attach additional responsibilities to an object dynamically
+- Provide a flexible alternative to subclassing for extending functionality
+- Recursively wrapping object
+- Inheritance is static and applies to enture class, decorator design pattern adds behaviour/state to individual objects dynamically
+- encapsulates the object inside an abstract wrapper interface which the decorator and core object inherit
+- allows responsibilities to be added not methods to objects interface
+- interface must remain constant as successive layers are specified
+Check List
+1. Ensure a single core component, several optional wrappers, and a common interface
+2. Create a "Lowest Common Denominator" interface that makes all classes interchangeable
+3. Create a second level base class (Decorator) to support optional wrapper classes
+4. Core and Decorator class inherit from LCD
+5. Decorator class declares a composition relationship to LCD interface, and this data member is initialized in its constructor
+6. Decorator class delegates to LCD object
+7. Define a Decorator derived class for each optional wrapper
+8. Decorator derived classes implement their wrapper functionality and delegate to Decorator base class
+9. Client configures the type and ordering of Core and Decorator objects
+
+
+
+
+Pimpl idiom
+- pointer to implementation
+class XWindow {
+  Display *d;
+  Window w;
+  int s;
+  GC gc;
+  unsigned long colours[10];
+};
+
+// XWindowImpl.h
+#include<x11/Xlib.h>
+class XWindowImpl {
+public:
+  Display *d;
+  Window w;
+  int s;
+  GC gc;
+  unsigned long colours[10];
+};
+// window.h
+class XWindowImpl;
+class XWindow {
+  XWindow *pImpl;  // private pointer to public class
+};
+// window.cc
+#include "window.h"
+#include "XWindowImpl.h"
+XWindow::XWindow() : pImpl { new XWindowImpl } {}
+
+Tips:
+- include as few other header files as possible in header files
+- Do the #include in the .cc file instead of .h file where possible
