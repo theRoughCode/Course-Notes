@@ -23,39 +23,6 @@ Escape Sequences
 Raw String Literals
  - 'R"(string)'
 
-Type Casting
-- '(data type to cast)'
-- static_cast<Type> (Expression)
-  - function that takes in a type and returns an "equivalent" value of type Type
-  - superclass pointer to subclass pointer
-  - does not change the value of variable in expression
-- const_cast<Type> (Expression)
-  - cast away constantness
-  void g(int *p);
-  void f(const int *p) {
-    g(const_cast<int*>(p));
-  }
-- dynamic_cast<Type> (Expression)
-  - downcasting from a type to a descendent type
-  - safer than static_cast, but less efficient
-  - returns null if different types
-  Book *pb;
-  Text *pt = static_cast<Text>(pb)->getTopic();  // might throw error
-  // alternative
-  Book *pb;
-  Text *pt = dynamic_cast<Text>(pb);  // might throw error
-  if(pt) cout << pt-?getTopic();
-  else cout << "Not a Text";
-  - if cast works => pt points to object
-  - otherwise => nullptr
-  - only works on classes that have at least one virtual method
-
-- reinterpret_cast<Type> (Expression)
-  - implementation-dependent cast, unsafe
-  Student s;
-  Turtle *t = reinterpret_cast<Turtle*>(&s);
-  - forces student to be treated as turtle
-
 Enums
  - Variable that cna only take on specific values
  - enum car = { "Toyota", "Mercedes", "BMW" }

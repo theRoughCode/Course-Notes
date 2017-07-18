@@ -159,7 +159,26 @@ Downcasting: casting from ancestor type to descendent
     1. Keep track of things so you know the info to be added is present
     2. Member functions must be virtual since dynamic_cast uses the virtual functions info to perform cast
 
+How C++ implements late binding
 virtual function table: created for a class that has one or more member functions that are virtual
   - has a pointer for each virtual member function
   - if inherited virtual function is not changed, table points to definition in ancestor class
   - if virtual function has a new definition, pointer points to that definition
+  - a vptr is placed in each class with virtual functions which points to the vtable of that object
+- When you make a virtual function call through a base class pointer, the compiler inserts code to fetch the vptr
+- When there is no virtual function the size of the object is equal to the size of its members
+- With one or more virtual function, the size includes an extra size of a void pointer (points to vtable)
+- once the object with virtual functions is created the vptr is initailized to point to the starting address of the vtable
+
+Book *pb = new Book;
+OR
+auto pb = make_shared<Book>();
+pb->isitHeavy();
+
+Steps in Calling Virtual Method
+1. Follow vptr to the vtable
+2. Fetch the pointer to the actual method from the vtable
+3. Follow the function pointer and call the function
+- Happens at runtime
+- virtual function call incurs small overhead
+- classes without virtual functions produce smaller objects
