@@ -72,7 +72,7 @@ Mechanism of RTTI (dynamic_cast)
 When dynamic_cast<destination*> (src) is used:
 1. source pointers RTTI info is retrieved
 2. RTTI info of destination is fetched
-3. Libaray routine then determines whether source pointers type is of destination type or base class type
+3. Library routine then determines whether source pointers type is of destination type or base class type
 
 Creating Your Own RTTI
 - static_pointer_cast, const_pointer_cast, dynamic_pointer_cast all use share_ptr in <memory>

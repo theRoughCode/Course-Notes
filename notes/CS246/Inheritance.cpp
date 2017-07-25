@@ -56,3 +56,8 @@ Multiple Inheritance
 "Is a" vs "Has a" Relationship
 - "Is a" -> inheritance
 - "Has a" -> class contains objects of another class as member dat
+
+
+Diamond Inheritance
+- If you have multiple base classes and those base classes have a common base class, you will have 2 copies of the original base class
+- If we want only one copy, we make the base class virtual

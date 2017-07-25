@@ -58,3 +58,29 @@ Lvalue: has an address explicitly accessible by the program
 Rvalue: not an Lvalue
   - Rvalue reference: &&
   - may be used to initialize a sconst Lvalue reference
+
+
+Smart Pointers
+- wrapper classes for pointers pointing to dynamic memory: shared_ptr, unique_ptr, weak_ptr
+- unique_ptr is the only pointer that points to a block of heap memory
+  - supports operator[] and array initialization
+  - used to model composition relationship
+- shared_ptr allows many pointers that all point to the same block of heap memory and only deletes the memory when no other shared_ptr point to it
+- weak_ptr is similar to shared_ptr but doesnt count towards the "shared count"
+  - used to implement temporary ownership of a shared_ptr
+  - used to prevent cyclic ownership in shared_ptr
+  - usage of weak_ptr is different than shared_ptr and unique_ptr.
+- Raw pointers still have some uses even if ou use smart pointers to manage dynamically-allocated memory
+  // a node for doubly linked list
+  template <typename T>
+  struct Node  {
+    T data;
+    std::unique_ptr<Node<T>> next;
+    // Raw pointers are ok to use for modelling has-a relationship
+    Node<T> *prev;
+  }
+
+  Dangers of Shared Pointers
+  - should use std::make_shared and std::make_unique rather than use new
+    - If you have both raw and smart pointers to the same piece of heap memory then you might not realize when the memory is released
+    - use raw pointers to create 2 smart pointers have INDEPENDENT "count" values and most certainly will lead to double free errors
