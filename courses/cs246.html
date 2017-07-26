@@ -3,6 +3,7 @@
   <head>
     <title>CS 246 Notes</title>
     <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
   </head>
   <body>
     <a name="top"></a>
@@ -31,6 +32,7 @@
       <li><code>cat file1.txt - file2.txt</code> takes in <samp>file1.txt</samp>, then keyboard input (end with <samp>ctrl-D</samp>), then <samp>file2.txt</samp></li>
       <li><code>man cat</code> provides info about cat command</li>
     </ul>
+
     <i style="margin-left: 20px;">Ctrl-C vs. Ctrl-D</i>
     <ul style="list-style:none; margin-top: 0;">
       <li><samp>Ctrl-C</samp>: kills a process and stops what it is doing by sending an interrupt signal</li>
@@ -61,6 +63,7 @@
           <li><code>~/</code> (home)</li>
         </ul>
     </ul>
+
     <b>exit</b>: terminates the shell session<br />
     <b>echo</b>: write arguments, separated by spaces and terminated with a newline<br />
     <b>rm</b>: remove<br />
@@ -98,6 +101,7 @@
       <li>e.g. <code>cat > output_file.txt</code> saves content of keyboard input to file</li>
       <li>e.g. <code>cat file1.txt file2.txt</code> combines file1 and file2 to new file</li>
     </ul>
+
     <h2>Wildcards</h2>
     <ul>
       <li>used for pattern matching and searching for files names with specific characters</li>
@@ -106,6 +110,7 @@
       <li>e.g. <code>cat file?.txt</code> shows the content of all files that start with the word 'file' then a single character or digit of type <samp>.txt</samp></li>
       <li>e.g. <code>ls *file*.txt</code> list all files that has the word 'file' anywhere in its name</li>
     </ul>
+
     <h2>Pipes</h2>
     <ul>
       <li>can pipe the output of certain commands into the input of another command (i.e. chains commands)</li>
@@ -158,9 +163,9 @@
       <li>if file doesnt exist, it creates an empty file</li>
       <li><code>touch -t</code> sets the time</li>
       <li>e.g.
-        <pre><code>touch tomato
+        <pre class="prettyprint lang-bsh linenums:1">touch tomato
 touch -t 0606060606 tomato
-touch tomato</code></pre>
+touch tomato</pre>
 
 This creates a file called tomato, sets the time stamp of tomato to June 6, 2006, 6:07
       </li>
@@ -303,6 +308,7 @@ echo $1 + $2 = $result</code>
           </pre>
         </li>
       </ul>
+
       <h2>Single Quotation vs Double Quotation</h2>
       <ul style="list-style:none;padding-left:0;">
         <li><code>echo "$HOME"</code> -> /home/rcykoh</li>
@@ -329,6 +335,7 @@ fi</code>
         <li><samp>-eq -ne</samp> check if equal, not equal</li>
         <li><samp>-gt -lt -ge -le</samp> check if greater, less, greater or equal, less or equal</li>
       </ul>
+
       <h2>String Manipulation</h2>
       <ul>
         <li><samp>${#string}</samp> return the length of string</li>
@@ -343,6 +350,7 @@ do
   commands
 done</code>
       </pre>
+
       <h2 style="margin-bottom:0;">Testing</h2>
       Why we test?
       <ol>

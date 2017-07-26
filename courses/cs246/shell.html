@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 Notes</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <title>CS 246 :: Shell</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/cs246.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="#">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">The Shell</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Shell Commands</a></li>
+                    <li><a href="#2">Standard File Streams</a></li>
+                    <li><a href="#3">Wildcards</a></li>
+                    <li><a href="#4">Pipes</a></li>
+                    <li><a href="#5">Users and Groups</a></li>
+                    <li><a href="#6">Regular Expressions</a></li>
+                    <li><a href="#7">Bash Scripts</a></li>
+                    <li><a href="#8">Testing</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <ul>
+                  <li>The <b>shell</b> is a program that reads commands and interprets them.</li>
+                  <li>Shell commands interact with the file system.</li>
+                </ul>
+                <h2><a name="1"></a>Shell Commands</h2>
+                <b>cat</b>: Prints out the content of a file or combine multiple files to standard output
+                <ul>
+                  <li><code>cat file1.txt</code> prints out file1.txt</li>
+                  <li><code>cat file1.txt file2.txt</code> combines both files</li>
+                  <li><code>cat</code>/<code>cat -</code> takes in keyboard input and outputs it (<samp>ctrl-D</samp> ends)</li>
+                  <li><code>cat file1.txt - file2.txt</code> takes in <samp>file1.txt</samp>, then keyboard input (end with <samp>ctrl-D</samp>), then <samp>file2.txt</samp></li>
+                  <li><code>man cat</code> provides info about cat command</li>
+                </ul>
+                <div class="note">
+                  <div>
+                    <i>Ctrl-C vs. Ctrl-D</i>
+                    <ul style="list-style:none; margin-top: 0; margin-left: -20px;">
+                      <li><samp>Ctrl-C</samp>: kills a process and stops what it is doing by sending an interrupt signal</li>
+                      <li><samp>Ctrl-D</samp>: EOF signal</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <b>head</b>: Displays first few (10) lines of a file<br />
+                <b>tail</b>: Displays last few (10) lines of a file<br />
+                <code>-n[# of lines]</code>/<code>-[# of lines]</code>: specify number of lines
+                <br /><br />
+                <b>ls</b>: lists the contents of the current directory<br />
+                <b class="indent">ls -a</b>: lists all contents including hidden files (files that start with '.')<br />
+                <b class="indent">ls -l</b>: lists the contents of a directory in a long listing format (<code>ls -l [filename]</code> displays info for a file in long listing format)<br /><br />
+
+                <b>pwd</b>: shows the current working directory<br /><br />
+                <b>cd</b>: change directory
+                <ul>
+                  <li><code>cd</code>/<code>cd ~</code> home directory</li>
+                  <li><code>cd [directory]</code> specified directory</li>
+                  <li><code>cd ..</code> parent directory</li>
+                  <li><code>cd /</code> root directory</li>
+                  <li><code>cd -</code> previous directory</li>
+                  <li>Absolute directories begin with <code>/</code></li>
+                  <li>Relative directories begin with
+                    <ul>
+                      <li><code>./</code> (current)</li>
+                      <li><code>../</code> (parent)</li>
+                      <li><code>~/</code> (home)</li>
+                    </ul>
+                </ul>
+
+                <b>exit</b>: terminates the shell session<br />
+                <b>echo</b>: write arguments, separated by spaces and terminated with a newline<br />
+                <b>rm</b>: remove<br />
+                <b style="margin-left: 20px;">rm -f</b>: force remove<br />
+                <b>less</b>: loads a text file one page at a time rather than all at once<br />
+                <b>wc</b>: displays the number of words, bytes, and lines in a file<br />
+                <b style="margin-left: 20px;">wc -w</b>: word count<br />
+                <b style="margin-left: 20px;">wc -l</b>: line count<br />
+                <b>sort</b>: sort lines of text file (alphabetical)<br />
+                <ul style="margin-top: 0;">
+                  <li>Lines starting with a number will appear before lines starting with a letter.</li>
+                  <li>Sorted in increasing alphabetical order based on first character</li>
+                  <li>Lines starting with a lowercase letter will appear before lines starting with the same letter in uppercase.</li>
+                  <li><code>sort -r</code>: sorts in reverse order</li>
+                </ul>
+
+                <h2><a name="2"></a>Standard File Streams</h2>
+                There are 3 standard file streams:
+                <ol>
+                  <li><code>stdin</code> with descriptor value of 0 (e.g. keyboard)</li>
+                  <li><code>stdout</code> with descriptor value of 1 (e.g. terminal)</li>
+                  <li><code>stderr</code> with descriptor value of 2 (e.g. log file)</li>
+                </ol>
+                <b>Input Redirection</b>: <code>stdin</code> is often supplied by directing an input to come from a file or previous output command using Pipe.
+                <ul>
+                  <li><code>doCommand < input_file</code></li>
+                  <li>e.g. <code>cat < file1.txt</code> redirects keyboard input from file1.txt.  <i>Note</i> that this is different from <code>cat file1.txt</code> which opens the file and prints out content</li>
+                </ul>
+                <b>Output Redirection</b>: <code>stdout</code> is often redirected to a file, <code>stderr</code> is usually printed to terminal but sometimes redirected to a log file
+                <ul>
+                  <li><code>doCommand > output_file</code> for stdout</li>
+                  <li><code>doCommand 2> error_file</code> for stderr</li>
+                  <li><code>doCommand > output_file 2>&1</code> redirects the error messages to the same location where output is (or in bash: <code>doCommand >% output_file</code>)</li>
+                  <li><code>doCommand >> output_file</code> appends to start of file</li>
+                  <li>e.g. <code>cat > output_file.txt</code> saves content of keyboard input to file</li>
+                  <li>e.g. <code>cat file1.txt file2.txt</code> combines file1 and file2 to new file</li>
+                </ul>
+
+                <h2><a name="3"></a>Wildcards</h2>
+                <ul>
+                  <li>used for pattern matching and searching for files names with specific characters</li>
+                  <li><code>?</code> replaces a single character or digit</li>
+                  <li><code>*</code> replaces a string of characters of digits</li>
+                  <li>e.g. <code>cat file?.txt</code> shows the content of all files that start with the word 'file' then a single character or digit of type <samp>.txt</samp></li>
+                  <li>e.g. <code>ls *file*.txt</code> list all files that has the word 'file' anywhere in its name</li>
+                </ul>
+
+                <h2><a name="4"></a>Pipes</h2>
+                <ul>
+                  <li>can pipe the output of certain commands into the input of another command (i.e. chains commands)</li>
+                  <li><code>commandA | commandB | commandC</code></li>
+                  <li><code>head -n11 file3.txt | tail -n2</code> displays lines 10 and 11 of <samp>file3.txt</samp></li>
+                </ul>
+
+                <h2><a name="5"></a>Users and Groups</h2>
+                <li>
+                  Each user is assigned a userid<br />
+                </li>
+                <b>who</b>: lists the currently logged-in users to the system<br />
+                <b>whoami</b>: lists current user<br />
+                <h3>File Permissions</h3>
+                Files have three types of permissions:
+                <ol style="margin-top: 0;">
+                  <li>read (r)</li>
+                  <li>write (w)</li>
+                  <li>execute (x)</li>
+                </ol>
+                There are 4 main types of users:
+                <ol style="margin-top: 0;">
+                  <li>user (u)</li>
+                  <li>group (g)</li>
+                  <li>others (o)</li>
+                  <li>all (a)</li>
+                </ol>
+                File permissions are ordered by user, group, others. For example,<br />
+                <code>drwxr-xr-x</code> means:
+                <ul style="margin-top: 0;">
+                  <li><code>d</code>: directory</li>
+                  <li><code>rwx</code>: user has rwx access</li>
+                  <li><code>r-x</code>: group has r and x access</li>
+                  <li><code>r-x</code>: others have r and x access</li>
+                </ul>
+                <b>chmod</b>: change permissions of a file
+                <ul style="margin-top: 0;">
+                  <li><code>+</code> adds permission</li>
+                  <li><code>-</code> removes permission</li>
+                  <li><code>=</code> sets permission</li>
+                  <li>e.g. <code>chmod u-r file</code> removes read permission from user for file</li>
+                  <li>e.g. <code>chmod o+x file</code> adds execute permission to others</li>
+                  <li>e.g. <code>chmod a=rwx file</code> gives everybody full control</li>
+                </ul>
+                <b>which</b>: search where an application resides (e.g. <code>which ls</code> searches where the ls command resides)<br />
+                <b>whereis</b>: search broader range of directories and locate the source and man packages of the application<br />
+                <b>tree</b>: displays tree view of file system (e.g. <code>tree cs246</code> displays tree view of cs246 folder)<br />
+                <b>tac</b>: start from last line of a file and displays its contents backwards (e.g. <code>tac file1.txt file2.txt file3.txt</code> displays the contents of each file backwards, in order)<br />
+                <b>touch</b>: update the file timestamp to match the current time
+                <ul style="margin-top: 0;">
+                  <li>can be used to update the access, change and modify time</li>
+                  <li>if file doesnt exist, it creates an empty file</li>
+                  <li><code>touch -t</code> sets the time</li>
+                  <li>Create a file called tomato and set the time stamp of tomato to June 6, 2006, 6:07
+                    <pre class="prettyprint lang-bsh">touch tomato
+touch -t 0606060606 tomato
+touch tomato</pre>
+                  </li>
+                </ul>
+                <b>stat</b>: displays the detailed status of a particular file or file system<br />
+                <b>mkdir</b>: creates new directory<br />
+                <b>rmdir</b>: removes empty directory<br />
+                <b>mv</b>: move or/and rename a file (e.g. <code>mv alice.txt cs246/alicewonderland.txt</code> moves alice.txt into cs246 and rename to alicewonderland.txt)<br />
+                <b>sudo</b>: runs a program by the use of security privilege of another user often the root or super user<br />
+                <b>locate</b>: search through a previously created database of files and directory to find a match of your entry
+                <li>
+                  Move alice.txt into cs246 and rename to alicewonderland.txt.  Update the directory to reflect changes and locate the new location of alicewonderland
+                </li>
+                <pre class="prettyprint lang-bsh">mv alice.txt cs246/alicewonderland.txt
+updatedb
+locate alicewonderland</pre>
+                <br />
+                <b>awk</b>: extract and then print specific content of the file to generate reports<br />
+                <li>e.g. output the whole line</li>
+                <pre class="prettyprint lang-bsh">awk '{ print $0 }' fileName.txt</pre>
+                <b>cal</b>: displays the calendar<br />
+                <b>find</b>: searches for file<br />
+                  <ul style="margin-top:0;">
+                    <li><code>find [dir] -name file_name</code></li>
+                    <li>e.g. <code>find / -name ubunto > ubuntofiles.txt 2> logfile.txt less ubuntofiles.txt less logfile.txt</code> finds file named ubunto in the root dir and save results into a file, save errors into log file and display the first page of the two new files</li>
+                    <li><code>-delete</code> removes all files named <samp>file_name</samp> that are in the specified directory</li>
+                    <li><code>-exec [command]</code> executes command on specified files.  All following arguments are args to command until a <samp>;</samp>.  <samp>{}</samp> is the variable for each file</li>
+                    <li>e.g. <code>find / -name "*.txt" -exec rm {} \;</code> searches all <samp>txt</samp> files and deletes them.</li>
+                    <li><code>-size [size]</code> searches for all files of a specific size.</li>
+                    <ul>
+                      <li><code>b</code>: 512-byte blocks (default if no suffix is used)</li>
+                      <li><code>c</code>: bytes</li>
+                      <li><code>w</code>: two-byte words</li>
+                      <li><code>k</code>: Kilobytes (units of 1024 bytes)</li>
+                      <li><code>M</code>: Megabytes (units of 1048576 bytes)</li>
+                      <li><code>G</code>: Gigabytes (units of 1073741824 bytes)</li>
+                      <li><code>+</code>: bigger than specified size</li>
+                      <li><code>-</code>: smaller than specified size</li>
+                      <li>e.g. <code>find / -size +100M</code>: searches for all files bigger than 100MB</li>
+                    </ul>
+                  </ul>
+                  Difference between find and locate:
+                  <ol>
+                    <li><samp>locate</samp> is faster than <samp>find</samp></li>
+                    <li><samp>find</samp> has more functionality (can select files more than just name)</li>
+                    <li><samp>find</samp> doesn't necessarily search the entire filesystem, points to a subdirectory</li>
+                    <li><samp>find</samp> can perform operations to files it finds (<samp>exec</samp>, <samp>delete</samp>, <samp>size</samp>)</li>
+                    <li><samp>locate</samp>'s output can be outdated (needs to be updated by <samp>updatedb</samp>)</li>
+                  </ol>
+                  <b>uniq</b>: removes repeated, adjacent lines in a fil<br />
+                  e.g.
+                  <ul style="margin-top: 0;">
+                    <li><code>sort file3.txt file4.txt | uniq</code> sorts file3 and file4 and removes duplicates</li>
+                    <li><code>sort file3.txt file4.txt | uniq | wc -l</code> counts number of lines in unique combination of file3 and file4</li>
+                  </ul>
+                  <b>grep</b>: searches for a pattern in a file name and prints all matching lines
+                  <ul style="margin-top: 0;">
+                    <li><code>grep [pattern] directory</code></li>
+                    <li><code>-v</code> print line NOT matched by the pattern</li>
+                    <li><code>-i</code> case-insensitive</li>
+                    <li><code>-egrep</code>/<code>grep -E</code> uses extended regular expressions, such as <samp>+, ?, |, (, )</samp></li>
+                    <li>e.g. <code>egrep "(T|t)he" 1001nights.txt | wc -l</code> counts the number of lines where the word 'the' or 'The' appeared in 1001night.txt</li>
+                  </ul>
+                  <b>shutdown</b>: halts the machine
+                  <ul style="margin-top: 0;">
+                    <li><code>-h</code> schedules shutdown at current time</li>
+                    <li>e.g. <code>shutdown -h 10:00</code> schedules shut down at 10am</li>
+                    <li><code>-r</code> restarts machine</li>
+                  </ul>
+
+                  <h2><a name="6"></a>Regular Expressions (RegEx)</h2>
+                  <ul style="margin-top: 0;">
+                    <li><code>.</code> matches any single character</li>
+                    <li><code>|</code> matches either</li>
+                    <li><code>$</code> matches end of string</li>
+                    <li><code>^</code> matches beginning of string</li>
+                    <li><code>*</code> matches preceding item 0 or more times</li>
+                    <li><code>+</code> matches preceding item 1 or more times</li>
+                    <li><code>?</code> matches preceding item 0 or 1 times</li>
+                    <li><code>{n}</code> matches preceding item exactly n occurences</li>
+                    <li><code>[...]</code> matches any character in set</li>
+                    <li>e.g. <code>(W|w)onderland</code> matches Wonderland or wonderland</li>
+                    <li><code>[C|c][S|s][0-9]{3}</code> matches any CS course</li>
+                  </ul>
+                  <div class="note">
+                    <div>
+                      You can test your RegEx at <a href="https://regex101.com/">https://regex101.com/</a> or <a href="https://regex101.com/">https://regex101.com/</a>
+                    </div>
+                  </div>
+
+                  <h2><a name="7"></a>Bash Scripts</h2>
+                  Benefits:
+                  <ul>
+                    <li>Automate tasks</li>
+                    <li>Simple commands</li>
+                    <li>Users are given a controlled interface</li>
+                    <li>Combination of utilities to form new commands</li>
+                    <li>Quick protoyping of functionalities wthout compiling codes</li>
+                  </ul>
+                  <code>#!/bin/bash</code> specifies the path of the interpreter.  Bash scripts are saved with a ".sh" (shell) extension
+                  <br />
+                  <code>chmod u+x [fileName].sh</code> makes files executable
+
+                  <h3>Interactive script</h3>
+                  e.g. Write a script that will read your name and student id and display to output
+                  <pre class="prettyprint lang-bsh">#!/bin/bash
+echo "What is your name?"
+read name
+echo "Enter your student ID"
+read id
+echo your name is $name and your id is $id</pre>
+
+                  <code>Exit</code>: set return value<br />
+                  <code>$?</code>: view return value of most recent command<br />
+                  <code>\</code>: indicates continuation in the next line/split line into multiple lines<br />
+                  <code>;</code>: separates commands<br />
+                  <code>&&</code>: aborts subsequent commands if one fails<br />
+                  <code>||</code>: proceeds until success
+                  <br />
+                  <code>$0</code>: script name<br />
+                  <code>$1, $2</code> ...: First, Second, ... Parameters<br />
+                  <code>$*</code>: all parameters<br />
+                  <code>$#</code>: number of parameters<br />
+
+                  <h3>Command Substitution</h3>
+                  - store result of a command<br />
+                  - Enclose inner command with backticks <samp>``</samp> or enclose with <samp>$()</samp><br />
+                  - innermost command is executed first and its standard output is inserted where substitution is done<br />
+                  - <samp>$()</samp> allows nesting<br />
+                  - <samp>expr</samp>: evaluate an expression
+                  <ul>
+                    <li>arithmetics</li>
+                    <li>comparison</li>
+                    <li>logical</li>
+                    <li><samp>$(())</samp> or <samp>$(expr ...)</samp></li>
+                    <li>
+                      e.g. Add two inputs and print both summation
+                      <pre class="prettyprint lang-bsh">#!/bin/bash
+result=$(expr $1 + $2)
+echo $1 + $2 = $result</pre>
+                    </li>
+                  </ul>
+
+                  <div class="note">
+                    <div>
+                      <b>Single Quotation vs Double Quotation</b>
+                      <ul style="list-style:none;padding-left:0;">
+                        <li><code>echo "$HOME"</code> -> /home/rcykoh</li>
+                        <li><code>echo '$HOME'</code> -> $HOME</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3>If Statements</h3>
+                  <pre class="prettyprint lang-bsh">if [condition]
+then
+  statements
+elif [condition]
+then
+  statements
+else
+  statements
+fi</pre>
+
+                  The following flags can be put inside the condition:
+                  <ul>
+                    <li><code>-f</code> check if regular file exists</li>
+                    <li><code>-e</code> check if file exists</li>
+                    <li><code>-d</code> check if directory</li>
+                    <li><code>-r -w -x</code> check if readable, writable, executable</li>
+                    <li><code>-eq -ne</code> check if equal, not equal</li>
+                    <li><code>-gt -lt -ge -le</code> check if greater, less, greater or equal, less or equal</li>
+                  </ul>
+
+                  <h3>String Manipulation</h3>
+                  <ul>
+                    <li><code>${#string}</code> return the length of string</li>
+                    <li><code>${string:s:n}</code> return substring from start s for length n</li>
+                    <li><code>${string#*.}</code> extract characters after dot (.)</li>
+                    <li><code>${string%txt}</code> extract string before the txt</li>
+                  </ul>
+
+                  <h3>For Loop</h3>
+                  <pre class="prettyprint lang-bsh">for var in list
+do
+  commands
+done</pre>
+
+                  <h2><a name="8"></a>Testing</h2>
+                  Why we test?
+                  <ol>
+                    <li>Make judgement about quality or acceptability of program</li>
+                    <li>To discover errors</li>
+                  </ol>
+                  Goals of Test:
+                  <ol>
+                    <li>Find failure</li>
+                    <li>Demonstrate correct execution</li>
+                  </ol>
+                  <b>Deficient fix</b>: when a fix causes previously correct software to misbehave
+                  <h3 style="margin-bottom:0;">Test Case</h3>
+                  - essence of software testing to determine a set of test cases for the item to be tested
+                  <ul>
+                    <li>Specification-based Testing</li>
+                    <ul>
+                      <li>programs can be considered functions that map values from input domain to values in its output range</li>
+                      <li>black box testing</li>
+                      <li>content of black box is not known</li>
+                      <li>only understand input and output</li>
+                      <li>Advantages:</li>
+                      <ol>
+                        <li>Independent of how software is implemented</li>
+                        <li>Test case development occur in parallel with implementation</li>
+                      </ol>
+                      <li>Disadvantages:</li>
+                      <ol>
+                        <li>Significant redundancies</li>
+                        <li>Gaps of untested software</li>
+                      </ol>
+                    </ul>
+                    <li>Code-based Testing</li>
+                      <ul>
+                        <li>white box testing</li>
+                        <li>implementation is known</li>
+                        <li>if program implements a behaviour not specified, this will never be revealed</li>
+                      </ul>
+                  </ul>
+                  <h3 style="margin-bottom:0;">How to Test</h3>
+                  <ul>
+                    <li>Start with black box testing because it is only dependent on the specification not the implementation</li>
+                    <li>Supplement with white box: cover several places in your program</li>
+                    <li>Black Box Testing</li>
+                    <ul>
+                      <li>Test the boundaries of valid input (edge cases)</li>
+                      <li>Multiple simultaneous boundaries</li>
+                      <li>Experienced tester will be able to guess what type of input is more likely to generate an error</li>
+                      <li>Test extreme cases</li>
+                    </ul>
+                    <li>White Box Testing</li>
+                    <ul>
+                      <li>Execute all lines of code</li>
+                      <li>Execute all logical paths</li>
+                      <li>Check that all functions run</li>
+                    </ul>
+                    <li>Regression Testing</li>
+                    <ul>
+                      <li>New changes do not cause previous code to break</li>
+                      <li>Run a set of test suites and testing scripts that contain previously checked tests after each addition of the code or bfore every release</li>
+                    </ul>
+                  </ul>
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    const lastMod = document.querySelector('#last_modified');
+    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+    </script>
+  </body>
+</html>

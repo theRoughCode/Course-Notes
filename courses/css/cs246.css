@@ -1,0 +1,47 @@
+body {
+  background-color: white;
+}
+
+h2 {
+  margin-top: 40px;
+}
+
+#title_text {
+  text-align: center;
+  font-size: 50px;
+}
+
+.col-lg-12 {
+  padding-bottom: 70px;
+}
+
+.note {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.note div {
+  text-align: left;
+  border: 1px solid grey;
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  overflow: auto;
+  max-width: 70%;
+  background-color: #d6e4f9;
+}
+
+.indent {
+  margin-left: 20px;
+}
+
+.footer {
+  position: relative;
+  margin-top: -70px; /* negative value of footer height */
+  height: 70px;
+  clear:both;
+}
+
+.footer p {
+  position: absolute;
+  bottom: 0;
+}
