@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 Notes</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <title>CS 246 :: C++</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/cs246.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">C++</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Object-Oriented Programming</a></li>
+                    <li><a href="#2">Standard File Streams</a></li>
+                    <li><a href="#3">Wildcards</a></li>
+                    <li><a href="#4">Pipes</a></li>
+                    <li><a href="#5">Users and Groups</a></li>
+                    <li><a href="#6">Regular Expressions</a></li>
+                    <li><a href="#7">Bash Scripts</a></li>
+                    <li><a href="#8">Testing</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2><a name="1"></a>Object-Oriented Programming</h2>
+                The main characteristics of OOP are:
+                <ol>
+                  <li>Encapsulation</li>
+                  <ul>
+                    <li>Form of information hiding or abstraction by restricting access to only accessors and mutators</li>
+                    <li>Abstraction decomposes complex systems into smaller components</li>
+                    <li>Data Validation: ensure only appropriate data is assigned to class private member variables</li>
+                  </ul>
+                  <li>Inheritance</li>
+                  <ul>
+                    <li>Objects can relate to each other with a "has a" (has a class inside its definition) or "is a" (derived class) relationship</li>
+                  </ul>
+                  <li>Polymorphism</li>
+                  <ul>
+                    <li>Multiple methods with the same name but different functionality</li>
+                    <li>Overriding (run-time polymorphism) and overloading (compile-time polymorphism)</li>
+                  </ul>
+                </ol>
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    const lastMod = document.querySelector('#last_modified');
+    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+    </script>
+  </body>
+</html>
