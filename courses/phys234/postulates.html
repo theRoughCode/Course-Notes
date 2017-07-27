@@ -40,11 +40,13 @@
           <li class="sidebar-brand">
               <a href="../../index.html">UW Couse Notes</a>
           </li>
-          <li><a href="#">Postulates of Quantum Mechanics</a></li>
-          <li><a href="#">Time Evolution</a></li>
-          <li><a href="#">Bound States</a></li>
-          <li><a href="#">Unbound States</a></li>
-          <li><a href="#">Harmonic Oscillator</a></li>
+          <li><a href="#1">Properties of Quantum Mechanical Systems</a></li>
+          <li><a href="#2">Postulates of Quantum Mechanics</a></li>
+          <li><a href="#3">$S_x$ and $S_y$ basis</a></li>
+          <li><a href="#4">Matrix Notation</a></li>
+          <li><a href="#5">General Quantum Systems</a></li>
+          <li><a href="#6">Operators</a></li>
+          <li><a href="#7">Diagonalizaton of Operators</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -62,16 +64,32 @@
                   <!-- Table of Contents -->
                   <h1>Table of Contents</h1>
                   <ol id="nav">
-                    <li><a href="#1">Postulates of Quantum Mechanics</a></li>
-                    <li><a href="#">Time Evolution</a></li>
-                    <li><a href="#">Bound States</a></li>
-                    <li><a href="#">Unbound States</a></li>
-                    <li><a href="#">Harmonic Oscillator</a></li>
+                    <li><a href="#1">Properties of Quantum Mechanical Systems</a></li>
+                    <li><a href="#2">Postulates of Quantum Mechanics</a></li>
+                    <li><a href="#3">$S_x$ and $S_y$ basis</a></li>
+                    <li><a href="#4">Matrix Notation</a></li>
+                    <li><a href="#5">General Quantum Systems</a></li>
+                    <li><a href="#6">Operators</a></li>
+                    <li><a href="#7">Diagonalizaton of Operators</a></li>
                   </ol>
                 </div>
                 <!-- Table of Contents -->
 
-                <h2><a name="1"></a>Postulates of Quantum Mechanics</h2>
+                <h2><a name="1"></a>Properties of Quantum Mechanical Systems</h2>
+                <ul>
+                  <li>
+                    Quantum mechanics is probabilistic.  We cannot predict the results of an experiment precisely, only the probability that a certain result is measured.
+                  </li>
+                  <li>
+                    Spin measurements are quantized.  Only discrete results are measured.
+                  </li>
+                  <li>
+                    Quantum measurements disturb the system.  Measuring one physical observable destroys existing information about other observable.
+                  </li>
+                </ul>
+
+
+                <h2><a name="2"></a>Postulates of Quantum Mechanics</h2>
                 <ol>
                   <li>
                     The state of a quantum mechanical system, including all the information you can know about it, is represented mathematically by a normalized ket $\ket{\psi}$.
@@ -124,14 +142,22 @@
                     </ul>
                   </li>
                 </ol>
-                <u>Ex 1.</u> Determine $\braket{+}{\psi}$.
-                $$\begin{align*}
-                  \braket{+}{\psi}&=\bra{+}(a\ket{+}+b\ket{-})\\
-                  &=\braketo{+}{a}{+} + \braketo{+}{b}{-}\\
-                  &= a\braket{a}{a} + b\braket{+}{-}\\
-                  &= a
-                \end{align*}$$
-                <i style="margin-left: 20px;">* Note that $\braket{-}{\psi}=b$</i>
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 1</u>. Determine $\braket{+}{\psi}$.
+                    <button id="exButton">Show solution</button>
+                  </div>
+                  <div id="solution">
+                    $$\begin{align*}
+                      \braket{+}{\psi}&=\bra{+}(a\ket{+}+b\ket{-})\\
+                      &=\braketo{+}{a}{+} + \braketo{+}{b}{-}\\
+                      &= a\braket{a}{a} + b\braket{+}{-}\\
+                      &= a
+                    \end{align*}$$
+                    <i>* Note that $\braket{-}{\psi}=b$</i>
+                  </div>
+                </div>
+
                 <div class="note">
                   <div>
                     We can also show that $\braket{\phi}{\psi}=\braket{\psi}{\phi}^*$.
@@ -158,7 +184,7 @@
                 </div>
                 The inner product, $\braket{+}{\psi}$ is called the <u>probability amplitude</u>.  The probability amplitude, when written in Bra-Ket notation, represents the input state on the <i>right</i> and the output state on the <i>left</i>. (i.e. $\braket{+}{\psi}$ represents measuring an input general state vector in the $+z$ direction)
 
-                <h3>$S_x$ basis</h3>
+                <h2><a name="3"></a>$S_x$ and $S_y$ basis</h2>
                 If we have a state vector in the $S_z$ basis and measure it along the x-axis, we get the following probabilities:
                 $$P_{+,+x}=|_x\braket{+}{+}|^2=\frac{1}{2},\quad P_{+,-x}=|_x\braket{-}{+}|^2=\frac{1}{2}\\ P_{-,+x}=|_x\braket{+}{-}|^2=\frac{1}{2},\quad
                 P_{-,-x}=|_x\braket{-}{-}|^2=\frac{1}{2}$$
@@ -167,13 +193,23 @@
                 <i>We can choose one of the coefficients to be real and positive because <b>the overall phase is irrelevant</b></i>. <br />
                 Further applying the orthonormality property onto the $S_x$ kets, we get that $e^{i\alpha}=-e^{i\beta}$.  Choosing $\alpha=0$, we get
                 $$\ket{+}_x=\frac{1}{\sqrt{2}}(\ket{+}+\ket{-}),\quad\ket{-}_x=\frac{1}{\sqrt{2}}(\ket{+}-\ket{-})$$
+                In a similar way, together with the additional requirement that $|_y\braket{+}{+}_x|^2=\frac{1}{2}$, we get that
+                $$\ket{+}_y=\frac{1}{\sqrt{2}}(\ket{+}+i\ket{-}),\quad\ket{-}_y=\frac{1}{\sqrt{2}}(\ket{+}-i\ket{-})$$
 
-                <h3>Matrix Notation</h3>
+                <h2><a name="4"></a>Matrix Notation</h2>
                 State vectors can be represented as matrices.  By convention, they are written in the $S_z$ basis. Ket vectors are represented as column vectors. The basis kets are represented as:
                 $$\ket{+}\doteq\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right),\quad \ket{-}\doteq\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$$
                 <i>Basis kets are unit vectors when written in their own basis.</i>
                 The top element represents the amplitude in the spin-up state and the bottom element represents that in the spin-down state. The $S_x$ kets can be written as:
                 $$\ket{+}_x\doteq\frac{1}{\sqrt{2}}\left(\begin{smallmatrix}1\\1\end{smallmatrix}\right),\quad \ket{-}_x\doteq\frac{1}{\sqrt{2}}\left(\begin{smallmatrix}1\\-1\end{smallmatrix}\right)$$
+                Thus, we get:
+                <div class="note">
+                  <div>
+                    $$\begin{align*}&\ket{+}\doteq\left(\begin{matrix}1\\0\end{matrix}\right)&&\ket{+}_x\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\1\end{matrix}\right)&&\ket{+}_y\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\i\end{matrix}\right)\\
+                    &\ket{-}\doteq\left(\begin{matrix}0\\1\end{matrix}\right)&&\ket{-}_x\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\-1\end{matrix}\right)&&\ket{-}_y\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\-i\end{matrix}\right)\end{align*}$$
+                  </div>
+                </div>
+
                 The general state vector is represented as:
                 $$\ket{\psi}\doteq\left(\begin{smallmatrix}\braket{+}{\psi}\\\braket{-}{\psi}\end{smallmatrix}\right)$$
                 i.e. if $\ket{\psi}=a\ket{+}+b\ket{-}$, then $\ket{\psi}\doteq\left(\begin{smallmatrix}a\\b\end{smallmatrix}\right)$. <br /><br />
@@ -184,6 +220,127 @@
                   &=|a|^2+|b|^2
                 \end{align*}$$
                 <i>A bra is represented by a row vector that is the complex conjugate and transpose of the column vector representing its corresponding ket.</i>
+
+                <h2><a name="5"></a>General Quantum Systems</h2>
+                The properties of state vectors in a spin-$\frac{1}{2}$ system can be generalized to other quantum systems. Consider a system with an observable $A$ that has measurements $a_n$ for some finite $n$. We have the basis kets as $\ket{a_i}$ for $1\leq i\leq n$.
+                $$\braket{a_i}{a_j}=\delta_{ij}\quad\text{orthonormality}$$
+                $$\ket{\psi}=\sum_i\braket{a_i}{\psi}\ket{a_i}\quad\text{completeness}$$
+                <div class="note">
+                  <div>
+                    $$\delta_{ij}=\begin{cases}
+                      0, &i\neq j\\
+                      1, &i=j
+                    \end{cases}$$
+                  </div>
+                </div>
+                We also get the generalization of Postulate 4 as
+                <div class="note">
+                  <div>
+                    $$P_{a_n}=|\braket{a_n}{\psi_{in}}|^2$$
+                  </div>
+                </div>
+
+                <h2><a name="6"></a>Operators</h2>
+                An <b>operator</b> is a mathematical object that acts on a ket and transforms it into a new ket.
+
+                <div class="note">
+                  <div>
+                    <h3>Postulate 2</h3>
+                     A physical observable is represented mathematically by an operator $A$ that acts on kets.
+                  </div>
+                </div>
+
+                 There are special kets called <b>eigenvectors</b> that are not changed by a particular operator $A$, except for a multiplicative constant (<b>eigenvalues</b>).  i.e. $A\ket{\psi}=a\ket{\psi}$.
+
+                 <div class="note">
+                   <div>
+                     <h3>Postulate 3</h3>
+                      The only possible result of a measurement of an observable is one of the eigenvalues $a_n$ of the corresponding operator $A$.
+                   </div>
+                 </div>
+                 For example, with a physical observable $S_z$, we get the following <b>eigenvalue equations</b>:
+                 $$S_z\ket{+}=+\frac{\hbar}{2}\ket{+}\quad S_z\ket{-}=-\frac{\hbar}{2}\ket{-}$$
+
+                 <h3>Matrix Representation of Operators</h3>
+                 In matrix notation, operators are represented by an $nxn$ matrix.  For example, $S_z$ is represented by the following $2x2$ matrix:
+                 $$S_z\doteq\frac{\hbar}{2}\left(\begin{matrix}1&0\\0&-1\end{matrix}\right)$$
+                <div class="note">
+                  <div>
+                    An operator is always diagonal in its own basis, with its diagonal elements as its eigenvalues.
+                  </div>
+                </div>
+                For an observable $A$ in a spin-$\frac{1}{2}$ system, we have
+                $$A\doteq\left(\begin{matrix}\braketo{+}{A}{+}&\braketo{+}{A}{-}\\\braketo{-}{A}{+}&\braketo{-}{A}{-}\end{matrix}\right)$$
+                In general, $A_{ij}=\braketo{i}{A}{j}$, where $i$ and $j$ are the rows and columns respectively.
+
+                <div class="note">
+                  <div>
+                    $$S_x\doteq\frac{\hbar}{2}\left(\begin{matrix}0&1\\1&0\end{matrix}\right)\quad
+                    S_y\doteq\frac{\hbar}{2}\left(\begin{matrix}0&-1\\i&0\end{matrix}\right)\quad S_z\doteq\frac{\hbar}{2}\left(\begin{matrix}1&0\\0&-1\end{matrix}\right)$$
+                  </div>
+                </div>
+
+                <h3>Spin Component in a General Direction</h3>
+                A general direction $\hat{n}$, a unit vector, is represented in spherical coordinates as:
+                $$\hat{n}=\hat{i}\sin\theta\cos\phi +\hat{j}\sin\theta\sin\phi + \hat{k}\cos\theta$$
+
+                <h2><a name="7"></a>Diagonalizaton of Operators</h2>
+                This method is used to find the eigenvalues and eigenvaectors given an operator.  We start with the eigenvalue equation: $A\ket{a_n}=a_n\ket{a_n}$
+                <ol>
+                  <li>
+                    Rewrite the eigenvalue equation as $(A - a_nI)\ket{a_n}=0$ and express it in matrix notation.
+                    $$\left(\begin{matrix}A_{11}-a_n&A_{12}\\A_{21}&A_{22}-a_n\end{matrix}\right)\left(\begin{matrix}c_1\\c_2\end{matrix}\right)=\left(\begin{matrix}0\\0\end{matrix}\right)$$
+                  </li>
+                  <li>
+                    We get two sets of homogenous equations, which yield non-trivial solutions if the determinant of the coefficient matrix is zero.  Letting $\lambda=a_n$, we get the <b>characteristic equation</b> from $\det(A-\lambda I)=0$.
+                  </li>
+                  <li>
+                     Solve the characteristic equation for $\lambda$.  We get two roots which are the eigenvalues $a_1$ and $a_2$.
+                  </li>
+                  <li>
+                    Substitute it back into the eigenvalue equation and solve for the eigenvectors corresponding to each eigenvalue.
+                  </li>
+                </ol>
+
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 2</u>. Find the eigenvalues and eigenvectors for $S_y$.
+                    <button id="exButton"></button>
+                  </div>
+                  <div id="solution">
+                    <ol>
+                      <li>
+                        Rewrite the eigenvalue equation as $(S_y - \lambda I)\ket{\lambda}=0$
+                      </li>
+                      <li>
+                        Solve for the characteristic equation.
+                        $$\begin{align*}
+                          \det\left(\begin{matrix}-\lambda&-i\frac{\hbar}{2}\\i\frac{\hbar}{2}&-\lambda\end{matrix}\right)&=0\\
+                          \lambda^2-\bigg(\frac{\hbar}{2}\bigg)^2&=0
+                        \end{align*}$$
+                      </li>
+                      <li>
+                        Solve the characteristic equation for the eigenvalues:
+                        $\lambda=\pm\frac{\hbar}{2}$
+                      </li>
+                      <li>
+                        Substitute each eigenvalue back into the eigenvalue equation and solve for the corresponding eigenvector.<br />
+                        For $+\frac{\hbar}{2}$,
+                        $$\begin{align*}
+                          S_y\ket{+}_y&=+\frac{\hbar}{2}\ket{+}_y\\
+                          \frac{\hbar}{2}\left(\begin{matrix}0&-i\\i&0\end{matrix}\right)\left(\begin{matrix}a\\b \end{matrix}\right)&=+\frac{\hbar}{2}\left(\begin{matrix}a\\b \end{matrix}\right)\\
+                          \left(\begin{matrix}-ib\\ia \end{matrix}\right)&=\left(\begin{matrix}a\\b \end{matrix}\right)
+                        \end{align*}$$
+                        Solving this, we get: $a=\frac{1}{\sqrt{2}}$ and $b=i\frac{1}{\sqrt{2}}$.  Thus, the eigenvector corresponding to the $+\frac{\hbar}{2}$ eigenvalue is $\ket{+}_y\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\i \end{matrix}\right)$.<br />
+                        Likewise, we can find that $\ket{-}_y\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\-i \end{matrix}\right)$.
+                      </li>
+                    </ol>
+
+
+                  </div>
+                </div>
+
+
               </div>
             </div>
         </div>
@@ -215,6 +372,24 @@
     });
     const lastMod = document.querySelector('#last_modified');
     lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+
+    const exercises = document.querySelectorAll('.ex');
+    exercises.forEach(ex => {
+      const btn = ex.querySelector('#exButton');
+      const sln = ex.querySelector('#solution');
+      btn.innerHTML = 'Show solution';
+      sln.style.display = 'none';
+      btn.addEventListener('click', function(e) {
+        console.log(sln.style.display);
+        if (sln.style.display === 'none') {
+          sln.style.display = 'block';
+          btn.innerHTML = 'Hide solution';
+        } else {
+          sln.style.display = 'none';
+          btn.innerHTML = 'Show solution'
+        }
+      });
+    });
     </script>
   </body>
 </html>

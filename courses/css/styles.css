@@ -40,6 +40,32 @@ h3 {
   text-align: center;
 }
 
+.ex {
+  text-align: center;
+  width: 70%;
+  padding: 10px 0;
+  margin: 30px auto;
+  padding: 0.5em 0.7em;
+  border: 1px solid grey;
+  border-radius: 0.5em;
+  background: #f2f2f2;
+}
+
+.ex button {
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+.ex #question {
+  margin: 10px auto;
+  text-align: left;
+}
+
+.ex #solution {
+  display: none;
+  text-align: left;
+}
+
 .indent {
   margin-left: 20px;
 }
