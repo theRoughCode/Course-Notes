@@ -6,6 +6,10 @@ h2 {
   margin-top: 40px;
 }
 
+h3 {
+  margin-top: 30px;
+}
+
 #title_text {
   text-align: center;
   font-size: 50px;
@@ -18,16 +22,22 @@ h2 {
 .note {
   text-align: center;
   padding: 10px 0;
+  margin: 20px;
 }
 
 .note div {
   text-align: left;
   border: 1px solid grey;
   display: inline-block;
-  padding: 0.2em 0.5em;
+  padding: 0.5em 0.7em;
   overflow: auto;
   max-width: 70%;
   background-color: #d6e4f9;
+}
+
+.note h3 {
+  margin: 0.1em;
+  text-align: center;
 }
 
 .indent {

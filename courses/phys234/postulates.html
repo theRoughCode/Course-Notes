@@ -29,7 +29,9 @@
   </head>
   <body>
     <!-- MathJax Commands -->
-    $\newcommand{\ud}[1]{{#1^{\dagger}}} \newcommand{\bra}[1]{\left\langle #1\right|} \newcommand{\ket}[1]{\left| #1\right\rangle}$
+    <div style="display: none;">
+      $\newcommand{\ud}[1]{{#1^{\dagger}}} \newcommand{\bra}[1]{\left\langle #1\right|} \newcommand{\ket}[1]{\left| #1\right\rangle} \newcommand{\braket}[2]{\left\langle #1 | #2\right\rangle} \newcommand{\braketo}[3]{\left\langle #1 \right| #2 \left| #3\right\rangle}$
+    </div>
 
     <div id="wrapper">
       <!-- Sidebar -->
@@ -70,12 +72,118 @@
                 <!-- Table of Contents -->
 
                 <h2><a name="1"></a>Postulates of Quantum Mechanics</h2>
+                <ol>
+                  <li>
+                    The state of a quantum mechanical system, including all the information you can know about it, is represented mathematically by a normalized ket $\ket{\psi}$.
+                  </li>
+                  <li>
+                    A physical observable is represented mathematically by an operator $A$ that acts on kets.
+                  </li>
+                  <li>
+                    The only possible result of a measurement of an observable $A$ is one of its eigenvalues $a_n$.
+                  </li>
+                  <li>
+                    The probability of obtaining of obtaining the eigenvalue $a_n$ in a measurement of an observable $A$ on the system in the state $\ket{\psi}$ is $$P_{a_n}=|\braket{a_n}{\psi}|^2$$.
+                  </li>
+                  <li>
+                    After a measurement $A$ with eigenvalue $a_n$, the new state is the normalized projection of the original state onto the measurement's ket(s). $$\ket{\psi'}=\frac{P_n\ket{\psi}}{\sqrt{\braketo{\psi}{P_n}{\psi}}}$$.
+                  </li>
+                  <li>
+                    The time evolution of a quantum system is determined by the Hamiltonian (total energy operator), $H(t)$, through the Schrödinger equation:
+                    $$i\hbar\frac{d}{dt}\ket{\psi(t)}=H(t)\ket{\psi(t)}$$
+                  </li>
+                </ol><br /><br />
                 <div class="note">
                   <div>
-                    Postulate 1: The state of a quantum mechanical system, including all the information you can know about it, is represented mathematically by a normalized ket $\ket{\psi}$.
+                    <h3>Postulate 1</h3>
+                     The state of a quantum mechanical system, including all the information you can know about it, is represented mathematically by a normalized ket $\ket{\psi}$.
                   </div>
                 </div>
 
+                In 2D-space, two kets, $\ket{\pm}$ form a basis.  The basis kets have 3 properties:
+                <ol>
+                  <li>
+                    Normalization: $\braket{+}{+}=1$, $\braket{-}{-}=1$
+                  </li>
+                  <li>
+                    Orthogonality: $\braket{+}{-}=0$, $\braket{-}{+}=0$
+                  </li>
+                  <li>
+                    Completeness: $\ket{\psi}=a\ket{+}+b\ket{-}$, $a, b$ are complex scalars.
+                    <ul>
+                      <li>
+                        The general quantum state vector $\ket{\psi}$ can be written as a linear combination of the two basis kets.
+                      </li>
+                      <li>
+                        This is referred to as a <u>superposition</u> of states.
+                      </li>
+                      <li>
+                        The complex conjugate vector of the general state vector is:
+                        $$\bra{\psi}=a^*\bra{+}+b^*\bra{-}$$
+                      </li>
+                    </ul>
+                  </li>
+                </ol>
+                <u>Ex 1.</u> Determine $\braket{+}{\psi}$.
+                $$\begin{align*}
+                  \braket{+}{\psi}&=\bra{+}(a\ket{+}+b\ket{-})\\
+                  &=\braketo{+}{a}{+} + \braketo{+}{b}{-}\\
+                  &= a\braket{a}{a} + b\braket{+}{-}\\
+                  &= a
+                \end{align*}$$
+                <i style="margin-left: 20px;">* Note that $\braket{-}{\psi}=b$</i>
+                <div class="note">
+                  <div>
+                    We can also show that $\braket{\phi}{\psi}=\braket{\psi}{\phi}^*$.
+                  </div>
+                </div>
+
+                From Postulate 1, we require all state vectors to be normalized.  Given a state vector, here's how we normalize it:
+                $$\begin{align*}
+                  \braket{\psi}{\psi}&=(a^*\bra{+}+b^*\bra{-})(a\ket{+}+b\ket{-})\\
+                  1&=a^*a\braket{+}{+} + a^*b\braket{+}{-} + b^*a\braket{-}{+} + b^*b\braket{-}{-}\\
+                  1&= |a|^2+ |b|^2\quad\text{OR}\\
+                  1&= |\braket{+}{\psi}|^2 + |\braket{-}{\psi}|^2
+                \end{align*}$$
+
+                Each term in the above sum represents the <b>probability</b> that the general quantum state is measured in the corresponding basis state.
+                $$P_{S_z=+\hbar/2}=|\braket{+}{\psi}|^2\quad\quad P_{S_z=-\hbar/2}=|\braket{-}{\psi}|^2$$
+
+                <div class="note">
+                  <div>
+                    <h3>Postulate 4</h3>
+                     The probability of obtaining of obtaining the eigenvalue $a_n$ in a measurement of an observable $A$ on the system in the state $\ket{\psi}$ is
+                     $$P_{a_n}=|\braket{a_n}{\psi}|^2$$
+                  </div>
+                </div>
+                The inner product, $\braket{+}{\psi}$ is called the <u>probability amplitude</u>.  The probability amplitude, when written in Bra-Ket notation, represents the input state on the <i>right</i> and the output state on the <i>left</i>. (i.e. $\braket{+}{\psi}$ represents measuring an input general state vector in the $+z$ direction)
+
+                <h3>$S_x$ basis</h3>
+                If we have a state vector in the $S_z$ basis and measure it along the x-axis, we get the following probabilities:
+                $$P_{+,+x}=|_x\braket{+}{+}|^2=\frac{1}{2},\quad P_{+,-x}=|_x\braket{-}{+}|^2=\frac{1}{2}\\ P_{-,+x}=|_x\braket{+}{-}|^2=\frac{1}{2},\quad
+                P_{-,-x}=|_x\braket{-}{-}|^2=\frac{1}{2}$$
+                By the completeness property, each ket written in the $S_x$ basis can be written as a superposition of basis kets.  Plugging them in to the equations above, we get complex coefficients which we can write as:
+                $$\ket{+}_x=\frac{1}{\sqrt{2}}(\ket{+}+e^{i\alpha}\ket{-}),\quad\ket{-}_x=\frac{1}{\sqrt{2}}(\ket{+}+e^{i\beta}\ket{-})$$
+                <i>We can choose one of the coefficients to be real and positive because <b>the overall phase is irrelevant</b></i>. <br />
+                Further applying the orthonormality property onto the $S_x$ kets, we get that $e^{i\alpha}=-e^{i\beta}$.  Choosing $\alpha=0$, we get
+                $$\ket{+}_x=\frac{1}{\sqrt{2}}(\ket{+}+\ket{-}),\quad\ket{-}_x=\frac{1}{\sqrt{2}}(\ket{+}-\ket{-})$$
+
+                <h3>Matrix Notation</h3>
+                State vectors can be represented as matrices.  By convention, they are written in the $S_z$ basis. Ket vectors are represented as column vectors. The basis kets are represented as:
+                $$\ket{+}\doteq\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right),\quad \ket{-}\doteq\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$$
+                <i>Basis kets are unit vectors when written in their own basis.</i>
+                The top element represents the amplitude in the spin-up state and the bottom element represents that in the spin-down state. The $S_x$ kets can be written as:
+                $$\ket{+}_x\doteq\frac{1}{\sqrt{2}}\left(\begin{smallmatrix}1\\1\end{smallmatrix}\right),\quad \ket{-}_x\doteq\frac{1}{\sqrt{2}}\left(\begin{smallmatrix}1\\-1\end{smallmatrix}\right)$$
+                The general state vector is represented as:
+                $$\ket{\psi}\doteq\left(\begin{smallmatrix}\braket{+}{\psi}\\\braket{-}{\psi}\end{smallmatrix}\right)$$
+                i.e. if $\ket{\psi}=a\ket{+}+b\ket{-}$, then $\ket{\psi}\doteq\left(\begin{smallmatrix}a\\b\end{smallmatrix}\right)$. <br /><br />
+                Conversely, bra vectors are represented as row vectors.  So, $\bra{\psi}=a^*\bra{+}+b^*\bra{-}$, then $\bra{\psi}\doteq\left(\begin{smallmatrix}a^*&b^*\end{smallmatrix}\right)$.<br />
+                Writing the state vectors in matrix notation is convenient because we can use the rules of linear algebra.  For example,
+                $$\begin{align*}
+                  \braket{\psi}{\psi}&=\left(\begin{smallmatrix}a^*&b^*\end{smallmatrix}\right)\left(\begin{smallmatrix}a\\b\end{smallmatrix}\right)\\
+                  &=|a|^2+|b|^2
+                \end{align*}$$
+                <i>A bra is represented by a row vector that is the complex conjugate and transpose of the column vector representing its corresponding ket.</i>
               </div>
             </div>
         </div>
