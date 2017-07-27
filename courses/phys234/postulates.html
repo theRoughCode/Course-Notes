@@ -47,6 +47,7 @@
           <li><a href="#5">General Quantum Systems</a></li>
           <li><a href="#6">Operators</a></li>
           <li><a href="#7">Diagonalizaton of Operators</a></li>
+          <li><a href="#8">Hermitian Operators</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -71,6 +72,7 @@
                     <li><a href="#5">General Quantum Systems</a></li>
                     <li><a href="#6">Operators</a></li>
                     <li><a href="#7">Diagonalizaton of Operators</a></li>
+                    <li><a href="#8">Hermitian Operators</a></li>
                   </ol>
                 </div>
                 <!-- Table of Contents -->
@@ -283,6 +285,12 @@
                 <h3>Spin Component in a General Direction</h3>
                 A general direction $\hat{n}$, a unit vector, is represented in spherical coordinates as:
                 $$\hat{n}=\hat{i}\sin\theta\cos\phi +\hat{j}\sin\theta\sin\phi + \hat{k}\cos\theta$$
+                The spin component along $\hat{n}$ is obtained by projecting the spin vector $S$ onto it:
+                $$\begin{align*}
+                  S_n&=S\cdot\hat{n}\\
+                  &=S_x\sin\theta\cos\phi + S_y\sin\theta\sin\phi + S_z\cos\theta\\
+                  S_n&\doteq\frac{\hbar}{2}\left(\begin{matrix}\cos\theta&\sin\theta e^{-i\phi}\\\sin\theta e^{i\phi}&-\cos\theta\end{matrix}\right)
+                \end{align*}$$
 
                 <h2><a name="7"></a>Diagonalizaton of Operators</h2>
                 This method is used to find the eigenvalues and eigenvaectors given an operator.  We start with the eigenvalue equation: $A\ket{a_n}=a_n\ket{a_n}$
@@ -335,8 +343,31 @@
                         Likewise, we can find that $\ket{-}_y\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\-i \end{matrix}\right)$.
                       </li>
                     </ol>
+                  </div>
+                </div>
 
+                Diagonalizing the operator $S_n$ gives us:
+                $$\ket{+}_n\doteq\cos\frac{\theta}{2}\ket{+}+\sin\frac{\theta}{2}e^{i\phi}\ket{-},\quad\ket{-}_n\doteq\sin\frac{\theta}{2}\ket{+}-\cos\frac{\theta}{2}e^{i\phi}\ket{-}$$
 
+                <h2><a name="8"></a>Hermitian Operators</h2>
+                Similar to how operators act on the left of a bra, operators act on the right of kets (i.e. $\bra{\zeta} = \bra{\psi}A$ ).  Note that $\bra{\zeta}$ does not necessarily equal $\ket{\phi}=A\ket{\psi}$.  In order to find that corresponding $\bra{\phi}$, we use the <b>hermitian adjoint</b> of the operator $A$, $\ud{A}$, such that $\bra{\phi} = \bra{\psi}\ud{A}$.<br />
+                The Hermitian adjoint, $\ud{A}$ is found by <i>transposing</i> and taking the complex conjugate of $A$.
+                <div class="note">
+                  <div>
+                    <ul>
+                      <li>
+                        An operator is <b>Hermitian</b> if $A=\ud{A}$.
+                      </li>
+                      <li>
+                        In QM, all physical observables are Hermitian operators.
+                      </li>
+                      <li>
+                        Hermitian operators have real eigenvalues. This ensures that the results of measurements are always real.
+                      </li>
+                      <li>
+                        The eigenvectors of a Hermitian matrix comprise a set of complete basis states.  This ensures that we can use the eigenvectors of any observable as a valid basis.
+                      </li>
+                    </ul>
                   </div>
                 </div>
 
