@@ -8,17 +8,29 @@
     <meta name="Course Notes" content="">
     <meta name="Raphael" content="">
 
-    <title>PHYS 234 Notes</title>
+    <title>PHYS 234 :: Postulates of QM</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- MathJax -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+
     <!-- Custom CSS -->
     <link href="../../css/simple-sidebar.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
   </head>
   <body>
+    <!-- MathJax Commands -->
+    $\newcommand{\ud}[1]{{#1^{\dagger}}} \newcommand{\bra}[1]{\left\langle #1\right|} \newcommand{\ket}[1]{\left| #1\right\rangle}$
+
     <div id="wrapper">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
@@ -26,7 +38,7 @@
           <li class="sidebar-brand">
               <a href="../../index.html">UW Couse Notes</a>
           </li>
-          <li><a href="./postulates.html">Postulates of Quantum Mechanics</a></li>
+          <li><a href="#">Postulates of Quantum Mechanics</a></li>
           <li><a href="#">Time Evolution</a></li>
           <li><a href="#">Bound States</a></li>
           <li><a href="#">Unbound States</a></li>
@@ -44,15 +56,26 @@
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                 <h1 id="title_text">PHYS 234 - Quantum Physics I</h1><br />
                 <div id="contents">
+
+                  <!-- Table of Contents -->
                   <h1>Table of Contents</h1>
                   <ol id="nav">
-                    <li><a href="./postulates.html">Postulates of Quantum Mechanics</a></li>
+                    <li><a href="#1">Postulates of Quantum Mechanics</a></li>
                     <li><a href="#">Time Evolution</a></li>
                     <li><a href="#">Bound States</a></li>
                     <li><a href="#">Unbound States</a></li>
                     <li><a href="#">Harmonic Oscillator</a></li>
                   </ol>
                 </div>
+                <!-- Table of Contents -->
+
+                <h2><a name="1"></a>Postulates of Quantum Mechanics</h2>
+                <div class="note">
+                  <div>
+                    Postulate 1: The state of a quantum mechanical system, including all the information you can know about it, is represented mathematically by a normalized ket $\ket{\psi}$.
+                  </div>
+                </div>
+
               </div>
             </div>
         </div>
