@@ -30,7 +30,7 @@
   <body>
     <!-- MathJax Commands -->
     <div style="display: none;">
-      $\newcommand{\ud}[1]{{#1^{\dagger}}} \newcommand{\bra}[1]{\left\langle #1\right|} \newcommand{\ket}[1]{\left| #1\right\rangle} \newcommand{\braket}[2]{\left\langle #1 | #2\right\rangle} \newcommand{\braketo}[3]{\left\langle #1 \right| #2 \left| #3\right\rangle}$
+      $\newcommand{\ud}[1]{{#1^{\dagger}}} \newcommand{\bra}[1]{\left\langle #1\right|} \newcommand{\ket}[1]{\left| #1\right\rangle} \newcommand{\braket}[2]{\left\langle #1 | #2\right\rangle} \newcommand{\braketo}[3]{\left\langle #1 \right| #2 \left| #3\right\rangle} \newcommand{\ketbra}[2]{\left| #1\right\rangle\left\langle #2\right|} \newcommand{\angle}[1]{\left\langle #1\right\rangle}$
     </div>
 
     <div id="wrapper">
@@ -48,6 +48,8 @@
           <li><a href="#6">Operators</a></li>
           <li><a href="#7">Diagonalizaton of Operators</a></li>
           <li><a href="#8">Hermitian Operators</a></li>
+          <li><a href="#9">Projection Operators</a></li>
+          <li><a href="#10">Measurements</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -73,6 +75,8 @@
                     <li><a href="#6">Operators</a></li>
                     <li><a href="#7">Diagonalizaton of Operators</a></li>
                     <li><a href="#8">Hermitian Operators</a></li>
+                    <li><a href="#9">Projection Operators</a></li>
+                    <li><a href="#10">Measurements</a></li>
                   </ol>
                 </div>
                 <!-- Table of Contents -->
@@ -144,6 +148,7 @@
                     </ul>
                   </li>
                 </ol>
+                <i>By convention, state vectors are written in the $S_z$ basis, and $\ket{\pm}$ represent the measurements along the $z$-axis.</i>
                 <div class="ex">
                   <div id="question">
                     <u>Ex 1</u>. Determine $\braket{+}{\psi}$.
@@ -221,7 +226,16 @@
                   \braket{\psi}{\psi}&=\left(\begin{smallmatrix}a^*&b^*\end{smallmatrix}\right)\left(\begin{smallmatrix}a\\b\end{smallmatrix}\right)\\
                   &=|a|^2+|b|^2
                 \end{align*}$$
-                <i>A bra is represented by a row vector that is the complex conjugate and transpose of the column vector representing its corresponding ket.</i>
+                A bra is represented by a row vector that is the complex conjugate and transpose of the column vector representing its corresponding ket.<br />
+                <b>Tip:</b> To remember whether a ket/bra is a column or row vector, follow the orientation of the starting symbol of the ket/bra
+                <ul>
+                  <li>
+                    Ket: starts with a vertical bar ( $|$ ) == column vector
+                  </li>
+                  <li>
+                    Bra: starts with a left angle braket ( $\langle$ ) == row vector
+                  </li>
+                </ul>
 
                 <h2><a name="5"></a>General Quantum Systems</h2>
                 The properties of state vectors in a spin-$\frac{1}{2}$ system can be generalized to other quantum systems. Consider a system with an observable $A$ that has measurements $a_n$ for some finite $n$. We have the basis kets as $\ket{a_i}$ for $1\leq i\leq n$.
@@ -371,6 +385,91 @@
                   </div>
                 </div>
 
+                <h2><a name="9"></a>Projection Operators</h2>
+                A ket in the $S_z$ basis can be written as
+                $$\begin{align*}
+                  \ket{\psi}&=a\ket{+}+b\ket{-}\\
+                  &=(\braket{+}{\psi})\ket{+}+(\braket{-}{\psi})\ket{-}\\
+                  &=(\ketbra{+}{+} + \ketbra{-}{-})\ket{\psi}
+                \end{align*}$$
+                <div class="note">
+                  <div>
+                    <h3>Completeness Relation</h3>
+                    $$\quad\ketbra{+}{+} + \ketbra{-}{-}=\mathbb{I}$$
+                  </div>
+                </div>
+                The above relation is true for any basis.  Each term in the relation, known as an <b>outer product</b>, is a <b>projection operator</b>.  For spin-$\frac{1}{2}$ systems, the $S_z$ projection operators are
+                $$\mathbb{P}_+=\ketbra{+}{+}\doteq\left(\begin{matrix}1&0\\0&0\end{matrix}\right), \quad \mathbb{P}_-=\ketbra{-}{-}\doteq\left(\begin{matrix}0&0\\0&1\end{matrix}\right)$$
+
+                Note that a projector acting on its corresponding eigenstate results in the eigenstate, whereas if it acts on an orthogonal eigenstate results in zero:
+                $$\mathbb{P}_+\ket{+}=\ketbra{+}{+}\ket{+}=\ket{+}, \quad \mathbb{P}_-\ket{-}=\ketbra{-}{-}\ket{-}=\ket{-}$$
+
+                <h3>Spectral Representation</h3>
+                In general, any operatorcan be written as a linear combination of its projection operators:
+                $$A=\sum_n a_n\ketbra{\psi_n}{\psi_n}$$
+                where $a_n$ is the corresponding eigenvalue.
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 3</u>. Write $S_x$ in its spectral representation and show that it equals its matrix representation.
+                    <button id="exButton"></button>
+                  </div>
+                  <div id="solution">
+                    $$\begin{align*}
+                      S_x&=\frac{\hbar}{2}\ket{+}_{xx}\bra{+}-\frac{\hbar}{2}\ket{-}_{xx}\bra{-}\\
+                      &=\frac{\hbar}{2}\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\1\end{matrix}\right)\frac{1}{\sqrt{2}}\left(\begin{matrix}1&1\end{matrix}\right)-\frac{\hbar}{2}\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\-1\end{matrix}\right)\frac{1}{\sqrt{2}}\left(\begin{matrix}1&-1\end{matrix}\right)\\
+                      &=\frac{\hbar}{4}\bigg(\left(\begin{matrix}1&1\\1&1\end{matrix}\right)-\left(\begin{matrix}1&-1\\-1&1\end{matrix}\right)\bigg)\\
+                      &=\frac{\hbar}{2}\left(\begin{matrix}0&1\\1&0\end{matrix}\right)\doteq S_x\quad\square
+                    \end{align*}$$
+                  </div>
+                </div>
+                Another use of projection operators is in calculating probabilities.
+                $$\begin{align*}
+                  P_n&=|{}_n\braket{+}{\psi}|^2\\
+                  &= {}_n\braket{+}{\psi}^*_n\braket{+}{\psi}\\
+                  &=\braket{\psi}{+}_{nn}\braket{+}{\psi}\\
+                  &=\braketo{\psi}{\mathbb{P}_n}{\psi}
+                \end{align*}$$
+                The probability of a measurement of a particular state $n$ from an input state $\ket{\psi}$ can be calculated using the matrix element of the projection operator $P_n$.  For example, the probability of the measurement $S_z=\frac{\hbar}{2}$:
+                $$\begin{align*}
+                  P_+&=|\braket{+}{\psi}|^2\\
+                  &=\braket{\psi}{+}\braket{+}{\psi}\\
+                  &=\braketo{\psi}{\mathbb{P}_+}{\psi}
+                \end{align*}$$
+
+                <h3>Projection Postulate</h3>
+                We can also view this representation of probability as the projection operator projecting the input ket onto the direction of the projection, with a multiplicative constant of the probability amplitude. Normalizing by dividing by the probability amplitude (square root of probability), we can represent the new state as
+                $$\ket{\psi'}=\frac{\mathbb{P}_n\ket{\psi}}{\sqrt{\braketo{\psi}{\mathbb{P}_n}{\psi}}}$$
+
+                <div class="note">
+                  <div>
+                    <h3>Postulate 5</h3>
+                     After a measurement of $A$ that yields the result $a_n$, the system is in a new state: the normalized projection of the input state onto the ket corresponding to the measurement.
+                     $$\ket{\psi'}=\frac{\mathbb{P}_n\ket{\psi}}{\sqrt{\braketo{\psi}{\mathbb{P}_n}{\psi}}}$$
+                  </div>
+                </div>
+
+                <h2>Measurements</h2>
+                <div class="note">
+                  <div>
+                    <h4>Expectation Value</h4>
+                     $$\angle{A}=\braketo{\psi}{A}{\psi}=\sum_ia_iP_i$$
+                  </div>
+                </div>
+                Note that the expectation value is not the expected result of a single experiment.  Rather, it is the mean result of a large number of experiments on identically-prepared systems.
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 4</u>. Calculate the expectation value of $S_z$ for a system prepared in the state $\ket{+}_x$.
+                    <button id="exButton"></button>
+                  </div>
+                  <div id="solution">
+                    $$\begin{align*}
+                      \angle{S_z}&={}_x\braketo{+}{S_z}{+}_x\\
+                      &\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1&1\end{matrix}\right)\frac{\hbar}{2}\left(\begin{matrix}1&0\\0&-1\end{matrix}\right)\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\1\end{matrix}\right)\\
+                      &=\frac{\hbar}{4}\left(\begin{matrix}1&1\end{matrix}\right)\left(\begin{matrix}1\\-1\end{matrix}\right)\\
+                      &=0
+                    \end{align*}$$
+                  </div>
+                </div>
 
               </div>
             </div>
