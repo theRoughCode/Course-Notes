@@ -31,7 +31,7 @@ h3 {
   display: inline-block;
   padding: 0.5em 0.7em;
   overflow: auto;
-  max-width: 700px;
+  max-width: 70%;
   background-color: #d6e4f9;
 }
 
@@ -42,7 +42,7 @@ h3 {
 
 .ex {
   text-align: center;
-  width: 700px;
+  width: 70%;
   padding: 10px 0;
   margin: 30px auto;
   padding: 0.5em 0.7em;
