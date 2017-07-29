@@ -63,14 +63,6 @@
                     <li><a href="#1">Schödinger Equation</a></li>
                     <li><a href="#2">The Schödinger Equation Recipe</a></li>
                     <li><a href="#3">Time-dependent Hamiltonian</a></li>
-                    <li><a href="#4">Matrix Notation</a></li>
-                    <li><a href="#5">General Quantum Systems</a></li>
-                    <li><a href="#6">Operators</a></li>
-                    <li><a href="#7">Diagonalizaton of Operators</a></li>
-                    <li><a href="#8">Hermitian Operators</a></li>
-                    <li><a href="#9">Projection Operators</a></li>
-                    <li><a href="#10">Measurements</a></li>
-                    <li><a href="#11">Uncertainty Principle</a></li>
                   </ol>
                 </div>
                 <!-- Table of Contents -->
@@ -156,7 +148,21 @@
                   </div>
                   <div id="solution">
                     Since we aren't using the recipe, we are free to choose our own basis.  For convenience, we choose the basis that $H$ is written in.  The state vector becomes $\ket{\psi(t)}=c_+(t)\ket{+}+c_-(t)\ket{-}$.<br />
-                    Apply
+                    Substituting into the Schrödinger equation,
+                    $$i\hbar\frac{d}{dt}\left(\begin{matrix}c_+(t)\\c_-(t)\end{matrix}\right)=\frac{\hbar}{2}\left(\begin{matrix}\omega_0&\omega_1e^{-\omega t}\\\omega_1e^{\omega t}&-\omega_0\end{matrix}\right) \left(\begin{matrix}c_+(t)\\c_-(t)\end{matrix}\right)$$
+                    This gives us the following differential equations:
+                    $$i\hbar\dot{c_+}=\frac{\hbar\omega_0}{2}c_+(t)+\frac{\hbar\omega_1}{2}e^{-i\omega t}c_-(t)\\
+                    i\hbar\dot{c_-}=\frac{\hbar\omega_1}{2}e^{i\omega t}c_+(t)-\frac{\hbar\omega_0}{2}c_-(t)$$
+                    To solve these equations, we consider the problem from the rotating frame.  The state vector after a frame transformation becomes
+                    $$\ket{\tilde{\psi}(t)}=c_+(t)e^{i\omega t/2}\ket{+}+c_-(t)e^{-i\omega t/2}\ket{-}$$
+                    If we let $c_+(t)=e^{-i\omega t/2}a_+(t)$ and $c_-(t)=e^{i\omega t/2}a_-(t)$, we can rewrite the state vector in the non-rotating frame as
+                    $$\ket{\psi(t)}=a_+(t)e^{-i\omega t/2}\ket{+}+a_-(t)e^{i\omega t/2}\ket{-}$$
+                    Substituting this into the differential equations, we get
+                    $$i\hbar\dot{a_+}=-\frac{\hbar\Delta\omega}{2}a_+(t)+\frac{\hbar\omega_1}{2}a_-(t)\\
+                    i\hbar\dot{a_-}=\frac{\hbar\omega_1}{2}a_+(t)+\frac{\hbar\Delta\omega}{2}a_-(t)$$
+                    where $\Delta\omega=\omega-\omega_0$.  These differential equations can be thought of as a transformed Schrödinger equation:
+                    $$i\hbar\frac{d}{dt}\ket{\tilde{\psi}(t)}=\tilde{H(t)}\ket{\tilde{\psi}(t)}\text{, }\tilde{H}\doteq\frac{\hbar}{2}\left(\begin{matrix}-\Delta\omega&\omega_1\\\omega_1&\Delta\omega\end{matrix}\right)$$
+                    Now that the Hamiltonian is time-independent, we can solve it using the recipe and use the transformation equations to find the solution to the original problem.
                   </div>
                 </div>
 
