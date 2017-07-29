@@ -15,6 +15,11 @@ h3 {
   font-size: 50px;
 }
 
+#wrapper {
+  margin: 0 auto;
+  width: 1000px;
+}
+
 .col-lg-12 {
   padding-bottom: 70px;
 }
@@ -64,6 +69,8 @@ h3 {
 .ex #solution {
   display: none;
   text-align: left;
+  margin: 20px auto;
+  width: 90%;
 }
 
 .indent {

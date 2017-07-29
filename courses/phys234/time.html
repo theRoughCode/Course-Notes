@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PHYS 234 :: Time Evolution</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MathJax -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- MathJax Commands -->
+    <div style="display: none;">
+      $\newcommand{\ud}[1]{{#1^{\dagger}}} \newcommand{\bra}[1]{\left\langle #1\right|} \newcommand{\ket}[1]{\left| #1\right\rangle} \newcommand{\braket}[2]{\left\langle #1 | #2\right\rangle} \newcommand{\braketo}[3]{\left\langle #1 \right| #2 \left| #3\right\rangle} \newcommand{\ketbra}[2]{\left| #1\right\rangle\left\langle #2\right|} \newcommand{\angle}[1]{\left\langle #1\right\rangle}$
+    </div>
+
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./postulates.html">Postulates of Quantum Mechanics</a></li>
+          <li><a href="#">Time Evolution</a></li>
+          <li><a href="#">Bound States</a></li>
+          <li><a href="#">Unbound States</a></li>
+          <li><a href="#">Harmonic Oscillator</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid" id="topDiv">
+            <div class="row">
+              <div class="col-lg-12">
+                <a name="top"></a>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Time Evolution</h1><br />
+                <div id="contents">
+
+                  <!-- Table of Contents -->
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Schödinger Equation</a></li>
+                    <li><a href="#2">The Schödinger Equation Recipe</a></li>
+                    <li><a href="#3">Time-dependent Hamiltonian</a></li>
+                    <li><a href="#4">Matrix Notation</a></li>
+                    <li><a href="#5">General Quantum Systems</a></li>
+                    <li><a href="#6">Operators</a></li>
+                    <li><a href="#7">Diagonalizaton of Operators</a></li>
+                    <li><a href="#8">Hermitian Operators</a></li>
+                    <li><a href="#9">Projection Operators</a></li>
+                    <li><a href="#10">Measurements</a></li>
+                    <li><a href="#11">Uncertainty Principle</a></li>
+                  </ol>
+                </div>
+                <!-- Table of Contents -->
+
+                <h2><a name="1"></a>Schödinger Equation</h2>
+                <div class="note">
+                  <div>
+                    <h3>Postulate 6</h3>
+                     The time evolution of a quantum system is determined by the Hamiltonian (total energy operator, $H(t)$) through the Schrödinger Equation:
+                     $$i\hbar\frac{d}{dt}\ket{\psi(t)}=H(t)\ket{\psi(t)}$$
+                  </div>
+                </div>
+                The Hamiltonian is an observable, so it is hermitian.  Its eigenvalues are the possible outcomes of a total energy measurement (allowed energies, $E_n$) and its eigenstates are the energy eigenstates, $\ket{E_n}$, which form an orthonormal basis.  Thus, we have the <b>energy eigenvalue equation</b> as:
+                $$H\ket{E_n}=E_n\ket{E_n}$$
+                We can write any quantum state in the energy basis:
+                $$\ket{\psi(t)}=\sum_n c_n(t)\ket{E_n}$$
+                where $c_n(t)$ is the <b>expansion coefficient</b>, where the state's time dependence resides.  If we substitute this into the Schrödinger equation and define the initial state as $\ket{\psi(0)}=\sum_n c_n\ket{E_n}$, we get the time evolution of the quantum state as:
+                $$\ket{\psi(t)}=\sum_n c_n e^{-iE_nt/\hbar}\ket{E_n}$$
+
+                <h3>Stationary States</h3>
+                Consider a state that is initially in an energy eigenstate: $\ket{\psi(0)}=\ket{E_1}$.  At a later time t, $\ket{\psi(t)}=e^{-iE_nt/\hbar}\ket{E_1}$.
+                Since the overall phase does not affect any measurements, the state remains in its initial state. This is known as a <b>stationary state</b>.
+
+                <h2><a name="2"></a>The Schödinger Equation Recipe</h2>
+                <div class="note">
+                  <div>
+                    Given a Hamiltonian $H$ and an initial state $\ket{\psi(0)}$, we can calculate the probabilty or expectation value of an outcome $a_i$ of an observable $A$ at time $t$ by applying the following steps:
+                    <ol>
+                      <li>
+                        Diagonalize $H$ to find the eigenvalues $E_n$ and eigenvectors $\ket{E_n}$.
+                        <i>Note that this recipe can only be performed with the state written in the energy basis</i>
+                      </li>
+                      <li>
+                        Write $\ket{\psi(0)}$ in terms of the energy eigenstates: $\ket{\psi(0)}=\sum_n c_n(0)\ket{E_n}$
+                      </li>
+                      <li>
+                        Multiply each eigenstate coefficient by the time-dependent phase factor, $e^{-iE_nt/\hbar}$ to obtain $\ket{\psi(t)}$.
+                      </li>
+                      <li>
+                        Calculate the probability: $P_{a_i}=|\braket{a_i}{\psi(t)}|^2$, or the expectation value: $\angle{A}=\braketo{\psi(t)}{A}{\psi(t)}=\sum_i a_i P_{a_i}(t)$
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 1</u>. Given $H\doteq\frac{\hbar\omega_0}{2}\left(\begin{matrix}1&0\\0&-1\end{matrix}\right)$, what is the probability that a state is found to be spin-up along the $z$-axis?
+                    <button id="exButton">Show solution</button>
+                  </div>
+                  <div id="solution">
+                    <ol>
+                      <li>
+                        Since $H$ is already diagonal, we have the following eigenvalues and eigenvectors:
+                        $$E_+=\frac{\hbar\omega_0}{2}\quad\ket{E_+}\doteq\left(\begin{matrix}1\\0\end{matrix}\right),\quad E_-=-\frac{\hbar\omega_0}{2}\quad\ket{E_-}\doteq\left(\begin{matrix}0\\-1\end{matrix}\right)$$
+                        Since the overall phase does not matter and $e^{i\pi}\left(\begin{matrix}0\\-1\end{matrix}\right)=\left(\begin{matrix}0\\1\end{matrix}\right)$, we can let $\ket{E_-}\doteq\left(\begin{matrix}0\\1\end{matrix}\right)$.
+                      </li>
+                      <li>
+                        We can assume that the initial state is the general state $\ket{+}_n=\cos\frac{\theta}{2}\ket{+}+\sin\frac{\theta}{2}e^{i\phi}\ket{-}$.  Thus,
+                        $$\ket{\psi}\doteq\cos\frac{\theta}{2}\left(\begin{matrix}1\\0\end{matrix}\right)+\sin\frac{\theta}{2}e^{i\phi}\left(\begin{matrix}0\\1\end{matrix}\right)=\left(\begin{matrix}\cos\frac{\theta}{2}\\\sin\frac{\theta}{2}e^{i\phi}\end{matrix}\right)$$
+                      </li>
+                      <li>
+                        Multiplying by the time-dependent phase factor,
+                        $$\ket{\psi(t)}\doteq\left(\begin{matrix}e^{-iE_+t/\hbar}\cos\frac{\theta}{2}\\e^{-iE_-t/\hbar}\sin\frac{\theta}{2}e^{i\phi}\end{matrix}\right)=\left(\begin{matrix}e^{-i\omega_0t/2}\cos\frac{\theta}{2}\\e^{i\omega_0t/2}\sin\frac{\theta}{2}e^{i\phi}\end{matrix}\right)$$
+                        Since the global phas has no physical significance, we can multiply the state by $e^{i\omega_0t/2}$ to get
+                        $$\ket{\psi(t)}\doteq\left(\begin{matrix}\cos\frac{\theta}{2}\\e^{i(\omega_0t+\phi)}\sin\frac{\theta}{2}\end{matrix}\right)$$
+                      </li>
+                      <li> Finally, we calculate the probability.
+                        $$P_+=|\braket{+}{\psi(t)}|^2=|\cos\frac{\theta}{2}|^2=\cos^2\frac{\theta}{2}$$
+                      </li>
+                    </ol>
+                    <i>Note that the state is time-dependent, while the observable $S_z$ is not. The probability is also time-independent becuase the $S_z$ eigenstates are also energy eigenstates for the problem => $H$ and $S_z$ commute.</i>
+                  </div>
+                </div>
+
+                <h2><a name="3"></a>Time-dependent Hamiltonian</h2>
+                If we are given a time-dependent Hamiltonian, we must find a way to remove its time-dependence to apply it to the recipe.  We do this by substituting the state into the Schrödinger equation.
+
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 1</u>. Given $H\doteq\frac{\hbar}{2}\left(\begin{matrix}\omega_0&\omega_1e^{-\omega t}\\\omega_1e^{\omega t}&-\omega_0\end{matrix}\right)$, what is the probability that a state is found to be spin-up along the $z$-axis?
+                    <button id="exButton">Show solution</button>
+                  </div>
+                  <div id="solution">
+                    Since we aren't using the recipe, we are free to choose our own basis.  For convenience, we choose the basis that $H$ is written in.  The state vector becomes $\ket{\psi(t)}=c_+(t)\ket{+}+c_-(t)\ket{-}$.<br />
+                    Apply
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+        <div id="bottomDiv">
+          <div>
+            <p class="last_modified"></p>
+          </div>
+        </div>
+        <footer class="footer">
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    const lastMod = document.querySelector('#last_modified');
+    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+
+    const exercises = document.querySelectorAll('.ex');
+    exercises.forEach(ex => {
+      const btn = ex.querySelector('#exButton');
+      const sln = ex.querySelector('#solution');
+      btn.innerHTML = 'Show solution';
+      sln.style.display = 'none';
+      btn.addEventListener('click', function(e) {
+        console.log(sln.style.display);
+        if (sln.style.display === 'none') {
+          sln.style.display = 'block';
+          btn.innerHTML = 'Hide solution';
+        } else {
+          sln.style.display = 'none';
+          btn.innerHTML = 'Show solution'
+        }
+      });
+    });
+    </script>
+  </body>
+</html>

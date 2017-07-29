@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PHYS 234 Notes</title>
+    <title>PHYS 234 :: Postulates of QM</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
     <meta name="Course Notes" content="">
     <meta name="Raphael" content="">
-
-    <title>PHYS 234 :: Postulates of QM</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -40,16 +38,11 @@
           <li class="sidebar-brand">
               <a href="../../index.html">UW Couse Notes</a>
           </li>
-          <li><a href="#1">Properties of Quantum Mechanical Systems</a></li>
-          <li><a href="#2">Postulates of Quantum Mechanics</a></li>
-          <li><a href="#3">$S_x$ and $S_y$ basis</a></li>
-          <li><a href="#4">Matrix Notation</a></li>
-          <li><a href="#5">General Quantum Systems</a></li>
-          <li><a href="#6">Operators</a></li>
-          <li><a href="#7">Diagonalizaton of Operators</a></li>
-          <li><a href="#8">Hermitian Operators</a></li>
-          <li><a href="#9">Projection Operators</a></li>
-          <li><a href="#10">Measurements</a></li>
+          <li><a href="#">Postulates of Quantum Mechanics</a></li>
+          <li><a href="./time.html">Time Evolution</a></li>
+          <li><a href="#">Bound States</a></li>
+          <li><a href="#">Unbound States</a></li>
+          <li><a href="#">Harmonic Oscillator</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -61,7 +54,7 @@
               <div class="col-lg-12">
                 <a name="top"></a>
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                <h1 id="title_text">PHYS 234 - Quantum Physics I</h1><br />
+                <h1 id="title_text">Postulates of Quantum Mechanics</h1><br />
                 <div id="contents">
 
                   <!-- Table of Contents -->
@@ -77,6 +70,8 @@
                     <li><a href="#8">Hermitian Operators</a></li>
                     <li><a href="#9">Projection Operators</a></li>
                     <li><a href="#10">Measurements</a></li>
+                    <li><a href="#11">Uncertainty Principle</a></li>
+                    <li><a href="#12">Mixed States and Density Operators</a></li>
                   </ol>
                 </div>
                 <!-- Table of Contents -->
@@ -448,10 +443,10 @@
                   </div>
                 </div>
 
-                <h2>Measurements</h2>
+                <h2><a name="10"></a>Measurements</h2>
                 <div class="note">
                   <div>
-                    <h4>Expectation Value</h4>
+                    <h3>Expectation Value</h3>
                      $$\angle{A}=\braketo{\psi}{A}{\psi}=\sum_ia_iP_i$$
                   </div>
                 </div>
@@ -467,6 +462,177 @@
                       &\doteq\frac{1}{\sqrt{2}}\left(\begin{matrix}1&1\end{matrix}\right)\frac{\hbar}{2}\left(\begin{matrix}1&0\\0&-1\end{matrix}\right)\frac{1}{\sqrt{2}}\left(\begin{matrix}1\\1\end{matrix}\right)\\
                       &=\frac{\hbar}{4}\left(\begin{matrix}1&1\end{matrix}\right)\left(\begin{matrix}1\\-1\end{matrix}\right)\\
                       &=0
+                    \end{align*}$$
+                    As a sanity check, we can check that the expectation value is real and is between $-\frac{\hbar}{2}$ and $\frac{\hbar}{2}$.
+                  </div>
+                </div>
+
+                <div class="note">
+                  <div>
+                    <h3>Standard Deviation</h3>
+                     $$\Delta A=\sqrt{\angle{A^2}-\angle{A}^2}$$
+                  </div>
+                </div>
+                where $\angle{A^2}=\braketo{\psi}{A^2}{\psi}$.
+
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 5</u>. Calculate the standard deviation of $S_x$ for an input ket $\ket{+}$.
+                    <button id="exButton"></button>
+                  </div>
+                  <div id="solution">
+                    $$\begin{align*}
+                      \angle{S_x}&=\braketo{+}{S_x}{+}\\
+                      &\doteq\left(\begin{matrix}1&0\end{matrix}\right)\frac{\hbar}{2}
+                      \left(\begin{matrix}0&1\\1&0\end{matrix}\right)\left(\begin{matrix}1\\0\end{matrix}\right)\\
+                      &=0\\
+                      \angle{S_x^2}&=\braketo{+}{S_xS_x}{+}\\
+                      &\doteq\left(\begin{matrix}1&0\end{matrix}\right)\frac{\hbar}{2}
+                      \left(\begin{matrix}0&1\\1&0\end{matrix}\right)\frac{\hbar}{2}
+                      \left(\begin{matrix}0&1\\1&0\end{matrix}\right)\left(\begin{matrix}1\\0\end{matrix}\right)\\
+                      &=\frac{\hbar^2}{4}\\
+                      \Delta{S_x}=\sqrt{\angle{S_x^2}-\angle{S_x}^2}=\frac{\hbar}{2}
+                    \end{align*}$$
+                  </div>
+                </div>
+
+                <div class="note">
+                  <div>
+                    <h3>Commutator</h3>
+                     $$[A, B] = AB-BA$$
+                  </div>
+                </div>
+                Two observables <b>commute</b> if their commutator is equal to zero.  If two operators commute, they have a common set of eigenstates.
+                <div class="note">
+                  <div>
+                    Commuting observables share common eigenstates.
+                  </div>
+                </div>
+                Given two commuting observables $A$ and $B$,  if we take a measurement of $A$ to get a state $\ket{a}$ and then take a subsequent measurement of $B$, the second measurement does not change the state of $\ket{a}$.  We say that the 2 observables can be measured simultaneously.  Thus, we can measure one observable without "erasing" our previous knowledge of the other observable.<br />
+                If two observables do not commute, they are incompatible and cannot be measured simultaneously.  For example, $S_x, S_y, S_z$ do not commute and hence measuring one observable and then measuring another disturbs the original state.
+                <div class="note">
+                  <div>
+                    <h3>Commutator</h3>
+                     $$[S_x, S_y] = i\hbar S_z,\quad [S_y, S_z] = i\hbar S_x,\quad [S_z, S_x] = i\hbar S_y$$
+                     <i>* Cylic relationship</i>
+                  </div>
+                </div>
+
+                <h2><a name="11"></a>Uncertainty Principle</h2>
+                <div class="note">
+                  <div>
+                     $$\Delta A\Delta B\geq \frac{1}{2}|\angle{[A,B]}|$$
+                  </div>
+                </div>
+
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 6</u>. Calculate the uncertainty of $S_x$ and $S_y$.
+                    <button id="exButton"></button>
+                  </div>
+                  <div id="solution">
+                    $$\begin{align*}
+                      \angle{S_x}&=\braketo{+}{S_x}{+}\\
+                      &\doteq\left(\begin{matrix}1&0\end{matrix}\right)\frac{\hbar}{2}
+                      \left(\begin{matrix}0&1\\1&0\end{matrix}\right)\left(\begin{matrix}1\\0\end{matrix}\right)\\
+                      &=0\\
+                      \angle{S_x^2}&=\braketo{+}{S_xS_x}{+}\\
+                      &\doteq\left(\begin{matrix}1&0\end{matrix}\right)\frac{\hbar}{2}
+                      \left(\begin{matrix}0&1\\1&0\end{matrix}\right)\frac{\hbar}{2}
+                      \left(\begin{matrix}0&1\\1&0\end{matrix}\right)\left(\begin{matrix}1\\0\end{matrix}\right)\\
+                      &=\frac{\hbar^2}{4}\\
+                      \Delta{S_x}=\sqrt{\angle{S_x^2}-\angle{S_x}^2}=\frac{\hbar}{2}
+                    \end{align*}$$
+                  </div>
+                </div>
+
+                <h2><a name="12"></a>Mixed States and Density Operators</h2>
+                <b>Pure quantum states</b> are states that are prepared through a projection measurement (i.e. prepared by a ket $\ket{\psi}$).  They cannot be expressed as a mixture of other states.
+                <b>Mixed quantum states</b> are a probabilistic mixture of pure states (i.e. a probabilistic mixture of states $\ket{\psi_i}$).
+                Mixed states are not the same as a coherent superposition.
+                <ul>
+                  <li>
+                    Superposition: $\ket{+}_x=\frac{1}{\sqrt{2}}(\ket{+}+\ket{-})$
+                    <ul>
+                      <li>State is <i>all</i> of the states at the same time</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Mixed state: 50% $\ket{+}$, 50% $\ket{-}$
+                    <ul>
+                      <li>State is <i>one</i> of the states but we don't know which one</li>
+                    </ul>
+                  </li>
+                </ul>
+                <h3>Expectation Value</h3>
+                Consider an experiment that produces states $\ket{\psi_n}$ with probabilities $p_i$ such that $\sum_i p_i=1$.  Note that the states $\ket{\psi_i}$ need not be orthogonal.  How do we calculate the expectation value of $S_n$, $[S_n]$, of this mixed state?
+                $$\begin{align*}
+                  [S_n]&=\sum_i p_i\braketo{\psi_i}{S_n}{\psi_i}\\
+                  &=\sum_i p_i\braketo{\psi_i}{(\frac{\hbar}{2}\ket{+}_{nn}\bra{+}-\frac{\hbar}{2}\ket{-}_{nn}\bra{-})}{\psi_i}\\
+                  &=\sum_i p_i\braketo{\psi_i}{(S_n\ket{+}_{nn}\bra{+}-S_n\ket{-}_{nn}\bra{-})}{\psi_i}\\
+                  &=\sum_i p_i[\braketo{\psi_i}{S_n}{+}_{nn}\braket{+}{\psi_i} + \braketo{\psi_i}{S_n}{-}_{nn}\braket{-}{\psi_i}]\\
+                  &=\sum_i p_i[{}_n\braket{+}{\psi_i}\braketo{\psi_i}{S_n}{+}_n+ {}_n\braket{-}{\psi_i}\braketo{\psi_i}{S_n}{-}_n]\\ &\quad*\braket{-}{\psi_i}\text{ is a complex number so we can bring it in front}\\
+                  &={}_n\braketo{+}{\sum_i p_i}{\psi_i}\braketo{\psi_i}{S_n}{+}_n+ {}_n\braketo{-}{\sum_i p_i}{\psi_i}\braketo{\psi_i}{S_n}{-}_n
+                \end{align*}$$
+                Note that this is the sum of the diagonal elements of a matrix represented by $\sum_i p_i\ketbra{\psi_i}{\psi_i}S_n$ written in the $S_n$ basis.
+                <div class="note">
+                  <div>
+                    <h3>Density Operator</h3>
+                    $$\rho=\sum_i p_i\ketbra{\psi_i}{\psi_i}$$
+                  </div>
+                </div>
+                The density operator (or density matrix) is useful for characterizing mixed states. Note that two different mixed states can have the same density matrix
+                Therefore, $[S_n]=Tr(\rho S_n)$.<br />  This formula for the expectation value for a mixed state can be applied to any observable in any dimension: $[A]=Tr(\rho A)$.
+                <h3>Properties of Density Matrix</h3>
+                <ol>
+                  <li>
+                    $\rho\doteq\left(\begin{matrix}a&b\\b^*&1-a\end{matrix}\right)$
+                  </li>
+                  <li>
+                    $Tr(\rho)=1$
+                  </li>
+                  <li>
+                    Hermitian: $\rho=\ud{\rho}$
+                  </li>
+                  <li>
+                    The density operator for a pure state is the corresponding projection operator. (e.g. for $\ket{\psi}=\ket{+}_x$, $\rho=\ket{+}_{xx}\bra{+})$
+                  </li>
+                  <li>
+                    For pure states:
+                    <ol>
+                      <li> $\rho^2=\rho$ </li>
+                      <li> $Tr(\rho^2)=1$ </li>
+                    </ol>
+                  </li>
+                  <li>
+                    For mixed states:
+                    <ol>
+                      <li> $\rho^2\neq\rho$ </li>
+                      <li> $Tr(\rho^2)<1$ </li>
+                    </ol>
+                  </li>
+                  <li>
+                    Pure state remains pure under Hamitonian evolution: $\frac{d}{dt}\rho=\frac{1}{i\hbar}[H,\rho]$
+                  </li>
+                </ol>
+
+                <h4>To test for purity of states:</h4>
+                <ol>
+                  <li>Check $\rho^2=\rho$</li>
+                  <li>Check the trace of $\rho^2$</li>
+                </ol>
+
+                <div class="ex">
+                  <div id="question">
+                    <u>Ex 7</u>. Given a mixed state of 50% $\ket{+}$, 50% $\ket{+}$, calculate the probability of getting $\ket{+}_x$.
+                    <button id="exButton"></button>
+                  </div>
+                  <div id="solution">
+                    $$\begin{align*}
+                      \rho&=\frac{1}{2}\ketbra{+}{+}+\frac{1}{2}\ketbra{-}{-}\\
+                      [P_{+x}]&=Tr(\rho\mathbb{P}_{+x})\\
+                      &=Tr\bigg(\frac{1}{2}\left(\begin{matrix}1&1\\1&1\end{matrix}\right)\frac{1}{2}\left(\begin{matrix}1&1\\1&1\end{matrix}\right)\bigg)\\
+                      &=\frac{1}{2}
                     \end{align*}$$
                   </div>
                 </div>
