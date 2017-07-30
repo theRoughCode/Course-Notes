@@ -40,9 +40,8 @@
           </li>
           <li><a href="./postulates.html">Postulates of Quantum Mechanics</a></li>
           <li><a href="./time.html">Time Evolution</a></li>
-          <li><a href="">Wavefunctions</a></li>
-          <li><a href="#">Bound States</a></li>
-          <li><a href="#">Unbound States</a></li>
+          <li><a href="#">Wavefunctions</a></li>
+          <li><a href="./wells.html">Potential Wells</a></li>
           <li><a href="#">Harmonic Oscillator</a></li>
         </ul>
       </div>
@@ -55,7 +54,7 @@
               <div class="col-lg-12">
                 <a name="top"></a>
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                <h1 id="title_text">Time Evolution</h1><br />
+                <h1 id="title_text">Wavefunctions</h1><br />
                 <div id="contents">
 
                   <!-- Table of Contents -->
@@ -90,9 +89,12 @@
                 Probability of finding a particle in $a< x < b$:
                 $$P_{a < x < b}=\int_a^b|\psi(x)|^2dx$$
                 Probability for finding a state with energy $E_n$:
-                $$P_{E_n}=|\braket{E_n}{\psi}|^2=|\int_{-\infty}^\infty\phi^*_n(x)\psi(x)dx|^2$$
+                $$P_{E_n}=|\braket{E_n}{\psi}|^2=|\int_{-\infty}^\infty\phi^*_n(x)\psi(x)dx|^2=|c_n|^2$$
                 $$\phi_n(x)=\braket{x}{E_n}$$
                 where $\phi_n(x)$ is the energy eigenstate with energy $E_n$.<br /><br />
+                To find the expansion coefficient $c_n$,
+                $$c_n=\int_{-\infty}^\infty\phi^*_n(x)\psi(x)dx$$
+                <i>Note this is identical to the ket notation of $c_n=\braket{a_n}{\psi}$</i><br /><br />
                 <b>Normalization condition:</b> $$\int_{-\infty}^\infty P(x)dx=\int_{-\infty}^\infty|\psi(x)|^2dx=\int_{-\infty}^\infty\psi^*(x)\psi(x)dx=1$$
                 <div class="note">
                   <div>
