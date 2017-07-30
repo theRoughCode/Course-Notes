@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PHYS 234 :: Free Particle</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MathJax -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+    </script>
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- MathJax Commands -->
+    <div style="display: none;">
+      $\newcommand{\ud}[1]{{#1^{\dagger}}} \newcommand{\bra}[1]{\left\langle #1\right|} \newcommand{\ket}[1]{\left| #1\right\rangle} \newcommand{\braket}[2]{\left\langle #1 | #2\right\rangle} \newcommand{\braketo}[3]{\left\langle #1 \right| #2 \left| #3\right\rangle} \newcommand{\ketbra}[2]{\left| #1\right\rangle\left\langle #2\right|} \newcommand{\angle}[1]{\left\langle #1\right\rangle}$
+    </div>
+
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./postulates.html">Postulates of Quantum Mechanics</a></li>
+          <li><a href="./time.html">Time Evolution</a></li>
+          <li><a href="./wave.html">Wavefunctions</a></li>
+          <li><a href="./wells.html">Potential Wells</a></li>
+          <li><a href="#">Free Particle</a></li>
+          <li><a href="#">Harmonic Oscillator</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid" id="topDiv">
+            <div class="row">
+              <div class="col-lg-12">
+                <a name="top"></a>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Free Particle</h1><br />
+                <div id="contents">
+
+                  <!-- Table of Contents -->
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">The Free Particle</a></li>
+                    <li><a href="#2">Momentum Eigenstates</a></li>
+                    <li><a href="#3">Scattering and Tunneling</a></li>
+                  </ol>
+                </div>
+                <!-- Table of Contents -->
+
+                <h2><a name="1"></a>The Free Particle</h2>
+                For a free particle, $V(x)=0$ everywhere and the energy eigenvalue equation is
+                $$\frac{d^2}{dx^2}\phi_E(x)=-\frac{2mE}{\hbar^2}\phi_E(x)=-k^2\phi_E(x)$$
+                Applying the Schrödinger time evolution, we get
+                $$\psi_E(x,t)=Ae^{ik(x-\frac{\omega}{k}t)}+Be^{-ik(x+\frac{\omega}{k}t)}$$
+                We recognize the exponent as a function of position, with the negative sign indicating direction, so we simplify and rewrite the wavefunction as:
+                $$\psi_E(x)=Ae^{ikx}$$
+
+                <h2><a name="2"></a>Momentum Eigenstates</h2>
+                We recall that the momentum operator in the position representation is: $\hat{p}=-i\hbar\frac{d}{dx}$.  Applying this to an eigenstate $\phi_k(x)$, we get $\hat{p}\phi_k(x)=\hbar k\phi_E(x)$.  So, we have the <b>momentum eigenvalue</b> $p=\hbar k$ and the <b>momentum eigenstate</b> $\phi_p(x)=Ae^{ipx/\hbar}$.
+                We can apply the normalization condition and the dirac-delta function to get $$A=\frac{1}{\sqrt{2\pi\hbar}}$$
+                $$\phi_p(x)=\frac{1}{2\pi\hbar}e^{ipx/\hbar}$$
+
+                To derive the general wavefunction, we apply the completenes theorem:
+                $$\int_{-\infty}^\infty\ketbra{p}{p}dp=\mathbb{I}$$
+                $$\begin{align*}
+                  \psi(x)&=\braket{x}{\psi}\\
+                  &=\braketo{x}{\bigg(\int_{-\infty}^\infty\ketbra{p}{p}dp\bigg)}{\psi}\\
+                  &=\int_{-\infty}^\infty\braket{x}{p}\braket{p}{\psi}dp\\
+                  &=\int_{-\infty}^\infty\phi_p(x)\psi(p)dp\\
+                  &=\frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^\infty \psi(p)e^{ipx/\hbar}dp\quad\leftarrow\text{ Fourier Transform}
+                \end{align*}$$
+                The <b>fourier transform</b> allows for a conversion from the <b>momentum space</b> wavefunction to the <b>position space</b> wavefunction.<br />
+                Conversely, the <i>inverse</i> fourier transform converts from the position space to the momentum space:
+                $$\psi(p)=\frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^\infty \psi(x)e^{-ipx/\hbar}dx$$
+                <b>Note:</b>
+                <ul>
+                  <li>
+                    $\braket{x}{p}$ is the projection of the momentum eigenstate onto the position basis, which is the position representation of the momentum eigenstate wavefunction, $\phi_p(x)$.
+                  </li>
+                  <li>
+                    $\braket{p}{\psi}$ is the projection of the general state onto the momentum basis, $\psi(p)$. <br /> <i>* $\psi(x)$ and $\psi(p)$ are DIFFERENT functions.</i>
+                  </li>
+                </ul>
+                <div class="note">
+                  <div>
+                    $$\psi(x)=\frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^\infty \psi(p)e^{ipx/\hbar}dp\\\psi(p)=\frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^\infty \psi(x)e^{-ipx/\hbar}dx$$
+                  </div>
+                </div>
+                In summary,
+                <table>
+                  <tr>
+                    <th></th>
+                    <th>Position Space</th>
+                    <th>Momentum Space</th>
+                  </tr>
+                  <tr>
+                    <td>Position Eigenstate</td>
+                    <td>$\ket{x_0}\doteq\delta(x-x_0)$</td>
+                    <td>$\ket{x_0}\doteq\frac{1}{\sqrt{2\pi\hbar}}e^{-ip_0x/\hbar}$</td>
+                  </tr>
+                  <tr>
+                    <td>Momentum Eigenstate</td>
+                    <td>$\ket{p_0}\doteq\frac{1}{\sqrt{2\pi\hbar}}e^{ip_0x/\hbar}$</td>
+                    <td>$\ket{p_0}\doteq\delta(p-p_0)$</td>
+                  </tr>
+                  <tr>
+                    <td>Position Operator</td>
+                    <td>$\hat{x}\doteq x$</td>
+                    <td>$\hat{x}\doteq i\hbar\frac{d}{dp}$</td>
+                  </tr>
+                  <tr>
+                    <td>Momentum Operator</td>
+                    <td>$\hat{p}\doteq -i\hbar\frac{d}{dx}$</td>
+                    <td>$\hat{p}\doteq p$</td>
+                  </tr>
+                </table>
+
+                <h2><a name="3"></a>Scattering and Tunneling</h2>
+                For unbound states, the particle has enough energy to escape the potential well, $E>V_0$.  We define the following potential energy function for the finite well:
+                $$V(x)=\begin{cases}
+                  0,&\text{outside}\\
+                  -V_0,&\text{inside}
+                \end{cases}$$
+                We define 2 wave vectors:
+                $$k_1=\frac{\sqrt{2mE}}{\hbar}\text{ (outside well)},\quad k_2=\frac{\sqrt{2m(E+V_0)}}{\hbar}\text{ (inside well)}$$
+                $$\phi_E(x)=\begin{cases}
+                  Ae^{ik_1x}+Be^{-ik_1x},&x< -a\\
+                  Ce^{ik_2x}+De^{-ik_2x},&-a < x< -a\\
+                  Fe^{ik_1x}+Ge^{-ik_1x},&x> a\\
+                \end{cases}$$
+                Since the unbound states need not decay to $0$ at the endpoints, we cannot impose the normalization condition.
+                <ul>
+                  <li>
+                    Energy is not quantized.
+                  </li>
+                  <li>
+                    Scattering states have a <u>continuous</u> energy spectrum.
+                  </li>
+                  <li>
+                    We let $E$ be the initial condition.
+                  </li>
+                </ul>
+                Furthermore, we can treat the particle as coming from the left side from $-\infty$, so $G=0$ since no particles are coming from the right side.  Imposing boundary conditions, we get:
+                $$x=-a\begin{cases}
+                  \phi_E:Ae^{-ik_1x}+Be^{ik_1x}=Ce^{-ik_2x}+De^{ik_2x}\\
+                  \frac{d\phi_E}{dx}:ik_1Ae^{-ik_1x}-ik_1Be^{ik_1x}=ik_2Ce^{-ik_2x}-ik_2De^{ik_2x}
+                \end{cases}$$
+                $$x=a\begin{cases}
+                  \phi_E:Ce^{ik_2x}+De^{-ik_2x}=Fe^{ik_1x}\\
+                  \frac{d\phi_E}{dx}:ik_2Ce^{ik_2x}-ik_2De^{-ik_2x}=ik_1Fe^{ik_1x}
+                \end{cases}$$
+                Simplifying and eliminating, we get:
+                <div class="note">
+                  <div>
+                    <h3>Transmission Probability</h3>
+                    $$T=\bigg|\frac{F}{A}\bigg|^2=\bigg(1+\frac{(k_1^2-k_2^2)^2}{4k_1^2k_2^2}\sin^2 2k_2a\bigg)^{-1}$$<br />
+                    <h3>Reflection Probability</h3>
+                    $$R=\bigg|\frac{B}{A}\bigg|^2=\bigg(1+\frac{4k_1^2k_2^2}{(k_1^2-k_2^2)^2\sin^2 2k_2a}\bigg)^{-1}$$<br />
+                    <h3>Lossless Property</h3>
+                    $$R+T=1$$
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div id="bottomDiv">
+          <div>
+            <p class="last_modified"></p>
+          </div>
+        </div>
+        <footer class="footer">
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    const lastMod = document.querySelector('#last_modified');
+    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+
+    const exercises = document.querySelectorAll('.ex');
+    exercises.forEach(ex => {
+      const btn = ex.querySelector('#exButton');
+      const sln = ex.querySelector('#solution');
+      btn.innerHTML = 'Show solution';
+      sln.style.display = 'none';
+      btn.addEventListener('click', function(e) {
+        console.log(sln.style.display);
+        if (sln.style.display === 'none') {
+          sln.style.display = 'block';
+          btn.innerHTML = 'Hide solution';
+        } else {
+          sln.style.display = 'none';
+          btn.innerHTML = 'Show solution'
+        }
+      });
+    });
+    </script>
+  </body>
+</html>
