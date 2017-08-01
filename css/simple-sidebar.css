@@ -104,20 +104,12 @@
     background: none;
 }
 
-@media(min-width:768px) {
+@media(min-width:1000px) {
     #wrapper {
-        padding-left: 0;
-    }
-
-    #wrapper.toggled {
         padding-left: 250px;
     }
 
     #sidebar-wrapper {
-        width: 0;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
         width: 250px;
     }
 
@@ -126,8 +118,20 @@
         position: relative;
     }
 
+    #menu-toggle {
+      display: none;
+    }
+/*
+    #wrapper.toggled {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
-    }
+    }*/
 }
