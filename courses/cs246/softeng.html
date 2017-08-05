@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Software Engineering</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="#">The Shell</a></li>
+          <li><a href="#">Bash Scripts</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Software Engineering</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Testing</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                  <h2><a name="1"></a>Testing</h2>
+                  Why we test?
+                  <ol>
+                    <li>Make judgement about quality or acceptability of program</li>
+                    <li>To discover errors</li>
+                  </ol>
+                  Goals of Test:
+                  <ol>
+                    <li>Find failure</li>
+                    <li>Demonstrate correct execution</li>
+                  </ol>
+                  <b>Deficient fix</b>: when a fix causes previously correct software to misbehave
+                  <h3 style="margin-bottom:0;">Test Case</h3>
+                  - essence of software testing to determine a set of test cases for the item to be tested
+                  <ul>
+                    <li>Specification-based Testing</li>
+                    <ul>
+                      <li>programs can be considered functions that map values from input domain to values in its output range</li>
+                      <li>black box testing</li>
+                      <li>content of black box is not known</li>
+                      <li>only understand input and output</li>
+                      <li>Advantages:</li>
+                      <ol>
+                        <li>Independent of how software is implemented</li>
+                        <li>Test case development occur in parallel with implementation</li>
+                      </ol>
+                      <li>Disadvantages:</li>
+                      <ol>
+                        <li>Significant redundancies</li>
+                        <li>Gaps of untested software</li>
+                      </ol>
+                    </ul>
+                    <li>Code-based Testing</li>
+                      <ul>
+                        <li>white box testing</li>
+                        <li>implementation is known</li>
+                        <li>if program implements a behaviour not specified, this will never be revealed</li>
+                      </ul>
+                  </ul>
+                  <h3 style="margin-bottom:0;">How to Test</h3>
+                  <ul>
+                    <li>Start with black box testing because it is only dependent on the specification not the implementation</li>
+                    <li>Supplement with white box: cover several places in your program</li>
+                    <li>Black Box Testing</li>
+                    <ul>
+                      <li>Test the boundaries of valid input (edge cases)</li>
+                      <li>Multiple simultaneous boundaries</li>
+                      <li>Experienced tester will be able to guess what type of input is more likely to generate an error</li>
+                      <li>Test extreme cases</li>
+                    </ul>
+                    <li>White Box Testing</li>
+                    <ul>
+                      <li>Execute all lines of code</li>
+                      <li>Execute all logical paths</li>
+                      <li>Check that all functions run</li>
+                    </ul>
+                    <li>Regression Testing</li>
+                    <ul>
+                      <li>New changes do not cause previous code to break</li>
+                      <li>Run a set of test suites and testing scripts that contain previously checked tests after each addition of the code or bfore every release</li>
+                    </ul>
+                  </ul>
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    const lastMod = document.querySelector('#last_modified');
+    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+    </script>
+  </body>
+</html>
