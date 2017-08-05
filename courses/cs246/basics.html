@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: C++ Basics</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    "></a>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">C++ Basics</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Variables</a></li>
+                    <li><a href="#2">Sample C++ Program</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1"></a>Variables</h2>
+                Variables are used to store a value.  The name of a variable is called an <b>identifier</b>, which are case-sensitive.
+                <h3>Declaration</h3>
+                Every variable must be <i>declared</i> before it is used.  This tells the compiler what kind of data is being stored in the variable so it can allocate the required space for it.<br />
+                Syntax for variable declaration: <code class="prettyprint lang-cpp">Type_Name Var_Name_1, Var_Name_2, ...;</code><br />
+                Here are some simple types of variables:
+                <ul>
+                  <li>short (short int)</li>
+                  <li>int</li>
+                  <li>long (long int)</li>
+                  <li>float</li>
+                  <li>double</li>
+                  <li>long double</li>
+                  <li>char</li>
+                  <li>bool</li>
+                </ul>
+
+                <h3>Assignment</h3>
+                Evaluates the right-hand side of equal sign and sets the variable on the left-hand side equal to the value.<br />
+                Syntax for variable assignment: <code class="prettyprint lang-cpp">Variable = Expression;</code><br /><br />
+                Assignments can be chained.  e.g. <code class="prettyprint lang-cpp">n = m = 2</code><br />
+                This is equivalent to <code class="prettyprint lang-cpp">n = (m = 2)</code>.  First, <code>m</code> is set to <code>2</code>, this expression is evaluated to <code>2</code> which is then assigned to <code>n</code>.<br />
+
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

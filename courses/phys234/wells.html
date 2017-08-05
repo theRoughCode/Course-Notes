@@ -53,7 +53,6 @@
           <div class="container-fluid" id="topDiv">
             <div class="row">
               <div class="col-lg-12">
-                <a name="top"></a>
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                 <h1 id="title_text">Potential Wells</h1><br />
                 <div id="contents">
@@ -67,7 +66,7 @@
                 </div>
                 <!-- Table of Contents -->
 
-                <h2><a name="1"></a>Infinite Box Well</h2>
+                <h2 id="1">Infinite Box Well</h2>
                 The infinite box well, $0 \leq x\leq L$, has the following potential function:
                 $$V(x)=\begin{cases}
                 \infty,&x < 0\\
@@ -100,7 +99,7 @@
                 To get $A$, we normalize the wavefunction $1=\int_{-\infty}^\infty\phi_n^*(x)\phi_n(x)dx$ to get $A=\sqrt{\frac{2}{L}}$
                 Thus, for a particle in an infinite box well, $$\phi_n(x)=\sqrt{\frac{2}{L}}\sin\frac{n\pi x}{L}$$
 
-                <h2><a name="2"></a>Finite Square Well</h2>
+                <h2 id="2">Finite Square Well</h2>
                 The potential energy function for a finite square well, $-a \leq x \leq a$, is:
                 $$V(x)=\begin{cases}
                 V_0,&x< -a\\
@@ -189,6 +188,7 @@
           </div>
         </div>
         <footer class="footer">
+          <a href="#top">Back to Top</a>
           <p id="last_modified"></p>
         </footer>
       </div>
@@ -203,32 +203,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
 
-    const exercises = document.querySelectorAll('.ex');
-    exercises.forEach(ex => {
-      const btn = ex.querySelector('#exButton');
-      const sln = ex.querySelector('#solution');
-      btn.innerHTML = 'Show solution';
-      sln.style.display = 'none';
-      btn.addEventListener('click', function(e) {
-        console.log(sln.style.display);
-        if (sln.style.display === 'none') {
-          sln.style.display = 'block';
-          btn.innerHTML = 'Hide solution';
-        } else {
-          sln.style.display = 'none';
-          btn.innerHTML = 'Show solution'
-        }
-      });
-    });
-    </script>
   </body>
 </html>

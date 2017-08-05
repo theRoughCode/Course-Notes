@@ -45,12 +45,13 @@
                 <div id="contents">
                   <h1>Table of Contents</h1>
                   <ol id="nav">
-                    <li><a href="#1">Object-Oriented Programming</a></li>
+                    <li><a href="./basics.html">C++ Basics</a></li>
+                    <li><a href="#">Sample C++ Program</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
 
-                <h2><a name="1"></a>Object-Oriented Programming</h2>
+                <h2>Object-Oriented Programming</h2>
                 The main characteristics of OOP are:
                 <ol>
                   <li>Encapsulation</li>
@@ -68,6 +69,38 @@
                     <li>Multiple methods with the same name but different functionality</li>
                     <li>Overriding (run-time polymorphism) and overloading (compile-time polymorphism)</li>
                   </ul>
+                </ol>
+
+                <h2>Sample C++ Program</h2>
+                <pre class="prettyprint lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+  int num;
+  cout << "Enter a number:" << endl;
+  cin >> num;
+  cout << "Your number is: " << num << endl;
+  return 0;
+}</pre>
+                <ol>
+                  <li>
+                    <code class="prettyprint lang-cpp">#include &lt;iostream&gt;</code> <code class="prettyprint lang-cpp">using namespace std;</code> - allows us to use console input and output
+                  </li>
+                  <li>
+                    <code class="prettyprint lang-cpp">int main()</code> - every C++ program is essentially a function definition for a function called <code>main</code>.  The <code>main</code> function is executed when the function is run and the statements within the braces are executed.
+                  </li>
+                  <li>
+                    <code class="prettyprint lang-cpp">cout <<</code> - outputs text to stdout. Allows for chaining of strings/variables by adding inserters <code><<</code> and the additional strings/variables to the right side.  <code>endl</code> represents a newline character.
+                  </li>
+                  <li>
+                    <code class="prettyprint lang-cpp">cin >></code> - reads stdin and stores input value into specified variable.  Only reads up to a whitespace character (space, tab, newline)
+                  </li>
+                  <li>
+                    <code class="prettyprint lang-cpp">return 0;</code> - ends the program successfully.
+                  </li>
+                  <li>
+                    Note that each statement ends with a semicolon <code>;</code>
+                  </li>
                 </ol>
               </div>
             </div>
@@ -88,14 +121,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
-    </script>
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+    
   </body>
 </html>

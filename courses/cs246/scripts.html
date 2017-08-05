@@ -17,7 +17,6 @@
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
   </head>
   <body>
-    <a name="top"></a>
     <div id="wrapper">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
@@ -58,7 +57,7 @@
                 </div>
                 <!--Table of Contents -->
 
-                  <h2><a name="1"></a>Bash Scripts</h2>
+                  <h2 id="1">Bash Scripts</h2>
                   Benefits:
                   <ul>
                     <li>Automate tasks</li>
@@ -92,7 +91,7 @@ echo your name is $name and your id is $id</pre>
                   <code>$*</code>: all parameters<br />
                   <code>$#</code>: number of parameters<br />
 
-                  <h2><a name="2"></a>Command Substitution</h2>
+                  <h2 id="2">Command Substitution</h2>
                   - store result of a command<br />
                   - Enclose inner command with backticks <samp>``</samp> or enclose with <samp>$()</samp><br />
                   - innermost command is executed first and its standard output is inserted where substitution is done<br />
@@ -111,7 +110,7 @@ echo $1 + $2 = $result</pre>
                     </li>
                   </ul>
 
-                  <h2><a name="3"></a>Functions</h2>
+                  <h2 id="3">Functions</h2>
                   <ul>
                     <li>
                       execute procedures by building code blocks that implements a set of operations
@@ -139,7 +138,7 @@ sum 1 2</pre>
                     </div>
                   </div>
 
-                  <h2><a name="4"></a>If Statements</h2>
+                  <h2 id="4">If Statements</h2>
                   <pre class="prettyprint lang-bsh">if [ condition ]
 then
   statements
@@ -182,7 +181,7 @@ else
   echo "Fail"
 fi</pre>
 
-                  <h2><a name="5"></a>Boolean Expressions</h2>
+                  <h2 id="5">Boolean Expressions</h2>
                   <ul>
                     <li><code>&&</code> and</li>
                     <li><code>||</code> or</li>
@@ -218,7 +217,7 @@ echo result is $result</pre>
                     </li>
                   </ul>
 
-                  <h2><a name="6"></a>Case Statements</h2>
+                  <h2 id="6">Case Statements</h2>
                   Case statements are used to compare a variable against different values.
                   <pre class="prettyprint lang-bsh">case  $var  in
     pattern1|pattern2|pattern3)
@@ -255,7 +254,7 @@ esac </pre>
 
 
 
-                  <h2><a name="7"></a>String Manipulation</h2>
+                  <h2 id="7">String Manipulation</h2>
                   <ul>
                     <li><code>${#string}</code> return the length of string</li>
                     <li><code>${string:s:n}</code> return substring from start s for length n</li>
@@ -263,7 +262,7 @@ esac </pre>
                     <li><code>${string%txt}</code> extract string before <code>txt</code></li>
                   </ul>
 
-                  <h2><a name="8"></a>Loops</h2>
+                  <h2 id="8">Loops</h2>
                   <h3>For Loops</h3>
                   <pre class="prettyprint lang-bsh">for var in list
 do
@@ -335,14 +334,8 @@ echo fact</pre>
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
-    </script>
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
   </body>
 </html>

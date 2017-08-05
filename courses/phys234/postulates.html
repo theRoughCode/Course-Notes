@@ -53,7 +53,6 @@
           <div class="container-fluid" id="topDiv">
             <div class="row">
               <div class="col-lg-12">
-                <a name="top"></a>
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                 <h1 id="title_text">Postulates of Quantum Mechanics</h1><br />
                 <div id="contents">
@@ -77,7 +76,7 @@
                 </div>
                 <!-- Table of Contents -->
 
-                <h2><a name="1"></a>Properties of Quantum Mechanical Systems</h2>
+                <h2 id="1"><roperties of Quantum Mechanical Systems</h2>
                 <ul>
                   <li>
                     Quantum mechanics is probabilistic.  We cannot predict the results of an experiment precisely, only the probability that a certain result is measured.
@@ -91,7 +90,7 @@
                 </ul>
 
 
-                <h2><a name="2"></a>Postulates of Quantum Mechanics</h2>
+                <h2 id="2"><ostulates of Quantum Mechanics</h2>
                 <ol>
                   <li>
                     The state of a quantum mechanical system, including all the information you can know about it, is represented mathematically by a normalized ket $\ket{\psi}$.
@@ -187,7 +186,7 @@
                 </div>
                 The inner product, $\braket{+}{\psi}$ is called the <u>probability amplitude</u>.  The probability amplitude, when written in Bra-Ket notation, represents the input state on the <i>right</i> and the output state on the <i>left</i>. (i.e. $\braket{+}{\psi}$ represents measuring an input general state vector in the $+z$ direction)
 
-                <h2><a name="3"></a>$S_x$ and $S_y$ basis</h2>
+                <h2 id="3"><S_x$ and $S_y$ basis</h2>
                 If we have a state vector in the $S_z$ basis and measure it along the x-axis, we get the following probabilities:
                 $$P_{+,+x}=|_x\braket{+}{+}|^2=\frac{1}{2},\quad P_{+,-x}=|_x\braket{-}{+}|^2=\frac{1}{2}\\ P_{-,+x}=|_x\braket{+}{-}|^2=\frac{1}{2},\quad
                 P_{-,-x}=|_x\braket{-}{-}|^2=\frac{1}{2}$$
@@ -199,7 +198,7 @@
                 In a similar way, together with the additional requirement that $|_y\braket{+}{+}_x|^2=\frac{1}{2}$, we get that
                 $$\ket{+}_y=\frac{1}{\sqrt{2}}(\ket{+}+i\ket{-}),\quad\ket{-}_y=\frac{1}{\sqrt{2}}(\ket{+}-i\ket{-})$$
 
-                <h2><a name="4"></a>Matrix Notation</h2>
+                <h2 id="4"><atrix Notation</h2>
                 State vectors can be represented as matrices.  By convention, they are written in the $S_z$ basis. Ket vectors are represented as column vectors. The basis kets are represented as:
                 $$\ket{+}\doteq\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right),\quad \ket{-}\doteq\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$$
                 <i>Basis kets are unit vectors when written in their own basis.</i>
@@ -233,7 +232,7 @@
                   </li>
                 </ul>
 
-                <h2><a name="5"></a>General Quantum Systems</h2>
+                <h2 id="5"><eneral Quantum Systems</h2>
                 The properties of state vectors in a spin-$\frac{1}{2}$ system can be generalized to other quantum systems. Consider a system with an observable $A$ that has measurements $a_n$ for some finite $n$. We have the basis kets as $\ket{a_i}$ for $1\leq i\leq n$.
                 $$\braket{a_i}{a_j}=\delta_{ij}\quad\text{orthonormality}$$
                 $$\ket{\psi}=\sum_i\braket{a_i}{\psi}\ket{a_i}\quad\text{completeness}$$
@@ -252,7 +251,7 @@
                   </div>
                 </div>
 
-                <h2><a name="6"></a>Operators</h2>
+                <h2 id="6"><perators</h2>
                 An <b>operator</b> is a mathematical object that acts on a ket and transforms it into a new ket.
 
                 <div class="note">
@@ -302,7 +301,7 @@
                   S_n&\doteq\frac{\hbar}{2}\left(\begin{matrix}\cos\theta&\sin\theta e^{-i\phi}\\\sin\theta e^{i\phi}&-\cos\theta\end{matrix}\right)
                 \end{align*}$$
 
-                <h2><a name="7"></a>Diagonalizaton of Operators</h2>
+                <h2 id="7"><iagonalizaton of Operators</h2>
                 This method is used to find the eigenvalues and eigenvaectors given an operator.  We start with the eigenvalue equation: $A\ket{a_n}=a_n\ket{a_n}$
                 <ol>
                   <li>
@@ -359,7 +358,7 @@
                 Diagonalizing the operator $S_n$ gives us:
                 $$\ket{+}_n\doteq\cos\frac{\theta}{2}\ket{+}+\sin\frac{\theta}{2}e^{i\phi}\ket{-},\quad\ket{-}_n\doteq\sin\frac{\theta}{2}\ket{+}-\cos\frac{\theta}{2}e^{i\phi}\ket{-}$$
 
-                <h2><a name="8"></a>Hermitian Operators</h2>
+                <h2 id="8"><ermitian Operators</h2>
                 Similar to how operators act on the left of a bra, operators act on the right of kets (i.e. $\bra{\zeta} = \bra{\psi}A$ ).  Note that $\bra{\zeta}$ does not necessarily equal $\ket{\phi}=A\ket{\psi}$.  In order to find that corresponding $\bra{\phi}$, we use the <b>hermitian adjoint</b> of the operator $A$, $\ud{A}$, such that $\bra{\phi} = \bra{\psi}\ud{A}$.<br />
                 The Hermitian adjoint, $\ud{A}$ is found by <i>transposing</i> and taking the complex conjugate of $A$.
                 <div class="note">
@@ -381,7 +380,7 @@
                   </div>
                 </div>
 
-                <h2><a name="9"></a>Projection Operators</h2>
+                <h2 id="9"><rojection Operators</h2>
                 A ket in the $S_z$ basis can be written as
                 $$\begin{align*}
                   \ket{\psi}&=a\ket{+}+b\ket{-}\\
@@ -444,7 +443,7 @@
                   </div>
                 </div>
 
-                <h2><a name="10"></a>Measurements</h2>
+                <h2 id="10">Measurements</h2>
                 <div class="note">
                   <div>
                     <h3>Expectation Value</h3>
@@ -519,7 +518,7 @@
                   </div>
                 </div>
 
-                <h2><a name="11"></a>Uncertainty Principle</h2>
+                <h2 id="11">Uncertainty Principle</h2>
                 <div class="note">
                   <div>
                      $$\Delta A\Delta B\geq \frac{1}{2}|\angle{[A,B]}|$$
@@ -547,7 +546,7 @@
                   </div>
                 </div>
 
-                <h2><a name="12"></a>Mixed States and Density Operators</h2>
+                <h2 id="12">Mixed States and Density Operators</h2>
                 <b>Pure quantum states</b> are states that are prepared through a projection measurement (i.e. prepared by a ket $\ket{\psi}$).  They cannot be expressed as a mixture of other states.
                 <b>Mixed quantum states</b> are a probabilistic mixture of pure states (i.e. a probabilistic mixture of states $\ket{\psi_i}$).
                 Mixed states are not the same as a coherent superposition.
@@ -647,6 +646,7 @@
           </div>
         </div>
         <footer class="footer">
+          <a href="#top">Back to Top</a>
           <p id="last_modified"></p>
         </footer>
       </div>
@@ -661,32 +661,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
 
-    const exercises = document.querySelectorAll('.ex');
-    exercises.forEach(ex => {
-      const btn = ex.querySelector('#exButton');
-      const sln = ex.querySelector('#solution');
-      btn.innerHTML = 'Show solution';
-      sln.style.display = 'none';
-      btn.addEventListener('click', function(e) {
-        console.log(sln.style.display);
-        if (sln.style.display === 'none') {
-          sln.style.display = 'block';
-          btn.innerHTML = 'Hide solution';
-        } else {
-          sln.style.display = 'none';
-          btn.innerHTML = 'Show solution'
-        }
-      });
-    });
-    </script>
   </body>
 </html>

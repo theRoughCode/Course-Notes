@@ -53,7 +53,6 @@
           <div class="container-fluid" id="topDiv">
             <div class="row">
               <div class="col-lg-12">
-                <a name="top"></a>
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                 <h1 id="title_text">Wavefunctions</h1><br />
                 <div id="contents">
@@ -69,11 +68,11 @@
                 </div>
                 <!-- Table of Contents -->
 
-                <h2><a name="1"></a>The Hamiltonian</h2>
+                <h2 id="1">The Hamiltonian</h2>
                 Similar to how position and momentum play a key role in expressing the total energy of a particle in classical physics, position and momentum are the primary observables in quantum mechanics. The quantum mechanical Hamiltonian operator for a particle moving in one dimension is:
                 $$\hat{H}=\frac{\hat{p}_x^2}{2m}+V(\hat{x})$$
 
-                <h2><a name="2"></a>Energy Eigenvalue Equation</h2>
+                <h2 id="2">Energy Eigenvalue Equation</h2>
                 There are few quantum mechanical problems that can be solved using abstract kets.  It is generally more convenient to express quantum states as spatial functions known as <b>wavefunctions</b>, denoted as $\psi(x)$.  This is a representation of the abstract quantum state, known as the <b>position representation</b>:
                 $$\ket{\psi}\doteq\psi(x)$$
                 This representation uses the position eigenstates as the preferred basis.  The energy eigenstates, written as wave functions, are denoted as $\ket{E_i}\doteq\phi_{E_i}(x)$.  Thus, the energy eigenvalue equation becomes: $\hat{H}\phi_{E_i}(x)=E_i\phi_{E_i}(x)$.
@@ -82,7 +81,7 @@
                 Thus, the eigenvalue equation becomes:
                 $$\bigg(-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+V(x)\bigg)\phi_E(x)=E\phi_E(x)$$
 
-                <h2><a name="3"></a>The Wavefunction</h2>
+                <h2 id="3">The Wavefunction</h2>
                 Unlike ket vectors, wavefunctions represent a continuous distribution of probabilities.  The wavefunction is defined as the <b>probability amplitude</b> for the quantum state to be measured in the position eigenstate:
                 $$\psi(x)=\braket{x}{\psi}$$
                 The <b>probability distribution</b> can be calculated by taking the absolute square of the probability amplitude.
@@ -130,7 +129,7 @@
                   </li>
                 </ol>
 
-                <h2><a name="4"></a>The SE Recipe for Wavefunctions</h2>
+                <h2 id="4">The SE Recipe for Wavefunctions</h2>
                 <ol>
                   <li>
                     Diagonalize $H$ to find energy eigenvalues and energy eigenstates.
@@ -159,6 +158,7 @@
           </div>
         </div>
         <footer class="footer">
+          <a href="#top">Back to Top</a>
           <p id="last_modified"></p>
         </footer>
       </div>
@@ -173,32 +173,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
 
-    const exercises = document.querySelectorAll('.ex');
-    exercises.forEach(ex => {
-      const btn = ex.querySelector('#exButton');
-      const sln = ex.querySelector('#solution');
-      btn.innerHTML = 'Show solution';
-      sln.style.display = 'none';
-      btn.addEventListener('click', function(e) {
-        console.log(sln.style.display);
-        if (sln.style.display === 'none') {
-          sln.style.display = 'block';
-          btn.innerHTML = 'Hide solution';
-        } else {
-          sln.style.display = 'none';
-          btn.innerHTML = 'Show solution'
-        }
-      });
-    });
-    </script>
   </body>
 </html>

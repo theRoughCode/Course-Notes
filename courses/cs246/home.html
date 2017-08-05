@@ -44,9 +44,13 @@
                   <h1>Table of Contents</h1>
                   <ol id="nav">
                     <li><a href="./shell.html">The Shell</a></li>
-                    <li><a href="#">C++</a></li>
-                    <li><a href="#">Unix tools</a></li>
-                    <li><a href="#">Software Engineering</a></li>
+                    <li><a href="./scripts.html">Bash Scripts</a></li>
+                    <li><a href="./cpp.html">C++</a>
+                      <ol type="i">
+                        <li><a href="./basics.html">C++ Basics</a></li>
+                      </ol>
+                    </li>
+                    <li><a href="./softeng.html">Software Engineering</a></li>
                   </ol>
                 </div>
               </div>
@@ -72,14 +76,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
-    </script>
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+    
   </body>
 </html>

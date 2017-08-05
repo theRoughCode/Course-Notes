@@ -53,7 +53,6 @@
           <div class="container-fluid" id="topDiv">
             <div class="row">
               <div class="col-lg-12">
-                <a name="top"></a>
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                 <h1 id="title_text">Harmonic Oscillator</h1><br />
                 <div id="contents">
@@ -68,7 +67,7 @@
                 </div>
                 <!-- Table of Contents -->
 
-                <h2><a name="1"></a>Quantum Harmonic Oscillator</h2>
+                <h2 id="1">Quantum Harmonic Oscillator</h2>
                 Recall that in a classical harmonic oscillator, we defined $\omega=\sqrt{\frac{k}{m}}$ and the total mechanical energy was $E=\frac{p^2}{2m}+\frac{1}{2}kx^2$.  Similarly, the quantum mechanical Hamiltonian for the harmonic oscillator is:
                 $$H=\frac{\hat{p}^2}{2m}+\frac{1}{2}m\omega^2\hat{x}^2$$
                 As usual, when provided with a potential energy system, we want to solve the energy eigenvalue equation $H\ket{E}=E\ket{E}$ for the allowed energies in the system.  We can do this with a power series solution or the <b>operator method</b>.
@@ -104,7 +103,7 @@
                   </div>
                 </div>
 
-                <h2><a name="2"></a>Wavefunctions</h2>
+                <h2 id="2">Wavefunctions</h2>
                 Ground state wavefunction:
                 $$\phi_0(x)=\bigg(\frac{m\omega}{\pi\hbar}\bigg)^\frac{1}{4}e^{-\frac{m\omega x^2}{2\hbar}}$$
                 To find the other energy eigenstates, we apply the raising operator to the ground state.
@@ -117,7 +116,7 @@
                   </div>
                 </div>
 
-                <h2><a name="3"></a>Position and Momentum Operators</h2>
+                <h2 id="3">Position and Momentum Operators</h2>
                 <div class="note">
                   <div>
                     $$x=\sqrt{\frac{\hbar}{2m\omega}}(a+\ud{a})$$
@@ -150,12 +149,8 @@
               </div>
             </div>
         </div>
-        <div id="bottomDiv">
-          <div>
-            <p class="last_modified"></p>
-          </div>
-        </div>
         <footer class="footer">
+          <a href="#top">Back to Top</a>
           <p id="last_modified"></p>
         </footer>
       </div>
@@ -170,32 +165,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
-
-    const exercises = document.querySelectorAll('.ex');
-    exercises.forEach(ex => {
-      const btn = ex.querySelector('#exButton');
-      const sln = ex.querySelector('#solution');
-      btn.innerHTML = 'Show solution';
-      sln.style.display = 'none';
-      btn.addEventListener('click', function(e) {
-        console.log(sln.style.display);
-        if (sln.style.display === 'none') {
-          sln.style.display = 'block';
-          btn.innerHTML = 'Hide solution';
-        } else {
-          sln.style.display = 'none';
-          btn.innerHTML = 'Show solution'
-        }
-      });
-    });
-    </script>
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
   </body>
 </html>

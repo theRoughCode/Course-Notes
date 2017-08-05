@@ -17,7 +17,6 @@
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
   </head>
   <body>
-    <a name="top"></a>
     <div id="wrapper">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
@@ -59,7 +58,7 @@
                   <li>The <b>shell</b> is a program that reads commands and interprets them.</li>
                   <li>Shell commands interact with the file system.</li>
                 </ul>
-                <h2><a name="1"></a>Shell Commands</h2>
+                <h2 id="1">Shell Commands</h2>
                 <b>cat</b>: Prints out the content of a file or combine multiple files to standard output
                 <ul>
                   <li><code>cat file1.txt</code> prints out file1.txt</li>
@@ -119,7 +118,7 @@
                   <li><code>sort -r</code>: sorts in reverse order</li>
                 </ul>
 
-                <h2><a name="2"></a>Standard File Streams</h2>
+                <h2 id="2">Standard File Streams</h2>
                 There are 3 standard file streams:
                 <ol>
                   <li><code>stdin</code> with descriptor value of 0 (e.g. keyboard)</li>
@@ -141,7 +140,7 @@
                   <li>e.g. <code>cat file1.txt file2.txt</code> combines file1 and file2 to new file</li>
                 </ul>
 
-                <h2><a name="3"></a>Wildcards</h2>
+                <h2 id="3">Wildcards</h2>
                 <ul>
                   <li>used for pattern matching and searching for files names with specific characters</li>
                   <li><code>?</code> replaces a single character or digit</li>
@@ -150,14 +149,14 @@
                   <li>e.g. <code>ls *file*.txt</code> list all files that has the word 'file' anywhere in its name</li>
                 </ul>
 
-                <h2><a name="4"></a>Pipes</h2>
+                <h2 id="4">Pipes</h2>
                 <ul>
                   <li>can pipe the output of certain commands into the input of another command (i.e. chains commands)</li>
                   <li><code>commandA | commandB | commandC</code></li>
                   <li><code>head -n11 file3.txt | tail -n2</code> displays lines 10 and 11 of <samp>file3.txt</samp></li>
                 </ul>
 
-                <h2><a name="5"></a>Users and Groups</h2>
+                <h2 id="5">Users and Groups</h2>
                 <li>
                   Each user is assigned a userid<br />
                 </li>
@@ -275,7 +274,7 @@ locate alicewonderland</pre>
                     <li><code>-r</code> restarts machine</li>
                   </ul>
 
-                  <h2><a name="6"></a>Regular Expressions (RegEx)</h2>
+                  <h2 id="6">Regular Expressions (RegEx)</h2>
                   <ul style="margin-top: 0;">
                     <li><code>.</code> matches any single character</li>
                     <li><code>|</code> matches either</li>
@@ -314,14 +313,8 @@ locate alicewonderland</pre>
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    const lastMod = document.querySelector('#last_modified');
-    lastMod.innerHTML = `Last updated on ${document.lastModified}`;
-    </script>
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
   </body>
 </html>

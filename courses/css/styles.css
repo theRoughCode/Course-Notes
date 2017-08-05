@@ -84,7 +84,6 @@ table, th, td {
 
 .footer {
   position: relative;
-  margin-top: -70px; /* negative value of footer height */
   height: 70px;
   clear:both;
 }
