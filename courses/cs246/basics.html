@@ -17,7 +17,6 @@
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
   </head>
   <body>
-    "></a>
     <div id="wrapper">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
@@ -46,7 +45,9 @@
                   <h1>Table of Contents</h1>
                   <ol id="nav">
                     <li><a href="#1">Variables</a></li>
-                    <li><a href="#2">Sample C++ Program</a></li>
+                    <li><a href="#2">Console I/O</a></li>
+                    <li><a href="#3">File I/O</a></li>
+                    <li><a href="#4">String <=> Integer</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -54,9 +55,9 @@
                 <h2 id="1"></a>Variables</h2>
                 Variables are used to store a value.  The name of a variable is called an <b>identifier</b>, which are case-sensitive.
                 <h3>Declaration</h3>
-                Every variable must be <i>declared</i> before it is used.  This tells the compiler what kind of data is being stored in the variable so it can allocate the required space for it.<br />
+                Every variable must be <i>declared</i> before it is used.  This tells the compiler what kind of data is being stored in the variable so it can allocate the required space for it.  Uninitialized, declared variables have a default garbage value set to them.<br />
                 Syntax for variable declaration: <code class="prettyprint lang-cpp">Type_Name Var_Name_1, Var_Name_2, ...;</code><br />
-                Here are some simple types of variables:
+                Here are some types of variables:
                 <ul>
                   <li>short (short int)</li>
                   <li>int</li>
@@ -66,6 +67,7 @@
                   <li>long double</li>
                   <li>char</li>
                   <li>bool</li>
+                  <li>enums</li>
                 </ul>
 
                 <h3>Assignment</h3>
@@ -73,7 +75,107 @@
                 Syntax for variable assignment: <code class="prettyprint lang-cpp">Variable = Expression;</code><br /><br />
                 Assignments can be chained.  e.g. <code class="prettyprint lang-cpp">n = m = 2</code><br />
                 This is equivalent to <code class="prettyprint lang-cpp">n = (m = 2)</code>.  First, <code>m</code> is set to <code>2</code>, this expression is evaluated to <code>2</code> which is then assigned to <code>n</code>.<br />
+                If a variable is assigned a value at the time of declaration, it is being <b>initialized</b>.  There are 2 methods of initialization:
+                <ol>
+                  <li><code class="prettyprint lang-cpp">int count = 0;</code></li>
+                  <li><code class="prettyprint lang-cpp">int count (0);</code></li>
+                </ol>
 
+                <h2 id="2">Console I/O</h2>
+                <ol>
+                  <li>
+                    Output with <code>cout</code>: outputs text to stdout.  Used with <b>inserter operator</b> <code><<</code>. Allows for chaining of strings/variables by adding inserters and the additional strings/variables to the right side.  <code>endl</code> represents a newline character.
+                  </li>
+                  <li>
+                    Input with <code>cin</code> - reads stdin and stores input value into specified variable.  Used wth <b>extractor operator</b> <code>>></code>. Only reads up to a whitespace character (space, tab, newline)
+                  </li>
+                  <li>
+                    Output with <code>cerr</code> - sends its output to stderr.  Allows a way to distinguish normal output and error messages.  Works in the same way as <code>cout</code>.
+                  </li>
+                </ol>
+
+                <h3>Formatting Output</h3>
+                The output format can also be formatted.  For example, if we wanted all floats to be represented with 2 decimals places, we add the following statements:<pre class="prettyprint lang-cpp">
+cout.setf(ios::fixed);
+cout.setf(ios::showpoint);
+cout.precision(2);</pre>
+                Any following <code>cout</code> statements that follow will output floats rounded to 2 decimal places.
+
+                <h2 id="3">File I/O</h2>
+                Similar to console I/O, programs can do file I/O to perform reading and writing to files.
+                <h3>Opening a text file</h3>
+                <pre class="prettyprint lang-cpp">
+#include &lt;fstream>
+using namespace std;
+ifstream inputStream;
+inputStream.open("player.txt");
+assure(inputStream, "player.txt");  // ensures that file is successfully opened
+inputStream >> score >> firstName >> lastName;</pre>
+Another way to open a file is by <code class="prettyprint lang-cpp">ifstream in ('player.txt');</code>
+
+              <h4>Input Operations</h4>
+              <ul>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.get(char &ch)</code> - Puts the next input character in the variable ch. Returns an integer value, which is zero if it encountered a problem (e.g. end of file).
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.getline(char *buffer, int length)</code> - Reads characters into the string buffer until it reaches the length specified or a newline character. Stores a null character ('\0') after the last character read.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.read(char *buffer, int n)</code> - Reads n bytes (or until the end of the file) from the stream into the buffer.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.ignore(int n)</code> - Removes the next n characters (or until end of file) from the input stream.  If no argument is given, skips until the next newline character.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.clear(iostate state)</code> - Sets stream's error state flags to specified state (<code>goodbit</code> by default, which "clears" error flags).
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.fail()</code> - Returns true if the last <code>cin</code> command failed (e.g. if entered value does not fit variable).  To reset the stream after an error:
+                  <pre class="prettyprint lang-cpp">
+if (cin.fail()) {
+    cin.clear(); // clears error flags
+    cin.ignore(); // ignores "bad" character
+}</pre>
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.bad()</code> - Returns true if the <code>badbit</code> error state flag is set.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.eof()</code> - Returns true if the <code>eofbit</code> error state flag is set.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.fail()</code> - Returns true if <code>badbit</code> and/or <code>failbit</code> error state flags are set.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.good()</code> - Returns true if none of the error state flags (<code>badbit</code>, <code>failbit</code>, <code>eofbit</code>) are set (i.e. state flag is <code>goodbit</code>)
+                </li>
+              </ul>
+
+              <h4>Stream Error State Flags</h4>
+              Error state flags are used to keep track of the stream's state.
+              <ul>
+                <li><code class="prettyprint lang-cpp">eofbit</code> - end-of-file is reached</li>
+                <li><code class="prettyprint lang-cpp">failbit</code> - last input operation failed due to internal logic</li>
+                <li><code class="prettyprint lang-cpp">badbit</code> - error due to failure of an I/O operation on the stream buffer</li>
+                <li><code class="prettyprint lang-cpp">goodbit</code> - no error / absence of above error state flags</li>
+              </ul>
+
+              <h2 id="4">String <=> Integer</h2>
+              <code class="prettyprint lang-cpp">stringstream</code> can be used to convert strings to and from integers.
+              <h3>String to Integer</h3>
+              <pre class="prettyprint lang-cpp">#include &lt;sstream>
+#include &lt;string>
+using namespace std;
+string s = "42 30";
+istringstream iss (s);
+int x, y;
+iss >> x >> y;</pre>
+              <h3>Integer to String</h3>
+              <pre class="prettyprint lang-cpp">
+ostringstream oss;
+oss << 23 << "+" << 124;
+string s = oss.str();</pre>
 
 
               </div>
