@@ -13,7 +13,14 @@ $('footer.footer').find('a').click(function() {
 $('div#contents').find('a').click(function(){
     var $href = $(this).attr('href');
     var $anchor = $($href).offset();
-    console.log($href);
+    $('body').animate({ scrollTop: $anchor.top });
+    return false;
+});
+
+// animate scrolling for other links
+$('a.link').click(function(){
+    var $href = $(this).attr('href');
+    var $anchor = $($href).offset();
     $('body').animate({ scrollTop: $anchor.top });
     return false;
 });

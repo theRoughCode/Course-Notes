@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Control Flow</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Control Flow</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">If Statements</a></li>
+                    <li><a href="#2">Switch Statements</a></li>
+                    <li><a href="#3">Loops</a></li>
+                    <li><a href="#4">Break and Continue Statements</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">If Statements</h2>
+                Chooses between alternative actions based on value of Boolean expression.
+                <pre class="prettyprint lang-cpp">
+if (Boolean_Expression_1) {
+  Action1();
+} else if (Boolean_Expression_2) {
+  Action2();
+} else {
+  Action3();
+}</pre>
+                Enclosing braces within each branch can be omitted if there is only one statement provided.  Enclosing braces are used for <b>compound statements</b>.  The <code>else</code> statement is also optional if not needed.  If statements can also be <b>nested</b>.
+
+                <h3>Ternary Operator</h3>
+                Ternary operators are shorthand if-else statements that allows embedding of conditionals in expressions. <br />
+                Syntax: <code class="prettyprint lang-cpp">var = (Boolean_Expression) ? True_Case : False_Case</code><br />
+                e.g.  Set the value of <code>max</code> to the maximum of <code>n1</code> and <code>n2</code>:
+                <code class="prettyprint lang-cpp">max = (n1 > n2) ? n1 : n2</code>
+
+                <h2 id="2">Switch Statements</h2>
+                Similar to if statements but more convenient.  Choice of branch is determined by a <b>controlling expression</b> given in paranthesis, which can only be one of:
+                <ol>
+                  <li>bool</li>
+                  <li>enum</li>
+                  <li>int</li>
+                  <li>char</li>
+                </ol>
+                <pre class="prettyprint lang-cpp">
+switch (Controlling_Expression) {
+  case Constant_1:
+    Statement_Sequence_1
+    break;
+  case Constant_2:
+    Statement_Sequence_2
+    break;
+  default:  // default branch if all other branches return false
+    Default_Statement_Sequence
+}</pre>
+
+                <br /><br /> <h2 id="3">Loops</h2>
+                There are 3 types of loops in C++:
+                <ol>
+                  <li>
+                    While loops - Most flexible, no restrictions.
+                  </li>
+                  <li>
+                    Do-while loops - least flexible, always executes body at least once.
+                  </li>
+                  <li>
+                    For loops - Iterates/counts through a defined range of values.
+                  </li>
+                </ol>
+                <h3>While Loops</h3>
+                <pre class="prettyprint lang-cpp">
+while (Boolean_Expression) {  // Loops Condition
+  Statements
+}</pre>
+                <h3>Do-while Loops</h3>
+                <pre class="prettyprint lang-cpp">
+do {
+  Statements
+} while (Boolean_Expression);  // Loop Condition</pre>
+
+                <h3>Comma Operator</h3>
+                The comma operator <code>,</code> evaluates a list of expressions and returns the value of the last expression.  Used in for loops.<br />
+                e.g. <code class="prettyprint lang-cpp">first = (first = 2, second = first + 1);</code>
+                <ul>
+                  <li><code>first</code> gets assigned the value 3</li>
+                  <li><code>second</code> gets assigned the value 3</li>
+                </ul>
+                <i>*Does not guarantee what order the expression will be evaluated.</i>  To guarantee the order, use parenthesis.
+
+                <h3>For Loops</h3>
+                For loops are used to step through a range of values, most commonly integers.
+                <pre class="prettyprint lang-cpp">
+for (Initialization_Action; Boolean_Expression; Update_Action){
+  Statements
+}</pre>
+                The comma operator can be used to add multiple actions to the items in the loop condition. e.g.
+                <pre class="prettyprint lang-cpp">
+for (Initialization_Action_1, Initialization_Action_2; Boolean_Expression; Update_Action){
+  Statements
+}</pre>
+
+
+                <h2 id="4">Break and Continue Statements</h2>
+                <ul>
+                  <li><code>break</code> - forces the loop to exit immediately</li>
+                  <li><code>continue</code> - skips rest of loop body</li>
+                </ul>
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

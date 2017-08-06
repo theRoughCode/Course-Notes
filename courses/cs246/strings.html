@@ -44,13 +44,47 @@
                 <div id="contents">
                   <h1>Table of Contents</h1>
                   <ol id="nav">
-                    <li><a href="./basics.html">C++ Basics</a></li>
-                    <li><a href="#">Sample C++ Program</a></li>
+                    <li><a href="#1">Standard Class String</a></li>
+                    <li><a href="#2">String Operations</a></li>
+                    <li><a href="#3">Escape Sequences</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
 
+                There are 2 types of strings:
+                <ol>
+                  <li>C-strings: Array of characters (char) ending with a null character (\0). e.g. Literals <code class="prettyprint lang-cpp">"Hello World!"</code></li>
+                  <li>string class: offers greater functionality and checks for error conditions.  Uses templates.  Requires <code>&lt;string></code> class.</li>
+                </ol>
 
+                <h2 id="1">Standard Class String</h2>
+                <pre class="prettyprint lang-cpp">
+#include &lt;string>
+std::string s1, s2, s3;
+s1 = "ab"; // Assignment
+s2 = "cd";
+s3 = s1 + s2; // Concatenation. "abcd"</pre>
+
+                <h2 id="2">String Operations</h2>
+                <ul>
+                  <li><code class="prettyprint lang-cpp">str.length()</code> - returns length of string</li>
+                  <li><code class="prettyprint lang-cpp">str.at(int i)</code> - returns reference to char at position i.  Performs a range check on i and throws an error if invalid position.</li>
+                  <li><code class="prettyprint lang-cpp">str[i]</code> - returns reference to char at position i.  Undefined behaviour if i is beyond length of string</li>
+                  <li><code class="prettyprint lang-cpp">str1 == str2</code> <code class="prettyprint lang-cpp">str1 != str2</code> - checks if strings are equal/not equal</li>
+                  <li><code class="prettyprint lang-cpp">str1 > str2</code> - compares strings in lexographical order (how it would be found in a dictionary)</li>
+                </ul>
+
+                <h2 id="3">Escape Sequences</h2>
+                Escape sequences allow us to extend the character set, such as using double quotes <code>""</code> in our string rather than terminating the string. Denoted by a backslash <code>\</code> followed by the escape sequence char.
+                Here are some of them:
+                <ul>
+                  <li><code>\n</code>new line</li>
+                  <li><code>\\</code>backslash</li>
+                  <li><code>\"</code>double quote</li>
+                </ul><br />
+
+                <h4>Raw String Literals</h4>
+                Introduced in C++11.  Avoids escape sequences by interpreting everything in brackets literally (no pun intended 😎). e.g. <code class="prettyprint lang-cpp">string s = R"(\t\\t\n)";</code> is equal to <code>\t\\t\n</code>, which is useful for pathnames.
 
 
               </div>

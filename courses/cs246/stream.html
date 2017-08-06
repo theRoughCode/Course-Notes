@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Streams</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Streams</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Streams</a></li>
+                    <li><a href="#2">Console I/O</a></li>
+                    <li><a href="#3">File I/O</a></li>
+                    <li><a href="#4">String <=> Integer</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Streams</h2>
+                A <b>stream</b> is an object that transports and formats characters of fixed width.
+
+                <h3>Stream Libraries</h3>
+                <ul>
+                  <li><code>istream</code> - input stream</li>
+                  <li><code>ostream</code> - output stream</li>
+                  <li><code>iostream</code> - both input and output stream.  Has the following children libararies: <code>ifstream</code>, <code>ofstream</code>, <code>fstream</code>, <code>istringstream</code>, <code>ostringstream</code>, <code>stringstream</code>
+                  </li>
+                </ul>
+
+                <h3>Stream Operators</h3>
+                <ul>
+                  <li>Inserter Operator <code><<</code></li>
+                  <li>Extractor Operator <code>>></code></li>
+                  <li>Parse information expected by destination object according to its type</li>
+                </ul>
+
+                <h2 id="2">Console I/O</h2>
+                <ol>
+                  <li>
+                    Output with <code>cout</code>: outputs text to stdout.  Used with <b>inserter operator</b> <code><<</code>. Allows for chaining of strings/variables by adding inserters and the additional strings/variables to the right side.  <code>endl</code> represents a newline character.
+                  </li>
+                  <li>
+                    Input with <code>cin</code> - reads stdin and stores input value into specified variable.  Used wth <b>extractor operator</b> <code>>></code>. Only reads up to a whitespace character (space, tab, newline)
+                  </li>
+                  <li>
+                    Output with <code>cerr</code> - sends its output to stderr.  Allows a way to distinguish normal output and error messages.  Works in the same way as <code>cout</code>.
+                  </li>
+                </ol>
+
+                <h3>Formatting Output</h3>
+                The output format can also be formatted.  For example, if we wanted all floats to be represented with 2 decimals places, we add the following statements:<pre class="prettyprint lang-cpp">
+cout.setf(ios::fixed);
+cout.setf(ios::showpoint);
+cout.precision(2);</pre>
+                Any following <code>cout</code> statements that follow will output floats rounded to 2 decimal places.
+
+                <h2 id="3">File I/O</h2>
+                Similar to console I/O, programs can do file I/O to perform reading and writing to files.
+                <h3>Opening a text file</h3>
+                <pre class="prettyprint lang-cpp">
+#include &lt;fstream>
+using namespace std;
+ifstream inputStream;
+inputStream.open("player.txt");
+assure(inputStream, "player.txt");  // ensures that file is successfully opened
+inputStream >> score >> firstName >> lastName;</pre>
+Another way to open a file is by <code class="prettyprint lang-cpp">ifstream in ('player.txt');</code>
+
+              <h4>Input Operations</h4>
+              <ul>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.get(char &ch)</code> - Puts the next input character in the variable ch. Returns an integer value, which is zero if it encountered a problem (e.g. end of file).
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.getline(char *buffer, int length)</code> - Reads characters into the string buffer until it reaches the length specified or a newline character. Stores a null character ('\0') after the last character read.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.read(char *buffer, int n)</code> - Reads n bytes (or until the end of the file) from the stream into the buffer.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.ignore(int n)</code> - Removes the next n characters (or until end of file) from the input stream.  If no argument is given, skips until the next newline character.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.clear(iostate state)</code> - Sets stream's error state flags to specified state (<code>goodbit</code> by default, which "clears" error flags).
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.fail()</code> - Returns true if the last <code>cin</code> command failed (e.g. if entered value does not fit variable).  To reset the stream after an error:
+                  <pre class="prettyprint lang-cpp">
+if (cin.fail()) {
+    cin.clear(); // clears error flags
+    cin.ignore(); // ignores "bad" character
+}</pre>
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.bad()</code> - Returns true if the <code>badbit</code> error state flag is set.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.eof()</code> - Returns true if the <code>eofbit</code> error state flag is set.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.fail()</code> - Returns true if <code>badbit</code> and/or <code>failbit</code> error state flags are set.
+                </li>
+                <li>
+                  <code class="prettyprint lang-cpp">cin.good()</code> - Returns true if none of the error state flags (<code>badbit</code>, <code>failbit</code>, <code>eofbit</code>) are set (i.e. state flag is <code>goodbit</code>)
+                </li>
+              </ul>
+
+              <h4>Stream Error State Flags</h4>
+              Error state flags are used to keep track of the stream's state.
+              <ul>
+                <li><code class="prettyprint lang-cpp">eofbit</code> - end-of-file is reached</li>
+                <li><code class="prettyprint lang-cpp">failbit</code> - last input operation failed due to internal logic</li>
+                <li><code class="prettyprint lang-cpp">badbit</code> - error due to failure of an I/O operation on the stream buffer</li>
+                <li><code class="prettyprint lang-cpp">goodbit</code> - no error / absence of above error state flags</li>
+              </ul>
+
+              <h2 id="4">String <=> Integer</h2>
+              <code class="prettyprint lang-cpp">stringstream</code> can be used to convert strings to and from integers.
+              <h3>String to Integer</h3>
+              <pre class="prettyprint lang-cpp">#include &lt;sstream>
+#include &lt;string>
+using namespace std;
+string s = "42 30";
+istringstream iss (s);
+int x, y;
+iss >> x >> y;</pre>
+              <h3>Integer to String</h3>
+              <pre class="prettyprint lang-cpp">
+ostringstream oss;
+oss << 23 << "+" << 124;
+string s = oss.str();</pre>
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

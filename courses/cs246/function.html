@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Functions</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Functions</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Predefined Functions</a></li>
+                    <li><a href="#2">Random Number Generator</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                Functions are the building blocks of programs.  There are 2 types of functions:
+                <ol>
+                  <li>
+                    Returns a value - function returns a value (can be used as a value).  Must include a <code class="prettyprint lang-cpp">return</code> statement
+                  </li>
+                  <li>
+                    Does not return a value (void) -
+                    just performs an action; do not return a value. e.g. <code class="prettyprint">exit</code> statement.
+                  </li>
+                </ol>
+                <pre class="prettyprint lang-cpp">
+Return_Type Function_Name (Parameter_1, Parameter_2, ...) {
+  Statements
+  return Return_Value; // return statement
+}</pre>
+
+                <h2 id="1">Predefined Functions</h2>
+                C++ comes with in-built libraries of functions for us to use.  In order to use them, we must <code>#include</code> the appropriate libarary.
+                Here are some math functions:
+                <ul>
+                  <li>&lt;cstdlib>
+                    <ul>
+                      <li><code>abs(int i)</code> - returns absolute value of int</li>
+                      <li><code>labs(long i)</code> - returns absolute value of long int</li>
+                      <li><code>rand()</code> - returns a pseudo-random number in the range between 0 and <code>RAND_MAX</code>.  More details in the <a class="link" href="#2">Random Number Generator</a> section below.</li>
+                    </ul>
+                  </li>
+                  <li>&lt;cmath>
+                    <ul>
+                      <li><code>fabs(float i)</code> - returns absolute value of float</li>
+                      <li><code>pow(double x, double y)</code> - returns <code>x^y</code></li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h2 id="2">Random Number Generator</h2>
+                To generate a random number, we can use the <code class="prettyprint">rand()</code> function from the <code>&lt;cstdlib></code> library.  <code class="prettyprint">rand()</code> does not take any arguments and returns a value between 0 and <code>RAND_MAX</code> (a library-dependent constant defined in <code>&lt;cstdlib></code>).  To use this to our intended implementation, we perform:
+                <ol>
+                  <li>Scaling - <code class="prettyprint">rand() % Scale</code> returns a value in the range 0 to <code>Scale - 1</code></li>
+                  <li>Shifting - <code class="prettyprint">rand() % Scale + Shift</code> returns a value in the range <code>Shift</code> to <code>Scale + Shift - 1</code></li>
+                </ol>
+                <h3>Random Number Seed</h3>
+                Seeds can be used to alter the sequence of pseudo-random numbers.  We use the function <code class="prettyprint">srand(int seed_value)</code> for this.<br />
+                <ul>
+                  <li>
+                    <code class="prettyprint">srand(1)</code> performs the same action as <code class="prettyprint">rand()</code>.
+                  </li>
+                  <li>
+                    In order to produce random-like numbers, we use runtime values such as <code class="prettyprint">time()</code> provided in the <code>&lt;ctime></code> library. e.g. <pre class="prettyprint lang-cpp">
+#include &lt;cstdlib.h>
+#include &lt;time.h>
+srand (time(NULL));
+printf ("Random number: %d\n", rand() % 100 + 1); // random number in range 1 to 100
+</pre>
+                  </li>
+                </ul>
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>
