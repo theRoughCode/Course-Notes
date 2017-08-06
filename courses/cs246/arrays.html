@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Arrays</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Arrays</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Declaring and Accessing Arrays</a></li>
+                    <li><a href="#2">Initializing Arrays</a></li>
+                    <li><a href="#3">Iterating Through Arrays</a></li>
+                    <li><a href="#4">Arrays in Functions</a></li>
+                    <li><a href="#5">Multi-Dimensional Arrays</a></li>
+                    <li><a href="#5">Arrays in Memory</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Declaring and Accessing Arrays</h2>
+                An <b>array</b> is a collection of data of the <i>same</i> type.  To declare an array of size <code>n</code>: <code class="prettyprint">Data_Type array[n];</code><br />
+                This declares an array of <code>n</code> variables of type <code>Data_Type</code>.  Declaration of arrays can be grouped together with declaration of regular variables, for example,
+                <code class="prettyprint">int num1, numArray[5], num2;</code><br />
+                <br />
+                To access the <b>elements</b> of the array, we use the <code>[]</code> operator and include the index of the element inside the brackets.  The indices span from 0 to <code>n - 1</code>.  For example, if we wanted to access the 5th element, we want to call the 4th index: <code class="prettyprint">array[4]</code>.<br />
+                <div class="note">
+                  <div>
+                    Note the 2 uses of the <code>[]</code> operator:
+                    <ul>
+                      <li>During declaration, it specifies the <i>size</i> of the array</li>
+                      <li>Otherwise, it specifies the <i>index</i> of the element</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <h2 id="2">Initializing Arrays</h2>
+                <pre class="prettyprint">
+int foo1 [3] = { 16, 2, 77};
+int foo2 [3] = { 16, 2 };  // last element = 0
+int foo3 [3] = { };   // all 0
+
+// foo1 is equivalent to:
+int foo4[3];
+foo4[0] = 16;
+foo4[1] = 2;
+foo4[2] = 77;
+
+// Also equivalent:
+int foo5[] = { 16, 2, 77 };</pre>
+                If fewer values than the array size is provided, the array is filled from the beginning and the rest are filled with the "zero" of the base array type (0 in the case with <code>int</code>).<br />
+                If the array size is not specified, the size is determined by the number of initialization values.
+
+
+                <h2 id="3">Iterating Through Arrays</h2>
+                <h3>For Loops</h3>
+                Arrays naturally work well with counting loops.  For example, to iterate through the elements of an array, we can use the for loop and iterate from 0 to <code>size - 1</code> as such:
+                <pre class="prettyprint">
+for (int i = 0; i < size; i++) {
+  cout << array[i];
+}</pre>
+                One major pitfall of this technique is that the for loop might go beyond the range of the array, and it is up to the programmer to make sure it stays within the array size.  Note the <code><</code> in the for loop condition above.  If we had used <code><=</code>, the loop would have tried to access an element out of the array's range.  For example, given an array of size 5, <code class="prettyprint">array[5]</code> is out of range as the last element has index of <code>5 - 1 = 4</code>.
+                <div class="note">
+                  <div>
+                    <h3>Tip:</h3>
+                    Use constants for array sizes.
+                    <ul>
+                      <li>Improves readability</li>
+                      <li>Improves versatility</li>
+                      <li>Improves maintainability</li>
+                    </ul>
+
+                    <pre class="prettyprint">
+const int SIZE = 5;
+int array[SIZE];
+for (int i = 0; i < SIZE; i++) {
+  do_Something(array[i]);
+}</pre>
+                  </div>
+                </div>
+
+                <h3>Range-Based For Loops</h3>
+                Another to ensuring we iterate only within the range of the array is to use <b>range-based for loops</b>.<pre class="prettyprint">
+for (datatype varname : array) {
+  do_Something(varname);
+}</pre>
+                <code>varname</code> can be set to any name the programmer chooses.  <code>varname</code> is a <i>local copy</i> of the element in the array.  Mutating it <u>will not</u> modify the original element in the array.  In order to do so, we must pass <code>varname</code> in as a reference.
+                <pre class="prettyprint">
+for (datatype& varname : array) {
+  mutate(varname);  // original element changes
+}</pre>
+
+                <h2 id="4">Arrays in Functions</h2>
+                <h3>Passing Elements</h3>
+                Individual elements of an array can be passed in to a function in 2 ways:
+                <ol>
+                  <li>
+                    Pass by value - local copy is created.  Any changes does not affect original copy.
+                  </li>
+                  <li>Pass by reference - address is copied.  Any changes in the function modifies original element.</li>
+                </ol>
+                We specify which type of argument the function is taking in the parameter list:
+                <pre class="prettyprint">
+void foo1 (int elem);
+void foo2 (int& elem);
+foo1(arr[2]);  // by value
+foo2(arr[2]);  // by reference</pre>
+
+                <h3>Passing Entire Arrays</h3>
+                An entire array can be passed in to a function, but this formal parameter is neither a call-by-value or call-by-reference parameter; instead it is an <b>array parameter</b>.  Typically, the size of the array is sent in as a second argument. To specify an array parameter:
+                <code class="prettyprint">void foo (int arr[], int size);</code><br />
+                When an array is passed in, it is similar to a pass-by-reference: any changes made to the array by the function mutates the original array.  This is because when an array is passed in, only the <i>address</i> of the first element is passed in.  Note that when passing in an array, no square brackets should be included.  e.g.
+                <pre class="prettyprint">
+const int SIZE = 5;
+int array[SIZE] = { 1, 2, 3, 4, 5 };
+void foo(int arr[], const int size) {
+  for (int i = 0; i < size; i++) {
+    arr[i] += 1;  // modifies original array
+  }
+}
+foo(array);  // NO square brackets</pre>
+                In the event where the array should <u>not</u> be modified, we place the <code>const</code> modifier before the array parameter.
+                e.g. <code class="prettyprint">void foo (const int arr[]);</code>
+
+                <h2 id="5">Multi-Dimensional Arrays</h2>
+                Arrays with more than one index can also be created, for example, a 2-dimensional array can be used to represent a 2-D grid.  A 2-D array can be viewed as an "array of arrays". For example:
+<pre class="prettyprint">
+char grid[5][10];
+// be viewed as a grid of 5 rows and 10 columns
+grid[0][0], grid[0][1], ..., grid[0][9]
+grid[1][0], grid[1][1], ..., grid[1][9]
+...
+grid[4][0], grid[4][1], ..., grid[4][9]
+</pre>
+
+                <h3>Multi-Dimensional Array Parameters</h3>
+                Multi-dimensional array parameters are passed into functions in a similar way to one-dimensional arrays:
+                <ul>
+                  <li>
+                    First dimension size is not provided; given as second parameter (size)
+                  </li>
+                  <li>
+                    Second dimension size is given
+                  </li>
+                </ul>
+                e.g. <code class="prettyprint">void foo(const char grid[][10], int size);</code>
+
+
+
+                <h2 id="6">Arrays in Memory</h2>
+                When arrays are declared, memory is allocated for the <i>entire</i> array.  The memory is <b>sequentially-allocated</b> which means that the addresses of the elements of the array are allocated "back-to-back".
+
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>
