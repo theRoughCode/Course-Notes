@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Structures & Classes</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Structures & Classes</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Structures</a></li>
+                    <li><a href="#2">Classes</a></li>
+                    <li><a href="#3">Class Member Functions</a></li>
+                    <li><a href="#4">Public and Private Members</a></li>
+                    <li><a href="#5">Accessor and Mutator Functions</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Structures</h2>
+                Structures are another form of "aggregate" data type, like arrays.  It differs from arrays in that it allows for a collection of values of <i>different</i> types.  Structs, like arrays, are treated as a single item.  One major difference is that a struct <u>must</u> be <i>defined</i> prior to declaring any variables.
+                <h3>Defining a Struct</h3>
+                When a struct is defined, no memory is allocated.  It is a "placeholder" for what the struct will look like.  The structure definition will have a list of member names in the enclosing braces.  Note that a semi-colon must follow the closing brace.  An example of a structure definition is:
+<pre class="prettyprint">
+struct CDAccount {  // struct keyword
+  // member names
+  double balance;
+  double interestRate;
+  int term;
+};  // Dont forget semi-colon
+</pre>
+                <h3>Initializing a Struct</h3>
+                Structures can be initialized at declaration:
+                <code class="prettyprint">CDAccount account = { 12.50, 0.05, 3 };</code><br />
+                The initialization provides the initial data to all member variables.
+
+                <h3>Accessing a Struct</h3>
+                Once a structure definition is given, the structure type can be used to declare <b>structure values</b>, which is a collection of <b>member values</b> (one for each member name).  These <b>structure variables</b> can be accessed with the dot operator <code>.</code>: e.g.
+<pre class="prettyprint">
+CDAccount account;  // declaration
+account.balance;  // accesses "balance" member variable
+</pre>
+                <h3>Structure Assignment</h3>
+                Given 2 objects of the same structure type, assignments copy each member variable from one to the other.  e.g. <code class="prettyprint">account1 = account2;</code>
+
+
+                <h2 id="2">Classes</h2>
+                Classes are like structures with <b>member functions</b>.  The value of a class variable is called an <b>object</b>. Classes are integral to OOP whose focus is on objects containing data and operations.
+
+                The definition of a class is very similar to that of structures:
+<pre class="prettyprint">
+class DayofYear {
+public:
+  int month;
+  int day;
+  void output();  // member function
+};  // Don't forget semicolon</pre>
+                Declaring objects is the same as other variables, e.g. <code class="prettyprint">DayofYear today, birthday;</code><br />
+                Objects include:
+                <ul>
+                  <li>
+                    Data - Member variables
+                  </li>
+                  <li>
+                    Operations - Member functions
+                  </li>
+                </ul>
+
+                Class member variables are accessed in the same way as structs, with the dot operator. e.g. <code class="prettyprint">today.output();</code> invokes the member function <code>output()</code> of the object <code>today</code>.
+
+                <h2 id="3">Class Member Functions</h2>
+                Class member functions must be defined/implemented after the class definition.  Typically, function declarations are placed in the interface file while the implementations are kept elsewhere (information hiding).<br />
+                Syntax: <code class="prettyprint">Return_Type Class_Name::Function_Name Parameter_List){}</code>
+                <br />Notice the <b>scope resolution operator</b> <code>::</code>.  It tells the compiler which class the member is from.  The item before <code>::</code> (the class name) is called the <b>type qualifier</b>. e.g.
+<pre class="prettyprint">
+void DayofYear::output() {
+  cout << "Month: " << month << ", Day: " << day;
+}
+</pre>
+
+                <h3>Classes and OOP</h3>
+                <ol>
+                  <li>
+                    Information Hiding
+                    <ul>
+                      <li>
+                        Details of how operations work are not known to users
+                      </li>
+                      <li>
+                        Accomplished by restricting access to member variables (private/protected)
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Data Abstraction
+                    <ul>
+                      <li>
+                        User knows how to use ADT/class, but details of how data is manipulated within ADT/class is not known to user
+                      </li>
+                      <li>
+                        Can be used as a technique for identifying which information should be hidden
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Encapsulation
+                    <ul>
+                      <li>
+                        Aggregates data and operations but keeps some details hidden (through information hiding) and others visible
+                      </li>
+                      <li>
+                        Objects are an encapsulation of data values and operations
+                      </li>
+                    </ul>
+                  </li>
+                </ol>
+
+                <h2 id="4">Public and Private Members</h2>
+                <h3>Private Members</h3>
+                Member variables in classes are <b>private</b> by default (opposite of structures whose members are public by default), or under the <code class="prettyprint">private:</code> tag, which means they are accessible only inside the class.  They cannot be accessed outside the class definition via the dot operator.  This upholds the principles of OOP as it hides data from the client and allows manipulation only through public member functions.
+                <h3>Public Members</h3>
+                Public member variables are specified under the <code class="prettyprint">public:</code> tag, which makes them accessible from outside the class by the client through the dot operator. e.g.
+<pre class="prettyprint">
+class DayofYear {
+public:
+  void input();
+  void output();
+private:
+  int month;  // data is private
+  int day;
+}
+DayofYear date;
+cin >> date.month;  // not allowed
+date.input();  // allowed
+</pre>
+
+                <h2 id="5">Accessor and Mutator Functions</h2>
+                Accessor and Mutator functions are used to set/modify and retrieve the private member data of objects.
+                <ul>
+                  <li>
+                    Accessor Functions - allows client to retrieve data from object
+                  </li>
+                  <li>
+                    Mutator Function - allows client to change the data
+                  </li>
+                </ul>
+
+                <h2 id="6">Structures vs. Classes</h2>
+                <table>
+                  <tr>
+                    <th>Property</th>
+                    <th></th>
+                    <th>Structure</th>
+                    <th>Class</th>
+                  </tr>
+                  <tr>
+                    <td>Default Scope</td>
+                    <td></td>
+                    <td>Public</td>
+                    <td>Private</td>
+                  </tr>
+                  <tr>
+                    <td>Member Functions</td>
+                    <td></td>
+                    <td>None</td>
+                    <td>Interface member functions are public</td>
+                  </tr>
+                </table>
+
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>
