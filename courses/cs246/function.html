@@ -46,11 +46,23 @@
                   <ol id="nav">
                     <li><a href="#1">Predefined Functions</a></li>
                     <li><a href="#2">Random Number Generator</a></li>
+                    <li><a href="#3">Programmer-Defined Functions</a></li>
+                    <li><a href="#4">Scope</a></li>
+                    <li><a href="#5">Parameter vs. Argument</a></li>
+                    <li><a href="#6">Parameters</a></li>
+                    <li><a href="#7">Overloading</a></li>
+                    <li><a href="#8">Assert Macro</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
 
-                Functions are the building blocks of programs.  There are 2 types of functions:
+                Functions are the building blocks of programs. The 3 advantages of functions are:
+                <ol>
+                  <li>Divide & Conquer</li>
+                  <li>Readability</li>
+                  <li>Re-usability</li>
+                </ol>
+                There are 2 types of functions:
                 <ol>
                   <li>
                     Returns a value - function returns a value (can be used as a value).  Must include a <code class="prettyprint lang-cpp">return</code> statement
@@ -107,6 +119,138 @@ printf ("Random number: %d\n", rand() % 100 + 1); // random number in range 1 to
                   </li>
                 </ul>
 
+                <h2 id="3">Programmer-Defined Functions</h2>
+                There are 3 components to using functions:
+                <ol>
+                  <li>Function Declaration - Provides information to compiler to properly interpret function calls.</li>
+                  <li>Function Definition - Provides implmentation of function.</li>
+                  <li>Function Call - Transfers control flow to function.</li>
+                </ol>
+
+                <h3>Function Declaration</h3>
+                Also known as the <b>function prototype</b>.  It is placed <i>before</i> any calls, most commonly in header files.  It provides the compiler with information on how to properly interpret calls.  The compiler only needs to know:
+                <ul>
+                  <li>Return type</li>
+                  <li>Function name</li>
+                  <li>Parameter list - formal parameter names not needed but should be left in for readability</li>
+                </ul>
+                Syntax: <code class="prettyprint">Return_Type Function_Name (Parameter_List);</code>
+
+                <h3>Function Definition</h3>
+                This is the implementation of the function.  Statements are placed within the enclosing braces.  The return statement sends data back to caller.  At this point (or end of block for void functions) transfers the control flow back to the point of function call.  <br />
+                Syntax: <pre class="prettyprint">Return_Type Function_Name (Parameter_List) {
+  Statements
+  return Return_Type;
+}</pre>
+
+                <h3>Function Call</h3>
+                Calls the specified function.<br />
+                Syntax: <code class="prettyprint">Variable = Function_Name(Argument_List);</code>
+
+                <h2 id="4">Scope</h2>
+                Functions should be self-contained and not interfere with other functions.  There are times when a function might have a same variable name as one outside of the function.  The scope of the variables determine which one is being used.
+                There are 2 types of variable scopes:
+                <ol>
+                  <li>Local scope</li>
+                  <li>Global scope</li>
+                  <li>Block scope</li>
+                </ol>
+                <h3>Local Scope</h3>
+                Local variables are declared inside the body of a function and are available only within that function's scope.  This allows for variables with the same names being declared in different functions.  Advantages of local variables:
+                <ul>
+                  <li>maintains control over data</li>
+                  <li>used on a need-to-know basis</li>
+                  <li>functions should declare what local data is needed</li>
+                </ul>
+
+                <h3>Global Scope</h3>
+                Global variables are declared outside of the function body and is accessible to all functions in that file.  This is commonly used for constants. Global variables are seldom used as it lacks control over their usage.
+
+                <h3>Block Scope</h3>
+                Variables are declared inside a compound (block) statement.  All function definitions are blocks, which provides local "function-scope".  e.g. loop blocks<br />
+                Block scopes can also be nested.  Variables have their scope limited to the innermost enclosing braces.
+
+
+
+                <h2 id="5">Parameter vs Argument</h2>
+                <ul>
+                  <li>
+                    Formal Parameters
+                    <ul>
+                      <li>listed in function declaration</li>
+                      <li>used in body of function</li>
+                      <li>placeholder that is filled in with something when the function is called</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Argument
+                    <ul>
+                      <li>used to fill in a formal parameter</li>
+                      <li>listed in parenthesis in function call</li>
+                      <li>plugged in to formal parameters when function is invoked</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h2 id="6">Parameters</h2>
+                There are 2 methods of passing arguments as parameters:
+                <ol>
+                  <li>
+                    Call-by-value: copy of value is passed
+                    <ul>
+                      <li>local variable</li>
+                      <li>only value of arg is passed in</li>
+                      <li>if modified, only local copy is mutated</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Call-by-reference: address of actual argument is passed
+                    <ul>
+                      <li>provides access to actual argument</li>
+                      <li>data provided by argument can be modified by the function</li>
+                      <li>Reference is specified by the ampersand <code>&</code> after the data type: <code class="prettyprint">datatype& var</code></li>
+                      <li>Reduces overhead because no need to copy over entire object, only address</li>
+                      <li>If argument should not be modified, we add the <code>const</code> keyword. e.g. <code class="prettyprint">void fun (const int i){}</code></li>
+                    </ul>
+                  </li>
+                </ol>
+                e.g. <pre class="prettyprint">void getNumbers(int num1, int& num2) {
+  num1 += num2;  // local copy of num1 is changed
+  num2 += num1;  // original copy of num2 is changed
+}</pre>
+
+                <h3>Default Arguments</h3>
+                Allows function call to omit some arguments.  Specify default value in parameter list of function declaration. e.g.<pre class="prettyprint">void showVolume(int length, int width = 1, int height = 1);
+showVolume(1, 2, 3);  // all arguments provided
+showVolume(1, 2); // length, width provided. height defaulted to 1
+showVolume(7); // length provided. width, height defaulted to 1</pre>
+
+                <h2 id="7">Overloading</h2>
+                C++ allows 2 or more different definitions to the same function name, but with different parameter lists (i.e. different number of parameters or parameters of different types). The compiler decides which function to call based on the signature of the function call.
+                <h3>Overloading Resolution</h3>
+                <ol>
+                  <li>First looks for exact signature - no argument conversion required</li>
+                  <li>Then looks for compatible signatures - where automatic type conversion is possible in the following order:
+                    <ol type="i">
+                      <li>
+                        Promotion (e.g. <code>int</code> to <code>double</code>) - no loss of data
+                      </li>
+                      <li>
+                        Demotion (e.g. <code>double</code> to <code>int</code>) - possible loss of data
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+
+                <h2 id="8">Assert Macro</h2>
+                An <b>assertion</b> is a true or false statement used in debugging and testing programs.  It is used to check correctness of provided arguments.  It does not have a return value and terminates the program if the assert condition is false so that the error can be investigated.  Defined in the <code>&lt;cassert></code> library. <br />
+                Syntax: <code class="prettyprint">assert (Assert_Condition);</code>
+                <br />
+                To turn assertions off, add <code class="prettyprint">#define NDEBUG</code> before the include statements.  To turn it back on, remove or comment out that line. e.g.<pre class="prettyprint">#define NDEBUG
+#include &lt;cassert>
+void getAge(int age){
+  assert (age >= 0); // program terminates if age is negative
+}</pre>
 
               </div>
             </div>
