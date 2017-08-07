@@ -154,16 +154,6 @@ Class &Class::operator=(const Class &Object) {
 }
 Class c2 = c1;  <-- calls copy constructor
 
-Shallow Copy vs Deep Copy
-- Shallow Copy:
-  - copy contents of member vars from one object to the other
-  - default assignment and copy constructors
-  - fine if not pointers involved
-- Deep copy:
-  - creates copies of what each member var is pointing to
-  - creates a separate but identical copy
-  - must dereference pointer variable to get the data for copying
-
 Copy and Swap Idiom
 - strong exception guarantee for resource managing class
 Normal Way:

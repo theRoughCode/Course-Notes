@@ -49,8 +49,9 @@
                     <li><a href="#3">Iterating Through Arrays</a></li>
                     <li><a href="#4">Arrays in Functions</a></li>
                     <li><a href="#5">Multi-Dimensional Arrays</a></li>
-                    <li><a href="#5">Arrays in Memory</a></li>
-                    <li><a href="#6">Vectors</a></li>
+                    <li><a href="#6">Arrays in Memory</a></li>
+                    <li><a href="#7">Arrays As Pointers</a></li>
+                    <li><a href="#8">Vectors</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -185,7 +186,65 @@ grid[4][0], grid[4][1], ..., grid[4][9]
                 <h2 id="6">Arrays in Memory</h2>
                 When arrays are declared, memory is allocated for the <i>entire</i> array.  The memory is <b>sequentially-allocated</b> which means that the addresses of the elements of the array are allocated "back-to-back".
 
-                <h2 id="7">Vectors</h2>
+                <h3>Static Arrays</h3>
+                All the arrays we have provided in the examples above were <b>static arrays</b>.  They are created on the stack and have automatic storage duration (get destroyed when function call ends). <i>See <a href="./pointer.html#dynauto">here</a> for more on automatic/local variables.</i>  They necessarily have a fixed size, which is a limitation if we do not know the size needed before the program runs. A workaround is to estimate the maximum size needed, which is a waste of memory.  Another solution is to use dynamic arrays.
+
+                <h3>Dynamically-Allocated Arrays</h3>
+                These are arrays whose size is not specified when writing the program.  They are initialized with the <code>new</code> keyword (see <a href="./pointer.html#3">here</a> for more on <code>new</code>).  i.e. <code class="prettyprint">double a = new double[size];</code><br />
+                To destroy a dynamically-allocated array we use the <b>array deallocation</b> function: <code>delete[]</code>
+
+                <h2 id="7">Arrays As Pointers</h2>
+                As mentioned above, array variables are just the addresses of their first element.  Thus, array variables are just like pointers, the only difference is that they are constant pointers <code>const int *</code>, which means that they cannot change where they point to.  e.g.
+<pre class="prettyprint">
+int a[10];
+int b = *a;  // b == a[0]
+int *c;
+c = a; // LEGAL - points to a[0]
+a = c; // ILLEGAL - array pointer is a constant pointer
+</pre>
+
+                <h3>Resizing A Dynamic Array</h3>
+                <ol>
+                  <li>Allocate a <code>new []</code> array and store it in a temp pointer</li>
+                  <li>Copy over previous values</li>
+                  <li><code>delete[]</code> old array</li>
+                  <li>Change any necessary pointer to array and size</li>
+                </ol>
+<pre class="prettyprint">
+int* newArr = new int[new_size];
+std::copy(oldArr, oldArr + std::min(old_size, new_size), newArr);
+delete[] oldArr;
+oldArr = newArr;
+</pre>
+                <h3>Returning An Array</h3>
+                Functions cannot return an array type.  We must return a pointer to the array. i.e.
+<pre class="prettyprint">
+int[] function(); // ILLEGAL
+int *function(); // LEGAL
+</pre>
+                <h3>Pointer Arithmetic</h3>
+                Since arrays are just pointers, coupled with the fact that arrays are sequentially-allocated, we can perform arithmetic operations on array variables.. e.g.
+<pre class="prettyprint">
+int *d = new int[10];
+int a = d;      // a == d[0]
+int b = d + 1;  // b == d[1]
+int c = d + 2;  // c == d[2]
+</pre>
+                We can also use pointer arithmetic to iterate through the array, for example:
+<pre class="prettyprint">
+for (int i = 0; i < arraySize; i++) {
+  cout << *(d + i) << " ";
+}</pre>
+                <h3>Multi-Dimensional Dynamic Arrays</h3>
+                The following example first creates an array of 3 pointers, and then allocates each pointer an array of 4 <code>int</code>s
+<pre class="prettyprint">
+typedef int* IntArrayPtr;
+IntArrayPtr *m = new IntArrayPtr[3];
+for (int i = 0; i < 3; i++) {
+  m[i] = new int[4];
+}</pre>
+
+                <h2 id="8">Vectors</h2>
                 Vectors are similar to arrays in that it has a base type and is a collection of base type values.  However, vectors are allowed to grow and shrink in size.
                 <br />Syntax: <code class="prettyprint">vector&lt;Base_Type> vec;</code><br />
                 This syntax indicates a template class (discussed later) and any type can be put inside the angle brackets and it will produce a new class of vectors with that base type.  It will call the default constructor for the class <code>vector&lt;Base_Type></code> and create an empty vector object.

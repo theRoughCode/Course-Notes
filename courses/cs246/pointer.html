@@ -65,9 +65,9 @@ int& bob = robert;  // reference to bob
                 In this example, <code>bob</code> is a reference to the storage location for <code>robert</code>.  <code>bob</code> is known as an <b>alias</b> for <code>robert</code>: any change to <code>bob</code> results in a change to <code>robert</code>.<br />
                 Returning a reference allows us to overload certain operators in a more natural way. e.g. <code class="prettyprint">double& sampleFunction(double& variable)</code>.  <i>For more examples, see the overloading of inserter <code><<</code> and extractor <code>>></code> operators <a href="./function.html#exsert">here</a></i>.  We should not return a local variable because that creates an alias to a variable that is destroyed once the function call is done.
 
-                <h3>L-Values and R-Values</h3>
-                <b>L-Value</b>: appears on left-hand side of an assignment operator; represent a storage location.  Persists beyond expression.
-                <br /><b>R-Value</b>: appears on right-hand side of an assignment operator.  A temporary value that does not persist beyond the expression. e.g. <code>2 + 3</code>
+                <h3 id="lrvalue">L-Values and R-Values</h3>
+                <b>L-Value</b>: appears on left-hand side of an assignment operator; represent a storage location (most references are of this type).  Persists beyond expression.
+                <br /><b>R-Value</b>: appears on right-hand side of an assignment operator.  We can have a reference to an r-value by using a double-ampersand <code>&&</code> (used in <a href="./class.html#move">move sematics</a>).  A temporary value that does not persist beyond the expression. e.g. <code>2 + 3</code>
                 <br /><br />
                 Functions that return an l-value must return a reference.  <i>Caution</i>: When a member function returns a member var, refrain from returning by reference to avoid external access to private member vars.  If you do, add a const to return value to protect access to member var (see <a href="./function.html#rules">here</a>).
 
@@ -110,7 +110,7 @@ int *n = new int(17);  // *n == 17</pre>
                 <h2 id="6">Null Pointer</h2>
                 <code>NULL</code> is actually the number 0 which can lead to ambiguity.  We can resolve this problem by using the null pointer: <code>nullptr</code>.  It is not 0 and can be used anywhere we could use <code>NULL</code>.
 
-                <h3>Dynamic vs. Automatic Variables</h3>
+                <h3 id="dynauto">Dynamic vs. Automatic Variables</h3>
                 <ul>
                   <li>
                     Dynamic Variables:
@@ -162,6 +162,27 @@ P::P(int m) {
   this->m = m;
 }
 </pre>
+                <h2 id="9">Shallow vs. Deep Copies</h2>
+                <ul>
+                  <li>
+                    Shallow Copy
+                    <ul>
+                      <li>copy contents of member vars from one object to the other</li>
+                      <li>default assignment and copy constructors</li>
+                      <li>fine if not pointers involved</li>
+                    </ul>
+                  </li>
+                    <li>
+                      Deep Copy
+                      <ul>
+                        <li>Pointers & dynamic memory is involved</li>
+                        <li>creates copies of what each member var is pointing to</li>
+                        <li>creates a separate but identical copy</li>
+                        <li>must dereference pointer variable to get the data for copying</li>
+                        <li>must write an <a href="./function.html#assignment">overloaded assignment operator</a> or copy constructor</li>
+                      </ul>
+                    </li>
+                </ul>
 
               </div>
             </div>

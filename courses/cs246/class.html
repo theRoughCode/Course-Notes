@@ -48,12 +48,19 @@
                     <li><a href="#2">Classes</a></li>
                     <li><a href="#3">Class Member Functions</a></li>
                     <li><a href="#4">Public and Private Members</a></li>
-                    <li><a href="#5">Accessor and Mutator Functions</a></li>
-                    <li><a href="#6">Structures vs. Classes</a></li>
-                    <li><a href="#7">Constructors</a></li>
-                    <li><a href="#8">Static Modifer</a></li>
-                    <li><a href="#9">Friend Classes</a></li>
-                    <li><a href="#10">Forward Class Declaration</a></li>
+                    <li><a href="#5">Class Initialization</a></li>
+                    <li><a href="#6">Accessor and Mutator Functions</a></li>
+                    <li><a href="#7">Structures vs. Classes</a></li>
+                    <li><a href="#8">Constructors</a></li>
+                    <li><a href="#9">Destructors</a></li>
+                    <li><a href="#10">Copy Constructor</a></li>
+                    <li><a href="#11">Copy Assignment Operator</a></li>
+                    <li><a href="#12">Move Constructor</a></li>
+                    <li><a href="#13">Move Assignment Operator</a></li>
+                    <li><a href="#14">Static Modifer</a></li>
+                    <li><a href="#15">Friend Classes</a></li>
+                    <li><a href="#16">Forward Class Declaration</a></li>
+                    <li><a href="#17">Unified Modeling Language (UML)</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -174,15 +181,55 @@ DayofYear date;
 cin >> date.month;  // not allowed
 date.input();  // allowed
 </pre>
+                <h2 id="5">Class Initialization</h2>
                 <h3>Member Initialization</h3>
                 Member initialization allow us to set default values for member vars by initializing them within the class definition.
                 <pre class="prettyprint">
 class DayofYear {
-int month = 1;  // member initialization
-int day = 1;
+  int month = 1;  // member initialization
+  int day = 1;
 };</pre>
+                <h3>Uniform Initialization</h3>
+                Classes can be initialized similar to arrays: <code class="prettyprint">int arr[4] = { 0, 1, 2, 3 };</code>
+                For a class with only public vars:
+<pre class="prettyprint">
+class Student {
+public:
+  String name;
+  int id;
+}
+Student s1 = { "Sarah", 1222 };  // aggregate initialization</pre>
+                For a class with private vars, we need to define a constructor to initialize the private vars.
+<pre class="prettyprint">
+class Student {
+private:
+  String name;
+  int id;
+public:
+  Student(String name, int id) : name {name}, id {id} {}
+}
+Student s2 = { "John", 3344 };  // calls constructor</pre>
+                Uniform Initialization searches for:
+                <ol>
+                  <li>
+                    initializer_list constructor, i.e. <code class="prettyprint">myclass (std::initializer_list&lt;int> v);</code>
+                  </li>
+                  <li>
+                    Regular constructors
+                    <ul>
+                      <li>private member vars</li>
+                      <li>public constructor</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Aggregate Initialization (with public member vars)
+                  </li>
+                </ol>
 
-                <h2 id="5">Accessor and Mutator Functions</h2>
+                <h3>Member Initialization List</h3>
+                Fields are initialized in the order of declaration in the class, not in the order of MIL.  This is more efficient than initializing in the body as it calls the constructor once rather than calling the default constructor and then initializing the member vars.  (More <a href="#init">later</a>.)
+
+                <h2 id="6">Accessor and Mutator Functions</h2>
                 Accessor and Mutator functions are used to set/modify and retrieve the private member data of objects.
                 <ul>
                   <li>
@@ -209,7 +256,7 @@ private:
 };</pre>
 
 
-                <h2 id="6">Structures vs. Classes</h2>
+                <h2 id="7">Structures vs. Classes</h2>
                 <table>
                   <tr>
                     <th>Property</th>
@@ -231,7 +278,7 @@ private:
                   </tr>
                 </table>
 
-                <h2 id="7">Constructors</h2>
+                <h2 id="8">Constructors</h2>
                 Constructors are member functions that are called when an object of that class is declared.  It initializes some or all member variables.  It can also be used to validate the data provided to ensure that the appropriate data is assigned to the member variables.  A constructor is defined like any other function except:
                 <ol>
                   <li>
@@ -264,7 +311,7 @@ DayofYear::DayofYear(int monthValue, int dayValue) {
   month = monthValue;
   day = dayValue;
 }</pre>
-                <h3>Initialization Section</h3>
+                <h3 id="init">Initialization Section</h3>
                 We can also use an <b>initialization section</b> to initalize member data.  The initialization section is placed after the parameter list and before the opening braces.  It consists of a colon followed by a list of some or all member vars separated by commas. Each member varaiable included is then followed by its initializing value in parenthesis.  This is favoured over the other method as it is more efficient: less overhead (explained later). e.g.
 <pre class="prettyprint">
 DayofYear::DayofYear(int monthValue, int dayValue)
@@ -299,7 +346,210 @@ Max(int my_max, int my_min, int my_middle) : Max (my_max, my_min){
                 <h3>Default Constructor</h3>
                 The <b>default constructor</b> is the constructor without any arguments.  It is auto-generated only if no other constructors are defined.  As a rule, it should always be defined to allow for accidental declarations of classes without parameters, i.e. <code class="prettyprint">DayofYear date;</code>
 
-                <h2 id="8">Static Modifier</h2>
+                <div class="note">
+                  <div>
+                    <h3>The Big 3</h3>
+                    The big 3 consists of:
+                    <ul>
+                      <li>Destructor</li>
+                      <li>Copy Constructor</li>
+                      <li>Copy Assignment Operator</li>
+                    </ul>
+                    It is a rule of thumb of C++ for building exception-safe code and for formalizing rules on resource management.
+                    It claims that if a class defines one (or more) of the following, it should probably explicitly define all three.
+                  </div>
+                </div>
+                <h2 id="9">Destructors</h2>
+                Destructors are executed whenever an object of its class goes out of scope or is deallocated by the <code>delete</code> operator.
+                <br />Syntax: <code class="prettyprint">~className(){}</code><br />
+                Its default version only destroys regular variables and not dynamic variables.
+
+                <h2 id="10">Copy Constructor</h2>
+                A copy constructor is used when a copy of an object is made, in the following situations:
+                <ol>
+                  <li>
+                    A class object is declared and initialized by another object of the same type in parameters. e.g.
+                    <ul>
+                      <li><code class="prettyprint">Class c1(c2);</code></li>
+                      <li><code class="prettyprint">Class c1 = c2;</code></li>
+                    </ul>
+                  </li>
+                  <li>
+                    When a function returns a value of the class type.
+                  </li>
+                  <li>
+                    When an argument of the class type is plugged in for a call-by-value parameter
+                  </li>
+                </ol>
+                The copy constructor has one call-by-reference parameter of same class type (normally const).  Any class that uses pointers/new operator should have a copy constructor.
+<pre class="prettyprint">
+Class::Class(const Class& Object) {
+  ptr = new int;
+  *ptr = Object->ptr; // copies value over
+}</pre>
+
+                <h2 id="11">Copy Assignment Operator</h2>
+                This is called when an already initialized object is assigned a new value from another existing object.  This is a fallback for move assignment when move is unavailable (rvalues can bind to const references)
+<pre class="prettyprint">
+Class &Class::operator=(const Class &Object) {
+  if (this != &Object){
+    // get rid of old data
+    delete ptr;
+    ptr = nullptr;
+    // copy over values
+    ptr = new int;
+    *ptr = Object->ptr;
+    return *this;
+  }
+}
+Class c2 = c1;  // calls copy constructor</pre>
+
+                <h3>Copy And Swap Idiom</h3>
+                The <b>copy and swap idiom</b> provides a strong exception guarantee for resource managing class.  Normally, copying is done as follows:
+                <ol>
+                  <li>Check for self-assignment</li>
+                  <li>Free up memory</li>
+                  <li>Allocate new memory</li>
+                  <li>Deep copy similar to copy constructor</li>
+                </ol>
+                For example, in a LinkedList:
+<pre class="prettyprint">
+struct Node {
+private:
+  Node *next;
+
+public:
+  Node &operator =(const Node &other) {
+    if (this != &other) {
+      delete next;
+      next = other.next ? new Node (*other.next) : nullptr;
+      return *this;
+    }
+  }
+}</pre>
+                This method does not leak memory, however, it has 3 disadvantages:
+                <ol>
+                  <li>
+                    Self-assignment rarely occurs, slows program down to check.  Would be better if it could work regardless.
+                  </li>
+                  <li>
+                    Only provides a basic exception guarantee. It does <u>not</u> maintain the state of the object when an exception is thrown. If <code>new</code> fails, <code>next</code> has lost its data.
+                  </li>
+                  <li>
+                    Duplicates code written elsewhere.
+                  </li>
+                </ol>
+                To solve this, we use the copy and swap idiom, as follows:
+<pre class="prettyprint">
+#include <utility>  // swap
+struct Node {
+private:
+  Node *next;
+  int data;
+public:
+  void swap(Node &other){
+    using std::swap;
+    swap(data, other.data); // data now contains other.data, other.data contains your data
+    swap(next, other.next);
+  }
+  Node &operator =(const Node &other) {
+    Node temp = other;  // copy constructor
+    swap(temp);  // swap temp with this
+    return *this;
+  }
+}
+</pre>
+                Note that the above 3 disadvantages are solved:
+                <ol>
+                  <li>
+                    Works even with self-assignment due to <code>temp</code>
+                  </li>
+                  <li>
+                    Provides a strong exception guarantee.  If <code>new</code> fails, we won't even reach the point of the function where the current object is being altered.  <code>swap</code> is non-throwing and the temp variable will be destroyed when the function ends.
+                  </li>
+                  <li>
+                    This idiom does not repeat code, thus we cannot introduce bugs.
+                  </li>
+                </ol>
+
+                <div class="note">
+                  <div>
+                    <h3>The Big 5</h3>
+                    The Big 5 is an extension of the Big 3, implemented in C++11.  It consists of:
+                    <ul>
+                      <li>Destructor</li>
+                      <li>Copy Constructor</li>
+                      <li>Move Constructor</li>
+                      <li>Copy Assignment Operator</li>
+                      <li>Move Assignment Operator</li>
+                    </ul>
+                    It implements move semantics, allowing destination objects to grab data from temporary objects.
+                  </div>
+                </div>
+                <h2 id="12">Move Constructor</h2>
+                <h3 id="move">Move Semantics</h3>
+                Copying was the means to transfer the state of an object to another. Moving is faster as they move existing resources to the new destination and sets the other to the default constructor, while copying requires the creation of a new resource from scratch.  The lack of allocation and copying makes it faster and more efficient than copying.
+                <h3>The Move Constructor</h3>
+                The move constructor removes need for deep copy or <code>delete</code>.   Takes in an r-value reference (see <a href="./pointer.html#lrvalue">here</a>). <code>std::move()</code> is a cast that can be applied on an l-value argument to produce an rvalue reference. e.g.
+<pre class="prettyprint">
+MemoryPage (MemoryPage &&other) : size(0), buf(nullptr) {
+  // pilers other's resources
+  size = other.size;
+  buf = other.buf;
+  // reset other
+  other.size = 0;
+  other.bug = nullptr;
+}</pre>
+
+                <h2 id="13">Move Assignment Operator</h2>
+                Similar to copy constructor except that before pilfering source object, it releases any resources the object might own.  Performs the following steps:
+                <ol>
+                  <li>releases source object, *this, currently owns</li>
+                  <li>pilfers others resources</li>
+                  <li>set other to a default state</li>
+                  <li>return *this</li>
+                </ol>
+<pre class="prettyprint">
+MemoryPage& MemoryPage::operator=(MemoryPage&& other){
+  if (this != &other) {
+    // release the current object’s resources
+    delete[] buf;
+    size = 0;
+    // pilfer other’s resource
+    size = other.size;
+    buf = other.buf;
+    // reset other
+    other.size = 0;
+    other.buf = nullptr;
+  }
+  return *this;
+}</pre>
+
+                <h3>Move and Swap Example</h3>
+<pre class="prettyprint">
+MemoryPage& MemoryPage::operator=(MemoryPage&& other){
+  using std::swap;
+  swap(size, other.size); // swap values of this with other (R-value to be destroyed)
+  swap(buf, other.buf);
+  return *this
+}</pre>
+
+                <div class="note">
+                  <div>
+                    Every class comes with:
+                    <ol>
+                      <li>default constructor</li>
+                      <li>copy constructor</li>
+                      <li>copy assignment operator</li>
+                      <li>destructor</li>
+                      <li>move constructor</li>
+                      <li>move assignment operator</li>
+                    </ol>
+                  </div>
+                </div>
+
+
+                <h2 id="14">Static Modifier</h2>
                 <h3>Static Variables</h3>
                 <b>Static member variables</b> are shared by all objects of that class.  When one object changes it, all objects sees that change. To make a variable static, we place the <code>static</code> keyword before its type. Here are some potential uses:
                 <ol>
@@ -330,7 +580,7 @@ int DayofYear::numOfDates = 0; // initialize static var
 DayofYear::printTodayDate(); // call static function
 </pre>
 
-                <h2 id="9">Friend Classes</h2>
+                <h2 id="15">Friend Classes</h2>
                 Similar to functions being a <code>friend</code> to a class (see <a href="./function.html#9">here</a>).
                 If a class <code>F</code> is a friend of class <code>>C</code>, then every member function of class <code>F</code> is a friend of class <code>C</code>.  We declare the friend class as a friend within the other class.
 <pre class="prettyprint">
@@ -341,7 +591,7 @@ public:
 };
 class F {};</pre>
 
-                <h2 id="10">Forward Class Declaration</h2>
+                <h2 id="16">Forward Class Declaration</h2>
                 A <b>forward declaration</b> is a declaration of an identifier which the programmer has not yet provided a definition.
                 <div class="note">
                   <div>
@@ -357,6 +607,36 @@ public:
   F *ptr;  // allowed
   F obj;   // not allowed
 };</pre>
+
+              <h2 id="17">Unified Modeling Language (UML)</h2>
+              UML's show dependencies between classes.  Here are some properties:
+              <ul>
+                <li>class names are on top</li>
+                <li><code>+</code> represents a public member</li>
+                <li><code>-</code> represents a private member</li>
+                <li>arrows represent inclusion of another class</li>
+                <li>weak association: includes parameter of another class</li>
+                <li>strong association: hold reference to an instance of another class</li>
+                <li>Aggregation: shared association
+                  <ul>
+                    <li>
+                      class B can be a part of other classes (class A is not an exclusive container of class B)
+                    </li>
+                    <li>use an open diamond</li>
+                  </ul>
+                </li>
+                <li>Composition: not shared association
+                  <ul>
+                    <li>
+                      class A has exclusive ownership over class B
+                    </li>
+                    <li>use a solid diamond</li>
+                  </ul>
+                </li>
+                <li>numbers on either side of arrow to represent the multiplicity relationship</li>
+                <li>Order: class name, member vars, member functions</li>
+              </ul>
+              Refer to this <a href="https://cppcodetips.wordpress.com/2013/12/23/uml-class-diagram-explained-with-c-samples/" target="_blank">link</a> for more information.
 
               </div>
             </div>

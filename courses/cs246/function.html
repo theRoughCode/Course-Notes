@@ -325,8 +325,22 @@ istream& operator >>(istream& inputStream, Money& amount) {
  return inputStream;
 }</pre>
 <br />
-                <h4>Overloading = Operator</h4>
-                The assignment operator is overloaded as a member operator.  The default assignment operator copies values of the member vars from one object to the corresponding member vars of the other object.  The operator should return a reference to allow chaining.
+                <h4 id="assignment">Overloading = Operator</h4>
+                The assignment operator is overloaded as a member operator.  The default assignment operator copies values of the member vars from one object to the corresponding member vars of the other object.  The operator should return a reference to allow chaining (use <code>this</code> pointer).
+<pre class="prettyprint">
+StringClass& StringClass::operator=(const StringClass& rtSide) {
+  if (this == &rtSide) // if right side same as left side
+    return *this;
+  else{
+    capacity = rtSide.length;
+    length = rtSide.length;
+    delete [] a;
+    a = new char[capacity];
+    for (int i = 0; i < length; i++)
+      a[i] = rtSide.a[i];
+    return *this;
+  }
+}</pre>
                 <br /><br />
                 <h4>Overloading ++ And -- Operators</h4>
                 As both the increment and decrement operators have prefix and postfix versions, we need to distinguish them.
