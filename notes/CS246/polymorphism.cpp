@@ -96,7 +96,7 @@ class Comic : public Book {
 }
 
 Comic c{40};
-Book &pB{&c};
+Book *pB{&c};
 Book &rB{c};
 Comic *pc{&c};
 

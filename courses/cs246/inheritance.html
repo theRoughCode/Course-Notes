@@ -62,10 +62,10 @@ class derivedClass : public baseClass {
   // want to change definition of inherited member function
   void inheritedFn();
 }</pre>
-                <h3>Properties of Derived Classes</h3>
+                <h3 id="prop">Properties of Derived Classes</h3>
                 <ol>
                   <li>derived classes can add new member vars and functions</li>
-                  <li>derived classes are objects of the base class (but not vice versa)</li>
+                  <li>derived classes are objects of the base class (but not vice versa).  We can assign an object of the derived class to one of the base class, but we introduce the <b>slicing problem</b> (more on this <a href="./polymorphism.html#6">here</a>).</li>
                   <li>derived classes do not have access to private vars or functions from the base class</li>
                 </ol>
 

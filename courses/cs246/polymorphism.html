@@ -45,11 +45,169 @@
                   <h1>Table of Contents</h1>
                   <ol id="nav">
                     <li><a href="#1">Virtual Functions</a></li>
+                    <li><a href="#2">override Keyword</a></li>
+                    <li><a href="#3">final Keyword</a></li>
+                    <li><a href="#4">Pure Virtual Functions</a></li>
+                    <li><a href="#5">Abstract Classes</a></li>
+                    <li><a href="#6">Slicing Problem</a></li>
+                    <li><a href="#7">Virtual Destructors</a></li>
+                    <li><a href="#8">Upcasting & Downcasting</a></li>
+                    <li><a href="#9">Late Binding Implmentation</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
 
-                <h2 id="1"></h2>
+                <h2 id="1">Virtual Functions</h2>
+                <b>Polymorphism</b> is the ability to associate multiple meanings to one function name with virtual functions and late binding.  Virtual functions provide the capability of polymorphism and it is where a function is used before it is defined.  The compiler waits till it is used in the program and gets the object's implementation.  This technique is known as <b>late binding</b> or dynamic binding.  Virtual functions are used when we dont know exactly how a function is implemented.  <i>This is different from Java where all functions are automatically virtual.</i><br />
+                To declare a function as virtual, we prepend the <code>virtual</code> keyword: <code class="prettyprint">virtual Return_Type foo();</code>
+                <h3>Inheritance</h3>
+                Inherited classes will keep the virtual properties of virtual functions in the base class (even without stating the virtual keyword).
+                <h3>Override vs. Redefine</h3>
+                <ul>
+                  <li>
+                    if a virtual function is changed, it is <b>overriden</b> (defined at runtime)
+                  </li>
+                  <li>
+                    if a non-virtual function is changed, it is <b>redefined</b> (defined at compiletime)
+                  </li>
+                </ul>
+
+                <h3>Disadvantages of Virtual Functions</h3>
+                <ol>
+                  <li>More overhead</li>
+                  <li>Uses more storage </li>
+                  <li>Late binding makes the program runs slower </li>
+                </ol>
+
+                <h2 id="2">override Keyword</h2>
+                The <code>override</code> keyword is used to make clear if a function is overridden or redefined.  This is specified in function declaration and ensures that the function is virtual and that it is overriding a virtual base class function.
+<pre class="prettyprint">
+class Sale {
+  virtual double bill() const;
+};
+class DiscountSale : public Sale {
+  double bill() const override;
+};</pre>
+
+                Having virtual functions allows us to accomodate multiple types under one abstraction (polymorphism).
+<pre class="prettyprint">
+class Book {
+  string title, author;
+protected:
+  int numPages;
+public:
+  Book();
+  virtual bool isHeavy() const {
+    return numPages > 200;
+  }
+};
+class Comic : public Book {
+  bool isHeavy() const override {
+    return numPages > 30;
+  }
+}
+
+Comic c{40};
+Book *pB{&c};
+Book &rB{c};
+Comic *pc{&c};
+
+cout  << pc->isHeavy() // true
+      << pB->isHeavy() // true
+      << rb.isHeavy(); // true
+
+Book *myBook[20];
+for (int i = 0; i < 20; i++) {
+  cout << myBooks[i]->isHeavy() << endl;
+}</pre>
+
+                <h2 id="3">final Keyword</h2>
+                The <code>final</code> keyword prevents a virtual function from being overriden.  This is useful for inherited classes that inherit virtual functions where we don't want its derived classes to override it.
+<pre class="prettyprint">
+class Sale {
+  virtual double bill() const final;
+};
+class DiscountSale : public Sale {
+  double bill() const;  // compiler error
+};</pre>
+                <h2 id="4">Pure Virtual Functions</h2>
+                Pure virtual functions are used when a base class does not have a definition for them.  Its sole purpose is for its derived classes to override and provide their own specific implementation.  To make a virtual function pure, we append <code>= 0</code> to its declaration. i.e. <code class="prettyprint">virtual type foo() = 0;</code>
+
+                <h2 id="5">Abstract Classes</h2>
+                <b>Abstract classes</b> are classes with one or more virtual functions.  Here are some properties of abstract classes:
+                <ul>
+                  <li>can only be used as a base class</li>
+                  <li>cannot create objects of an abstract class</li>
+                  <li>can still write code with parameters of the abstract class type which will apply to all object of derived classes</li>
+                  <li>inherited classes from abstract class will be abstract unless you provide definitions for <i>all</i> the inherited pure virtual functions</li>
+                </ul>
+
+                <h2 id="6">Slicing Problem</h2>
+                We have learnt in <a href="./inheritance/html#prop">Inheritance</a> that a derived class can be assigned to objects of the base class.  However, this means that we can only assign values included in the parent type, and we lose any new fields that the derived class has.  This is the <b>slicing problem</b>.  Example:
+<pre class="prettyprint">
+class Pet {
+  public:
+    string name;
+    virtual void print( ) const;
+};
+class Dog : public Pet {
+  public:
+    string breed;
+    void print( ) const; // virtual
+};
+Dog vdog;
+Pet vpet;
+vdog.name = "Tiny";
+vdog.breed = "Great Dane";
+vpet = vdog;</pre>
+                When we assign <code>vdog</code> to <code>vpet</code>, we lose the <code>breed</code> field.  To solve this, we use pointers and dynamic variables, and in doing so, we can treat object of the derived class as an object of the base class without losing variables.
+<pre class="prettyprint">
+Pet *ppet;
+Dog *pdog;
+pdog = new Dog;
+pdog->name = "Tiny";
+pdog->breed = "Great Dane";
+ppet = pdog;
+cout << ppet->breed; // ERROR
+ppet.print();  // accesses breed field</pre>
+
+                <h2 id="7">Virtual Destructors</h2>
+                Consider the following example:
+<pre class="prettyprint">
+Base *pBase = new Derived;
+delete pBase;</pre>
+                This calls the base class' destructor and <i>not</i> the derived class'.  To fix this, we make the destructor virtual.  It is thus good practice to make all destructors virtual.
+
+                <h2 id="8">Upcasting & Downcasting</h2>
+                <h3>Upcasting</h3>
+                <b>Upcasting</b> is casting from a descendent object to an anscestor type.  This is safe s you're only disregarding some info.
+
+                <h3>Downcasting</h3>
+                <b>Downcasting</b> is casting from an ancestor object to a descendent type.   This is dangerous as we are not assumming that additional member fields are being added.  To solve this, we use <code>dynamic_cast</code> which works only with pointer types.
+<pre class="prettyprint">
+Pet *ppet;
+ppet = new Dog;
+Dog *pdog = dynamic_cast<Dog*>(ppet);</pre>
+                <code>dynamic_cast</code> informs us if it fails by returning <code>NULL</code>.  Keep the following points in mind when downcasting:
+                <ol>
+                  <li>
+                    Keep track of member fields so you know the info to be added is present
+                  </li>
+                  <li>
+                    Member functions must be virtual since dynamic_cast uses the virtual functions info to perform cast
+                  </li>
+                </ol>
+
+                <h2 id="9">Late Binding Implementation</h2>
+                C++ implements late binding by creating a <b>virtual function table</b>.  This is created for a class that has one or more member functions that are virtual.  It has a pointer for each virtual member function.  If the inherited virtual function is not changed, the table points to the definition in the ancestor class.  If the virtual function has a new definition, the pointer points to that definition.  A <code>vptr</code> is placed in each class with virtual functions which points to the <code>vtable</code> of that object.<br />
+                When a virtual function call is made through a base class pointer, the compiler inserts code to fetch the <code>vptr</code>.  When there is no virtual function, the size of the object is equal to the size of its members.  If there is one or more virtual functions, the object's size includes an extra size of a void pointer (points to vtable).  Once the object with virtual functions is created, the vptr is initailized to point to the starting address of the vtable.
+                <h3>Steps In Calling Virtual Method</h3>
+                <ol>
+                  <li>Follow vptr to the vtable</li>
+                  <li>Fetch the pointer to the actual method from the vtable</li>
+                  <li>Follow the function pointer and call the function</li>
+                </ol>
+
 
               </div>
             </div>
