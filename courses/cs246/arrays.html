@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CS 246 :: Arrays</title>
+    <title>CS 246 :: Arrays & Vectors</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
@@ -38,7 +38,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                <h1 id="title_text">Arrays</h1><br />
+                <h1 id="title_text">Arrays & Vectors</h1><br />
 
                 <!-- Table of Contents -->
                 <div id="contents">
@@ -50,6 +50,7 @@
                     <li><a href="#4">Arrays in Functions</a></li>
                     <li><a href="#5">Multi-Dimensional Arrays</a></li>
                     <li><a href="#5">Arrays in Memory</a></li>
+                    <li><a href="#6">Vectors</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -181,10 +182,24 @@ grid[4][0], grid[4][1], ..., grid[4][9]
                 </ul>
                 e.g. <code class="prettyprint">void foo(const char grid[][10], int size);</code>
 
-
-
                 <h2 id="6">Arrays in Memory</h2>
                 When arrays are declared, memory is allocated for the <i>entire</i> array.  The memory is <b>sequentially-allocated</b> which means that the addresses of the elements of the array are allocated "back-to-back".
+
+                <h2 id="7">Vectors</h2>
+                Vectors are similar to arrays in that it has a base type and is a collection of base type values.  However, vectors are allowed to grow and shrink in size.
+                <br />Syntax: <code class="prettyprint">vector&lt;Base_Type> vec;</code><br />
+                This syntax indicates a template class (discussed later) and any type can be put inside the angle brackets and it will produce a new class of vectors with that base type.  It will call the default constructor for the class <code>vector&lt;Base_Type></code> and create an empty vector object.
+
+                <h3>Vector Operations</h3>
+                <ul>
+                  <li><code class="prettyprint">vec.at(int pos)</code> - returns a reference to the element at <code>pos</code> </li>
+                  <li><code class="prettyprint">vec[int pos]</code> - similar to <code>vec.at()</code> but does not check if <code>pos</code> is out of range.</li>
+                  <li><code class="prettyprint">vec.push_back(Base_Type x)</code> - adds <code>x</code> to end of vector</li>
+                  <li><code class="prettyprint">vec.size()</code> - returns number of elements in vector</li>
+                  <li><code class="prettyprint">vec.capacity()</code> - returns capacity of vector; can be equal or greater than vector size.  Represents size of storage space (in terms of number of elements) currently allocated to vector</li>
+                  <li><code class="prettyprint">vec.clear()</code> - removes all elements from vector (destroys them) and leave the vector with a size of 0</li>
+                  <li><code class="prettyprint">vec.erase(iterator pos)</code> - removes a single element at <code>position</code>.  Can remove a range of elements by using: <code class="prettyprint">vec.erase(iterator first, iterator last)</code> which removes <code>[first, last)</code></li>
+                </ul>
 
 
 
