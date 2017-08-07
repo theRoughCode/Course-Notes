@@ -48,11 +48,11 @@
                     <li><a href="#2">Random Number Generator</a></li>
                     <li><a href="#3">Programmer-Defined Functions</a></li>
                     <li><a href="#4">Scope</a></li>
-                    <li><a href="#5">Parameter vs. Argument</a></li>
-                    <li><a href="#6">Parameters</a></li>
-                    <li><a href="#7">Const Modifer</a></li>
-                    <li><a href="#8">Inline Functions</a></li>
-                    <li><a href="#9">Overloading</a></li>
+                    <li><a href="#5">Parameters</a></li>
+                    <li><a href="#6">Const Modifer</a></li>
+                    <li><a href="#7">Inline Functions</a></li>
+                    <li><a href="#8">Overloading</a></li>
+                    <li><a href="#9">Friend Functions</a></li>
                     <li><a href="#10">Assert Macro</a></li>
                   </ol>
                 </div>
@@ -172,9 +172,8 @@ printf ("Random number: %d\n", rand() % 100 + 1); // random number in range 1 to
                 Variables are declared inside a compound (block) statement.  All function definitions are blocks, which provides local "function-scope".  e.g. loop blocks<br />
                 Block scopes can also be nested.  Variables have their scope limited to the innermost enclosing braces.
 
-
-
-                <h2 id="5">Parameter vs Argument</h2>
+                <h2 id="5">Parameters</h2>
+                <h3>Parameter vs Argument</h3>
                 <ul>
                   <li>
                     Formal Parameters
@@ -193,8 +192,6 @@ printf ("Random number: %d\n", rand() % 100 + 1); // random number in range 1 to
                     </ul>
                   </li>
                 </ul>
-
-                <h2 id="6">Parameters</h2>
                 There are 2 methods of passing arguments as parameters:
                 <ol>
                   <li>
@@ -227,7 +224,7 @@ showVolume(1, 2, 3);  // all arguments provided
 showVolume(1, 2); // length, width provided. height defaulted to 1
 showVolume(7); // length provided. width, height defaulted to 1</pre>
 
-                <h2 id="7">Const Modifier</h2>
+                <h2 id="6">Const Modifier</h2>
                 To protect a variable from being changed, the <code>const</code> keyword is placed before the type.
 
                 <h3>Constant Parameters</h3>
@@ -237,7 +234,7 @@ showVolume(7); // length provided. width, height defaulted to 1</pre>
                 If a member function should not change the value of calling object, we can mark the function with a const modifier by appending it at the end of the function declaration.  As a rule of thumb, if a function does not need to modify its containing class, it should be declared as a constant function. e.g. <code class="prettyprint">void output() const;</code><br />
                 * Constant objects can only call constant functions.
 
-                <h2 id="8">Inline Functions</h2>
+                <h2 id="7">Inline Functions</h2>
                 Inline functions are a way to reduce overhead for smaller functions by telling the compiler to replace all calls to this function with its definition (similar to macros).
 
                 <h3>Inline Non-Member Functions</h3>
@@ -246,7 +243,7 @@ showVolume(7); // length provided. width, height defaulted to 1</pre>
                 <h3>Inline Member Functions</h3>
                 To make a member function inline, we place the function definition <i>within</i> the class definition, which makes it automatically inline.
 
-                <h2 id="9">Overloading</h2>
+                <h2 id="8">Overloading</h2>
                 C++ allows 2 or more different definitions to the same function name, but with different parameter lists (i.e. different number of parameters or parameters of different types). The compiler decides which function to call based on the signature of the function call.
                 <h3>Overloading Resolution</h3>
                 <ol>
@@ -262,6 +259,92 @@ showVolume(7); // length provided. width, height defaulted to 1</pre>
                     </ol>
                   </li>
                 </ol>
+
+                <h3>Overloading Built-In Operators</h3>
+                We can overload built-in functions to work with programmer-defined types.  To overload an operator, we add the <code>operator</code> keyword after the data type and before the operator.  For example, the following overloading of the <code>+</code> operator allows us to add two <code>Money</code> objects together:
+<pre class="prettyprint">
+const Money operator +(const Money& amount1, const Money& amount2) {
+ int allCents1 = amount1.getCents() + amount1.getDollars()*100;
+ int allCents2 = amount2.getCents() + amount2.getDollars()*100;
+ int sumAllCents = allCents1 + allCents2;
+ int absAllCents = abs(sumAllCents); // Money can be negative
+ int finalDollars = absAllCents / 100;
+ int finalCents = absAllCents % 100;
+
+ if (sumAllCents < 0) {
+  finalDollars = -finalDollars;
+  finalCents = -finalCents;
+ }
+
+ return Money(finalDollars, finalCents);
+}</pre>
+                <h3>Returning By const Value</h3>
+                Note that the above example for the <code>+</code> operator returns a constant object.  If it didn't, we could modify the returned anonymous object which would make no sense.
+<pre class="prettyprint">
+Money operator +(const Money& amount1, const Money& amount2);
+Money sum = (m1 + m2).getDollars();  // possible since not const</pre>
+
+                <h3>Overloading Operators as Member Functions</h3>
+                We can also overload operators as member functions, as part of a class.  Allows access to private member variables without having to go through the accessor/mutator methods.  This requires the overloaded function to take in only one parameter, since the calling object serves as the first parameter.
+<pre class="prettyprint">
+const Money::Money operator +(const Money& amount2);</pre>
+
+                <h3>Rules on Overloading Operators</h3>
+                <ol>
+                  <li>
+                    When overloading an operator, at least one parameter of the resulting overloaded operator must be of a class type
+                  </li>
+                  <li>
+                    Most operators can be overloaded as a member of the class, a friend of the class, or a nonmember, nonfriend
+                  </li>
+                  <li>
+                    The following operators can only be overloaded as (non-static) members of the class: =, [], ->, and ()
+                  </li>
+                  <li>
+                    Cannot create a new operator, can only overload existing operators
+                  </li>
+                  <li>
+                    Cannot change the number of arguments that an operator takes (excluding difference between member and non-member overloaded operator parameters)
+                  </li>
+                  <li>
+                    Cannot change precedence of an operator.  An overloaded operator has the same precedence as the ordinary version of the operator.  e.g. <code class="prettyprint">x*y + z => (x*y) + z</code>
+                  </li>
+                  <li>
+                    The following operators cannot be overloaded: <code>.</code>, <code>::</code>, <code>sizeof</code>, <code>?:</code>, <code>.*</code>
+                  </li>
+                  <li>
+                    Overloaded operators cannot have default arguments
+                  </li>
+                </ol>
+
+                <h3>Automatic Type Conversion</h3>
+                Following the previous example of overloading as a member function, consider the following case:
+<pre class="prettyprint">
+Money baseAmount(100, 60), fullAmount;
+fullAmount = baseAmount + 25;
+fullAmount.output();</pre>
+                Since the <code>+</code> was not overloaded for ints, the compiler looks for a constructor that takes a single argument of <code>int</code> and converts it to an object of type <code>Money</code>.  Once converted, the program applies the overloaded operator function onto the it.<br />
+                Note that <code class="prettyprint">25 + baseAmount</code> would not work as 25 cannot be a calling object.  This can be handled if we overload the <code>+</code> operator as a non-member.
+                <br />Advantages of overloading as a non-member:
+                <ol>
+                  <li>
+                    allows us to combine variables of different types
+                  </li>
+                  <li>
+                    gives automatic type conversion of all arguments
+                  </li>
+                </ol>
+                On the other hand, overloading as a member gives us the efficiency of bypassing accessor/mutator methods and diirectly accessing member variables.  Overloading as a <b>friend function</b> offers both advantages.
+
+
+                <h2 id="9">Friend Functions</h2>
+                A <b>friend function</b> of a class is not a  member function of the class but it has access to private members/functions of that class. This makes friend functions more efficient as it reduces overhead. They are essentially nonmember functions that have all the privileges of member functions.  <br />
+                We declare friend functions of a class in the class definition, similar to member functions, but they are <u>not</u> member functions. They are ordinary non-member functions with extra access to data members of the class.  They are called the same way as a non-member function (no need for dot operator).
+<pre class="prettyprint">
+class Class_Name {
+public:
+  friend Friend_Function();
+};</pre>
 
                 <h2 id="10">Assert Macro</h2>
                 An <b>assertion</b> is a true or false statement used in debugging and testing programs.  It is used to check correctness of provided arguments.  It does not have a return value and terminates the program if the assert condition is false so that the error can be investigated.  Defined in the <code>&lt;cassert></code> library. <br />

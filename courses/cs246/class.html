@@ -52,6 +52,8 @@
                     <li><a href="#6">Structures vs. Classes</a></li>
                     <li><a href="#7">Constructors</a></li>
                     <li><a href="#8">Static Modifer</a></li>
+                    <li><a href="#9">Friend Classes</a></li>
+                    <li><a href="#10">Forward Class Declaration</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -184,7 +186,7 @@ int day = 1;
                 Accessor and Mutator functions are used to set/modify and retrieve the private member data of objects.
                 <ul>
                   <li>
-                    Accessor Functions - allows client to retrieve data from object.  Should not change class data (represented by making function a constant function via <code>const</code> keyword after function parameter list.  Explained more <a href="./function.html#7">here</a>.)
+                    Accessor Functions - allows client to retrieve data from object.  Should not change class data (represented by making function a constant function via <code>const</code> keyword after function parameter list.  Explained more <a href="./function.html#6">here</a>.)
                   </li>
                   <li>
                     Mutator Function - allows client to change the data
@@ -236,7 +238,7 @@ private:
                     must have the same name as class
                   </li>
                   <li>
-                    cannot return a value
+                    cannot return a value.  They return an anonymous object (for example, overloaded functions returning a new object as seen <a href="./function.html#8">here</a>).
                   </li>
                   <li>
                     no type given (not even void)
@@ -328,8 +330,33 @@ int DayofYear::numOfDates = 0; // initialize static var
 DayofYear::printTodayDate(); // call static function
 </pre>
 
-                
+                <h2 id="9">Friend Classes</h2>
+                Similar to functions being a <code>friend</code> to a class (see <a href="./function.html#9">here</a>).
+                If a class <code>F</code> is a friend of class <code>>C</code>, then every member function of class <code>F</code> is a friend of class <code>C</code>.  We declare the friend class as a friend within the other class.
+<pre class="prettyprint">
+class F;  // forward declaration
+class C {
+public:
+  friend class F;
+};
+class F {};</pre>
 
+                <h2 id="10">Forward Class Declaration</h2>
+                A <b>forward declaration</b> is a declaration of an identifier which the programmer has not yet provided a definition.
+                <div class="note">
+                  <div>
+                    <h3>Tip:</h3>
+                    Always forward declare classes instead of using headers if possible.
+                  </div>
+                </div>
+                When we include header files, we introduce a dependency that will cause the current class to recompile whenever the header file changes.  Forward declaring classes will speed up compilation.  <br />Note, however, that when we forward declare classes, all the compiler knows is that the class exists and nothing about its size or members, thus, we cannot use it when the current class needs to know the "insides" of the forward declared class. e.g.
+<pre class="prettyprint">
+class F;  // forward declaration
+class C {
+public:
+  F *ptr;  // allowed
+  F obj;   // not allowed
+};</pre>
 
               </div>
             </div>
