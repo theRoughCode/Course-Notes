@@ -49,6 +49,9 @@
                     <li><a href="#3">Class Member Functions</a></li>
                     <li><a href="#4">Public and Private Members</a></li>
                     <li><a href="#5">Accessor and Mutator Functions</a></li>
+                    <li><a href="#6">Structures vs. Classes</a></li>
+                    <li><a href="#7">Constructors</a></li>
+                    <li><a href="#8">Static Modifer</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -164,22 +167,45 @@ public:
 private:
   int month;  // data is private
   int day;
-}
+};
 DayofYear date;
 cin >> date.month;  // not allowed
 date.input();  // allowed
 </pre>
+                <h3>Member Initialization</h3>
+                Member initialization allow us to set default values for member vars by initializing them within the class definition.
+                <pre class="prettyprint">
+class DayofYear {
+int month = 1;  // member initialization
+int day = 1;
+};</pre>
 
                 <h2 id="5">Accessor and Mutator Functions</h2>
                 Accessor and Mutator functions are used to set/modify and retrieve the private member data of objects.
                 <ul>
                   <li>
-                    Accessor Functions - allows client to retrieve data from object
+                    Accessor Functions - allows client to retrieve data from object.  Should not change class data (represented by making function a constant function via <code>const</code> keyword after function parameter list.  Explained more <a href="./function.html#7">here</a>.)
                   </li>
                   <li>
                     Mutator Function - allows client to change the data
                   </li>
                 </ul>
+<pre class="prettyprint">
+class DayofYear {
+public:
+  void input();
+  void output();
+  // Mutator Functions
+  void setMonth (int month);
+  void setDay (int day);
+  // Accessor Functions
+  int getMonth() const;
+  int getDay() const;
+private:
+  int month;  // data is private
+  int day;
+};</pre>
+
 
                 <h2 id="6">Structures vs. Classes</h2>
                 <table>
@@ -203,6 +229,106 @@ date.input();  // allowed
                   </tr>
                 </table>
 
+                <h2 id="7">Constructors</h2>
+                Constructors are member functions that are called when an object of that class is declared.  It initializes some or all member variables.  It can also be used to validate the data provided to ensure that the appropriate data is assigned to the member variables.  A constructor is defined like any other function except:
+                <ol>
+                  <li>
+                    must have the same name as class
+                  </li>
+                  <li>
+                    cannot return a value
+                  </li>
+                  <li>
+                    no type given (not even void)
+                  </li>
+                </ol>
+                We can then declare objects of that type with the initialization parameters provided.  Note that we cannot call constructors like other member functions.
+<pre class="prettyprint">
+class DayofYear {
+public:
+  DayofYear(int month, int day); // ctor initializes month and day
+private:
+  int month;  // data is private
+  int day;
+};
+DayofYear date1(3, 14), date2(2, 29);
+// The following is ILLEGAL
+DayofYear date1;
+date1.DayofYear(7, 4);
+</pre>
+                A contructor definition looks like this:
+<pre class="prettyprint">
+DayofYear::DayofYear(int monthValue, int dayValue) {
+  month = monthValue;
+  day = dayValue;
+}</pre>
+                <h3>Initialization Section</h3>
+                We can also use an <b>initialization section</b> to initalize member data.  The initialization section is placed after the parameter list and before the opening braces.  It consists of a colon followed by a list of some or all member vars separated by commas. Each member varaiable included is then followed by its initializing value in parenthesis.  This is favoured over the other method as it is more efficient: less overhead (explained later). e.g.
+<pre class="prettyprint">
+DayofYear::DayofYear(int monthValue, int dayValue)
+  : month(monthValue), day(dayValue) {}</pre>
+
+                <h3>Overloaded Constructors</h3>
+                Constructors can also be overloaded like other functions.  This allows for multiple contructors of different parameters.  The <i>default</i> constructor (without parameters) should <u>not</u> be declared with any brackets, else the compiler will mistake it for a function.
+<pre class="prettyprint">
+DayofYear date1;  // Correct
+DayofYear date1(); // Wrong
+</pre>
+                <h3>Constructor Delegation</h3>
+                When dealing with multiple constructors, we might encounter repetitive code across constructors.  To reduce this, we can apply <b>constructor delegation</b>.  We call the constructor we are delegating to as the <i>only</i> item in the initialization section.
+<pre class="prettyprint">
+class Max {
+  int max, min, middle;
+};
+Max::Max(int my_max) {
+  max = my_max > 0 ? my_max : 10;
+}
+Max(int my_max, int my_min) : Max(my_max) {
+  min = my_min > 0 && my_min < max ? my_min : 1;
+}
+Max(int my_max, int my_min, int my_middle) : Max (my_max, my_min){
+  middle = my_middle < max && my_middle > min ? my_middle : 5;
+}</pre>
+
+                <h3>Explicit Constructor Calls</h3>
+                Constructors can be called even after object has been declared. e.g. <code class="prettyprint">holiday = DayofYear(5, 5);</code><br />
+                Note that for the default constructor with no arguments, we <u>do</u> have to include parenthesis this time.
+
+                <h3>Default Constructor</h3>
+                The <b>default constructor</b> is the constructor without any arguments.  It is auto-generated only if no other constructors are defined.  As a rule, it should always be defined to allow for accidental declarations of classes without parameters, i.e. <code class="prettyprint">DayofYear date;</code>
+
+                <h2 id="8">Static Modifier</h2>
+                <h3>Static Variables</h3>
+                <b>Static member variables</b> are shared by all objects of that class.  When one object changes it, all objects sees that change. To make a variable static, we place the <code>static</code> keyword before its type. Here are some potential uses:
+                <ol>
+                  <li>
+                    for object of a class to communicate with each other and coordinate actions.
+                  </li>
+                  <li>
+                    track how often a member function is called across all objects
+                  </li>
+                  <li>
+                    count how many objects exist at a given time
+                  </li>
+                </ol>
+                Static variables are initialized <i>outside</i> the class definition.  This ensures that the class' author performs the initializing of the static variables and no other programmer can initialize them (static vars cannot be initialized twice).
+
+                <h3>Static Functions</h3>
+                Static member functions are member functions that does not need access to an object's data but still needs to be a member of that class.  It can be called outside of the class without having to have a calling object.  Note that it can only use <i>static member variables</i> and not any variable that depends on a calling object.
+<pre class="prettyprint">
+class DayofYear {
+public:
+  static void printTodayDate();
+private:
+  int month;
+  int day;
+  static int numOfDates;
+};
+int DayofYear::numOfDates = 0; // initialize static var
+DayofYear::printTodayDate(); // call static function
+</pre>
+
+                
 
 
               </div>

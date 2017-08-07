@@ -50,8 +50,10 @@
                     <li><a href="#4">Scope</a></li>
                     <li><a href="#5">Parameter vs. Argument</a></li>
                     <li><a href="#6">Parameters</a></li>
-                    <li><a href="#7">Overloading</a></li>
-                    <li><a href="#8">Assert Macro</a></li>
+                    <li><a href="#7">Const Modifer</a></li>
+                    <li><a href="#8">Inline Functions</a></li>
+                    <li><a href="#9">Overloading</a></li>
+                    <li><a href="#10">Assert Macro</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -214,7 +216,7 @@ printf ("Random number: %d\n", rand() % 100 + 1); // random number in range 1 to
                     </ul>
                   </li>
                 </ol>
-                e.g. <pre class="prettyprint">void getNumbers(int num1, int& num2) {
+                <pre class="prettyprint">void getNumbers(int num1, int& num2) {
   num1 += num2;  // local copy of num1 is changed
   num2 += num1;  // original copy of num2 is changed
 }</pre>
@@ -225,7 +227,26 @@ showVolume(1, 2, 3);  // all arguments provided
 showVolume(1, 2); // length, width provided. height defaulted to 1
 showVolume(7); // length provided. width, height defaulted to 1</pre>
 
-                <h2 id="7">Overloading</h2>
+                <h2 id="7">Const Modifier</h2>
+                To protect a variable from being changed, the <code>const</code> keyword is placed before the type.
+
+                <h3>Constant Parameters</h3>
+                This can be used to make parameters constant, especially when passing in references that should not be changed.  For example, it is desirable to pass in classes as references (less overhead), but we might not want the object to be changed.  e.g. <code class="prettyprint">bool isLarger(const int& a, const int& b);</code>
+
+                <h3>Constant Functions</h3>
+                If a member function should not change the value of calling object, we can mark the function with a const modifier by appending it at the end of the function declaration.  As a rule of thumb, if a function does not need to modify its containing class, it should be declared as a constant function. e.g. <code class="prettyprint">void output() const;</code><br />
+                * Constant objects can only call constant functions.
+
+                <h2 id="8">Inline Functions</h2>
+                Inline functions are a way to reduce overhead for smaller functions by telling the compiler to replace all calls to this function with its definition (similar to macros).
+
+                <h3>Inline Non-Member Functions</h3>
+                To make non-member (not part of a class) function inline, we declare it like a normal function, but prepend <code>inline</code> to the function's definition and place it in a header file (to avoid an "unresolved external" error from the linker when trying to call it from other <code>.cpp</code> files).
+
+                <h3>Inline Member Functions</h3>
+                To make a member function inline, we place the function definition <i>within</i> the class definition, which makes it automatically inline.
+
+                <h2 id="9">Overloading</h2>
                 C++ allows 2 or more different definitions to the same function name, but with different parameter lists (i.e. different number of parameters or parameters of different types). The compiler decides which function to call based on the signature of the function call.
                 <h3>Overloading Resolution</h3>
                 <ol>
@@ -242,7 +263,7 @@ showVolume(7); // length provided. width, height defaulted to 1</pre>
                   </li>
                 </ol>
 
-                <h2 id="8">Assert Macro</h2>
+                <h2 id="10">Assert Macro</h2>
                 An <b>assertion</b> is a true or false statement used in debugging and testing programs.  It is used to check correctness of provided arguments.  It does not have a return value and terminates the program if the assert condition is false so that the error can be investigated.  Defined in the <code>&lt;cassert></code> library. <br />
                 Syntax: <code class="prettyprint">assert (Assert_Condition);</code>
                 <br />
