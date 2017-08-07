@@ -207,7 +207,7 @@ printf ("Random number: %d\n", rand() % 100 + 1); // random number in range 1 to
                     <ul>
                       <li>provides access to actual argument</li>
                       <li>data provided by argument can be modified by the function</li>
-                      <li>Reference is specified by the ampersand <code>&</code> after the data type: <code class="prettyprint">datatype& var</code></li>
+                      <li>Reference is specified by the ampersand <code>&</code> after the data type: <code class="prettyprint">datatype& var</code> (see more <a href="./pointer.html#1">here</a>.)</li>
                       <li>Reduces overhead because no need to copy over entire object, only address</li>
                       <li>If argument should not be modified, we add the <code>const</code> keyword. e.g. <code class="prettyprint">void fun (const int i){}</code></li>
                     </ul>
@@ -278,6 +278,7 @@ const Money operator +(const Money& amount1, const Money& amount2) {
 
  return Money(finalDollars, finalCents);
 }</pre>
+
                 <h3>Returning By const Value</h3>
                 Note that the above example for the <code>+</code> operator returns a constant object.  If it didn't, we could modify the returned anonymous object which would make no sense.
 <pre class="prettyprint">
@@ -287,15 +288,106 @@ Money sum = (m1 + m2).getDollars();  // possible since not const</pre>
                 <h3>Overloading Operators as Member Functions</h3>
                 We can also overload operators as member functions, as part of a class.  Allows access to private member variables without having to go through the accessor/mutator methods.  This requires the overloaded function to take in only one parameter, since the calling object serves as the first parameter.
 <pre class="prettyprint">
-const Money::Money operator +(const Money& amount2);</pre>
+const Money::Money operator +(const Money& amount2);</pre><br />
 
-                <h3>Rules on Overloading Operators</h3>
+
+                <h4 id="exsert">Overloading >> And << Operators</h4>
+                Overloading the inserter and extractor operators can be used to input and output objects of programmer-defined classes.  For example, let's look at the inserter operator:
+<pre class="prettyprint">
+ostream& operator <<(ostream& outputStream, const Money& amount) {
+  int absDollars = abs(amount.dollars);
+  int absCents = abs(amount.cents);
+  if (amount.dollars < 0 || amount.cents < 0)
+    //accounts for dollars == 0 or cents == 0
+    outputStream << "$-";
+  else
+    outputStream << '$';
+  outputStream << absDollars;
+  if (absCents >= 10)
+    outputStream << '.' << absCents;
+  else
+    outputStream << '.' << '0' << absCents;
+  return outputStream;
+}</pre>
+                Note that the overloaded operator returns a reference.  This allows us to chain inserter operators. The extractor operator is overloaded in a similar way, but the second argument <i>receives</i> the input value, so it cannot be a constant.
+<pre class="prettyprint">
+istream& operator >>(istream& inputStream, Money& amount) {
+ char dollarSign;
+ inputStream >> dollarSign;
+ if (dollarSign != '$') {
+   cout << "No dollar sign in Money input.\n";
+   exit(1);
+ }
+ double amountAsDouble;
+ inputStream >> amountAsDouble;
+ amount.dollars = amount.dollarsPart(amountAsDouble);
+ amount.cents = amount.centsPart(amountAsDouble);
+ return inputStream;
+}</pre>
+<br />
+                <h4>Overloading = Operator</h4>
+                The assignment operator is overloaded as a member operator.  The default assignment operator copies values of the member vars from one object to the corresponding member vars of the other object.  The operator should return a reference to allow chaining.
+                <br /><br />
+                <h4>Overloading ++ And -- Operators</h4>
+                As both the increment and decrement operators have prefix and postfix versions, we need to distinguish them.
+                <ul>
+                  <li>
+                    Prefix Version: <code>++x</code>
+                    <ul>
+                      <li>overload as nonmember operator with one parameter</li>
+                      <li>overload as member operator with no parameter</li>
+                    </ul>
+                  </li>
+                    <li>
+                      Postfix Version: <code>x++</code>
+                      <ul>
+                        <li>add parameter of type int.  Note that this is just a marker for compiler.  Do <u>not</u> give a second int arg when invoking it</li>
+                      </ul>
+                    </li>
+                </ul>
+<pre class="prettyprint">
+class IntPair {
+public:
+  IntPair operator++(); // Prefix version
+  IntPair operator++(int); // Postfix version
+}
+IntPair IntPair:: operator++() { // Prefix version
+ first++;
+ second++;
+ return IntPair(first, second);
+}
+IntPair IntPair:: operator++(int ignoreMe) { // Postfix version
+ int temp1 = first;
+ int temp2 = second;
+ first++;
+ second++;
+ return IntPair(temp1, temp2);
+}</pre><br />
+                <h4>Overloading Array Operator []</h4>
+                The array operator can be overloaded (as a member function) so it can be used with objects of the class.  To use it on the left-hand side of an assignment, the operator must return a reference.
+<pre class="prettyprint">
+char& CharPair:: operator[](int index) {
+ if (index == 1) return first;
+ else if (index == 2) return second;
+ else {
+   cout << "Illegal index value.\n";
+   exit(1);
+ }
+}</pre>
+
+                <h3 id="rules">Rules on Overloading Operators</h3>
                 <ol>
                   <li>
                     When overloading an operator, at least one parameter of the resulting overloaded operator must be of a class type
                   </li>
                   <li>
                     Most operators can be overloaded as a member of the class, a friend of the class, or a nonmember, nonfriend
+                  </li>
+                  <li>
+                    <ul>
+                      <li>Overloading l-value: <code class="prettyprint">int& f();</code></li>
+                      <li>Overloading r-value: <code class="prettyprint">const int& f() const;</code></li>
+                    </ul>
                   </li>
                   <li>
                     The following operators can only be overloaded as (non-static) members of the class: =, [], ->, and ()

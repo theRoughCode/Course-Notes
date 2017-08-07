@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: References & Pointers</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">References & Pointers</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">References</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">References</h2>
+                A <b>reference</b> represents the name of a storage location.  They are denoted by an ampersand <code>&</code> after the data type.  We can have standalone references, such as:
+<pre class="prettyprint">
+int robert;
+int& bob = robert;  // reference to bob
+</pre>
+                In this example, <code>bob</code> is a reference to the storage location for <code>robert</code>.  <code>bob</code> is known as an <b>alias</b> for <code>robert</code>: any change to <code>bob</code> results in a change to <code>robert</code>.<br />
+                Returning a reference allows us to overload certain operators in a more natural way. e.g. <code class="prettyprint">double& sampleFunction(double& variable)</code>.  <i>For more examples, see the overloading of inserter <code><<</code> and extractor <code>>></code> operators <a href="./function.html#exsert">here</a></i>.  We should not return a local variable because that creates an alias to a variable that is destroyed once the function call is done.
+
+                <h3>L-Values and R-Values</h3>
+                <b>L-Value</b>: appears on left-hand side of an assignment operator; represent a storage location.  Persists beyond expression.
+                <br /><b>R-Value</b>: appears on right-hand side of an assignment operator.  A temporary value that does not persist beyond the expression. e.g. <code>2 + 3</code>
+                <br /><br />
+                Functions that return an l-value must return a reference.  <i>Caution</i>: When a member function returns a member var, refrain from returning by reference to avoid external access to private member vars.  If you do, add a const to return value to protect access to member var (see <a href="./function.html#rules">here</a>).
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>
