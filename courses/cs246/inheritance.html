@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Inheritance</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Inheritance</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Inheritance Basics</a></li>
+                    <li><a href="#2">Inherited Members</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Inheritance Basics</h2>
+                OOP provides a dimension of abstraction known as <b>inheritance</b>.  Inheritance is the process by which a new class, known as the <b>derived class</b> or <b>child class</b> or <b>descendent class</b> (can be used for child of child of etc.), is created from another class, known as the <b>base class</b> or <b>parent class</b> or <b>ancestor class</b> (can be used for parent of parent of etc.).  The derived class has all the member vars and all ordinary member functions that the base class has. In the derived class, we only include the declaration of an inherited member function if you want to change its definition.  To have a derived class inherit from a base class we add a colon followed by the name of the base class in the derived class' definition:
+<pre class="prettyprint">
+class derivedClass : public baseClass {
+  // want to change definition of inherited member function
+  void inheritedFn();
+}</pre>
+                <h3>Properties of Derived Classes</h3>
+                <ol>
+                  <li>derived classes can add new member vars and functions</li>
+                  <li>derived classes are objects of the base class (but not vice versa)</li>
+                  <li>derived classes do not have access to private vars or functions from the base class</li>
+                </ol>
+
+                <h3>"Is a" vs "Has a" Relationship</h3>
+                <ul>
+                  <li>"Is a" - inheritance (e.g. a boy "is a" human)</li>
+                  <li>"Has a" - class contains objects of another class as member data (e.g. a boy "has a" toy)</li>
+                </ul>
+
+                <h2 id="2">Inherited Members</h2>
+                The derived class has all the member vars and all ordinary member functions of base class.  The inherited member functions and member variables are not mentioned in the declaration of the derived class, but are automatically members of the derived class, except for the following:
+                <ul>
+                  <li>constructors</li>
+                  <li>destructors</li>
+                  <li>copy constructors</li>
+                  <li>assignment operator</li>
+                  <li>private member functions</li>
+                </ul>
+
+                <h3>Redefinition of Inherited Functions</h3>
+                If we want to change the definition of an inherited member function, we declare it in the definition of the derived class (called <b>redefining</b>).  However, if the descendent class wants to use the base class function, we use the scope resolution operator with the name of the base class, i.e. <code class="prettyprint">derivedClass.baseClass::function();</code>
+
+                <h3>Assignment Operators And Copy Constructors</h3>
+                Overloaded assignment operators and copy constructors are not inherited, but they should be included in the derived class. The base class' assignment operators and copy constructors can be used in the derived classes with the scope resolution operator.
+<pre class="prettyprint">
+Derived& Derived::operator =(const Derived& rightSide) {
+  Base::operator =(rightSide);
+}</pre>
+                Notice that we first invoke the base class assignment operator.  We would then set the new variables of the derived class.
+
+                <h2 id="3">Constructors</h2>
+                Constructors are not inherited, but can invoke a constructor of base class within the definition of a derived class constructor. Constructors for derived classes begin with an invocation of a constructor for the base class which initializes all the data inherited from the base class.  By default, the base class' default constructor is invoked if no explicit base constructor is called.  An example of how a base class constructor can be invoked is:
+                <pre class="prettyprint">HourlyEmployee::HourlyEmployee (const string& name, const string& id,
+                                double rate, double hours)
+                  : Employee(name, id), wagerate(rate), hours(hours){}</pre>
+
+
+                <h2 id="4">Destructors</h2>
+                Destructors for derived classes automatically invoke the destructor of the base class, but it has to delete additional member variables it has defined.  The order that the destructors are called is the <i>opposite</i> of how constructors are called:  if class C derives from class B which derives from class A, if an object of class C goes out of scope, C -> B -> A destructors are called in that order.
+
+                <h2 id="5">Protected Qualifier</h2>
+                The <b>protected qualifier</b> allows variables and functions to be accessed by name in a derived class but not anywhere else.  Protected members are inherited in the derived class as if they were marked protected in the derived class. e.g. <code class="prettyprint">protected int a;</code>
+
+                <h2 id="6">Protected And Private Inheritance</h2>
+                The kind of inheritance we have mentioned up till now are forms of <b>public inheritance</b>.  The scope of the variables do not change as they are inherited (public and protected members are inherited as such, private members are not inherited).  There are also <b>protected</b> and <b>private inheritance</b> which are defined as such in the derived class' definition.
+                <ul>
+                  <li>
+                    Protected inheritance - members that are public in the base class are protected in the derived class when they are inherited. <br />e.g. <code class="prettyprint">class SalariedEmployee: protected Employee {};</code>
+                  </li>
+                  <li>
+                    Private inheritance - all members of the base class are inaccessible in the derived class. <br />e.g. <code class="prettyprint">class SalariedEmployee: private Employee {};</code>
+                  </li>
+                </ul>
+
+                <h2 id="7">Multiple Inheritance</h2>
+                A derived class can have more than one base class.  We specify the base classes by separating them with commas. i.e. <code class="prettyprint">class derivedMulti : public base1, base2 {}</code>
+
+                <h3>Diamond Inheritance</h3>
+                If you have multiple base classes and those base classes have a common base class, you will have 2 copies of the original base class.  If we want only one copy, we make the base class virtual.
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

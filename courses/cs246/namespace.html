@@ -47,6 +47,7 @@
                     <li><a href="#1">Compiling The Program</a></li>
                     <li><a href="#2">ifndef</a></li>
                     <li><a href="#3">Namespaces</a></li>
+                    <li><a href="#4">extern Keyword</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -163,6 +164,10 @@ using NS2::myFunction;  // illegal
                   <li>Make them a private member function if it naturally takes a calling object</li>
                   <li>Place in unnamed namespace if function does not need a calling object</li>
                 </ol>
+
+                <h2 id="4">extern Keyword</h2>
+                The <code>extern</code> keyword is used to tell the compiler that the variable is declared in another module outside the current file's scope.  The linker then finds this declaration and points this <code>extern</code> variable to the correct location.  This allows multiple files to work with the same variable.  <code>extern</code> variables do not have space allocated to them. e.g. <code class="prettyprint">extern int i;</code>
+
 
               </div>
             </div>
