@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Compilation & Namespace</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Compilation & Namespace</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Compiling The Program</a></li>
+                    <li><a href="#2">ifndef</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Compiling The Program</h2>
+                In C++, we can separate the specification of what the class does from how it is implemented.  In doing so, if we change the implementation of the class, then we only need to recompile the file containing the class implementation.  Other files that might be using this class need not be changed or recompiled.  This is an important principle of encapsulation.
+                <ol>
+                  <li>All member vars should be private</li>
+                  <li>Basic class operations should be one of:
+                    <ul>
+                      <li>Public member functions</li>
+                      <li>Friend or ordinary functions</li>
+                      <li>Overloaded operators</li>
+                    </ul>
+                    We grouped the class definition and the function declarations/prototypes together in the <b>interface</b>  The interface is what clients see and is placed in a header file (ends with a <code>.h</code>.  Other files that use this class will have to include it with the <b>include directive</b>: <code class="prettyprint">#include "filename.h"</code>).<br />
+                    <i>The double quotes <code>""</code> indicates that it is a programmer-defined file whereas angle brackets <code>&lt;></code> indicates a built-in library.</i>
+                  </li>
+                  <li>Make class <b>implementation</b> unavailable to clients.  The implementation consists of the function definitions, overloaded operator definitions, and other helper functions.  The implementation is placed in an implementation file (ends with a <code>.cpp</code> or <code>.cc</code>).  The implementation file must include the header file.</li>
+                </ol>
+
+                <h3>Compiling The Program</h3>
+                At compilation, only the implementation and application (driver) file, the file containing the <code>main</code> function, are compiled but not the interface file.  The interface file is not compiled because the compiler assumes that the contents of the interface file is contained in the implementation files.<br />
+                The compilation process invokes a preprocesser that reads the include directive and replaces it with the text in the corresponding interface file.  Once compiled, the <b>linker</b> connects the implementation and application files so they can work together.
+
+                <h2 id="2">ifndef</h2>
+                We note that a problem might arise when the same interface file is included multiple time across multiple files.  Some of these files might include others of these files, and we end up with the same header file being included multiple times in the same file.  C++ does not allow redefinition of classes.  To solve this:
+                <ol>
+                  <li>
+                    <code class="prettyprint">#define FILE_H</code><br />
+                    This includes <code>FILE_H</code> in a list to indicate that it has been seen.
+                  </li>
+                  <li>
+                    <code class="prettyprint">#ifndef FILE_H</code><br />
+                    This checks whether <code>FILE_H</code> is in the list.  If so, it skips everything until <code>#endif</code>
+                  </li>
+                </ol>
+<pre class="prettyprint">
+#ifndef FILE_H
+#define FILE_H
+class C {};
+#endif
+</pre>
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

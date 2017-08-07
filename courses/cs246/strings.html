@@ -70,8 +70,11 @@ s3 = s1 + s2; // Concatenation. "abcd"</pre>
                   <li><code class="prettyprint lang-cpp">str.length()</code> - returns length of string</li>
                   <li><code class="prettyprint lang-cpp">str.at(int i)</code> - returns reference to char at position i.  Performs a range check on i and throws an error if invalid position.</li>
                   <li><code class="prettyprint lang-cpp">str[i]</code> - returns reference to char at position i.  Undefined behaviour if i is beyond length of string</li>
+                  <li><code class="prettyprint lang-cpp">string str("string")</code> - creates a string object with value <code>"string"</code></li>
+                  <li><code class="prettyprint lang-cpp">str.empty()</code> - returns true if empty string</li>
                   <li><code class="prettyprint lang-cpp">str1 == str2</code> <code class="prettyprint lang-cpp">str1 != str2</code> - checks if strings are equal/not equal</li>
                   <li><code class="prettyprint lang-cpp">str1 > str2</code> - compares strings in lexographical order (how it would be found in a dictionary)</li>
+                  <li><code class="prettyprint lang-cpp">str1.find(str2)</code> - returns index of first occurrence of <code>str2</code> in <code>str1</code></li>
                 </ul>
 
                 <h2 id="3">Escape Sequences</h2>
