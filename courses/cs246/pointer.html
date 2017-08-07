@@ -45,6 +45,13 @@
                   <h1>Table of Contents</h1>
                   <ol id="nav">
                     <li><a href="#1">References</a></li>
+                    <li><a href="#2">Pointers</a></li>
+                    <li><a href="#3">New Operator</a></li>
+                    <li><a href="#4">Basic Memory Management</a></li>
+                    <li><a href="#5">Delete Operator</a></li>
+                    <li><a href="#6">Null Pointer</a></li>
+                    <li><a href="#7">Typedef Operator</a></li>
+                    <li><a href="#8">Arrow Operator</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -63,6 +70,98 @@ int& bob = robert;  // reference to bob
                 <br /><b>R-Value</b>: appears on right-hand side of an assignment operator.  A temporary value that does not persist beyond the expression. e.g. <code>2 + 3</code>
                 <br /><br />
                 Functions that return an l-value must return a reference.  <i>Caution</i>: When a member function returns a member var, refrain from returning by reference to avoid external access to private member vars.  If you do, add a const to return value to protect access to member var (see <a href="./function.html#rules">here</a>).
+
+                <h2 id="2">Pointers</h2>
+                <b>Pointers</b> represent the memory address of a variable.  To declare pointers,we place an asterisk <code>*</code> after the data type. i.e. <code class="prettyprint">DataType *var1, *var2, ...;</code>  <br />
+                <b>Dereferencing Operator</b> <code>*</code>: retrieves the value that the pointer is pointing to. e.g. <code class="prettyprint">int i = *intptr</code><br />
+                <b>Addressof Operator</b> <code>&</code>: retrieves the address of the variable. e.g. <code class="prettyprint">int *ptr = &i;</code>
+<pre class="prettyprint">
+int *ptr; // declares an int pointer
+int a = 5;
+ptr = &a; // points to a
+int b = *ptr;   // b = 5
+</pre>
+
+                <h2 id="3">New Operator</h2>
+                The <code>new</code> operator creates a new dynamic variable of a specified type and returns a pointer to the new variable.
+<pre class="prettyprint">
+MyType *p;
+p = new MyType;</pre>
+                If the type is a class type,  the default constructor is called for the newly created dynamic var.  We can specify a different constructor by including args, as follows:
+<pre class="prettyprint">
+MyType *p;
+p = new MyType(32, 17);</pre>
+                Similarly, we can initialize dynamic vars of nonclass types
+<pre class="prettyprint">
+int *n = new int(17);  // *n == 17</pre>
+
+                <h2 id="4">Basic Memory Management</h2>
+                The freestore or <b>heap</b> is reserved for dynamically-allocated vars (i.e. dynamic variables created by <code>new</code>).  If there is insufficient memory to create the new var, <code>new</code> terminates program.  It is good practice to recycle any freestore memory used by dynamic vars.
+
+                <h2 id="5">Delete Operator</h2>
+                The <code>delete</code> operator eliminates a dynamic var and returns the memory to the freestore manager so that the memory can be reused.  i.e. <code class="prettyprint">delete p;  // value of p is undefined</code><br />
+                Notice that the value of <code>p</code> is undefined after we free its memory.  The undefined pointer vars are called <b>dangling pointers</b>.
+                <div class="note">
+                  <div>
+                    It is good practice to set dangling pointer vars equal to <code>NULL</code>.
+                  </div>
+                </div>
+
+                <h2 id="6">Null Pointer</h2>
+                <code>NULL</code> is actually the number 0 which can lead to ambiguity.  We can resolve this problem by using the null pointer: <code>nullptr</code>.  It is not 0 and can be used anywhere we could use <code>NULL</code>.
+
+                <h3>Dynamic vs. Automatic Variables</h3>
+                <ul>
+                  <li>
+                    Dynamic Variables:
+                    <ul>
+                      <li>Created with <code>new</code> operator</li>
+                      <li>Created and destroyed while program runs</li>
+                      <li>Stored on heap</li>
+                    </ul>
+                  </li>
+                    <li>
+                      Automatic vars/local vars:
+                      <ul>
+                        <li>declared within function definition</li>
+                        <li>automatically created when function is declared</li>
+                        <li>destroyed when call ends</li>
+                        <li>not dynamic</li>
+                      </ul>
+                    </li>
+                </ul>
+
+                <h2 id="7">Typedef Operator</h2>
+                We can use the <code>typedef</code> operator to define an alias for any type name or definition.  It is usually placed outside the body of main so that it is available to the entire program.<br />
+                It can be used to rename pointers, such as:
+<pre class="prettyprint">
+typedef int* IntPtr;
+IntPtr p;  // equivalent to int *p;</pre>
+
+                <h2 id="8">Arrow Operator And this Pointer</h2>
+                <h3>Arrow Operator</h3>
+                The arrow operator <code>-></code> combines dereferencing a pointer to a class/struct object and calling its member.
+<pre class="prettyprint">
+Record *p;
+p = new Record;
+p->number = 2001;
+p->grade = 'A';  // same as (*p).grade</pre>
+
+                <h3>this Pointer</h3>
+                The <code>this</code> pointer represents a pointer pointing to the containing object.  For example,
+<pre class="prettyprint">
+class P {
+public:
+  P(int m);
+private:
+  int m;
+};
+P::P(int m) {
+  // m refers to argument
+  // to get object's m, we use "this"
+  this->m = m;
+}
+</pre>
 
               </div>
             </div>

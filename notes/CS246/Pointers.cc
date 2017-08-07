@@ -51,13 +51,3 @@ p->grade = 'A';  // same as (*p).grade
 
 this Pointer
 - refer to calling object
-
-Shallow Copy vs Deep Copy
-- Shallow Copy:
-  - copy contents of member vars from one object to the other
-  - default assignment and copy constructors
-  - fine if not pointers involved
-- Deep copy:
-  - creates copies of what each member var is pointing to
-  - creates a separate but identical copy
-  - must dereference pointer variable to get the data for copying
