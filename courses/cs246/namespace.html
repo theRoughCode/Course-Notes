@@ -46,6 +46,7 @@
                   <ol id="nav">
                     <li><a href="#1">Compiling The Program</a></li>
                     <li><a href="#2">ifndef</a></li>
+                    <li><a href="#3">Namespaces</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -88,7 +89,80 @@
 class C {};
 #endif
 </pre>
+                <i>* Alternatively, you can use <code class="prettyprint">#pragma once</code> instead of the above to accomplish the same results.</i>
 
+                <h2 id="3">Namespaces</h2>
+                <b>Namespaces</b> are a collection of name definitions, such as class and variable declarations.  Programs use many classes and functions that might have same names.  Namespaces help solve this by allowing us to turn on/off the ones we want.<br />
+                The <b>global namespace</b> is everywhere that isn't in a specific namespace.
+
+                <h3>Creating A Namespace</h3>
+                To place code in a namespace, we place it in a namespace grouping: <code class="prettyprint">namespace Name_Space_Name {}</code>
+
+                <h3>Using Directive</h3>
+                The <b>using directive</b> makes all definitions in std namespace available.  The same name can be defined in two different namespaces but we can only use one of those namespaces at a time.  If a name is defined in multiple namespaces, we must use the scope resolution operator <code>::</code> to specify which namespace is used.  The using directive applies only to the block from where it is placed.
+<pre class="prettyprint">
+{
+  using namespace NS1;
+  myFunction();
+}
+{
+  using namespace NS2;
+  myFunction();
+}</pre>
+                <h3>Using Declaration</h3>
+                A <b>using declaration</b> can also be used to specify <i>individual</i> names from a particular namespace. i.e. <code class="prettyprint">using Name_Space::One_Name;</code><br />
+                This makes <code>One_Name</code> from the namespace <code>Name_Space</code> available but not the other names in <code>Name_Space</code>.
+
+                <h3>Using Declaration vs. Using Directive</h3>
+                <ol>
+                  <li>
+                    Using declaration makes only one name in the namespace available to your code, while a using directive makes all the names in a namespace available
+                  </li>
+                  <li>
+                    Using declaration introduces a name into your code so no other use of the name can be made, while a using directive only potentially introduces the names in the namespace. i.e.
+<pre class="prettyprint">
+namespace NS1 { myFunction(); }
+namespace NS2 { myFunction(); }
+
+using namespace NS1;
+using namespace NS2; // legal as long as myFunction is not used
+
+using NS1::myFunction;
+using NS2::myFunction;  // illegal
+</pre>
+                  </li>
+                </ol>
+
+                Namespaces are generally named with unique strings like last names as it reduces the chance of other namespaces having the same name.<br />
+
+                <h3>Unnamed Namespaces</h3>
+                <b>Unnamed Namespaces</b> can be used to make definitions local to a <b>compilation unit</b> (a file along with all the files included by the include directive in it).  Each compilation unit has one unnamed namespace. i.e. <code class="prettyprint">namespace { }</code>
+
+                <h4>Global vs. Unnamed Namespaces</h4>
+                Names in both global and unnnamed namespaces may both be accessed without a qualifier.  However, here are some differences:
+                <ul>
+                  <li>
+                    Global Namespace
+                    <ul>
+                      <li>no namespace grouping</li>
+                      <li>global scope</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Unnamed Namespace
+                    <ul>
+                      <li>has namespace grouping, just no name</li>
+                      <li>local scope</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h4>Hiding Helper Functions</h4>
+                Helper functions have low-level utility and aren't for public use.  There are 2 ways to hide them:
+                <ol>
+                  <li>Make them a private member function if it naturally takes a calling object</li>
+                  <li>Place in unnamed namespace if function does not need a calling object</li>
+                </ol>
 
               </div>
             </div>
