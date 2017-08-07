@@ -55,12 +55,15 @@
                     <li><a href="#9">Destructors</a></li>
                     <li><a href="#10">Copy Constructor</a></li>
                     <li><a href="#11">Copy Assignment Operator</a></li>
-                    <li><a href="#12">Move Constructor</a></li>
-                    <li><a href="#13">Move Assignment Operator</a></li>
-                    <li><a href="#14">Static Modifer</a></li>
-                    <li><a href="#15">Friend Classes</a></li>
-                    <li><a href="#16">Forward Class Declaration</a></li>
-                    <li><a href="#17">Unified Modeling Language (UML)</a></li>
+                    <li><a href="#12">Explicit Type Conversion</a></li>
+                    <li><a href="#13">Move Constructor</a></li>
+                    <li><a href="#14">Move Assignment Operator</a></li>
+                    <li><a href="#15">Copy/Move Elision</a></li>
+                    <li><a href="#16">Static Modifer</a></li>
+                    <li><a href="#17">Friend Classes</a></li>
+                    <li><a href="#18">Forward Class Declaration</a></li>
+                    <li><a href="#19">Invariants</a></li>
+                    <li><a href="#20">Unified Modeling Language (UML)</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -441,7 +444,7 @@ public:
                 </ol>
                 To solve this, we use the copy and swap idiom, as follows:
 <pre class="prettyprint">
-#include <utility>  // swap
+#include &lt;utility>  // swap
 struct Node {
 private:
   Node *next;
@@ -472,6 +475,25 @@ public:
                   </li>
                 </ol>
 
+                <h2 id="12">Explicit Type Conversion</h2>
+                <h3>Implicit Type Conversion</h3>
+                By default, copy constructors are <b>implicit</b>.  This means that a type conversion can be done if there is a constructor with that type.  For example,
+<pre class="prettyprint">
+struct Node {
+  Node(int data) : data {data}, next{nullptr} {}
+};
+// explicit type conversions calls ctor
+Node n(4);
+Node n = 4;</pre>
+                <h3>Explicit Type Conversion</h3>
+                To prevent the compiler from using constructors to perform implicit conversions, we prepend the <code>explicit</code> keyword to the constructor.  One reason to do so is to avoid accidental construction of the object with other types.
+<pre class="prettyprint">
+struct Node {
+  explicit Node(int data) : data {data}, next{nullptr} {}
+};
+Node n(4);   // OK
+Node n = 4;  //Not OK</pre>
+
                 <div class="note">
                   <div>
                     <h3>The Big 5</h3>
@@ -486,7 +508,8 @@ public:
                     It implements move semantics, allowing destination objects to grab data from temporary objects.
                   </div>
                 </div>
-                <h2 id="12">Move Constructor</h2>
+
+                <h2 id="13">Move Constructor</h2>
                 <h3 id="move">Move Semantics</h3>
                 Copying was the means to transfer the state of an object to another. Moving is faster as they move existing resources to the new destination and sets the other to the default constructor, while copying requires the creation of a new resource from scratch.  The lack of allocation and copying makes it faster and more efficient than copying.
                 <h3>The Move Constructor</h3>
@@ -501,7 +524,7 @@ MemoryPage (MemoryPage &&other) : size(0), buf(nullptr) {
   other.bug = nullptr;
 }</pre>
 
-                <h2 id="13">Move Assignment Operator</h2>
+                <h2 id="14">Move Assignment Operator</h2>
                 Similar to copy constructor except that before pilfering source object, it releases any resources the object might own.  Performs the following steps:
                 <ol>
                   <li>releases source object, *this, currently owns</li>
@@ -548,8 +571,43 @@ MemoryPage& MemoryPage::operator=(MemoryPage&& other){
                   </div>
                 </div>
 
+                <h2 id="15">Copy/Move Elision</h2>
+                <b>Copy or move elision</b> is an optimization technique where compilers are required or permitted to omit the copy/move constructors, even if these constructors and destructors have observable side effects.  This prevents extra (potentially expensive) copies.  We can disable elision with <code>-fno-elide-constructors</code>. This should <u>not</u> be done because the elision would ignore the side effects.  If your program relies on side effects of copy constructors, it is badly written; cpoy constructors should be written such that elision is safe.
+<pre class="prettyprint">
+struct C {
+  C() {}
+  C(const C&) { std::cout << "A copy was made.\n"; }
+};
 
-                <h2 id="14">Static Modifier</h2>
+C f() {
+  return C();
+}
+
+int main() {
+  std::cout << "Hello World!\n";
+  C obj = f();
+}</pre>
+                Depending on the compiler and the level of elision, the following outputs are all valid:
+                <ul>
+                  <li>
+<pre class="prettyprint">
+Hello World!
+A copy was made.
+A copy was made.</pre>
+                  </li>
+                  <li>
+<pre class="prettyprint">
+Hello World!
+A copy was made.</pre>
+                  </li>
+                  <li>
+<pre class="prettyprint">
+Hello World!</pre>
+                  </li>
+                </ul>
+
+
+                <h2 id="16">Static Modifier</h2>
                 <h3>Static Variables</h3>
                 <b>Static member variables</b> are shared by all objects of that class.  When one object changes it, all objects sees that change. To make a variable static, we place the <code>static</code> keyword before its type. Here are some potential uses:
                 <ol>
@@ -580,7 +638,7 @@ int DayofYear::numOfDates = 0; // initialize static var
 DayofYear::printTodayDate(); // call static function
 </pre>
 
-                <h2 id="15">Friend Classes</h2>
+                <h2 id="17">Friend Classes</h2>
                 Similar to functions being a <code>friend</code> to a class (see <a href="./function.html#9">here</a>).
                 If a class <code>F</code> is a friend of class <code>>C</code>, then every member function of class <code>F</code> is a friend of class <code>C</code>.  We declare the friend class as a friend within the other class.
 <pre class="prettyprint">
@@ -591,7 +649,7 @@ public:
 };
 class F {};</pre>
 
-                <h2 id="16">Forward Class Declaration</h2>
+                <h2 id="18">Forward Class Declaration</h2>
                 A <b>forward declaration</b> is a declaration of an identifier which the programmer has not yet provided a definition.
                 <div class="note">
                   <div>
@@ -608,7 +666,71 @@ public:
   F obj;   // not allowed
 };</pre>
 
-              <h2 id="17">Unified Modeling Language (UML)</h2>
+              <h2 id="19">Invariants</h2>
+              <b>Invariants</b> are a set of asserts that must hold true from the creation to the destruction of objects.  For example, exactly one of two member vars must be 0.  We can use a member function to check if invariant holds and raise an assert if invariant is broken.  Encapsulation enforces invariants by making fields private and allowing us to ensure that the data is correct in the preconditions and postconditions.
+<pre class="prettyprint">
+struct Node {
+  int data;
+  Node *next;
+  Node(int data, Node *next) : data {data}, next{next} {}
+  ~Node(){
+    delete next;
+  }
+};
+// stack-allocated
+Node n1 {1, new Node{2, nullptr}};
+Node n2 {3, nullptr};
+Node n3 {4, &n2};</pre>
+              Here's what happens when each object is pushed off the stack:
+              <ol>
+                <li>
+                  <code>n1</code> - destructor called on n1, and its next node is deleted off heap
+                </li>
+                <li>
+                  <code>n2</code> - now a <code>nullptr</code> so nothing happens
+                </li>
+                <li>
+                  <code>n3</code> - undefined behaviour/crash since <code>n2</code> is being deleted
+                </li>
+              </ol>
+              To solve this, we use encapsulation by introducing a <b>wrapper class</b>.
+<pre class="prettyprint">
+class List {
+  struct Node; // private nested class
+  Node *l = nullptr;
+public:
+  void addToFront(int n);
+  int ith(int i);
+  ~List();
+};
+
+struct List::Node {
+  int data;
+  Node *next;
+  Node(int data, Node *next) : data{data}, next{next} {}
+  ~Node() {
+    delete next;
+  }
+};
+
+List::~List(){
+  delete l;
+}
+
+void list::addToFront(int n) {
+  l = new Node(n, l);
+}
+
+int List::ith(int i){
+  Node *cur = l;
+  for(int j = 0; j < i && cur; ++j) {
+    cur = cur->next;
+    return cur->data;
+  }
+}</pre>
+
+
+              <h2 id="20">Unified Modeling Language (UML)</h2>
               UML's show dependencies between classes.  Here are some properties:
               <ul>
                 <li>class names are on top</li>

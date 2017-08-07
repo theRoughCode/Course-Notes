@@ -96,7 +96,7 @@ Node &operator =(Node &&other){
 Copy/Move Elision
 - Optimization technique where compilers are required or permitted to omit the copy/move constructors, even if these constructors and destructors have observable side effects
 - prevents extra copies
-- can disable with -fno-slide-constructors
+- can disable with -fno-elide-constructors
 struct C {
   C() {}
   C(const C&) { std::cout << "A copy was made.\n"; }

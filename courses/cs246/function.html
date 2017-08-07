@@ -234,6 +234,18 @@ showVolume(7); // length provided. width, height defaulted to 1</pre>
                 If a member function should not change the value of calling object, we can mark the function with a const modifier by appending it at the end of the function declaration.  As a rule of thumb, if a function does not need to modify its containing class, it should be declared as a constant function. e.g. <code class="prettyprint">void output() const;</code><br />
                 * Constant objects can only call constant functions.
 
+                <h3>Mutable Modifier</h3>
+                <code>mutable</code> fields can be changed within constant functions.  For example,
+<pre class="prettyprint">
+struct Student {
+  mutable int numMethodCalls = 0;
+  float grade() const {
+    ++numMethodCalls;
+    return
+  }
+}</pre>
+
+
                 <h2 id="7">Inline Functions</h2>
                 Inline functions are a way to reduce overhead for smaller functions by telling the compiler to replace all calls to this function with its definition (similar to macros).
 
