@@ -47,6 +47,7 @@
                     <li><a href="#1">Intro To Templates</a></li>
                     <li><a href="#2">Class Templates</a></li>
                     <li><a href="#3">Inheritance</a></li>
+                    <li><a href="#4">Maps</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -153,6 +154,30 @@ template&lt;class T>
 Derived&lt;T>::~Derived() {
   delete[] b;
 }</pre>
+
+                <h2 id="4">Maps</h2>
+                Maps are a templated class that are containers of key-value pairs.  The key values are used to sort and uniquely identify the elements while the mapped values store the content associated with the key.  The elements are sorted by its key using the operator <code><</code>.  To use user-defined classes as keys, the class must be:
+                <ol>
+                  <li>Copyable</li>
+                  <li>Assignable</li>
+                  <li>Comparable (must implement operator <code><</code>)</li>
+                </ol>
+<pre class="prettyprint">
+#include &lt;map>
+using namespace std;
+// main
+map &lt;string, int> m;
+m["abc"] = 1;
+m["def"] = 4;
+cout << m["abc"] << endl; // 1
+cout << m["ghi"] << endl; // if key is not defined, it will call the default constructor of value type and insert it in that key  (prints 0)
+m.erase("abc");
+if(m.count("def")) {} // 0 if not found, 1 if found
+for (auto &p : m)
+  cout << p.first << p.second << endl;
+  // p.first gets key
+  // p.second gets value</pre>
+
 
               </div>
             </div>

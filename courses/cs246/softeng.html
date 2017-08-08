@@ -52,6 +52,7 @@
                     <li><a href="#5">Factory Method Pattern</a></li>
                     <li><a href="#6">Template Method Pattern</a></li>
                     <li><a href="#7">Non-Virtual Interface(NVI) Idiom</a></li>
+                    <li><a href="#8">Visitor Pattern</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -492,6 +493,120 @@ private:
                   <li>we can add more "hooks" by calling additional virtual methods from play</li>
                   <li>all this can be done without changing the public interface</li>
                 </ul>
+
+                <h2 id="8">Visitor Pattern</h2>
+                <a href="http://wikivisually.com/wiki/Architectural_pattern_(computer_science)"><img src="../images/visitor.PNG" /></a><br />
+                The <b>visitor pattern</b> is used to perform an extensible set of operations on an object structure without requiring any change to the structure.  It can also be used to add functionality to existing classes without changing or recompiling classes. It allows us to create separate algorithms for different subclasses of the Element class by overloading the <code>visit()</code> method for each element class.  The general structure has:
+                <ol>
+                  <li>
+                    AbstractVisitor
+                    <ul>
+                      <li>interface that defines the logic supported</li>
+                      <li>creates a <code>visit(ConcreteElement)</code> method for each <code>AbstractElement</code> derived type</li>
+                      <li>coupled with <code>ConcreteElement</code></li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteVisitor
+                    <ul>
+                      <li>implements <code>AbstractVisitor</code> and its <code>visit()</code> methods</li>
+                      <li>Each <code>ConcreteVisitor</code> represents a different logic</li>
+                      <li>create a class for each operation to be performed on the Element objects</li>
+                    </ul>
+                  </li>
+                  <li>
+                    AbstractElement
+                    <ul>
+                      <li>interface that defines the elements in the strucure</li>
+                      <li>creates an <code>accept(AbstractVisitor)</code> method that takes in an <code>AbstractVisitor</code></li>
+                      <li>coupled with <code>AbstractVisitor</code></li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteElement
+                    <ul>
+                      <li>implements <code>AbstractElement</code> and its <code>accept()</code> methods</li>
+                      <li>Each <code>ConcreteElement</code> represents a different structure</li>
+                      <li>Implments the <code>accept(AbstractVisitor)</code> method by calling <code>visit(*this)</code> on the <code>AbstractVisitor</code> argument, which will apply the logic.
+                      </li>
+                    </ul>
+                  </li>
+                </ol>
+<pre class="prettyprint">
+// AbstractElement
+class Book {
+public:
+  virtual void accept(BookVisitor &v) = 0;
+};
+
+// ConcreteElement
+class Novel : public Book {
+public:
+  Novel(std::string author) : author { author } {}
+  void accept(BookVisitor &v) override { v.visit(*this); }
+  std::string getAuthor() { return author; }
+private:
+  std::string author;
+};
+
+// ConcreteElement
+class Text : public Book {
+public:
+  Text(std::string topic) : topic { topic } {}
+  void accept(BookVisitor &v) override { v.visit(*this); }
+  std::string getTopic() { return topic; }
+private:
+  std::string topic;
+};
+
+// ConcreteElement
+class Comic : public Book {
+public:
+  Comic(std::string hero) : hero { hero } {}
+  void accept(BookVisitor &v) { v.visit(*this); }
+  std::string getHero() { return hero; }
+private:
+  std::string hero;
+};
+
+// AbstractVisitor
+class BookVisitor {
+public:
+  virtual void visit(Book &b) = 0;
+  virtual void visit(Text &t) = 0;
+  virtual void visit(Comic &c) = 0;
+};
+
+// ConcreteVisitor
+// Tracks how many of each type of book
+// Groups novels by author, texts by topic, comics by hero
+class Catalog : public BookVisitor {
+  map<string, int> theCatalog;
+public:
+  map<string, int> getCatalog() { return theCatalog; }
+  void visit(Book &b) { ++theCatalog[b.getAuthor()]; }
+  void visit(Text &t) { ++theCatalog[t.getTopic()]; }
+  void visit(Comic &c) { ++theCatalog[t.getHero()]; }
+};
+
+int main() {
+  std::vector&lt;Book> books;
+  Novel harryPotter("J.K. Rowling");
+  Text ctci("Programming");
+  Comic spider("Spider-Man");
+
+  books.push_back(harryPotter);
+  books.push_back(ctci);
+  books.push_back(spider);
+
+  Catalog log;
+
+  // call accept on each element and passing in visitor object
+  for (auto& book : books) {
+    book.accept(log);
+  }
+}</pre>
+
 
               </div>
             </div>

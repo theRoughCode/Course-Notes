@@ -152,8 +152,38 @@ double safeDivide(int top, int bot) throw (DivideByZero) {
                 If a function should not throw any exceptions that are caught inside the function, we use an empty exception specification, <code class="prettyprint">void foo() throw ();</code><br />
                 Any exceptions that are not included in the throw list invoke <code>unexpected()</code>.  The behaviour of <code>unexpected()</code> can be changed with <code>set_unexpected()</code> (which takes in the new function as its parameter), but its default action is to call <code>terminate()</code> which ends the program.
 
+                <h3>In Practice</h3>
+                Exception specifications have no been proven useful in practice:
+                <ul>
+                  <li>
+                    Run-time checking:
+                    <ul>
+                      <li>exception specifications are checked at runtime rather than at compile time. Does not guarantee that all exceptions have been handled.</li>
+                      <li>unhandled exceptions call <code>std::unexpected()</code> which defaults to terminating the program.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Run-time overhead:
+                    <ul>
+                      <li>Run-time checking requires the compiler to produce additional code.  Affects optimizations.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Unusable in generic code:
+                    <ul>
+                      <li> not generally possible to know what types of exceptions may be thrown, so a precise exception specification cannot be written.</li>
+                    </ul>
+                  </li>
+                </ul>
+                In practice, only two forms of exception-throwing guarantees are useful:
+                <ol>
+                  <li>might throw any exception: omit exception-specification</li>
+                  <li>will never throw any exception: noexcept (see below)</li>
+                </ol>
+
                 <div class="note">
                   <div>
+                    <h3>noexcept</h3>
                     In C++11, <code>throw</code> has been deprecated.  Instead we use <code>noexcept()</code> which takes in an expression (but does not evaluate it). <br /> If a function might throw an exception, we omit any throw statement or use <code class="prettyprint">noexcept(false)</code><br />
                     If a function does not throw, use <code class="prettyprint">noexcept</code> or <code class="prettyprint">noexcept(true)</code><br />
                     e.g. <code>void f() noexcept;  // f does not throw</code>
