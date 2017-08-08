@@ -46,13 +46,18 @@
                   <h1>Table of Contents</h1>
                   <ol id="nav">
                     <li><a href="#1">Testing</a></li>
-                    <li><a href="#2">Design Patterns</a></li>
-                    <li><a href="#3">Observer Pattern</a></li>
-                    <li><a href="#4">Decorator Pattern</a></li>
-                    <li><a href="#5">Factory Method Pattern</a></li>
-                    <li><a href="#6">Template Method Pattern</a></li>
-                    <li><a href="#7">Non-Virtual Interface(NVI) Idiom</a></li>
-                    <li><a href="#8">Visitor Pattern</a></li>
+                    <li><a href="#2">Coupling and Cohesion</a></li>
+                    <li><a href="#3">Design Patterns</a></li>
+                    <li><a href="#4">Observer Pattern</a></li>
+                    <li><a href="#5">Decorator Pattern</a></li>
+                    <li><a href="#6">Factory Method Pattern</a></li>
+                    <li><a href="#7">Template Method Pattern</a></li>
+                    <li><a href="#8">Non-Virtual Interface(NVI) Idiom</a></li>
+                    <li><a href="#9">Visitor Pattern</a></li>
+                    <li><a href="#10">PImpl Idiom</a></li>
+                    <li><a href="#11">Model-View-Controller(MVC) Pattern</a></li>
+                    <li><a href="#12">Resource Acquisition Is Initialization(RAII) Idiom</a></li>
+                    <li><a href="#13">Smart Pointers</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -120,7 +125,41 @@
                     </ul>
                   </ul>
 
-                  <h2 id="2">Design Patterns</h2>
+                  <h2 id="2">Coupling and Cohesion</h2>
+                  <b>Coupling</b> and <b>cohesion</b> are 2 measures of design quality.
+                  <h3>Coupling</h3>
+                  Coupling measures the degree of interdependence between software modules.  A <i>lower</i> coupling is better.  A high coupling is bad because:
+                  <ol>
+                    <li>Changes to one module require greater changes to other modules</li>
+                    <li>Harder to reuse individual modules</li>
+                  </ol>
+                  <h4>Low to High Coupling</h4>
+                  <ol>
+                    <li>Modules communicate via function calls with basic parameters returns</li>
+                    <li>Modules pass arrays/structs back and forth</li>
+                    <li>Module affect each others control flow</li>
+                    <li>Modules share global data</li>
+                    <li>Modules have access to each others implementation (friends)</li>
+                  </ol>
+
+                  <h3>Cohesion</h3>
+                  Cohesion measures how closely elements of a module are related to each other.  A <i>higher</i> cohesion is better.  A low cohesion is bad because:
+                  <ol>
+                    <li>Sign of poorly organized code</li>
+                    <li>Hard to understand and maintain</li>
+                    <li>Has many operations that don't have much in common</li>
+                  </ol>
+                  <h4>High to Low Cohesion</h4>
+                  <ol>
+                    <li>Elements cooperate to perform exactly one task</li>
+                    <li>Elements pass data to each other</li>
+                    <li>Elements maniplate a state over lifetime of an object, e.g. open/read/close files</li>
+                    <li>Elements have a common theme, otherwise unrelated, perhaps share base code, e.g. &lt;algorithm></li>
+                    <li>Arbitrary grouping of unrelated elements, e.g. &lt;utility></li>
+                  </ol>
+
+
+                  <h2 id="3">Design Patterns</h2>
                   Software <b>design patterns</b> are general reusable solutions to commonly occurring problems within a given context in software design. For example, using the concept of iterators with Linked Lists.
 <pre class="prettyprint">
 class List {
@@ -166,7 +205,7 @@ for (auto n : lst) {
   cout << n << endl;
 }</pre>
 
-                <h2 id="3">Observer Pattern</h2>
+                <h2 id="4">Observer Pattern</h2>
                 <img src="../images/observer.PNG" /><br />
                 The <b>observer pattern</b> is used to establish a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.  The general structure has:
                 <ol>
@@ -269,7 +308,7 @@ int main() {
 }
 </pre>
 
-                <h2 id="4">Decorator Pattern</h2>
+                <h2 id="5">Decorator Pattern</h2>
                 <img src="../images/decorator.PNG" /><br />
                 The <b>decorator pattern</b> is used to attach responsibilities to an object dynamically.  Inheritance is not feasible as it is static and applies to the entire class.  The decorator pattern provides a flexible alternative to subclassing for extending functionality.  It is dynamic and is applied to individual objects.  The general structure has:
                 <ol>
@@ -363,7 +402,7 @@ int main() {
 }
 </pre>
 
-                <h2 id="5">Factory Method Pattern</h2>
+                <h2 id="6">Factory Method Pattern</h2>
                 <a href="https://sourcemaking.com/design_patterns/factory_method"><img src="../images/factory.PNG" /></a><br />
                 The <b>Factory Method Pattern</b> uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object being created.  It allows classes to defer instantiation it uses to subclasses.   The general structure has:
                 <ol>
@@ -400,7 +439,7 @@ int main() {
   return 0;
 }
 </pre>
-                <h2 id="6">Template Method Pattern</h2>
+                <h2 id="7">Template Method Pattern</h2>
                 <a href="http://www.codeguru.com/cpp/article.php/c17909/C-Tutorial-The-Template-Pattern.htm"><img src="../images/template.PNG" /></a><br />
                 The <b>template method pattern</b> defines the skeleton of an algorithm in a "template method".  It defers some steps to subclasses to override by creating "placeholders".  The derived classes then override these placeholders to complete the algorithm.  The general structure has:
                 <ol>
@@ -450,7 +489,7 @@ class GreenTurtle : public Turtle {
     // draw green shell
   }
 }</pre>
-                <h2 id="7">Non-Virtual Interface(NVI) Idiom</h2>
+                <h2 id="8">Non-Virtual Interface(NVI) Idiom</h2>
                 Public virtual functions have the following uses:
                 <ol>
                   <li>
@@ -494,7 +533,7 @@ private:
                   <li>all this can be done without changing the public interface</li>
                 </ul>
 
-                <h2 id="8">Visitor Pattern</h2>
+                <h2 id="9">Visitor Pattern</h2>
                 <a href="http://wikivisually.com/wiki/Architectural_pattern_(computer_science)"><img src="../images/visitor.PNG" /></a><br />
                 The <b>visitor pattern</b> is used to perform an extensible set of operations on an object structure without requiring any change to the structure.  It can also be used to add functionality to existing classes without changing or recompiling classes. It allows us to create separate algorithms for different subclasses of the Element class by overloading the <code>visit()</code> method for each element class.  The general structure has:
                 <ol>
@@ -606,7 +645,183 @@ int main() {
     book.accept(log);
   }
 }</pre>
+                <h2 id="10">PImpl Idiom</h2>
+                The <b>PImpl (Pointer to Implementation) Idiom</b> is a C++ programming technique that hides the implementation details of a class by placing them in a separate class, which is accessed through an opaque pointer.
+<pre class="prettyprint">
+/* class.h */
+class Class {
+    // public methods
+    void foo();
+private:
+    class Private; // forward declaration
+    Private *pImpl;   // hide impl details
+};
 
+/* class.cc */
+#include "class.h"
+class Class::Private {
+  // include actual class implementation
+  void secretFoo() {}
+}
+Class::Class() : pImpl { new Private } {}
+Class::~Class() { delete pImpl; }
+void Class::foo() { pImpl->secretFoo(); }
+</pre>
+                We can forward declare the <code>Private</code> class because it is only used in the declaration of a pointer.  Also note that any method in <code>Class</code> can have access to methods in <code>Private</code>, but the client does not know the implementation since <code>Private</code> hides the methods.
+
+                <h3>Benefits of PImpl Idiom</h3>
+                <ol>
+                  <li>Fully-encapsulates a module</li>
+                  <li>Hides implementation from client</li>
+                  <li>Produces a stable interface</li>
+                  <li>More readable class definitions</li>
+                  <li>Hide implementation of <a href="./class.html#csi">Copy-Swap Idiom</a> and <a href="./class.html#move">move operations</a>.  This allows the assignment operators to be implmented <code>inline</code> without compromising encapsulation.
+<pre class="prettyprint">
+class Class {
+    // ...
+    Class(const Class& other) {
+      // calls copy ctor of Private class
+      Private *pImpl(other->pImpl);
+    }
+    void swap(Class & other) {
+        std::swap(pImpl, other.pImpl);
+    }
+    // Copy and Swap
+    Class & operator=(const Class & other) {
+        // call copy ctor of Class
+        Class temp(other);
+        swap(temp);
+        return *this;
+    }
+    // Move Semantics
+    Class(Class&& other) : pImpl(other.pImpl) { other.pImpl = nullptr; }
+    Class & operator=(Class && other) {
+        std::swap(pImpl, other.pImpl);
+        return *this;
+    }
+    // ...
+};</pre>
+                  </li>
+                </ol>
+
+                <h2 id="11">Model-View-Controller(MVC) Pattern</h2>
+                Consider the following example:
+<pre class="prettyprint">
+class ChessBoard {
+  istream &in;
+  ostream &out;
+public:
+  ChessBoard(istream &in, ostream &out) : in{in}, out{out} {
+    cout << "you move";
+  }
+}</pre>
+                <br />
+                <b>Single Responsibility Principle</b>: A class should have only one reason to change<br /><br />
+                The chessBoard class should not be doing any communication at all. All user interactions should be confined outside the game class.  This allows for total freedom to change how the game interacts.  Also, as a rule of thumb, <code>main</code> should not be used to handle the interactions as you may want to reuse or extend the communication code (hard to reuse code inside main).  A solution is to separate the logic and the display, and have a class to manage interactions, such as the MVC pattern.<br /><br />
+                The <b>MVC pattern</b> is an architectural pattern that separates an application into three main logical components:
+                <ol>
+                  <li>Model
+                    <ul>
+                      <li>the "brains"</li>
+                      <li>handles the data-related logic that the user works with</li>
+                      <li>can have multiple views (text, graphics)</li>
+                      <li>doesn't need to know about their details</li>
+                      <li>if an observer pattern is used, it plays the role of <code>Subject</code>.  Else, it communicates through the Controller</li>
+                    </ul>
+                  </li>
+                  <li>View
+                    <ul>
+                      <li>the "display"</li>
+                      <li>used for the UI logic</li>
+                    </ul>
+                  </li>
+                  <li>Controller
+                    <ul>
+                      <li>the "interface" between Model and View components</li>
+                      <li>mediates communication between Model and View</li>
+                      <li>may encapsulate turn-taking or entire game rules (tradeoff with Model)</li>
+                      <li>handles user input from View and updates Model</li>
+                    </ul>
+                  </li>
+                </ol>
+
+                <h2 id="12">Resource Acquisition Is Initialization(RAII) Idiom</h2>
+                Consider the following example:
+<pre class="prettyprint">
+void f() {
+  MyClass *p = new MyClass;
+  MyClass mc;
+  try {
+    y();
+  } catch {
+    delete p;
+    throw;
+  }
+  delete p;
+}</pre>
+                This method is tedious and error prone (duplication of code).  Instead of using pointers, we should use stack-allocated objects as much as possible as C++ guarantees that the destructors of stack-allocated objects will run.<br />
+                The <b>RAII idiom</b> states that every resource should be wrapped in a stack-allocated object, where destructor deletes it.  This can be seen with file I/O: <code class="prettyprint">ifstream f {"file"};</code>.  The acquisition of the resource happens by initializing the object <code>f</code>.  When <code>f</code> gets popped off the stack, the filestream is closed.  The RAII idiom can be implemented via <b>smart pointers</b>, included in <code class="prettyprint">&lt;memory></code>.
+
+                <h2 id="13">Smart Pointers</h2>
+                <h3>Unique Pointers</h3>
+                <code class="prettyprint">class std::unique_ptr&lt;T></code>
+                <br />
+                The <b>unique pointer</b> holds a pointer to an object of type <code>T</code>.  It guarantees that only one object holds that pointer, i.e. you cannot apply the copy constructor or copy assignment.
+<pre class="prettyprint">
+auto p = std::make_unique&lt;C>();
+unique_ptr&lt;C> q = p; // ERROR, cannot have multiple pointers pointing to same object</pre>
+
+                  However, you can use move semantics to transfer ownership of the pointer with <code>std::move(ptr)</code>.  The pointer that the unique pointer holds will be deleted when:
+                <ol>
+                  <li>unique pointer is popped off the stack, calling the destructor which deletes the pointer</li>
+                  <li>unique pointer is assigned to another pointer via <code>operator=</code></li>
+                </ol>
+                This provides exception safety to classes/functions that handle dynamic objects by guaranteeing deletion upon exit.
+<pre class="prettyprint">
+template&lt;typename T>
+class unique_ptr {
+  T* ptr;
+public:
+  unique_ptr(T* p) : ptr{p}{}
+  ~unique_ptr() {delete ptr;}
+  unique_ptr(unique_ptr&lt;T> &other) = delete;
+  unique_pt(unique_ptr&lt;T> &&other) : ptr{other.ptr} {
+    other.ptr = nullptr;
+  }
+  unique_pt&lt;T> &operator=(const unique_ptr&lt;T> &other) = delete;
+  unique_pt&lt;T> &operator=(unique_ptr&lt;T> &&other) {
+    using std::swap;
+    swap(ptr, other.ptr);
+    return *this;
+  }
+  T &operator*() {
+    return *ptr;
+  }
+}</pre>
+
+                <h3>Shared Pointers</h3>
+                <code class="prettyprint">class std::shared_ptr&lt;T></code>
+                <b>Shared pointers</b> work in the same way as unique pointers, with the only difference being that we can have multiple shared pointers with the same pointer.
+<pre class="prettyprint">
+auto p1 = std::make_shared&lt;MyClass>();
+if(...) {
+  auto p2 = p1;  // p2 has same pointer has p1
+} // p2 is popped but object is NOT deleted</pre>
+                Shared pointers keep a count of how many pointers are sharing the pointer.  Shared pointers will only delete the pointer once the count of shared pointers is zero.  This can lead to a shared pointer not deleting its pointer even after the program exits if there is a cyclic dependency between shared pointers.
+<pre class="prettyprint">
+class A {
+  shared_ptr&lt;A> ptr;
+}
+std::shared_ptr&lt;A> a1 = std::make_shared&lt;A>();
+std::shared_ptr&lt;A> a2 = std::make_shared&lt;A>();
+a1->ptr = a2;
+a2->ptr = a1;
+exit(0);  // memory leak
+</pre>
+                A memory leak occurs in the above example because when the program tries to delete <code>a1</code>, it is kept alive by <code>a2->ptr</code> which is, in turn, kept alive by <code>a1->ptr</code>.  An even simpler example:
+<pre class="prettyprint">
+std::shared_ptr&lt;A> a = std::make_shared&lt;A>();
+a->ptr = a;   // never dies</pre>
 
               </div>
             </div>
