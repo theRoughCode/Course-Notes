@@ -62,7 +62,7 @@
                     <li><a href="#16">Static Modifer</a></li>
                     <li><a href="#17">Friend Classes</a></li>
                     <li><a href="#18">Forward Class Declaration</a></li>
-                    <li><a href="#19">Invariants</a></li>
+                    <li><a href="#19">Preconditions, Postconditions, Invariants</a></li>
                     <li><a href="#20">Unified Modeling Language (UML)</a></li>
                   </ol>
                 </div>
@@ -666,8 +666,15 @@ public:
   F obj;   // not allowed
 };</pre>
 
-              <h2 id="19">Invariants</h2>
-              <b>Invariants</b> are a set of asserts that must hold true from the creation to the destruction of objects.  For example, exactly one of two member vars must be 0.  We can use a member function to check if invariant holds and raise an assert if invariant is broken.  Encapsulation enforces invariants by making fields private and allowing us to ensure that the data is correct in the preconditions and postconditions.
+              <h2 id="19">Preconditions, Postconditions, Invariants</h2>
+              These are properties of classes/functions that allow us to specify what it does/accomplishes.
+              <b>Preconditions</b> are conditions that must be true of the parameters of a function and/or data members, if the function is to behave correctly, <i>prior</i> to running the function.
+              <b>Postconditions</b> are conditions that are true <i>after</i> the function is run.<br />
+              e.g. Consider the square root function that prints to the screen: <code class="prettyprint">void sqrt(double x);</code><br />
+              Precondition: <code>x >= 0</code>
+              Postcondition: Square root of x is printed to screen
+              <b>Invariants</b> are a set of asserts that must hold true from the creation to the destruction of objects.  For example, exactly one of two member vars must be 0.  We can use a member function to check if invariant holds and raise an assert if invariant is broken.  Encapsulation enforces invariants by making fields private and allowing us to ensure that the data is correct in the preconditions and postconditions.<br />
+              <i>The pre and postconditions ensure that invariants are not violated.</i>
 <pre class="prettyprint">
 struct Node {
   int data;

@@ -47,6 +47,11 @@
                   <ol id="nav">
                     <li><a href="#1">Testing</a></li>
                     <li><a href="#2">Design Patterns</a></li>
+                    <li><a href="#3">Observer Pattern</a></li>
+                    <li><a href="#4">Decorator Pattern</a></li>
+                    <li><a href="#5">Factory Method Pattern</a></li>
+                    <li><a href="#6">Template Method Pattern</a></li>
+                    <li><a href="#7">Non-Virtual Interface(NVI) Idiom</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -159,6 +164,334 @@ for (auto it = lst.begin(); it != lst.end; ++it){
 for (auto n : lst) {
   cout << n << endl;
 }</pre>
+
+                <h2 id="3">Observer Pattern</h2>
+                <img src="../images/observer.PNG" /><br />
+                The <b>observer pattern</b> is used to establish a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.  The general structure has:
+                <ol>
+                  <li>
+                    AbstractSubject
+                    <ul>
+                      <li>keeps tracks of observers</li>
+                      <li>allows adding and removing of observers</li>
+                      <li>notifies observers when subject's state changes</li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteSubject
+                    <ul>
+                      <li>the "real" class that implements <code>AbstractSubject</code></li>
+                      <li>its change will notify the observers</li>
+                    </ul>
+                  </li>
+                  <li>
+                    AbstractObserver
+                    <ul>
+                      <li>an abstract class that defines the method that should be called whenever there is a change.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteObserver
+                    <ul>
+                      <li>the class that needs to keep itself updated with changes.</li>
+                      <li>implements <code>AbstractObserver</code></li>
+                      <li>registers itself with the <code>ConcreteSubject</code></li>
+                    </ul>
+                  </li>
+                </ol>
+                For example, the observer pattern could be used to keep track of a product's price, and any change to its price will update the various stores that sell it. In this case:
+                <ol>
+                  <li>
+                    Subject: Product
+                  </li>
+                  <li>
+                    Observers: Stores
+                  </li>
+                  <li>
+                    When price updates, it calls <code>notifyObservers()</code> which calls <code>notify()</code> on each store.
+                  </li>
+                </ol>
+<pre class="prettyprint">
+// AbstractSubject
+class Subject {
+  std::vector&lt;Shop*> observers;
+public:
+  void attach(Observer* o) { observers.push_back(o); }
+  void detach(Observer* o) {
+    list.erase(std::remove(list.begin(), list.end(), o), list.end());
+  }
+  void notifyObservers(float price) {
+    for (auto o : observers) {
+      o->notify(price);
+    }
+  }
+}
+
+// ConcreteSubject
+class Product : public AbstractSubject {
+public:
+  void updatePrice(float price) { notifyObservers(price); }
+}
+
+// AbstractObserver
+class Observer {
+public:
+    virtual void notify(float price) = 0;
+}
+
+// ConcreteObserver
+class Shop : public Observer {
+  std::string name;
+  float price;
+public:
+  Shop(std::string name) : name { name } {}
+  void notify(float price) { this->price = price; }
+}
+
+int main() {
+  Product p;
+  Shop shop1("Shop1");
+  Shop shop2("Shop2");
+
+  // attach observers
+  p.attach(shop1);
+  p.attach(shop2);
+
+  // update price and notify observers
+  p.updatePrice(2.35);
+
+  // Shop2 not looking to update price, so they unsubscribe
+  p.detach(shop2);
+
+  // only Shop1 is updated now
+  p.updatePrice(2.30);
+}
+</pre>
+
+                <h2 id="4">Decorator Pattern</h2>
+                <img src="../images/decorator.PNG" /><br />
+                The <b>decorator pattern</b> is used to attach responsibilities to an object dynamically.  Inheritance is not feasible as it is static and applies to the entire class.  The decorator pattern provides a flexible alternative to subclassing for extending functionality.  It is dynamic and is applied to individual objects.  The general structure has:
+                <ol>
+                  <li>
+                    Component
+                    <ul>
+                      <li>"lowest common denominator"</li>
+                      <li>abstract class for "base object" and the decorators</li>
+                      <li>can be used on its own or wrapped by decorator</li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteComponent
+                    <ul>
+                      <li>implements <code>Component</code></li>
+                      <li>the object we're adding functionalities to</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Decorator
+                    <ul>
+                      <li>the extra functionality</li>
+                      <li>implements <code>Component</code> (same as ConcreteComponent)</li>
+                      <li>has a pointer to a component</li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteDecorator
+                    <ul>
+                      <li>the extra functionality</li>
+                      <li>implements <code>Component</code> (same as ConcreteComponent)</li>
+                      <li>one is defined for each optional functionality</li>
+                      <li>implements their "added functionality" and delegates it to the Decorator base class</li>
+                    </ul>
+                  </li>
+                </ol>
+<pre class="prettyprint">
+// Lowest common denominator
+class Pizza {
+public:
+  virtual std::string description() = 0;
+  virtual ~Pizza() {};
+};
+
+// ConcreteComponent (base object)
+class CrustAndSauce: public Pizza {
+ public:
+ // virtual method (override)
+  std::string description() { return "Pizza"; }
+};
+
+// Decorator
+class Decorator: public Pizza {
+ protected:
+  Pizza *component;
+ public:
+  Decorator(Pizza *component) : component{ component } {}
+  Decorator::~Decorator() { delete component; }
+};
+
+// Decorator 1
+class StuffedCrust: public Decorator {
+ public:
+  StuffedCrust(Pizza *component) : Decorator{ p } {}
+  // virtual
+  std::string description() {
+    // delegation to component and add extra functionality
+    return component->description() + " with stuffed crust";
+  }
+};
+// Decorator 2
+class DippingSauce: public Decorator {
+  std::string flavour;
+ public:
+  DippingSauce(std::string flavour, Pizza *component) :
+    Decorator{ p }, flavour{ flavour } {}
+  // virtual
+  std::string description() {
+    // delegation to component and add extra functionality
+    return component->description() + " with " + flavour + " dipping sauce";
+  }
+};
+
+int main() {
+  Pizza *p = new StuffedCrust(
+              new DippingSauce("BBQ",
+                new DippingSauce("Garlic",
+                  new CrustAndSauce)));
+  cout << p->description();
+  // Output: "Pizza with Garlic dipping sauce with BBQ dipping sauce with stuffed crust"
+}
+</pre>
+
+                <h2 id="5">Factory Method Pattern</h2>
+                <a href="https://sourcemaking.com/design_patterns/factory_method"><img src="../images/factory.PNG" /></a><br />
+                The <b>Factory Method Pattern</b> uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object being created.  It allows classes to defer instantiation it uses to subclasses.   The general structure has:
+                <ol>
+                  <li>
+                    AbstractProduct
+                    <ul>
+                      <li>Contains the factory method that creates the required subclass.  Commonly implmented as a <code>static</code> function.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteProduct
+                    <ul>
+                      <li>The concrete subclasses that are actually returned.</li>
+                    </ul>
+                  </li>=
+                </ol>
+<pre class="prettyprint">
+// AbstractProduct
+class Enemy {
+public:
+  // factory method
+  static Enemy *createEnemy(const std::string type) {
+    if (type == "turtle") return new Turtle;
+    if (type == "bullet") return new Bullet;
+    return NULL;
+};
+
+// ConcreteProduct
+class Turtle : public Enemy {}
+class Bullet : public Enemy {}
+
+int main() {
+  Enemy *e = Enemy::createEnemy(turtle);
+  return 0;
+}
+</pre>
+                <h2 id="6">Template Method Pattern</h2>
+                <a href="http://www.codeguru.com/cpp/article.php/c17909/C-Tutorial-The-Template-Pattern.htm"><img src="../images/template.PNG" /></a><br />
+                The <b>template method pattern</b> defines the skeleton of an algorithm in a "template method".  It defers some steps to subclasses to override by creating "placeholders".  The derived classes then override these placeholders to complete the algorithm.  The general structure has:
+                <ol>
+                  <li>
+                    AbstractClass
+                    <ul>
+                      <li>contains the template method</li>
+                      <li>contains abstract versions of the placeholder operations</li>
+                    </ul>
+                  </li>
+                  <li>
+                    ConcreteClass
+                    <ul>
+                      <li>each ConcreteClass implements the full version of the algorithm by overriding all placeholder functions</li>
+                    </ul>
+                  </li>
+                </ol>
+<pre class="prettyprint">
+// AbstractClass
+class Turtle {
+public:
+// template method
+  void draw() {
+    drawHead();
+    drawShell();
+    drawFeet();
+  }
+private:
+  void drawHead() {}
+  void drawFeet() {}
+  // placeholder method
+  virtual void drawShell = 0;
+}
+
+// ConcreteClassA
+class RedTurtle : public Turtle {
+  // override placeholder
+  void drawShell override {
+    // draw red shell
+  }
+}
+
+// ConcreteClassB
+class GreenTurtle : public Turtle {
+  // override placeholder
+  void drawShell override {
+    // draw green shell
+  }
+}</pre>
+                <h2 id="7">Non-Virtual Interface(NVI) Idiom</h2>
+                Public virtual functions have the following uses:
+                <ol>
+                  <li>
+                    Provides an interface to client.  Indicates provided behaviour.
+                  </li>
+                  <li>
+                    Provides an interface to subclasses.  Contains "hooks" for subclasses to insert specialized behaviour
+                  </li>
+                </ol>
+                If public virtual functions are wrapped in the function declaration, it would be difficult to separate (modularize) them.  <br />
+                Furthermore, as discussed in <a href="./class.html#19">another section</a>, pre and postconditions are useful to ensure that the class invariants are not violated during the execution of a program.  It is important to modularize so we don't have repetitive checking of pre/post conditions and, potentially, forgetting to check them.  It is useful to check them in one place, the base class.  This is what the <b>NVI</b> idiom tries to accomplish. It separates customizable behaviour as private methods with non-customizable steps in between without changing public interface.  Here are its guidelines:
+                <ol>
+                  <li>All public methods should be non-virtual, using the Template Design Pattern</li>
+                  <li>All virtual methods should be private (ideally except in the following case)</li>
+                  <li>If derived classes need to invoke the base implementation of a virtual method, we make it protected.</li>
+                  <li>Base class destructor should be either public and virtual, or protected and nonvirtual.</li>
+                </ol>
+<pre class="prettyprint">
+// Without NVI Idiom
+class DigitalMedia {
+public:
+  virtual void play() = 0;
+  virtual ~DigitalMedia;
+}
+
+// With NVI Idiom
+class DigitalMedia {
+public:
+  void play() {
+    doPlay();
+  }
+  virtual ~DigitalMedia();
+private:
+  virtual void doPlay() = 0;
+}</pre>
+                Advantages of NVI Idiom in above example:
+                <ul>
+                  <li>extra control over Play</li>
+                  <li>we can add before/after code around doPlay that cant change</li>
+                  <li>we can add more "hooks" by calling additional virtual methods from play</li>
+                  <li>all this can be done without changing the public interface</li>
+                </ul>
 
               </div>
             </div>
