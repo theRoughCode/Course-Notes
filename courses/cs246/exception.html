@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Exception Handling</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Exception Handling</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Try-Catch</a></li>
+                    <li><a href="#2">Defining Your Own Exception Class</a></li>
+                    <li><a href="#3">Multiple Throws And Catches</a></li>
+                    <li><a href="#4">Throwing Exceptions In Functions</a></li>
+                    <li><a href="#5">Exception Specification</a></li>
+                    <li><a href="#6">Inheritance</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+                <br />
+                <b>Exception handling</b> is the process where we deal with exceptional cases/edge cases.  For example, consider the following example:
+<pre class="prettyprint">
+int milk, donuts;
+cin << milk << donuts;
+
+double dpg = donuts / static_cast&lt;double>(milk);
+cout << dpg;</pre>
+                This code assumes that <code>milk != 0</code>.  If <code>milk == 0</code>, then there be an error due to division by zero.  One way to handle this is by if statements.  The other way is using <b>try-catch blocks</b>.
+
+                <h2 id="1">Try-Catch</h2>
+<pre class="prettyprint">
+try {
+  int milk, donuts;
+  cin << milk << donuts;
+
+  if (milk <= 0) throw donuts;
+
+  double dpg = donuts / static_cast&lt;double>(milk);
+  cout << dpg;
+} catch(int e) {
+  cout << "We have " << e << " donuts, and no milk!" << endl;
+}</pre>
+
+                <h3>Try Block</h3>
+                The <b>try block</b> contains the code that tells the program what to do when everything goes smoothly.  If something unusual happens, we throw an exception, and flow of control is transferred to the catch block.
+
+                <h3>Catch Block</h3>
+                The <b>catch block</b> contains code that executes when the try block throws an exception.  Executing the catch block is known as "catching the exception" or "handling the exception".  The catch block takes in a catch-block parameter, which is preceded by a type name that specifies the type of thrown value that the catch block can catch.  The catch-block parameter also gives a name for the thrown value to be used in the catch block.  If no parameter is needed, the variable name can be left out (see <a class="link" href="#3">below</a>).
+                <br />
+                <code class="prettyprint">catch(...)</code> is a special kind of <code>catch</code> block that can be used to catch a thrown value of any type.
+
+                <h3>Nested Try-Catch Blocks</h3>
+                If an exception is thrown in the inner try block but not caught in any of the inner catch blocks, then the exception is thrown to the outer try block and possibly caught by an outer catch block.
+
+                <h2 id="2">Defining Your Own Exception Class</h2>
+                It is common to define a class whose objects can carry precise info on what is thrown to the catch block.  This allows us to have a different type to identify each possible kind of exceptional situation.  An exception class is just a class, for example:
+<pre class="prettyprint">
+class NoMilk {
+public:
+  NoMilk(){}
+  NoMilk(int num) : count(num) {}
+  int getCount() const {return count;}
+private:
+  int count;
+}
+int main () {
+  try {
+    int milk, donuts;
+    cin << milk << donuts;
+
+    if (milk <= 0) throw NoMilk(donuts);
+
+    double dpg = donuts / static_cast&lt;double>(milk);
+    cout << dpg;
+  } catch(NoMilk e) {
+    cout << "We have " << e.getCount() << " donuts, and no milk!" << endl;
+  }
+}</pre>
+
+                <h3>Trivial Exception Class</h3>
+                Exception classes with no member data can be defined as it allows us to throw an object of that class and activate the appropriate catch block. e.g. <code class="prettyprint">class DivideByZero{};</code>
+
+                <h2 id="3">Multiple Throws And Catches</h2>
+                A try block can throw any numnber of exception values.  When catching multiple exceptions the order of the catch blocks can be important.  The catch blocks are tried in order, so it is recommended to place more specific exceptions first and more generic exceptions last.
+<pre class="prettyprint">
+try {
+  int milk, donuts;
+  cin << milk << donuts;
+
+  if (milk < 0) throw NegativeNumber("milk");
+  if (milk == 0) throw DivideByZero();
+
+  double dpg = donuts / static_cast&lt;double>(milk);
+  cout << dpg;
+} catch(NegativeNumber e) {
+  cout << "Cannot have a negative number of " << e.getMessage() << endl;
+} catch (DivideByZero) {  // no need to give parameter if not used
+  cout << "ERROR: DIVIDE BY ZERO!";
+}</pre>
+                <h2 id="4">Throwing Exceptions In Functions</h2>
+                If we want to define the catch block outside of a function, the function can throw an exception that is handled when the function is called within a try block.
+<pre class="prettyprint">
+try {
+  quotient = safeDivide(num, denom);
+} catch(DivideByZero) {
+  cout << "ERROR: DIVSION BY ZERO!";
+}
+// Function throws to outer try-catch block
+double safeDivide(int top, int bot) throw (DivideByZero) {
+  if (bottom == 0) throw DivideByZero();
+  return top / static_cast<double> (bottom);
+}</pre>
+
+                <h2 id="5">Exception Specification</h2>
+                The <b>exception specification</b>, also known as the <b>throw list</b>, lists the types of exceptions that the function might throw but does not handle/catch.  Exception specifications appear in both the function declaration and definition and if there are multiple function declarations, all of them must have identical exception specifications.  If there are multiple possible exceptions, the exception types are separated by commas. i.e. <code class="prettyprint">void foo() throw (DivideByZero, SomeOtherException);</code><br />
+                If a function should not throw any exceptions that are caught inside the function, we use an empty exception specification, <code class="prettyprint">void foo() throw ();</code><br />
+                Any exceptions that are not included in the throw list invoke <code>unexpected()</code>.  The behaviour of <code>unexpected()</code> can be changed with <code>set_unexpected()</code> (which takes in the new function as its parameter), but its default action is to call <code>terminate()</code> which ends the program.
+
+                <div class="note">
+                  <div>
+                    In C++11, <code>throw</code> has been deprecated.  Instead we use <code>noexcept()</code> which takes in an expression (but does not evaluate it). <br /> If a function might throw an exception, we omit any throw statement or use <code class="prettyprint">noexcept(false)</code><br />
+                    If a function does not throw, use <code class="prettyprint">noexcept</code> or <code class="prettyprint">noexcept(true)</code><br />
+                    e.g. <code>void f() noexcept;  // f does not throw</code>
+                  </div>
+                </div>
+
+                <h2 id="6">Inheritance</h2>
+                Exception class hierarchies are useful.
+                If we have a derived class <code>D</code> of class <code>B</code>, and <code>B</code> is in the exception specification, then a thrown <code>D</code> will be caught.
+
+                <h2 id="7">Programming Techniques For Exception Handling</h2>
+                <ol>
+                  <li>
+                    Separate throwing and catching into separate functions - throw within a function definition and list it in the exception specification, but place the catch clause in a different function
+                  </li>
+                  <li>
+                    <u>Never</u> let the destructor throw an exception as it might be called when dealing with another exception
+                  </li>
+                  <li>
+                    Exceptions should be used sparingly as they alter the flow of control.  As a good rule of thumb, if a throw is desired, consider how to do it without the throw and if reasonable, do that instead.
+                  </li>
+                </ol>
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>
