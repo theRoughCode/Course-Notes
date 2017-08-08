@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Casting</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Casting</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Introduction to Casting</a></li>
+                    <li><a href="#2">Static Cast</a></li>
+                    <li><a href="#3">Const Cast</a></li>
+                    <li><a href="#4">Dynamic Cast</a></li>
+                    <li><a href="#5">Reinterpret Cast</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Introduction to Casting</h2>
+                <b>Casting</b> is the process of forcing one data type to be converted into another.  There more general casts are used as follows: <code class="prettyprint">(type) expression</code>.  For example, when converting from a double to an int: <code class="prettyprint">(int) 5.6</code> becomes <code>5</code><br />There are 4 other types of casts:
+                <ol>
+                  <li><code>static_cast</code></li>
+                  <li><code>const_cast</code></li>
+                  <li><code>dynamic_cast</code></li>
+                  <li><code>reinterpret_cast</code></li>
+                </ol>
+
+                <h2 id="2">Static Cast</h2>
+                <code class="prettyprint">static_cast<Type> (Expression)</code>
+                This function takes in a type and returns an "equivalent" value of type <code>Type</code>.  This can be used for non-polymorphic downcasting from a parent pointer to a child pointer.  It does not change the value of variable in expression.
+
+                <h2 id="3">Const Cast</h2>
+                <code class="prettyprint">const_cast<Type> (Expression)</code>
+                This is used to explicitly override <code>const</code> / <code>volatile</code> in a cast.  The target type must be the same.  It is used to either set or remove the <code>const</code> attribute.
+<pre class="prettyprint">
+void g(int *p);
+void f(const int *p) {
+  g(const_cast<int*>(p));
+}</pre>
+                <h2 id="4">Dynamic Cast</h2>
+                <code class="prettyprint">dynamic_cast<Type> (Expression)</code>
+                Dynamic casting is a type-safe form of downcasting by verifying the validity of the cast at runtime.  It performs polymorphic downcasting from a parent pointer to a child pointer.  If it fails (i.e. pointer does not point to the type specified), it returns <code>nullptr</code>.  It is safer than static_cast, but less efficient.  This only works on polymorphic classes (have at least one virtual method).
+<pre class="prettyprint">
+Book *pb;
+Text *pt = static_cast&lt;Text>(pb)->getTopic();  // might throw error
+// alternative
+Book *pb;
+Text *pt = dynamic_cast&lt;Text>(pb);  // nullptr if error
+if (pt) cout << pt->getTopic();
+else cout << "Not a Text";</pre>
+
+                <h2 id="5">Reinterpret Cast</h2>
+                <code class="prettyprint">reinterpret_cast<Type> (Expression)</code>
+                This operator changes a pointer to any other type of pointer. It also allows casting from pointer to an integer type and vice versa.  This is an implementation-dependent cast and is unsafe.
+<pre class="prettyprint">
+Student s;
+// Force student to be treated like a turtle :(
+Turtle *t = reinterpret_cast<Turtle*>(&s);</pre>
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

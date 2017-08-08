@@ -50,11 +50,13 @@
                     <li><a href="#4">Throwing Exceptions In Functions</a></li>
                     <li><a href="#5">Exception Specification</a></li>
                     <li><a href="#6">Inheritance</a></li>
+                    <li><a href="#7">3 Levels of Exception Safety</a></li>
+                    <li><a href="#8">STL Vectors</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
                 <br />
-                <b>Exception handling</b> is the process where we deal with exceptional cases/edge cases.  For example, consider the following example:
+                <b>Exception handling</b> is the process where we deal with exceptional cases/edge cases.  In general, exceptions are always preferred over using error codes in terms of program design.  For example, consider the following example:
 <pre class="prettyprint">
 int milk, donuts;
 cin << milk << donuts;
@@ -189,6 +191,7 @@ double safeDivide(int top, int bot) throw (DivideByZero) {
                     e.g. <code>void f() noexcept;  // f does not throw</code>
                   </div>
                 </div>
+                If you know a function will never throw or propagate an exception, declare it <code>noexcept</code> because it will facilitate optimization of your code.
 
                 <h2 id="6">Inheritance</h2>
                 Exception class hierarchies are useful.
@@ -206,6 +209,125 @@ double safeDivide(int top, int bot) throw (DivideByZero) {
                     Exceptions should be used sparingly as they alter the flow of control.  As a good rule of thumb, if a throw is desired, consider how to do it without the throw and if reasonable, do that instead.
                   </li>
                 </ol>
+
+                <h2 id="7">3 Levels of Exception Safety</h2>
+                There are 3 levels of exception safety:
+                <ol>
+                  <li>
+                    Basic Guarantee
+                    <ul>
+                      <li>If an exception occurs, the program is valid, but in an unspecified state</li>
+                      <li>Nothing is leaked</li>
+                      <li>Class invariants are maintained</li>
+                      <li>e.g. Regular copy constructor where data is lost</li>
+                    </ul>
+                    e.g.
+<pre class="prettyprint">
+class A {}
+class B {}
+class C {
+  A a;
+  B b;
+public:
+  void f() {
+    a.method1();
+    b.method2();
+  }
+};</pre>
+                    If <code>a.method1() </code>runs and <code>b.method2()</code> has an error, the state of <code>a</code> is changed without <code>b</code> changing.  This results in a <b>partial function</b>.<br />
+                  </li>
+                  <li>
+                    Strong Guarantee
+                    <ul>
+                      <li>Exception is raised while executing error</li>
+                      <li>The state of the program will be as if the function had not been called</li>
+                      <li>e.g. Copy and Swap idiom</li>
+                    </ul>
+                  </li>
+                  e.g.
+<pre class="prettyprint">
+class C {
+  A a;
+  B b;
+public:
+  void f() {
+    A aTemp = a;  // calls copy ctor
+    B bTemp = b;
+    aTemp.method1();
+    bTemp.method2();
+    std::swap(a, aTemp);  // nothrow
+    std::swap(b, bTemp);  // nothrow
+  }
+}</pre>
+                  If we had used a copy assignment operator instead of <code>swap</code>, we would not have a strong exception guarantee because copy assignment operator could throw.  The non-throwing <code>swap</code> ensures that the state of <code>a</code> and <code>b</code> are not changed if the above methods fail.
+                  <br />
+                  <li>
+                    Nothrow Guarantee
+                    <ul>
+                      <li>Function will never throw an exception</li>
+                      <li>no exception is emitted outside of the function</li>
+                      <li>Always accomplishes its task</li>
+                      <li>use <code>noexcept</code></li>
+                    </ul>
+                  </li>
+                  A possible further enhancement to the above example with strong guarantee is to use pointers via the pImpl idiom as copying pointers cannot throw exceptions.  This provides a nothrow guarantee.  i.e.
+<pre class="prettyprint">
+struct Cimpl {
+ A a;
+ B b;
+}
+class C {
+ unique_ptr<CImpl> pImpl;  // pointer to implementation
+public:
+ auto temp = make_unique<CImpl>(*pImpl);
+ // if temp == nullptr, nothing happens
+ temp->a.method1();
+ temp->b.method2();
+ std::swap(pImpl, temp);
+};  // Nothrow</pre>
+                </ol>
+
+                <h2 id="8">STL Vectors</h2>
+                Vectors (more on vectors <a href="./arrays.html#8">here</a>) encapsulate heal-allocated arrays.  This is a form of the <a href="./softeng.html#12">RAII</a> idiom because when the stack-allocated vector goes out of scope, the internal heap-allocated array is freed.
+                <br /><code class="prettyprint">void f() { vector<MyClass> v; }</code><br />
+                When <code>v</code> goes out of scope, the <code>MyClass</code> destructor runs on all items in the array and the array is freed.<br />
+                <code class="prettyprint">void g(){ vector<MyClass*> v; }</code><br />
+                When <code>v</code> goes out of scope, pointers dont have destructors, so only the array is freed while pointers are not.  To fix this, we can use shared pointers: <code class="prettyprint">void h() { vector<shared_ptr<MyClass>> v; }</code><br />
+
+                <h3>Emplace Back</h3>
+                <code class="prettyprint">vector&lt;T>::emplace_back</code> offers strong guarantee because if the array is full, it:
+                <ol>
+                  <li>allocates a new, larger array</li>
+                  <li>copy the objects over via copy constructor</li>
+                  <li>If copy constructor throws:
+                    <ol type="i">
+                      <li>destroys new array</li>
+                      <li>old array is intact</li>
+                      <li>strong guarantee</li>
+                    </ol>
+                  </li>
+                  <li>else delete old array</li>
+                </ol>
+                Consider the move constructor.  With the move constructor,<code>emplace_back</code> will:
+                <ol>
+                  <li>allocate new larger array</li>
+                  <li>move the objects over</li>
+                  <li>delete old array</li>
+                </ol>
+                The problem is that if the move constructor were to throw, <code>emplace_back</code> wouldn't offer strong guarantee because the original array would no longer be intact.  However, <code>emplace_back</code> promises the strong guarantee, so if the move constructor offers nothrow guarantee, <code>emplace_back</code> will use it, otherwise it will use the copy constructor which may be slower.
+                <div class="note">
+                  <div>
+                    <h3>Rule of Thumb</h3>
+                    Move operations should provide nothrow guarantee if possible and should indicate that they do so.
+<pre class="prettyprint">
+class MyClass {
+public:
+  MyClass(MyClass &&other) noexcept {}
+  MyClass &operator=(MyClass &&other) noexcept {}
+}</pre>
+
+                  </div>
+                </div>
 
               </div>
             </div>
