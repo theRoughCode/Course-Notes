@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Templates</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">Unix tools</a></li>
+          <li><a href="#">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Templates</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Intro To Templates</a></li>
+                    <li><a href="#2">Class Templates</a></li>
+                    <li><a href="#3">Inheritance</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Intro To Templates</h2>
+                <b>Templates</b> allow us to define one function that applies to all types of variables.  Templates are an example of "Algorithm Abstraction", which is the expression of algorithms in a general way so we can ignore details and concentrate on the substantive parts of the algorithm.<br />
+                Syntax: <code class="prettyprint">template&lt;class T></code><br />
+                This tells the compiler that the definition/declaration that follows is a template and that 'T' is a type parameter.  In the following definition/declaration, <code>T</code> can be replaced by any type, whether the type is a class or not.  The compiler produces a separate definition only for the types which use the template, as required.
+<pre class="prettyprint">
+template&lt;class T>
+void swapValues(T& var1, T& var2) {
+  T temp;
+  temp = var1;
+  var1 = var2;
+  var2 = temp;
+}
+int int1 = 1, int2 = 2;
+swapValues(int1, int2);
+char sym1 = 'A', sym2 = 'B';
+swapValues(sym1, sym2);</pre>
+                Note that we call the function just like any other function
+
+                <h3>Multiple Parameters</h3>
+                Templates can also be defined with multiple parameters, however, the following definition/declaration cannot have any unused template parameters. i.e. <code class="prettyprint">template &lt;class T1, class T2></code>
+
+                <h2 id="2">Class Templates</h2>
+                Class templates can be used to generalize a class. Defining class templates is the same as for function templates.  Once the class template is defined, we can declare object of the class.  The declaration must specify what type to be filled in for T. e.g. <code class="prettyprint">Pair<int> score; Pair<char> seats;</code>
+<pre class="prettyprint">
+//Class for a pair of values of type T:
+template&lt;class T>
+class Pair {
+public:
+  Pair();
+  Pair(T firstValue, T secondValue);
+  void setFirst(T newValue);
+  void setSecond(T newValue);
+  T getFirst() const;
+  T getSecond() const;
+private:
+  T first;
+  T second;
+};</pre>
+                <h3>Member Functions For Class Templates</h3>
+                Member functions that are a part of a class template is defined in the same way as member functions for ordinary classes.  The only difference is that the member functions are also templates.  The class name before the scope resolution operator has to have the template parameter.  However, the constructor and destructor names (after scope resolution operator) do <u>not</u> have the template parameter.
+<pre class="prettyprint">
+template&lt;class T>
+Pair&lt;T>::Pair(T firstValue, T secondValue) {
+  first = firstValue;
+  second = secondValue;
+}</pre>
+                <h3>Class Templates As Parameters</h3>
+                Class templates may be used as the type for a function parameter. <code class="prettyprint">int addUp(const Pair&lt;int>& thePair);</code><br />
+                They can also be used within a function template.
+<pre class="prettyprint">
+template&lt;class T>
+T addUp(const Pair&lt;T>& thePair);</pre>
+
+                <h3>Type Definitions</h3>
+                We can also define a new class type name that has the same meaning as a specialized class template name, using <code>typedef</code> (more on typedefs <a href="./pointer.html#7">here</a>).  i.e.
+<pre class="prettyprint">
+typedef Class_Name&lt;T> New_Type_Name;
+typedef Pair&lt;int> PairOfInt;
+</pre>
+                <h3>Friend Functions</h3>
+                When used with template classes, you must include a type parameter where appropriate.
+
+                <h2 id="3">Inheritance</h2>
+                When defining a derived template class, begin with a standard template class and derive the other template class from it.
+<pre class="prettyprint">
+// Base Class
+template&lt;class T>
+class Base {
+public:
+  Base();
+  virtual ~Base();
+private:
+  T *a;
+};
+
+template&lt;class T>
+Base&lt;T>::Base() {
+  a = new T[5];
+}
+template&lt;class T>
+Base&lt;T>::~Base() {
+  delete[] a;
+}
+
+// Derived Class
+template&lt;class T>
+class Derived : public Base&lt;T> {
+public:
+  Derived();
+  virtual ~Derived();
+private:
+  T *b;
+}
+
+template&lt;class T>
+Derived&lt;T>::Derived() : Base&lt;T>() {
+  b = new T[5];
+}
+template&lt;class T>
+Derived&lt;T>::~Derived() {
+  delete[] b;
+}</pre>
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

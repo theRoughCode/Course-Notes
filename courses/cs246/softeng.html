@@ -46,6 +46,7 @@
                   <h1>Table of Contents</h1>
                   <ol id="nav">
                     <li><a href="#1">Testing</a></li>
+                    <li><a href="#2">Design Patterns</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -112,6 +113,53 @@
                       <li>Run a set of test suites and testing scripts that contain previously checked tests after each addition of the code or bfore every release</li>
                     </ul>
                   </ul>
+
+                  <h2 id="2">Design Patterns</h2>
+                  Software <b>design patterns</b> are general reusable solutions to commonly occurring problems within a given context in software design. For example, using the concept of iterators with Linked Lists.
+<pre class="prettyprint">
+class List {
+  struct Node;
+  Node *list = nullptr;
+public:
+  class Iterator {
+    Node *p;
+  public:
+    explicit Iterator(Node *p) : p{p} {};
+    int &operator*(){
+      return p->data;
+    }
+    Iterator &operator++() {
+      p = p->next;
+      return *this;
+    }
+    bool operator ==(const Iterator &other) const {
+      return p == other.p;
+    }
+    bool operator !=(const Iterator &other) const {
+      return !(*this == other);
+    }
+    Iterator begin() {
+      return Iterator(list);
+    }
+    Iterator end() {
+      return Iterator(nullptr);
+    }
+  }
+}
+
+List lst;
+lst.addToFront(1);
+lst.addToFront(2);
+lst.addToFront(3);
+
+for (auto it = lst.begin(); it != lst.end; ++it){
+  cout << *it << end;
+}
+// OR
+for (auto n : lst) {
+  cout << n << endl;
+}</pre>
+
               </div>
             </div>
         </div>
