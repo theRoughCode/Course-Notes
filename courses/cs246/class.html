@@ -532,7 +532,7 @@ Node n = 4;  //Not OK</pre>
                 The move constructor removes need for deep copy or <code>delete</code>.   Takes in an r-value reference (see <a href="./pointer.html#lrvalue">here</a>). <code>std::move()</code> is a cast that can be applied on an l-value argument to produce an rvalue reference. e.g.
 <pre class="prettyprint">
 MemoryPage (MemoryPage &&other) : size(0), buf(nullptr) {
-  // pilers other's resources
+  // pilfers other's resources
   size = other.size;
   buf = other.buf;
   // reset other
@@ -541,12 +541,12 @@ MemoryPage (MemoryPage &&other) : size(0), buf(nullptr) {
 }</pre>
 
                 <h2 id="14">Move Assignment Operator</h2>
-                Similar to copy constructor except that before pilfering source object, it releases any resources the object might own.  Performs the following steps:
+                Similar to move constructor except that before pilfering source object, it releases any resources the object might own.  Performs the following steps:
                 <ol>
-                  <li>releases source object, *this, currently owns</li>
-                  <li>pilfers others resources</li>
-                  <li>set other to a default state</li>
-                  <li>return *this</li>
+                  <li>Releases source object <code>*this</code> currently owns</li>
+                  <li>Pilfers <code>other</code>'s resources</li>
+                  <li>Set <code>other</code> to a default state</li>
+                  <li>return <code>*this</code></li>
                 </ol>
 <pre class="prettyprint">
 MemoryPage& MemoryPage::operator=(MemoryPage&& other){
