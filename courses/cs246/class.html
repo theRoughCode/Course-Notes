@@ -587,8 +587,53 @@ MemoryPage& MemoryPage::operator=(MemoryPage&& other){
                   </div>
                 </div>
 
+                Example of a class with Big 5 implemented:
+<pre class="prettyprint">
+/* class.h */
+class Class {
+  int *ptr;
+public:
+  Class() {};  // default ctor
+  Class(int i); // overloaded ctor
+  // BIG 5
+  Class(const Class &other);  // copy ctor
+  Class(Class &&other);  // move ctor
+  Class &operator=(const Class &other);  // copy assignment
+  Class &operator=(Class &&other);  // move assignment
+  ~Class();
+}
+
+/* class.cc */
+// Constructors
+Class::Class() : ptr { nullptr } {}
+Class::Class(int i) : ptr { new int(i) } {}
+
+// Copy Ctor
+Class::Class(const Class &other) : ptr { new int(*(other.ptr)) } {}
+
+// Move Ctor
+Class::Class(Class &&other) : ptr { nullptr } {
+  std::swap(ptr, other.ptr);
+}
+
+// Copy Assignment Operator
+Class &Class::operator=(const Class &other) {
+  Class temp(other);  // Copy Ctor
+  std::swap(ptr, temp.ptr); // Copy and Swap
+  return *this;
+}
+
+// Move Assignment Operator
+Class &Class::operator=(Class &&other) {
+  std::swap(ptr, other.ptr); // Copy and Swap
+  return *this;
+}
+
+// Destructor
+Class~Class() { delete ptr; }</pre>
+
                 <h2 id="15">Copy/Move Elision</h2>
-                <b>Copy or move elision</b> is an optimization technique where compilers are required or permitted to omit the copy/move constructors, even if these constructors and destructors have observable side effects.  This prevents extra (potentially expensive) copies.  We can disable elision with <code>-fno-elide-constructors</code>. This should <u>not</u> be done because the elision would ignore the side effects.  If your program relies on side effects of copy constructors, it is badly written; cpoy constructors should be written such that elision is safe.
+                <b>Copy or move elision</b> is an optimization technique where compilers are required or permitted to omit the copy/move constructors, even if these constructors and destructors have observable side effects.  This prevents extra (potentially expensive) copies.  We can disable elision with <code>-fno-elide-constructors</code>. This should <u>not</u> be done because the elision would ignore the side effects.  If your program relies on side effects of copy constructors, it is badly written; copy constructors should be written such that elision is safe.
 <pre class="prettyprint">
 struct C {
   C() {}

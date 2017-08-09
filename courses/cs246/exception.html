@@ -30,7 +30,7 @@
           <li><a href="#4">Throwing Exceptions In Functions</a></li>
           <li><a href="#5">Exception Specification</a></li>
           <li><a href="#6">Inheritance</a></li>
-          <li><a href="#7">3 Levels of Exception Safety</a></li>
+          <li><a href="#7">4 Levels of Exception Safety</a></li>
           <li><a href="#8">STL Vectors</a></li>
         </ul>
       </div>
@@ -214,9 +214,25 @@ double safeDivide(int top, int bot) throw (DivideByZero) {
                   </li>
                 </ol>
 
-                <h2 id="7">3 Levels of Exception Safety</h2>
-                There are 3 levels of exception safety:
+                <h2 id="7">4 Levels of Exception Safety</h2>
+                There are 4 levels of exception safety:
                 <ol>
+                  <li>
+                    No Guarantee
+                    <ul>
+                      <li>If an exception occurs, it will not be handled</li>
+                      <li>Memory can be leaked</li>
+                      <li>Class invariants can be violated</li>
+                    </ul>
+<pre class="prettyprint">
+class A {
+  int *i;
+  A(int *i) : i { i } {}
+  ~A() { delete i; }
+}
+</pre>
+                    If an error occurs and an exception is thrown with an object of type <code>A</code>, the destructor will not be called and there will be a memory leak.  This does no have any exception handling thus it has no guarantee.
+                  </li>
                   <li>
                     Basic Guarantee
                     <ul>

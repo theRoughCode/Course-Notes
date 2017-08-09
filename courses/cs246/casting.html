@@ -68,11 +68,11 @@
                 </ol>
 
                 <h2 id="2">Static Cast</h2>
-                <code class="prettyprint">static_cast<Type> (Expression)</code>
+                <code class="prettyprint">static_cast&lt;Type> (Expression)</code>
                 This function takes in a type and returns an "equivalent" value of type <code>Type</code>.  This can be used for non-polymorphic downcasting from a parent pointer to a child pointer.  It does not change the value of variable in expression.
 
                 <h2 id="3">Const Cast</h2>
-                <code class="prettyprint">const_cast<Type> (Expression)</code>
+                <code class="prettyprint">const_cast&lt;Type> (Expression)</code>
                 This is used to explicitly override <code>const</code> / <code>volatile</code> in a cast.  The target type must be the same.  It is used to either set or remove the <code>const</code> attribute.
 <pre class="prettyprint">
 void g(int *p);
@@ -80,7 +80,7 @@ void f(const int *p) {
   g(const_cast<int*>(p));
 }</pre>
                 <h2 id="4">Dynamic Cast</h2>
-                <code class="prettyprint">dynamic_cast<Type> (Expression)</code>
+                <code class="prettyprint">dynamic_cast&lt;Type> (Expression)</code>
                 Dynamic casting is a type-safe form of downcasting by verifying the validity of the cast at runtime.  It performs polymorphic downcasting from a parent pointer to a child pointer.  If it fails (i.e. pointer does not point to the type specified), it returns <code>nullptr</code>.  It is safer than static_cast, but less efficient.  This only works on polymorphic classes (have at least one virtual method).
 <pre class="prettyprint">
 Book *pb;
@@ -92,7 +92,7 @@ if (pt) cout << pt->getTopic();
 else cout << "Not a Text";</pre>
 
                 <h2 id="5">Reinterpret Cast</h2>
-                <code class="prettyprint">reinterpret_cast<Type> (Expression)</code>
+                <code class="prettyprint">reinterpret_cast&lt;Type> (Expression)</code>
                 This operator changes a pointer to any other type of pointer. It also allows casting from pointer to an integer type and vice versa.  This is an implementation-dependent cast and is unsafe.
 <pre class="prettyprint">
 Student s;
