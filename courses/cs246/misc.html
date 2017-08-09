@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS 246 :: Miscellaneous</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="Course Notes" content="">
+    <meta name="Raphael" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp&lang=bsh&skin=sunburst"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a href="../../index.html">UW Couse Notes</a>
+          </li>
+          <li><a href="./shell.html">The Shell</a></li>
+          <li><a href="./scripts.html">Bash Scripts</a></li>
+          <li><a href="./cpp.html">C++</a>
+            <ol type="i">
+              <li><a href="./basics.html">C++ Basics</a></li>
+              <li><a href="./control.html">Control Flow</a></li>
+              <li><a href="./stream.html">Streams</a></li>
+              <li><a href="./strings.html">Strings</a></li>
+              <li><a href="./arrays.html">Arrays & Vectors</a></li>
+              <li><a href="./class.html">Structures & Classes</a></li>
+              <li><a href="./pointer.html">References & Pointers</a></li>
+              <li><a href="./namespace.html">Compilation & Namespace</a></li>
+              <li><a href="./inheritance.html">Inheritance</a></li>
+              <li><a href="./polymorphism.html">Polymorphism</a></li>
+              <li><a href="./templates.html">Templates</a></li>
+              <li><a href="./exception.html">Exception Handling</a></li>
+              <li><a href="./casting.html">Casting</a></li>
+            </ol>
+          </li>
+          <li><a href="./softeng.html">Software Engineering</a></li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <h1 id="title_text">Miscellaneous</h1><br />
+
+                <!-- Table of Contents -->
+                <div id="contents">
+                  <h1>Table of Contents</h1>
+                  <ol id="nav">
+                    <li><a href="#1">Concurrency & Multithreading</a></li>
+                    <li><a href="#2">Approaches To Concurrency</a></li>
+                  </ol>
+                </div>
+                <!--Table of Contents -->
+
+                <h2 id="1">Concurrency & Multithreading</h2>
+                Concurrency and multithreading are powerful tools to make your program run faster.  Multithreading can be used to improve responsiveness.
+                <h3>Concurrency</h3>
+                <b>Concurrency</b> is the process by which 2 or more separate activities are happening simultaneously.  <b>Context switching</b> is performed each time the computer switches from one task to another.
+
+                <h2 id="2">Approaches To Concurrency</h2>
+                <ol>
+                  <li>Concurrency with multiple processes: divide app into multiple single threaded processes
+                    <ul>
+                      <li>pass msg to each other through interprocess communication channels</li>
+                      <li>slow because OS provides protection to prevent one process to modify the data of other</li>
+                      <li>processes communicate to each other through interprocess communication</li>
+                    </ul>
+                  </li>
+                  <li>Concurrency with multiple threads: each thread runs independently of each other
+                    <ul>
+                      <li>share same address space</li>
+                      <li>most data can be accessed from all threads</li>
+                      <li>less overhead because OS has less book-keeping to do</li>
+                      <li>lack of protection</li>
+                      <li>programmer must ensure data is consistent whenever accessed</li>
+                      <li>relies on platform specific API</li>
+                    </ul>
+                  </li>
+                </ol>
+
+                <h3>When Not To Use Concurrency</h3>
+                <ol>
+                  <li>When the benefit is not worth the cost</li>
+                  <li>Code is harder to understand, more bugs</li>
+                  <li>Unless potential performance gain is large enough</li>
+                  <li>Having too many threads consume OS resources and might make the system run slower as a whole</li>
+                  <li>Can exhaust available memory and address space because each thread requires a separate stack space</li>
+                  <li>More threads = more context switching (takes time)</li>
+                </ol>
+
+
+              </div>
+            </div>
+        </div>
+        <footer class="footer">
+          <a href="#top">Back to Top</a>
+          <p id="last_modified"></p>
+        </footer>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+    <!-- JS Script -->
+    <script src="../../js/scripts.js"></script>
+
+  </body>
+</html>

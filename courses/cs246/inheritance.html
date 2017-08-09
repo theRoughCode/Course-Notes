@@ -31,6 +31,7 @@
           <li><a href="#5">Protected Qualifier</a></li>
           <li><a href="#6">Protected And Private Inheritance</a></li>
           <li><a href="#7">Multiple Inheritance</a></li>
+          <li><a href="#8">Duplicate Subobjects</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -54,6 +55,8 @@
                     <li><a href="#5">Protected Qualifier</a></li>
                     <li><a href="#6">Protected And Private Inheritance</a></li>
                     <li><a href="#7">Multiple Inheritance</a></li>
+                    <li><a href="#8">Duplicate Subobjects</a></li>
+                    <li><a href="#9">Diamond Inheritance</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -121,13 +124,254 @@ Derived& Derived::operator =(const Derived& rightSide) {
                   <li>
                     Private inheritance - all members of the base class are inaccessible in the derived class. <br />e.g. <code class="prettyprint">class SalariedEmployee: private Employee {};</code>
                   </li>
+                  <li><b>Note:</b> Private and protected inheritance restricts access to inherited members when used by a derived class object, but the derived class still contains all base class data</li>
                 </ul>
 
                 <h2 id="7">Multiple Inheritance</h2>
-                A derived class can have more than one base class.  We specify the base classes by separating them with commas. i.e. <code class="prettyprint">class derivedMulti : public base1, base2 {}</code>
+                A derived class can have more than one base class.  We specify the base classes by separating them with commas. i.e. <code class="prettyprint">class derivedMulti : public base1, base2 {}</code><br />
 
-                <h3>Diamond Inheritance</h3>
-                If you have multiple base classes and those base classes have a common base class, you will have 2 copies of the original base class.  If we want only one copy, we make the base class virtual.
+                <h3>Interface Inheritance</h3>
+                In C++, all inheritance is <b>implementation inheritance</b> because everything in the base class, both interface and implementation, becomes part of the derived class.  To <i>simulate</i> interface inheritance in C++, we derive from an <b>interface class</b>, which is a pure abstract class that contains only declarations (no data or function bodies).  These declarations will be pure virtual functions, except for the destructor.
+<pre class="prettyprint">
+// Interface Classes
+class Printable {
+public:
+  virtual ~Printable() {}
+  virtual void print(ostream&) const = 0;
+};
+class Intable {
+public:
+  virtual ~Intable() {}
+  virtualint toInt() const = 0;
+};
+class Stringable {
+public:
+  virtual ~Stringable() {}
+  virtual string toString() const = 0;
+};
+
+// Interface Inheritance
+class Able : public Printable, public Intable, public Stringable {
+  int myData;
+public:
+  Able(int x) { myData = x; }
+  void print(ostream& os) const { os << myData; }
+  int toInt() const { return myData; }
+  string toString() const {
+    ostringstream os;
+    os << myData;
+    return os.str();
+  }
+};
+
+void testPrintable(const Printable& p) {
+  p.print(cout);
+  cout << endl;
+}
+void testIntable(const Intable& n) {
+  cout << n.toInt() + 1 << endl;
+}
+void testStringable(const Stringable& s) {
+  cout << s.toString() + "th" << endl;
+}
+
+int main() {
+  Able a(7);
+  testPrintable(a);  // 7
+  testIntable(a);    // 8
+  testStringable(a); // 7th
+}</pre>
+
+
+                <h3>Common Function Names</h3>
+                Consider the following example:
+<pre class="prettyprint">
+class A { void foo(); };
+class B { void foo(); };
+class C : public A, public B {};
+
+int main() {
+  C c;
+  c.foo(); // ERROR
+}</pre>
+                The object <code>c</code> has 2 possible function <code>foo()</code> to choose from, class <code>A</code>'s or class <code>B</code>'s.  Since the compiler does not know which one to call, it throws an error.  To clarify which function we are calling, we qualify the function call with the corresponding base class' name. e.g.
+<pre class="prettyprint">
+class C : public A, public B {
+public:
+  using A::foo();
+}
+
+int main() {
+  C c;
+  c.foo(); // Calls A::foo()
+}</pre>
+                Another way is to use <a class="link" href="#dom">dominance</a>.
+
+                <h2 id="8">Duplicate Subobjects</h2>
+                When a base class is inherited, a copy of all data members of that base class is copied over to the derived class.  Note the following example:
+<pre class="prettyprint">
+class A { int x; };
+class B { int y; };
+class C : public A, public B { int z; };
+
+int main() {
+  cout << "sizeof(A) == " << sizeof(A) << endl;
+  cout << "sizeof(B) == " << sizeof(B) << endl;
+  cout << "sizeof(C) == " << sizeof(C) << endl;
+  C c;
+  cout << "&c == " << &c << endl;
+  A* ap = &c;
+  B* bp = &c;
+  cout << "ap == " << static_cast<void*>(ap) << endl;
+  cout << "bp == " << static_cast<void*>(bp) << endl;
+  C* cp = static_cast<C*>(bp);
+  cout << "cp == " << static_cast<void*>(cp) << endl;
+  cout << "bp == cp? " << boolalpha << (bp == cp) << endl;
+}
+
+/* Output:
+sizeof(A) == 4
+sizeof(B) == 4
+sizeof(C) == 12
+&c == 1245052
+ap == 1245052
+bp == 1245056
+cp == 1245052
+bp == cp? true
+*/</pre>
+                We note that the address of <code>ap</code> is the same as <code>&c</code>, while <code>bp</code> is offset by 4 bytes.  This indicates that the object <code>c</code> begins with its <code>A</code> subobject, then the <code>B</code> subobject, and finally the data from the <code>C</code> type.<br />
+                When upcasting from <code>C</code> to <code>A</code>, the resulting pointer points to the <code>A</code> portion which is at the beginning of the <code>C</code> object, and thus has the same address.<br />
+                When upcasting to <code>B</code>, however, the resulting pointer points to the <code>B</code> subobject, which is shift 4 bytes up because the <code>A</code> subobject takes up 4 bytes (int).<br />
+                When casting back from <code>B</code> to <code>C</code>, since the original object was a <code>C</code> type, the pointer is shifted back to the original address of the complete <code>C</code> object.<br />
+                When comparing <code>bp == cp</code>, <code>cp</code> is implicitly converted to a <code>B*</code> since upcasting is always allowed (vs. downcasting), thus the result was true.
+
+                <h2 id="9">Diamond Inheritance</h2>
+                <img src="../images/diamond1.PNG" style="width: 60%; height: auto;"><br />
+                If you have multiple base classes and those base classes have a common base class, you will have 2 copies of the original base class.  The inheritance diagram, therefore, looks more like:<br />
+                <img src="../images/diamond2.PNG" style="width: 60%; height: auto;"><br />
+
+<pre class="prettyprint">
+class Top {
+  int x;
+public:
+  Top(int n) { x = n; }
+};
+
+class Left : public Top {
+  int y;
+public:
+  Left(int m, int n) : Top(m) { y = n; }
+};
+
+class Right : public Top {
+  int z;
+public:
+  Right(int m, int n) : Top(m) { z = n; }
+};
+
+class Bottom : public Left, public Right {
+  int w;
+public:
+  Bottom(int i, int j, int k, int m)  : Left(i, k), Right(j, k) { w = m; }
+};
+
+int main() {
+  Bottom b(1, 2, 3, 4);
+  /*
+  Top (Left):   x = 1
+  Top (Right):  x = 2
+  Left:         y = 3
+  Right:        z = 3
+  Bottom:       w = 4
+  */
+  cout << sizeof b << endl; // 20 (5 * int)
+}</pre>
+                This design is awkward because the user thinks that only 4 integers are required, but which are the 2 arguments that should be passed into <code>Left</code> and <code>Right</code>?  This also presents a problem if we try to convert a <code>Bottom</code> pointer to a <code>Top</code> pointer. But as shown <a class="link" href="#8">earlier</a>, the address may be readjusted and will be different depending on which of the 2 <code>Top</code> subobject is chosen.  Since this upcast is ambiguous, the compiler does not allow it.  Another consequence is that the <code>Bottom</code> object would not be able to call a function defined in <code>Top</code>.
+
+                <h3>Virtual Base Class</h3>
+                In a true diamond inheritance, the <code>Top</code> object is shared by both the <code>Left</code> and <code>Right</code> subobjects within the <code>Bottom</code> object.  This is achieved by making the base class virtual.
+<pre class="prettyprint">
+class Top {
+protected:
+  int x;
+public:
+  Top(int n) { x = n; }
+  virtual ~Top() {}
+  friend ostream& operator<<(ostream& os, const Top& t) {
+    return os << t.x;
+  }
+};
+
+// virtual base class
+class Left : virtual public Top {
+protected:
+  int y;
+public:
+  Left(int m, int n) : Top(m) { y = n; }
+};
+
+// virtual base class
+class Right : virtual public Top {
+protected:
+  int z;
+public:
+  Right(int m, int n) : Top(m) { z = n; }
+};
+
+class Bottom : public Left, public Right {
+  int w;
+public:
+  Bottom(int i, int j, int k, int m)
+    : Top(i), Left(0, j), Right(0, k) { w = m; }
+  friend ostream& operator<<(ostream& os, const Bottom& b) {
+    return os << b.x << ',' << b.y << ',' << b.z<< ',' << b.w;
+  }
+};
+
+int main() {
+  Bottom b(1, 2, 3, 4);
+  cout << sizeof b << endl;  // 36
+  /*
+  Bottom: size = 4 (int)
+  Left, Right: size = 4 (int) + 8 (ptr) = 12
+  Top: size = 8
+  */
+  cout << b << endl;  // 1,2,3,4
+  cout << static_cast&lt;void*>(&b) << endl; // 1245032
+  Top* p = static_cast&lt;Top*>(&b);
+  cout << *p << endl;  // 1
+  cout << static_cast&lt;void*>(p) << endl;  // 1245060
+  cout << dynamic_cast&lt;void*>(p) << endl; // 1245032
+}</pre>
+                Each virtual base of a given type refers to the same object, no matter where it appears in the hierarchy.  The object diagram for <code>Bottom</code> looks something like this:
+                <br />
+                <img src="../images/virtualbase.PNG" style="max-height: 300px; width: auto;"><br />
+                The <code>Left</code> and <code>Right</code> subobjects each have a pointer to the shared <code>Top</code> subobject.  Note that because there is only a single instance of the <code>Top</code> object, the constructor is not called by the classes that inherit from it (<code>Left</code> and <code>Right</code>) as this would mean that the constructor is called multiple times.  Instead, the constructor is called by the most-derived class <code>Bottom</code>.  <i>The most derived class must initialize the virtual base.</i> <br />
+                Since all references to the <code>Top</code> subobject point to the same object, there is no ambiguity when upcasting to a <code>Top</code> object, so it is allowed.  With mutltiple inheritance, a derived object must behave as if it has multiple <code>vptr</code>s, one for each of its direct base classes that have virtual functions.
+
+                <h3 id="dom">Dominance</h3>
+                When we have functions with the same name occurring in different branches, dominance can be used to figure out which function to call.  Dominance favours the function occurring in the most-derived class.  i.e.
+<pre class="prettyprint">
+class Top {
+public:
+  virtual ~Top() {}
+  virtualvoid f() {}
+};
+
+// Left::f() > Top::f()
+class Left : virtual public Top {
+public:
+  void f() {}
+};
+
+// Only has Top::f()
+class Right : virtual public Top {};
+
+class Bottom : public Left, public Right {};
+int main() {
+  Bottom b;
+  b.f(); // Calls Left::f()
+}</pre>
 
               </div>
             </div>
