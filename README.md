@@ -34,4 +34,4 @@ For CS-related courses, we will be using Google's [Code-Prettify](https://github
  2. Fork the repo as above and submit a pull request with the change!
 
 ## Contributors
-@clayton-halim, @anamayagarodia, @tate1010
+@clayton-halim, @anamayagarodia, @tate1010, @hsami10
