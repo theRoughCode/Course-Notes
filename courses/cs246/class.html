@@ -625,7 +625,7 @@ Class &Class::operator=(const Class &other) {
 
 // Move Assignment Operator
 Class &Class::operator=(Class &&other) {
-  std::swap(ptr, other.ptr); // Copy and Swap
+  std::swap(ptr, other.ptr); // Move and Swap
   return *this;
 }
 
