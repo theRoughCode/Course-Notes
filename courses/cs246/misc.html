@@ -22,28 +22,13 @@
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <li class="sidebar-brand">
-              <a href="../../index.html">UW Couse Notes</a>
+              <a href="./home.html">CS 246 Notes</a>
           </li>
-          <li><a href="./shell.html">The Shell</a></li>
-          <li><a href="./scripts.html">Bash Scripts</a></li>
-          <li><a href="./cpp.html">C++</a>
-            <ol type="i">
-              <li><a href="./basics.html">C++ Basics</a></li>
-              <li><a href="./control.html">Control Flow</a></li>
-              <li><a href="./stream.html">Streams</a></li>
-              <li><a href="./strings.html">Strings</a></li>
-              <li><a href="./arrays.html">Arrays & Vectors</a></li>
-              <li><a href="./class.html">Structures & Classes</a></li>
-              <li><a href="./pointer.html">References & Pointers</a></li>
-              <li><a href="./namespace.html">Compilation & Namespace</a></li>
-              <li><a href="./inheritance.html">Inheritance</a></li>
-              <li><a href="./polymorphism.html">Polymorphism</a></li>
-              <li><a href="./templates.html">Templates</a></li>
-              <li><a href="./exception.html">Exception Handling</a></li>
-              <li><a href="./casting.html">Casting</a></li>
-            </ol>
-          </li>
-          <li><a href="./softeng.html">Software Engineering</a></li>
+          <li><a href="#1">Concurrency & Multithreading</a></li>
+          <li><a href="#2">Approaches To Concurrency</a></li>
+          <li><a href="#3">Function Objects</a></li>
+          <li><a href="#4">Lambdas</a></li>
+          <li><a href="#5">STL Algorithms</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -62,14 +47,22 @@
                   <ol id="nav">
                     <li><a href="#1">Concurrency & Multithreading</a></li>
                     <li><a href="#2">Approaches To Concurrency</a></li>
+                    <li><a href="#3">Function Objects</a></li>
+                    <li><a href="#4">Lambdas</a></li>
+                    <li><a href="#5">STL Algorithms</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
 
                 <h2 id="1">Concurrency & Multithreading</h2>
-                Concurrency and multithreading are powerful tools to make your program run faster.  Multithreading can be used to improve responsiveness.
+                Concurrency and multithreading are powerful tools to take advantage of available hardware to make your program run faster.  Multithreading can be used to improve responsiveness and performance.
                 <h3>Concurrency</h3>
-                <b>Concurrency</b> is the process by which 2 or more separate activities are happening simultaneously.  <b>Context switching</b> is performed each time the computer switches from one task to another.
+                <b>Concurrency</b> is the process by which 2 or more separate activities are happening simultaneously.  <b>Context switching</b> is performed each time the computer switches from one task to another.  It involves:
+                <ol>
+                  <li>Saving the CPU state and the instruction pointer of the currently running task</li>
+                  <li>Working out which task to switch to</li>
+                  <li>Reloading the CPU state from the task being switched to</li>
+                </ol>
 
                 <h2 id="2">Approaches To Concurrency</h2>
                 <ol>
@@ -78,6 +71,8 @@
                       <li>pass msg to each other through interprocess communication channels</li>
                       <li>slow because OS provides protection to prevent one process to modify the data of other</li>
                       <li>processes communicate to each other through interprocess communication</li>
+                      <li>easier to write safer concurrent code</li>
+                      <li>can run processes on different machines</li>
                     </ul>
                   </li>
                   <li>Concurrency with multiple threads: each thread runs independently of each other
@@ -101,7 +96,161 @@
                   <li>Can exhaust available memory and address space because each thread requires a separate stack space</li>
                   <li>More threads = more context switching (takes time)</li>
                 </ol>
+<pre class="prettyprint">
+// Non-concurrent
+#include &lt;iostream>
+int main() {
+  std::cout << "Hello World\n";
+}
 
+// Concurrent
+#include &lt;iostream>
+#include &lt;thread>
+void hello() {
+  std::cout << "Hello Concurrent World\n";
+}
+int main() {
+  std::thread t(hello);
+  t.join();
+}</pre>
+
+                In concurrent version:
+                <ol>
+                  <li>Code is moved to a separate function because each thread needs an initial function to start an execution</li>
+                  <li>A thread object of type <code>std::thread</code> named <code>t</code> is created and the construtor is initialized with the <code>hello</code> function.  Launches new thread (thread count = 2)</li>
+                  <li>Calling thread <code>main()</code> waits for new thread <code>t</code> to finish by calling <code>join()</code></li>
+                </ol>
+
+                <h3>Launching A Thread With A Function Object</h3>
+<pre class="prettyprint">
+class background_task{
+public:
+  void operator() () const {
+    do_something();
+    do_something_else();
+  }
+};
+background_task f;
+// f is copied to storage of thread and invoked there
+std::thread my_thread(f);</pre>
+                Note that if we want to use a temporary, unnnamed function object, we cannot use <code class="prettyprint">std::thread t(background_task())</code>.  This is interpreted as a a function <code>t</code> that takes in a pointer to a function with no parameters.  Instead, we can:
+                <ul>
+                  <li>enclose it in parenthesis: <code class="prettyprint">std::thread t((background_task()))</code></li>
+                  <li>use uniform initialization with braces rather than parenthesis: <code class="prettyprint">std::thread t{background_task()}</code></li>
+                </ul>
+
+                <h2 id="3">Function Objects</h2>
+                A <b>function object</b>, known as a <b>functor</b>, is any object for which the function call operator is defined. An advantage of this is the ability to contain states.
+<pre class="prettyprint">
+// this is a functor
+class Add_x {
+public:
+  Add_x(int x) : x(x) {}
+  int operator()(int y) const { return x + y; }
+private:
+  int x;
+};
+
+// Now you can use it like this:
+// 1. Create an instance of the functor class
+Add_x add42{42};
+
+// 2. Call it
+int i = add42(8);  // i == 50
+
+// Alternatively,
+std::vector<int> in{ 2, 5, 8, 3 };
+std::vector<int> out(in.size());
+
+// Pass a functor to std::transform, which calls the functor on every element
+// in the input sequence, and stores the result to the output sequence
+std::transform(in.begin(), in.end(), out.begin(), Add_x{1});
+// out == { 3, 6, 9, 4 }
+</pre>
+                <h2 id="4">Lambdas</h2>
+                <b>Lambdas</b> allow us to construct an unnamed function object capable of capturing variables in scope. <br />Syntax: <code class="prettyprint">[ captures ]( params ){ body }</code><br /><br />
+                The <b>captures</b> is a comma-separated list of zero or more captures, optionally beginning with a capture-default. <br />
+                Capture defaults:
+                <ol>
+                  <li>& - capture by reference</li>
+                  <li>= - capture by copy</li>
+                </ol>
+                The capture list can be passed as follows:
+                <ul>
+                  <li><code>[a, &b]</code> - <code>a</code> captured by copy, <code>b</code> captured by reference</li>
+                  <li><code>[this]</code> - captures current object by reference</li>
+                  <li><code>[&]</code> - captures all automatic (local) variables used in body of lambda by reference and current object by reference if it exists</li>
+                  <li><code>[=]</code> - captures all automatic (local) variables used in body of lambda by copy and current object by reference if it exists</li>
+                  <li><code>[]</code> - captures nothing</li>
+                </ul><br />
+                The <b>params</b> is a list of parameters, similar to named functions.
+<pre class="prettyprint">
+auto foo(int& x) {
+  return [&]{ std::cout << x << "\n"; };
+  // since x is used, it captures x by reference
+}
+
+int main(){
+  int i = 3;
+  auto f = foo(i); // the use of x in f binds directly to i
+  i = 5;
+  f();// OK; prints 5
+}</pre>
+
+                <h2 id="5">STL Algorithms</h2>
+                The <code>&lt;algorithm></code> library defines functions for a variety of purposes that operate on a range of elements, where range is [first, last).
+
+                <h3>for_each</h3>
+                Applies the given function object <code>f</code> to the result of dereferencing every iterator in the range [first, last), inorder.
+                <pre class="prettyprint">template &lt;class InputIt, class UnaryFunction>
+UnaryFunction for_each(InputIt first, InputIt last, UnaryFunction f)</pre><br />
+<pre class="prettyprint">
+std::vector&lt;int> nums{ 1, 2, 3, 4, 5 };
+auto print = [](const int& n){ std::cout << " " << n; };
+std::for_each(nums.begin(), nums.end(), [](int& n){ n++; });
+std::for_each(nums.begin(), nums.end(), print); // 2 3 4 5 6
+</pre>
+                <h3>find</h3>
+                Returns the first element in the range [first, last) that equals to <code>value</code>, otherwise, returns <code>last</code>.
+                <pre class="prettyprint">template &lt;class InputIt, class T>
+InputIt find(InputIt first, InputIt last, const T& value)</pre><br />
+<pre class="prettyprint">
+std::vector&lt;int> nums{ 1, 2, 3, 4, 5 };
+int i = 3;
+auto result = std::find(nums.begin(), nums.end(), i);
+if (result != nums.end()) cout << "nums contains " << i << endl;
+else cout << "nums does not contain " << i << endl;
+</pre>
+                <h3>count</h3>
+                Returns the number of elements in the range [first, last) equal to <code>value</code>.
+                <pre class="prettyprint">template &lt;class InputIt, class T>
+typename iterator_traits&lt;InputIt>::difference_type count(InputIt first, InputIt last, const T& value)</pre><br />
+<pre class="prettyprint">
+std::vector&lt;int> nums{ 1, 2, 3, 4, 5, 3, 3 };
+int i = 3;
+auto count = std::count(nums.begin(), nums.end(), i);
+cout << "nums contains " << count << " counts of " << i << endl;</pre>
+                We can also use <code>count_if</code> to count the elements where the last argument returns true. <pre class="prettyprint">int div3 = std::count_if(nums.begin(), nums.end(), [](int i){ return i % 3 == 0; });</pre>
+
+                <h3>copy</h3>
+                Copies the elements in the range [first, last) to another range beginning at <code>d_first</code>.
+                <pre class="prettyprint">template &lt;class InputIt, class OutputIt>
+OutputIt copy(InputIt first, InputIt last, OutputIt d_first)</pre><br />
+<pre class="prettyprint">
+std::vector&lt;int> nums{ 1, 2, 3, 4, 5 };
+std::copy(nums.begin(), nums.end(), std::ostream_iterator&lt;int>(std::cout, " "));
+// 1, 2, 3, 4, 5</pre>
+
+                <h3>transform</h3>
+                Applies <code>unary_op</code> to the range [first, last) and stores the result in another range beginning at <code>d_first</code>.
+                <pre class="prettyprint">template &lt;class InputIt, class OutputIt, class UnaryOperation>
+OutputIt transform(InputIt first, InputIt last, OutputIt d_first, UnaryOperation unary_op)</pre><br />
+<pre class="prettyprint">
+std::vector&lt;int> nums{ 1, 2, 3, 4, 5 };
+std::vector&lt;int> mult;
+std::transform(nums.begin(), nums.end(), mult.begin(), [](const int& n){ return n * 2; });
+for (int n : mult) cout << n << " ";
+// 2, 4, 6, 8, 10 </pre>
 
               </div>
             </div>
