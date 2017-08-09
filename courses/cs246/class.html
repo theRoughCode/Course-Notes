@@ -726,6 +726,13 @@ public:
   F *ptr;  // allowed
   F obj;   // not allowed
 };</pre>
+              As a rule of thumb, only forward declare when:
+              <ul>
+                <li>Pointer</li>
+                <li>Reference</li>
+                <li>Parameter of function</li>
+                <li>Return type of function</li>
+              </ul>
 
               <h2 id="19">Preconditions, Postconditions, Invariants</h2>
               These are properties of classes/functions that allow us to specify what it does/accomplishes.
