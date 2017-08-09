@@ -35,6 +35,8 @@
           <li><a href="#9">Visitor Pattern</a></li>
           <li><a href="#10">PImpl Idiom</a></li>
           <li><a href="#11">Model-View-Controller(MVC) Pattern</a></li>
+          <li><a href="#12">Bridge Pattern</a></li>
+          <li><a href="#13">Strategy Pattern</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -62,8 +64,7 @@
                     <li><a href="#9">Visitor Pattern</a></li>
                     <li><a href="#10">PImpl Idiom</a></li>
                     <li><a href="#11">Model-View-Controller(MVC) Pattern</a></li>
-                    <li><a href="#12">Resource Acquisition Is Initialization(RAII) Idiom</a></li>
-                    <li><a href="#13">Smart Pointers</a></li>
+                    <li><a href="#12">Strategy Pattern</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -446,7 +447,7 @@ int main() {
 }
 </pre>
                 <h2 id="7">Template Method Pattern</h2>
-                <a href="http://www.codeguru.com/cpp/article.php/c17909/C-Tutorial-The-Template-Pattern.htm"><img src="../images/template.PNG" /></a><br />
+                <a href="http://www.codeguru.com/cpp/article.php/c17909/C-Tutorial-The-Template-Pattern.htm"><img src="../images/template.png" /></a><br />
                 The <b>template method pattern</b> defines the skeleton of an algorithm in a "template method".  It defers some steps to subclasses to override by creating "placeholders".  The derived classes then override these placeholders to complete the algorithm.  The general structure has:
                 <ol>
                   <li>
@@ -750,6 +751,79 @@ public:
                     </ul>
                   </li>
                 </ol>
+
+                <h2 id="12">Strategy Pattern</h2>
+                <a href="https://en.wikibooks.org/wiki/Computer_Science_Design_Patterns/Strategy"><img src="../images/strategy.png" /></a><br />
+                The <b>strategy pattern</b> is used to provide a means to define a family of algorithms, encapsulate each one and make them interchangeable.  It allows the client to change the algorithm used dynamically.  The general structure has:
+                <ol>
+                  <li>AbstractStrategy
+                    <ul>
+                      <li>interface that provides the client with the generic algorithm</li>
+                      <li>base abstract class that the family of algorithms derive from</li>
+                    </ul>
+                  </li>
+                  <li>ConcreteStrategy
+                    <ul>
+                      <li>implements <code>AbstractStrategy</code></li>
+                      <li>each class provides its own implementation of the algorithm provided by <code>AbstractStrategy</code></li>
+                    </ul>
+                  </li>
+                </ol>
+<pre class="prettyprint">
+// AbstractStrategy
+class Sort {
+public:
+  virtual void sort(int arr[]) = 0;
+}
+
+// ConcreteStrategy
+class Merge : public Sort {
+public:
+  // virtual
+  void sort(int arr[]) { // merge sort }
+}
+
+// ConcreteStrategy
+class Quick : public Sort {
+public:
+  // virtual
+  void sort(int arr[]) { // quick sort }
+}
+
+// ConcreteStrategy
+class Bogo : public Sort {
+public:
+  // virtual
+  void sort(int arr[]) { // bogo sort }
+}
+
+class Select {
+public:
+  enum SortType { Merge, Quick, Bogo };
+  Select() : strategy { nullptr } {}
+  void setStrategy(int type);
+  void sort(int arr[]);
+private:
+  Sort *strategy;
+}
+
+int main() {
+  Select select;
+  int nums[5];
+  for (int &i : nums) {
+    cout << "Enter a number:" << endl;
+    cin >> i;  // Not exception-safe
+  }
+  cout << "Select a sort type: Merge(0) Quick(1) Bogo(2) Quit(3)";
+  int choice;
+  cin >> choice;
+  if (choice == 3) return 0;
+  select.setStrategy(choice);
+  select.sort(nums);
+  for (int i : nums) cout << i << " ";
+  return 0;
+}
+</pre>
 
               </div>
             </div>
