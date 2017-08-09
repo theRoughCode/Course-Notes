@@ -35,8 +35,6 @@
           <li><a href="#9">Visitor Pattern</a></li>
           <li><a href="#10">PImpl Idiom</a></li>
           <li><a href="#11">Model-View-Controller(MVC) Pattern</a></li>
-          <li><a href="#12">Resource Acquisition Is Initialization(RAII) Idiom</a></li>
-          <li><a href="#13">Smart Pointers</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -752,84 +750,6 @@ public:
                     </ul>
                   </li>
                 </ol>
-
-                <h2 id="12">Resource Acquisition Is Initialization(RAII) Idiom</h2>
-                Consider the following example:
-<pre class="prettyprint">
-void f() {
-  MyClass *p = new MyClass;
-  MyClass mc;
-  try {
-    y();
-  } catch {
-    delete p;
-    throw;
-  }
-  delete p;
-}</pre>
-                This method is tedious and error prone (duplication of code).  Instead of using pointers, we should use stack-allocated objects as much as possible as C++ guarantees that the destructors of stack-allocated objects will run.<br />
-                The <b>RAII idiom</b> states that every resource should be wrapped in a stack-allocated object, where destructor deletes it.  This can be seen with file I/O: <code class="prettyprint">ifstream f {"file"};</code>.  The acquisition of the resource happens by initializing the object <code>f</code>.  When <code>f</code> gets popped off the stack, the filestream is closed.  The RAII idiom can be implemented via <b>smart pointers</b>, included in <code class="prettyprint">&lt;memory></code>.
-
-                <h2 id="13">Smart Pointers</h2>
-                <h3>Unique Pointers</h3>
-                <code class="prettyprint">class std::unique_ptr&lt;T></code>
-                <br />
-                The <b>unique pointer</b> holds a pointer to an object of type <code>T</code>.  It guarantees that only one object holds that pointer, i.e. you cannot apply the copy constructor or copy assignment.
-<pre class="prettyprint">
-auto p = std::make_unique&lt;C>();
-unique_ptr&lt;C> q = p; // ERROR, cannot have multiple pointers pointing to same object</pre>
-
-                  However, you can use move semantics to transfer ownership of the pointer with <code>std::move(ptr)</code>.  The pointer that the unique pointer holds will be deleted when:
-                <ol>
-                  <li>unique pointer is popped off the stack, calling the destructor which deletes the pointer</li>
-                  <li>unique pointer is assigned to another pointer via <code>operator=</code></li>
-                </ol>
-                This provides exception safety to classes/functions that handle dynamic objects by guaranteeing deletion upon exit.
-<pre class="prettyprint">
-template&lt;typename T>
-class unique_ptr {
-  T* ptr;
-public:
-  unique_ptr(T* p) : ptr{p}{}
-  ~unique_ptr() {delete ptr;}
-  unique_ptr(unique_ptr&lt;T> &other) = delete;
-  unique_pt(unique_ptr&lt;T> &&other) : ptr{other.ptr} {
-    other.ptr = nullptr;
-  }
-  unique_pt&lt;T> &operator=(const unique_ptr&lt;T> &other) = delete;
-  unique_pt&lt;T> &operator=(unique_ptr&lt;T> &&other) {
-    using std::swap;
-    swap(ptr, other.ptr);
-    return *this;
-  }
-  T &operator*() {
-    return *ptr;
-  }
-}</pre>
-
-                <h3>Shared Pointers</h3>
-                <code class="prettyprint">class std::shared_ptr&lt;T></code>
-                <b>Shared pointers</b> work in the same way as unique pointers, with the only difference being that we can have multiple shared pointers with the same pointer.
-<pre class="prettyprint">
-auto p1 = std::make_shared&lt;MyClass>();
-if(...) {
-  auto p2 = p1;  // p2 has same pointer has p1
-} // p2 is popped but object is NOT deleted</pre>
-                Shared pointers keep a count of how many pointers are sharing the pointer.  Shared pointers will only delete the pointer once the count of shared pointers is zero.  This can lead to a shared pointer not deleting its pointer even after the program exits if there is a cyclic dependency between shared pointers.
-<pre class="prettyprint">
-class A {
-  shared_ptr&lt;A> ptr;
-}
-std::shared_ptr&lt;A> a1 = std::make_shared&lt;A>();
-std::shared_ptr&lt;A> a2 = std::make_shared&lt;A>();
-a1->ptr = a2;
-a2->ptr = a1;
-exit(0);  // memory leak
-</pre>
-                A memory leak occurs in the above example because when the program tries to delete <code>a1</code>, it is kept alive by <code>a2->ptr</code> which is, in turn, kept alive by <code>a1->ptr</code>.  An even simpler example:
-<pre class="prettyprint">
-std::shared_ptr&lt;A> a = std::make_shared&lt;A>();
-a->ptr = a;   // never dies</pre>
 
               </div>
             </div>
