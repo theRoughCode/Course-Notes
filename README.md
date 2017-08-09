@@ -9,6 +9,7 @@ Hey everyone!  This repo was created initially for me to study/increase the life
 3. Submit a pull request.
 
 ## What Should I Take Note Of?
+### Math-Related Courses
 For math-related courses, we will be making use of [MathJax](https://www.mathjax.org/) to embed LaTeX into our html.  
 If you are creating a new html file that requires MathJax, include the following script tags into the \<head\> of your document.
 ```html
@@ -21,10 +22,11 @@ If you are creating a new html file that requires MathJax, include the following
   });
 </script>
 ```
-
 #### Tips for MathJax
  - To in-line LaTeX: use $\<math\>$
- - To centre on page (equation-style): use $$\<math\>$$
+ - To centre on page (equation-style): use $$\<math\>$$ 
+### CS-Related Courses
+For CS-related courses, we will be using Google's [Code-Prettify](https://github.com/google/code-prettify) to format and provide syntax highlighting for our code.  To embed it in your code, use either ```<pre>``` or ```<code>``` with ```class="prettyprint"``` and enclose your code segment in it.
  
 ## Errors or Requests for Additions
  If you find a typo or an error, or if you have suggestions on something to add, you can:
@@ -32,4 +34,4 @@ If you are creating a new html file that requires MathJax, include the following
  2. Fork the repo as above and submit a pull request with the change!
 
 ## Contributors
-@clayton-halim, @anamayagarodia, @tate1010
+@clayton-halim, @anamayagarodia, @tate1010, @hsami10
