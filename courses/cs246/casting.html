@@ -49,6 +49,8 @@
                     <li><a href="#3">Const Cast</a></li>
                     <li><a href="#4">Dynamic Cast</a></li>
                     <li><a href="#5">Reinterpret Cast</a></li>
+                    <li><a href="#6">Downcasting</a></li>
+                    <li><a href="#7">RTTI (Run-Time Type Information)</a></li>
                   </ol>
                 </div>
                 <!--Table of Contents -->
@@ -92,7 +94,35 @@ else cout << "Not a Text";</pre>
 <pre class="prettyprint">
 Student s;
 // Force student to be treated like a turtle :(
-Turtle *t = reinterpret_cast<Turtle*>(&s);</pre>
+Turtle *t = reinterpret_cast&lt;Turtle*>(&s);</pre>
+
+                <h2 id="6">Downcasting</h2>
+                Downcasting is generally frowned upon because we might be downcasting into a wrong type.  If possible, we should be using polymorphism rather than trying to downcast.  If we do have to downcast, however, <code>dynamic_cast</code> provides a type-safe downcast operation because it returns a <code>nullptr</code> if the cast is not proper.
+<pre class="prettyprint">
+Pet *b = new Cat; // Upcast
+Dog *d1 = dynamic_cast&lt;Dog*>(b); // returns nullptr
+Cat *c1 = dynamic_cast&lt;Cat*>(b);  // OK</pre>
+
+                <h3>Downcasting References</h3>
+                Downcasting pointers is exception-safe as discussed earlier (returns <code>nullpre</code> if wrong type).  However, if we try to <code>dynamic_cast</code> a reference variable of the wrong type, <code>dynamic_cast</code> will throw a <code>bad_cast</code> because there is no such thing as a null reference.
+
+                <h2 id="7">RTTI (Run-Time Type Information)</h2>
+                <b>RTTI</b> refers to the ability to provide information about the type of a dynamic-typed object at runtime.  <code>dynamic_cast</code> is a form of RTTI. We can also use <code>typeid</code> (declared in <code>&lt;typeinfo></code>) and <code>static_cast</code> to downcast.  <code>typeid</code> returns a reference to a <code>std::type_info</code> object which can be used to compare objects/references/pointers with the desired type using <code>==</code> and <code>!=</code>.  <code>typeid(obj).name()</code> returns a string representation of the type name<br />
+<pre class="prettyprint">
+Circle c;
+Shape *s = &c; // Upcast
+if (typeid(Circle) == typeid(s)) s = static_cast&lt;Shape*>(&c);</pre>
+
+                <h3>Mechanisms of RTTI with Dynamic Cast</h3>
+                When <code>dynamic_cast&lt;destination*>(src)</code> is used:
+                <ol>
+                  <li>Source pointers RTTI info is retrieved</li>
+                  <li>RTTI info of destination is fetched</li>
+                  <li>Library routine then determines whether source pointers type is of destination type or base class type</li>
+                </ol>
+
+                <h3>Creating Your Own RTTI</h3>
+                RTTI requires only a virtual function to identify the exact type of the class, and a function to take a pointer to the base type and cast it down to the derived type.  This function produces a pointer of the derived type.
               </div>
             </div>
         </div>
