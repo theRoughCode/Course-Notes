@@ -35,8 +35,7 @@
           <li><a href="#9">Visitor Pattern</a></li>
           <li><a href="#10">PImpl Idiom</a></li>
           <li><a href="#11">Model-View-Controller(MVC) Pattern</a></li>
-          <li><a href="#12">Bridge Pattern</a></li>
-          <li><a href="#13">Strategy Pattern</a></li>
+          <li><a href="#12">Strategy Pattern</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -416,7 +415,7 @@ int main() {
                   <li>
                     AbstractProduct
                     <ul>
-                      <li>Contains the factory method that creates the required subclass.  Commonly implmented as a <code>static</code> function.</li>
+                      <li>Contains the factory method that creates the required subclass.  Commonly implemented as a <code>static</code> function.</li>
                     </ul>
                   </li>
                   <li>
@@ -424,7 +423,7 @@ int main() {
                     <ul>
                       <li>The concrete subclasses that are actually returned.</li>
                     </ul>
-                  </li>=
+                  </li>
                 </ol>
 <pre class="prettyprint">
 // AbstractProduct
@@ -682,7 +681,7 @@ void Class::foo() { pImpl->secretFoo(); }
                   <li>Hides implementation from client</li>
                   <li>Produces a stable interface</li>
                   <li>More readable class definitions</li>
-                  <li>Hide implementation of <a href="./class.html#csi">Copy-Swap Idiom</a> and <a href="./class.html#move">move operations</a>.  This allows the assignment operators to be implmented <code>inline</code> without compromising encapsulation.
+                  <li>Hide implementation of <a href="./class.html#csi">Copy-Swap Idiom</a> and <a href="./class.html#move">move operations</a>.  This allows the assignment operators to be implemented <code>inline</code> without compromising encapsulation.
 <pre class="prettyprint">
 class Class {
     // ...
