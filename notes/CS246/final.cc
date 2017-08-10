@@ -12,7 +12,7 @@ Topics
 - Exceptions (Absolute C++ 6th Chapter 18, Example: out_of_range with vectors, stack unwinding, rethrow exception throw vs throw s, "Throw by value, catch by reference", never destructor to emits exception, exception and error codes: comment on speed and efficiency)
 - Design Patterns(Observer, Decorator, Factory Method, Template Method, NVI Idiom)
 - STL map (definition, example, erase, count, iterating  through the map using range based for loop, std::pair (first and second fields), how to make your own map class)
--Visitor Design Pattern (double dispatch, adding functionality without changing class hierarchy code)
+- Visitor Design Pattern (double dispatch, adding functionality without changing class hierarchy code)
 - Circular Dependencies: solution: forward declare when possible
 - Compilation Dependencies: when to forward declare vs when to include
 - pImpl Idiom (Generalize the pImpl Idiom: Bridge Design Pattern)

@@ -201,8 +201,9 @@ void f() {
     y();
   } catch {
     delete p;
-    throw;
+    throw;  // throws the current exception and exits function
   }
+  doSomething();
   delete p;
 }</pre>
                 This method is tedious and error prone (duplication of code).  Instead of using pointers, we should use stack-allocated objects as much as possible as C++ guarantees that the destructors of stack-allocated objects will run.<br />

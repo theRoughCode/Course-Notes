@@ -688,9 +688,9 @@ class Class {
     // ...
     Class(const Class& other) {
       // calls copy ctor of Private class
-      Private *pImpl(other->pImpl);
+      Private *pImpl = new Private(*(other->pImpl));
     }
-    void swap(Class & other) {
+    void swap(Class &other) {
         std::swap(pImpl, other.pImpl);
     }
     // Copy and Swap
